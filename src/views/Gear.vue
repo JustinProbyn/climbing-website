@@ -22,19 +22,54 @@ export default {
     return {
       products: [
         {
-          type: "rope",
-          text: "Placeholder text",
-          img: require("../../public/img/rope.jpg")
+          type: "ropes",
+          img: require("../../public/img/rope.jpg"),
+          path: "Ropes"
         },
         {
-          type: "quickdraw",
-          text: "Placeholder text",
-          img: require("../../public/img/rope.jpg")
+          type: "Rope Bags",
+          img: require("../../public/img/rope.jpg"),
+          path: "RopeBags"
+        },
+        {
+          type: "Belay devices",
+          img: require("../../public/img/rope.jpg"),
+          path: "BelayDevices"
         },
         {
           type: "climbing shoes",
-          text: "Placeholder text",
-          img: require("../../public/img/rope.jpg")
+          img: require("../../public/img/rope.jpg"),
+          path: "ClimbingShoes"
+        },
+        {
+          type: "helmets",
+          img: require("../../public/img/rope.jpg"),
+          path: "Helmets"
+        },
+        {
+          type: "chalk",
+          img: require("../../public/img/rope.jpg"),
+          path: "Chalk"
+        },
+        {
+          type: "chalk bags",
+          img: require("../../public/img/rope.jpg"),
+          path: "ChalkBags"
+        },
+        {
+          type: "quickdraws",
+          img: require("../../public/img/rope.jpg"),
+          path: "Quickdraws"
+        },
+        {
+          type: "carabiners",
+          img: require("../../public/img/rope.jpg"),
+          path: "Carabiners"
+        },
+        {
+          type: "slings and cords",
+          img: require("../../public/img/rope.jpg"),
+          path: "SlingsAndCords"
         }
       ]
     };
@@ -76,5 +111,11 @@ export default {
 .gear__header .pictures__nav {
   float: right;
   font-size: 200%;
+}
+
+.products__container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 </style>
