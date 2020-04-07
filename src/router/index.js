@@ -8,6 +8,7 @@ import Pictures from "../views/Pictures.vue";
 import CompScene from "../views/CompScene.vue";
 import ClimbingSpots from "../views/ClimbingSpots.vue";
 import Cart from "../components/Cart.vue";
+import SignUp from "../components/SignUp.vue";
 
 // GEAR SHOP IMPORTS
 
@@ -64,6 +65,11 @@ const routes = [
     path: "/cart",
     name: "Cart",
     component: Cart
+  },
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp
   },
 
   // GEAR SHOP ROUTES

@@ -1,9 +1,12 @@
 <template>
   <div class="body">
     <header>
+      <v-btn to="SignUp">Sign Up</v-btn>
       <div class="hero-text">
         <h1>Climbing Website</h1>
-        <h2><span>&nbsp;</span>Ascend any height.</h2>
+        <h2>
+          <span>&nbsp;</span>Ascend any height.
+        </h2>
       </div>
 
       <div class="nav__bar">
@@ -33,10 +36,14 @@
 </template>
 
 <script>
-// @ is an alias to /src
+// import firebase from "firebase";
+// import SignUp from "../components/SignUp.vue";
 
 export default {
   name: "Home"
+  // components: {
+  //   signup: SignUp
+  // }
 };
 </script>
 
