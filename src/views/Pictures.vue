@@ -31,6 +31,7 @@ Vue.use(VueWaypoint);
 
 export default {
   data: () => ({
+    componentKey: 1,
     datas: [
       {
         id: "#",

@@ -1,13 +1,13 @@
 <template>
   <div class="articles">
     <div class="article__box">
-      <img class="news__img" :src="data.img" />
+      <img class="news__img" :src="data.image" />
       <v-card class="article__info" height="100%">
         <v-card-title class="title">
-          <a target="_blank" style="text-decoration: none" :href="data.link">{{ data.heading }}</a>
+          <a target="_blank" style="text-decoration: none" :href="data.link">{{ data.title }}</a>
         </v-card-title>
-        <v-card-subtitle class="sub">{{ data.sub }}</v-card-subtitle>
-        <v-card-text class="text">{{ data.text }}</v-card-text>
+        <v-card-subtitle class="sub">{{ data.subTitle }}</v-card-subtitle>
+        <v-card-text class="text">{{ data.textBody }}</v-card-text>
       </v-card>
     </div>
   </div>

@@ -12,39 +12,36 @@
         }"
       ></div>
     </div>
-    <div class="add-article-box">
-      <div class="inputs">
-        <!-- AUTHOR -->
+    <div>
+      <div class="add-article-box">
+        <div class="inputs">
+          <!-- AUTHOR -->
 
-        <v-text-field v-model="author" outlined clearable label="Author" type="text"></v-text-field>
+          <v-text-field v-model="author" outlined clearable label="Author" type="text"></v-text-field>
 
-        <!-- TITLE -->
+          <!-- TITLE -->
 
-        <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
+          <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
 
-        <!-- SUB TITLE -->
+          <!-- SUB TITLE -->
 
-        <v-text-field v-model="subTitle" outlined clearable label="Sub Title" type="text"></v-text-field>
+          <v-text-field v-model="subTitle" outlined clearable label="Sub Title" type="text"></v-text-field>
+
+          <input type="file" @change="onFileSelected" />
+          <v-text-field v-model="imageName" outlined clearable label="Image Name" type="text"></v-text-field>
+          <v-btn @click="uploadImage">Upload</v-btn>
+        </div>
+
+        <!-- TEXT BODY -->
+        <div class="text__body">
+          <v-textarea v-model="textBody" label="Text Body" counter full-width single-line></v-textarea>
+        </div>
+
+        <!--  -->
+        <div class="btn__box">
+          <v-btn outlined color="#d35400" class="btn" @click="submitArticle">Submit</v-btn>
+        </div>
       </div>
-
-      <!-- TEXT BODY -->
-      <div class="text__body">
-        <v-text-field
-          counter
-          full-width
-          single-line
-          v-model="textBody"
-          clearable
-          label="Text Body"
-          type="text"
-        >
-          <template v-slot:preppend-inner>
-            <img width="24" height="24" src="../../public/img/pencil.png" alt />
-          </template>
-        </v-text-field>
-      </div>
-
-      <!--  -->
     </div>
     <footer-comp></footer-comp>
   </v-app>
@@ -54,13 +51,17 @@
 
 <script>
 import NavBar from "../components/NavBar.vue";
+import StickyNavBar from "../components/StickyNavBar.vue";
 import Footer from "../components/Footer.vue";
 import VueWaypoint from "vue-waypoint";
 import Vue from "vue";
+import firebase from "firebase";
 Vue.use(VueWaypoint);
 export default {
   data() {
     return {
+      image: null,
+      imageName: "",
       author: "",
       title: "",
       subTitle: "",
@@ -75,9 +76,45 @@ export default {
   },
   components: {
     navbar: NavBar,
-    footerComp: Footer
+    footerComp: Footer,
+    stickynav: StickyNavBar
   },
   methods: {
+    onFileSelected(event) {
+      this.image = event.target.files[0];
+    },
+    uploadImage() {
+      const storageRef = firebase.storage().ref();
+      const fileName = this.imageName;
+      const imageRef = storageRef.child("images/" + fileName + ".jpg");
+      const file = this.image;
+      imageRef.put(file);
+    },
+    submitArticle() {
+      // Upload file
+      const storageRef = firebase.storage().ref();
+      const fileName = this.imageName;
+      const imageRef = storageRef.child("images/" + fileName + ".jpg");
+      const file = this.image;
+      imageRef.put(file);
+      // Get file
+      imageRef
+        .getDownloadURL()
+        .then(result => {
+          const image = result;
+          const articleData = {
+            image: image,
+            author: this.author,
+            title: this.title,
+            subTitle: this.subTitle,
+            textBody: this.textBody
+          };
+          this.$store.dispatch("addArticle", articleData);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     onWaypoint({ going, direction }) {
       // going: in, out
       // direction: top, right, bottom, left
@@ -126,7 +163,14 @@ export default {
   max-width: 300px;
 }
 
-.text__body {
-  max-width: 95%;
+.btn__box {
+  justify-content: flex-start;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.btn {
+  max-width: 120px;
+  padding: 20px;
 }
 </style>

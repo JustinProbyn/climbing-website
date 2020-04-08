@@ -11,20 +11,14 @@
               {{ data.text }}
             </v-card-text>
 
-            <v-fade-transition>
-              <v-overlay :value="showWindow" v-if="hover" absolute>
+            <v-expand-transition>
+              <v-overlay v-if="hover" absolute color="#d35400">
                 <v-btn @click="show">Englarge</v-btn>
-                <modal
-                  @before-close="beforeClose"
-                  style="z-index: 9999"
-                  width="1140px"
-                  height="auto"
-                  name="img"
-                >
+                <modal @before-close="beforeOpen" width="1140px" height="auto" name="img">
                   <img :src="data.url" />
                 </modal>
               </v-overlay>
-            </v-fade-transition>
+            </v-expand-transition>
           </v-card>
         </template>
       </v-hover>
@@ -35,9 +29,7 @@
 <script>
 export default {
   data() {
-    return {
-      showWindow: true
-    };
+    return {};
   },
   props: {
     data: Object
@@ -49,9 +41,7 @@ export default {
     hide() {
       this.$modal.hide("img");
     },
-    beforeClose() {
-      this.showWindow = false;
-    }
+    beforeOpen() {}
   }
 };
 </script>

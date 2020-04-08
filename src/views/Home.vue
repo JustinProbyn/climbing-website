@@ -11,9 +11,10 @@
         <div class="nav__bar">
           <ul class="nav__bar--ul">
             <div class="btns">
-              <v-btn outlined color="#d35400" class="btn" to="signup">Admin Sign Up</v-btn>
-              <v-btn outlined color="#d35400" class="btn" to="signin">Admin Sign In</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="!auth" to="signup">Admin Sign Up</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="!auth" to="signin">Admin Sign In</v-btn>
               <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-article">Add Article</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-picture">Add Picture</v-btn>
               <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
             </div>
             <li>
@@ -30,9 +31,6 @@
             </li>
             <li>
               <router-link to="pictures">Pictures</router-link>
-            </li>
-            <li>
-              <router-link to="comp-scene">Comp Scene</router-link>
             </li>
           </ul>
         </div>

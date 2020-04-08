@@ -5,8 +5,8 @@ import Gear from "../views/Gear.vue";
 import News from "../views/News.vue";
 import Training from "../views/Training.vue";
 import Pictures from "../views/Pictures.vue";
-import CompScene from "../views/CompScene.vue";
 import AddArticle from "../views/AddArticle.vue";
+import AddPicture from "../views/AddPicture.vue";
 import ClimbingSpots from "../views/ClimbingSpots.vue";
 import Cart from "../components/Cart.vue";
 import SignUp from "../components/SignUp.vue";
@@ -35,8 +35,13 @@ const routes = [
   },
   {
     path: "/add-article",
-    name: "AddArticle",
+    name: "add-article",
     component: AddArticle
+  },
+  {
+    path: "/add-picture",
+    name: "add-picture",
+    component: AddPicture
   },
   {
     path: "/climbing-spots",
@@ -52,11 +57,6 @@ const routes = [
     path: "/gear",
     name: "gear",
     component: Gear
-  },
-  {
-    path: "/comp-scene",
-    name: "compscene",
-    component: CompScene
   },
   {
     path: "/pictures",

@@ -14,7 +14,7 @@
     </div>
     <div class="news__body">
       <div class="articles__container">
-        <articles class="news__articles" v-for="data in newsData" :data="data" :key="data"></articles>
+        <articles class="news__articles" v-for="data in getNewsData" :data="data" :key="data"></articles>
       </div>
       <div class="sidebar">
         <h2 class="sidebar__title">Global Ascents</h2>
@@ -57,50 +57,62 @@ export default {
         root: null,
         rootMargin: "0px 0px 0px 0px",
         threshold: [0.25, 0.75]
-      },
-      newsData: [
-        {
-          id: "1",
-          img: require("../../public/img/finger-strength.jpg"),
-          sub:
-            "Priority number one is maintaining your finger and large-pull-muscle strength.",
-          text:
-            "Climbing loves consistency. But since the coronavirus pandemic has shut down gyms across the country, and climbing outside is now discouraged, how do you stay strong while you’re stuck at home?",
-          heading: "At-Home Strength Training for Rock Climbing",
-          link: "https://www.google.com"
-        },
-        {
-          id: "2",
-          img: require("../../public/img/stefano-ghisolfi.jpg"),
-          sub:
-            "With limited resources at home, climbers are devising innovative ways to stay fit for whenever the Games are rescheduled.",
-          text:
-            "Stefano Ghisolfi occasionally climbs his kitchen table to pass the time.",
-          heading:
-            "Olympic Rock Climbers Are Getting Creative at Home on Lockdown",
-          link: "https://www.google.com"
-        },
-        {
-          id: "3",
-          img: require("../../public/img/climbing-training.jpg"),
-          sub:
-            "Sportrock encourages people to finish the challenge in 10 minutes or less.",
-          text:
-            "Molly Donelan, who says that she adopted the workout from a Spartan challenge, did it in 6 minutes and 40 seconds. ",
-          heading: "Home Gym: A Fitness Challenge With Rock Climbers",
-          link: "https://www.google.com"
-        },
-        {
-          id: "4",
-          img: require("../../public/img/news-placeholder-img.jpg"),
-          sub: "Brief description of article",
-          text:
-            "Exert from article of something interesting, like bla bla bla bla bla bla bla bla bla bla bla bla",
-          heading: "News Article 4",
-          link: "https://www.google.com"
-        }
-      ]
+      }
+      // newsData:
+      // [
+      //   {
+      //     id: "1",
+      //     img: require("../../public/img/finger-strength.jpg"),
+      //     sub:
+      //       "Priority number one is maintaining your finger and large-pull-muscle strength.",
+      //     text:
+      //       "Climbing loves consistency. But since the coronavirus pandemic has shut down gyms across the country, and climbing outside is now discouraged, how do you stay strong while you’re stuck at home?",
+      //     heading: "At-Home Strength Training for Rock Climbing",
+      //     link: "https://www.google.com"
+      //   },
+      //   {
+      //     id: "2",
+      //     img: require("../../public/img/stefano-ghisolfi.jpg"),
+      //     sub:
+      //       "With limited resources at home, climbers are devising innovative ways to stay fit for whenever the Games are rescheduled.",
+      //     text:
+      //       "Stefano Ghisolfi occasionally climbs his kitchen table to pass the time.",
+      //     heading:
+      //       "Olympic Rock Climbers Are Getting Creative at Home on Lockdown",
+      //     link: "https://www.google.com"
+      //   },
+      //   {
+      //     id: "3",
+      //     img: require("../../public/img/climbing-training.jpg"),
+      //     sub:
+      //       "Sportrock encourages people to finish the challenge in 10 minutes or less.",
+      //     text:
+      //       "Molly Donelan, who says that she adopted the workout from a Spartan challenge, did it in 6 minutes and 40 seconds. ",
+      //     heading: "Home Gym: A Fitness Challenge With Rock Climbers",
+      //     link: "https://www.google.com"
+      //   },
+      //   {
+      //     id: "4",
+      //     img: require("../../public/img/news-placeholder-img.jpg"),
+      //     sub: "Brief description of article",
+      //     text:
+      //       "Exert from article of something interesting, like bla bla bla bla bla bla bla bla bla bla bla bla",
+      //     heading: "News Article 4",
+      //     link: "https://www.google.com"
+      //   }
+      // ]
     };
+  },
+  components: {
+    navbar: NavBar,
+    footerComp: Footer,
+    articles: Articles,
+    stickynav: StickyNavBar
+  },
+  computed: {
+    getNewsData() {
+      return this.$store.getters.getArticleData;
+    }
   },
   methods: {
     onWaypoint({ going, direction }) {
@@ -114,12 +126,6 @@ export default {
         this.stickyActive = false;
       }
     }
-  },
-  components: {
-    navbar: NavBar,
-    footerComp: Footer,
-    articles: Articles,
-    stickynav: StickyNavBar
   }
 };
 </script>

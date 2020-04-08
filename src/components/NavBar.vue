@@ -20,12 +20,6 @@
         <li>
           <router-link to="gear">Gear</router-link>
         </li>
-        <li>
-          <router-link to="comp-scene">Comp Scene</router-link>
-        </li>
-        <li>
-          <router-link to="add-article">Add Article</router-link>
-        </li>
       </ul>
     </nav>
   </div>
@@ -38,7 +32,13 @@ export default {
       isActive: false
     };
   },
-  methods: {}
+  methods: {},
+  computed: {
+    auth() {
+      return this.$store.getters.isLoggedIn;
+      // checks if state.userData.email exists then shows UI components based result
+    }
+  }
 };
 </script>
 

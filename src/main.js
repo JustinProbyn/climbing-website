@@ -8,7 +8,7 @@ import VModal from "vue-js-modal";
 import firebase from "firebase";
 import vuelidate from "vuelidate";
 
-Vue.use(vuelidate)
+Vue.use(vuelidate);
 
 Vue.use(VModal);
 
