@@ -24,52 +24,52 @@ export default {
         {
           type: "ropes",
           img: require("../../public/img/rope.jpg"),
-          path: "Ropes"
+          path: "ropes"
         },
         {
           type: "Rope Bags",
           img: require("../../public/img/rope.jpg"),
-          path: "RopeBags"
+          path: "rope-bags"
         },
         {
           type: "Belay devices",
           img: require("../../public/img/rope.jpg"),
-          path: "BelayDevices"
+          path: "belay-devices"
         },
         {
           type: "climbing shoes",
           img: require("../../public/img/rope.jpg"),
-          path: "ClimbingShoes"
+          path: "climbing-shoes"
         },
         {
           type: "helmets",
           img: require("../../public/img/rope.jpg"),
-          path: "Helmets"
+          path: "helmets"
         },
         {
           type: "chalk",
           img: require("../../public/img/rope.jpg"),
-          path: "Chalk"
+          path: "chalk"
         },
         {
           type: "chalk bags",
           img: require("../../public/img/rope.jpg"),
-          path: "ChalkBags"
+          path: "chalk-bags"
         },
         {
           type: "quickdraws",
           img: require("../../public/img/rope.jpg"),
-          path: "Quickdraws"
+          path: "quickdraws"
         },
         {
           type: "carabiners",
           img: require("../../public/img/rope.jpg"),
-          path: "Carabiners"
+          path: "carabiners"
         },
         {
           type: "slings and cords",
           img: require("../../public/img/rope.jpg"),
-          path: "SlingsAndCords"
+          path: "slings-and-cords"
         }
       ]
     };

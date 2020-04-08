@@ -1,49 +1,78 @@
 <template>
-  <div class="body">
-    <header>
-      <v-btn to="SignUp">Sign Up</v-btn>
-      <div class="hero-text">
-        <h1>Climbing Website</h1>
-        <h2>
-          <span>&nbsp;</span>Ascend any height.
-        </h2>
-      </div>
-
-      <div class="nav__bar">
-        <ul class="nav__bar--ul">
-          <li>
-            <router-link to="News">News</router-link>
-          </li>
-          <li>
-            <router-link to="Training">Training</router-link>
-          </li>
-          <li>
-            <router-link to="ClimbingSpots">Climbing spots</router-link>
-          </li>
-          <li>
-            <router-link to="Gear">Gear</router-link>
-          </li>
-          <li>
-            <router-link to="Pictures">Pictures</router-link>
-          </li>
-          <li>
-            <router-link to="CompScene">Comp Scene</router-link>
-          </li>
-        </ul>
-      </div>
-    </header>
-  </div>
+  <v-app>
+    <div class="body">
+      <header>
+        <div class="hero-text">
+          <h1>Climbing Website</h1>
+          <h2>
+            <span>&nbsp;</span>Ascend any height.
+          </h2>
+        </div>
+        <div class="nav__bar">
+          <ul class="nav__bar--ul">
+            <div class="btns">
+              <v-btn outlined color="#d35400" class="btn" to="signup">Admin Sign Up</v-btn>
+              <v-btn outlined color="#d35400" class="btn" to="signin">Admin Sign In</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-article">Add Article</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
+            </div>
+            <li>
+              <router-link to="news">News</router-link>
+            </li>
+            <li>
+              <router-link to="training">Training</router-link>
+            </li>
+            <li>
+              <router-link to="climbing-spots">Climbing spots</router-link>
+            </li>
+            <li>
+              <router-link to="gear">Gear</router-link>
+            </li>
+            <li>
+              <router-link to="pictures">Pictures</router-link>
+            </li>
+            <li>
+              <router-link to="comp-scene">Comp Scene</router-link>
+            </li>
+          </ul>
+        </div>
+      </header>
+    </div>
+  </v-app>
 </template>
 
 <script>
-// import firebase from "firebase";
+import firebase from "firebase";
 // import SignUp from "../components/SignUp.vue";
 
 export default {
-  name: "Home"
-  // components: {
-  //   signup: SignUp
-  // }
+  name: "Home",
+  data() {
+    return {
+      userLoggedIn: false
+    };
+  },
+  methods: {
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log(" Sign-out successful.");
+        })
+        .catch(function(er) {
+          console.log(er);
+        });
+      this.$store.dispatch("signOut");
+      // removes store localstorage and removes state.userData
+    }
+  },
+  computed: {
+    auth() {
+      return this.$store.getters.isLoggedIn;
+      // checks if state.userData.email exists then shows UI components based result
+    }
+  }
 };
 </script>
 
@@ -111,7 +140,7 @@ header {
   margin-left: auto;
   margin-right: 150px;
   background-color: rgba(0, 0, 0, 0.151);
-  width: 55%;
+  width: 100%;
   justify-content: center;
 }
 
@@ -131,5 +160,15 @@ header {
 .nav__bar--ul li a:hover,
 .nav__bar--ul li a:active {
   color: #d35400;
+}
+
+/* Sign up/ Sign in / Sign out buttons */
+
+.btns {
+  display: flex;
+  margin-right: 12%;
+}
+.btn {
+  margin-right: 20px;
 }
 </style>

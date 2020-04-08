@@ -1,26 +1,132 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
-    <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
-    <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-    <v-text-field v-model="password" :rules="emailRules" label="E-mail" required></v-text-field>
-
-    <v-btn color="success" class="mr-4" @click="signUp">SignUp</v-btn>
-  </v-form>
+  <v-app @keyup.enter.native="submit">
+    <v-card style="padding: 15px" width="500px" class="mx-auto mt-10">
+      <v-card-title>
+        <h2 class="display-1">Sign Up</h2>
+      </v-card-title>
+      <div class="inputs">
+        <v-text-field
+          outlined
+          prepend-inner-icon="mdi-account-circle"
+          v-model="username"
+          :error-messages="nameErrors"
+          :counter="15"
+          label="Userame"
+          required
+          @input="$v.username.$touch()"
+          @blur="$v.username.$touch()"
+        ></v-text-field>
+        <v-text-field
+          outlined
+          prepend-inner-icon="mdi-email"
+          v-model="email"
+          :error-messages="emailErrors"
+          label="Email"
+          required
+          @input="$v.email.$touch()"
+          @blur="$v.email.$touch()"
+        ></v-text-field>
+        <v-text-field
+          outlined
+          class="password_block"
+          prepend-inner-icon="mdi-lock"
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="showPassword = !showPassword"
+          v-model="password"
+          :error-messages="passwordErrors"
+          label="Password"
+          required
+          :type="showPassword ? 'text' : 'password'"
+          @input="$v.password.$touch()"
+          @blur="$v.password.$touch()"
+        ></v-text-field>
+        <v-text-field
+          outlined
+          class="password_block"
+          prepend-inner-icon="mdi-lock"
+          v-model="confirmPassword"
+          :error-messages="confirmPasswordErrors"
+          label="Confirm Password"
+          required
+          type="password"
+          @input="$v.confirmPassword.$touch()"
+          @blur="$v.confirmPassword.$touch()"
+        ></v-text-field>
+        <div class="btns">
+          <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">Submit</v-btn>
+          <v-btn @click="goToSignIn" color="info">Sign In</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn to="/">Home</v-btn>
+        </div>
+      </div>
+    </v-card>
+  </v-app>
 </template>
 
 <script>
 import firebase from "firebase";
+import {
+  required,
+  maxLength,
+  email,
+  minLength,
+  sameAs
+} from "vuelidate/lib/validators";
+import { validationMixin } from "vuelidate";
 
 export default {
+  mixins: [validationMixin],
+  validations: {
+    username: { required, maxLength: maxLength(15) },
+    email: { required, email },
+    password: { required, minLength: minLength(6) },
+    confirmPassword: { sameAs: sameAs("password") }
+  },
+
   data() {
     return {
+      username: "",
       email: "",
       password: "",
-      name: ""
+      confirmPassword: "",
+      showPassword: false
     };
   },
+  computed: {
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.required && errors.push("Password is required.");
+      !this.$v.password.minLength &&
+        errors.push("Password must be at least six characters");
+      return errors;
+    },
+    nameErrors() {
+      const errors = [];
+      if (!this.$v.username.$dirty) return errors;
+      !this.$v.username.maxLength &&
+        errors.push("Username must be at most 15 characters long");
+      !this.$v.username.required && errors.push("Username is required.");
+      return errors;
+    },
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Must be valid e-mail");
+      !this.$v.email.required && errors.push("Email is required");
+      return errors;
+    },
+    confirmPasswordErrors() {
+      const errors = [];
+      if (!this.$v.confirmPassword.$dirty) return errors;
+      this.$v.confirmPassword.$error && errors.push("Passwords must match.");
+      return errors;
+    }
+  },
+
   methods: {
-    signUp() {
+    submit() {
+      this.$v.$touch();
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
@@ -28,7 +134,22 @@ export default {
           console.log(error);
           // ...
         });
+      this.$router.push("signin");
+    },
+    goToSignIn() {
+      this.$router.push("signin");
     }
   }
 };
 </script>
+
+<style scoped>
+* {
+  font-family: "Lato", "Arial", sans-serif;
+  font-weight: 300;
+}
+.btns {
+  display: flex;
+  margin-top: 15px;
+}
+</style>

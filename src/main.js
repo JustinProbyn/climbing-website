@@ -5,7 +5,10 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import VModal from "vue-js-modal";
-import firebase from 'firebase'
+import firebase from "firebase";
+import vuelidate from "vuelidate";
+
+Vue.use(vuelidate)
 
 Vue.use(VModal);
 

@@ -6,9 +6,11 @@ import News from "../views/News.vue";
 import Training from "../views/Training.vue";
 import Pictures from "../views/Pictures.vue";
 import CompScene from "../views/CompScene.vue";
+import AddArticle from "../views/AddArticle.vue";
 import ClimbingSpots from "../views/ClimbingSpots.vue";
 import Cart from "../components/Cart.vue";
 import SignUp from "../components/SignUp.vue";
+import SignIn from "../components/SignIn.vue";
 
 // GEAR SHOP IMPORTS
 
@@ -32,95 +34,105 @@ const routes = [
     component: Home
   },
   {
-    path: "/climbingspots",
-    name: "ClimbingSpots",
+    path: "/add-article",
+    name: "AddArticle",
+    component: AddArticle
+  },
+  {
+    path: "/climbing-spots",
+    name: "climbing-spots",
     component: ClimbingSpots
   },
   {
     path: "/news",
-    name: "News",
+    name: "news",
     component: News
   },
   {
     path: "/gear",
-    name: "Gear",
+    name: "gear",
     component: Gear
   },
   {
-    path: "/compscene",
-    name: "CompScene",
+    path: "/comp-scene",
+    name: "compscene",
     component: CompScene
   },
   {
     path: "/pictures",
-    name: "Pictures",
+    name: "pictures",
     component: Pictures
   },
   {
     path: "/training",
-    name: "Training",
+    name: "training",
     component: Training
   },
   {
     path: "/cart",
-    name: "Cart",
+    name: "cart",
     component: Cart
   },
   {
+    path: "/signin",
+    name: "signin",
+    component: SignIn
+  },
+  {
     path: "/signup",
-    name: "SignUp",
+    name: "signup",
     component: SignUp
   },
 
   // GEAR SHOP ROUTES
   {
     path: "/ropes",
-    name: "Ropes",
+    name: "ropes",
     component: Ropes
   },
   {
     path: "/rope-bags",
-    name: "RopeBags",
+    name: "rope-bags",
     component: RopeBags
   },
   {
     path: "/belay-devices",
-    name: "BelayDevices",
+    name: "belay-devices",
     component: BelayDevices
   },
   {
     path: "/climbing-shoes",
-    name: "ClimbingShoes",
+    name: "climbing-shoes",
     component: ClimbingShoes
   },
   {
     path: "/helmets",
-    name: "Helmets",
+    name: "helmets",
     component: Helmets
   },
   {
     path: "/chalk",
-    name: "Chalk",
+    name: "chalk",
     component: Chalk
   },
   {
     path: "/chalk-bags",
-    name: "ChalkBags",
+    name: "chalk-bags",
     component: ChalkBags
   },
   {
     path: "/quickdraws",
-    name: "Quickdraws",
+    name: "quickdraws",
     component: Quickdraws
   },
   {
     path: "/carabiners",
-    name: "Carabiners",
+    name: "carabiners",
     component: Carabiners
   },
   {
     path: "/slings-and-cords",
-    name: "SlingsAndCords",
+    name: "slings-and-cords",
     component: SlingsAndCords
   }
 ];

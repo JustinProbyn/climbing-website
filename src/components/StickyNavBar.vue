@@ -6,22 +6,22 @@
           <router-link to="/">Home</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'News' }">News</router-link>
+          <router-link to="news">News</router-link>
         </li>
         <li>
-          <router-link to="Pictures">Pictures</router-link>
+          <router-link to="pictures">Pictures</router-link>
         </li>
         <li>
-          <router-link to="Training">Training</router-link>
+          <router-link to="training">Training</router-link>
         </li>
         <li>
-          <router-link to="ClimbingSpots">Climbing spots</router-link>
+          <router-link to="climbing-spots">Climbing spots</router-link>
         </li>
         <li>
-          <router-link to="Gear">Gear</router-link>
+          <router-link to="gear">Gear</router-link>
         </li>
         <li>
-          <router-link to="CompScene">Comp Scene</router-link>
+          <router-link to="compScene">Comp Scene</router-link>
         </li>
       </ul>
     </nav>
