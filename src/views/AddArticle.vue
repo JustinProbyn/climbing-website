@@ -21,7 +21,7 @@
 
           <!-- TITLE -->
 
-          <v-text-field v-model="title" outlined clearable label="Title" type="t "Jext"></v-text-field>
+          <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
 
           <!-- SUB TITLE -->
 
