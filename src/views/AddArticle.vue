@@ -17,11 +17,11 @@
         <div class="inputs">
           <!-- AUTHOR -->
 
-          <v-text-field v-model="author" outlined clearable label="Author" type="text"></v-text-field>
+          <v-text-field v-model="author" outlined clearable label="Authors" type="text"></v-text-field>
 
           <!-- TITLE -->
 
-          <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
+          <v-text-field v-model="title" outlined clearable label="Title" type="t "Jext"></v-text-field>
 
           <!-- SUB TITLE -->
 
