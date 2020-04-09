@@ -54,6 +54,7 @@ export default {
   }),
 
   computed: {
+    //Errors that are thrown to user if validations aren't met
     passwordErrors() {
       const errors = [];
       if (!this.$v.password.$dirty) return errors;
@@ -70,6 +71,7 @@ export default {
   },
 
   methods: {
+    /* checks if validation errors then signs into firebase */
     submit() {
       this.$v.$touch();
       firebase
@@ -82,13 +84,17 @@ export default {
         email: this.email,
         password: this.password
       };
-      this.$store.dispatch("SIGNIN_setUserAct", userData);
+      this.$store.dispatch("SIGNIN_setState", userData);
+
+      //   adds localstorage for autologin feature
       localStorage.setItem("email", userData.email);
       localStorage.setItem("password", userData.password);
-      //   adds localstorage for autologin feature
+
+      // clears form
       this.password = "";
       this.email = "";
 
+      // moves page to home
       this.$router.push("/");
     },
     goToHome() {

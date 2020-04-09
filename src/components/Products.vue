@@ -19,6 +19,7 @@ export default {
     show: false
   }),
   props: {
+    //receives products list with - Router Data - from "Gear"
     product: Object
   }
 };
@@ -34,6 +35,17 @@ export default {
 .items,
 .btn {
   font-family: "Lato", "Arial", sans-serif;
+}
+
+.btn a:link,
+.btn a:visited {
+  text-decoration: none;
+  color: rgb(100, 100, 100);
+}
+
+.btn a:hover,
+.btn a:active {
+  color: #d35400;
 }
 
 .product__container {

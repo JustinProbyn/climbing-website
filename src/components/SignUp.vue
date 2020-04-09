@@ -75,6 +75,7 @@ import {
 import { validationMixin } from "vuelidate";
 
 export default {
+  // Form Validations
   mixins: [validationMixin],
   validations: {
     username: { required, maxLength: maxLength(15) },
@@ -82,6 +83,7 @@ export default {
     password: { required, minLength: minLength(6) },
     confirmPassword: { sameAs: sameAs("password") }
   },
+  /***************************************/
 
   data() {
     return {
@@ -93,6 +95,7 @@ export default {
     };
   },
   computed: {
+    // Errors thrown at user if validations aren't met
     passwordErrors() {
       const errors = [];
       if (!this.$v.password.$dirty) return errors;
@@ -123,8 +126,9 @@ export default {
       return errors;
     }
   },
-
+  /***************************************/
   methods: {
+    //checks if there are any errors in form and creates user with firebase
     submit() {
       this.$v.$touch();
       firebase
@@ -134,6 +138,7 @@ export default {
           console.log(error);
           // ...
         });
+      //moves user to signin page
       this.$router.push("signin");
     },
     goToSignIn() {

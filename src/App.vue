@@ -5,7 +5,7 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch("tryAutoLogin");
+    this.$store.dispatch("onRefresh");
     // tries to login in with localstorage data when page reloads
   }
 };

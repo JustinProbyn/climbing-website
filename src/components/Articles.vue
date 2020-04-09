@@ -1,13 +1,33 @@
 <template>
   <div class="articles">
     <div class="article__box">
-      <img class="news__img" :src="data.image" />
+      <img class="news__img" :src="data.url" />
       <v-card class="article__info" height="100%">
         <v-card-title class="title">
-          <a target="_blank" style="text-decoration: none" :href="data.link">{{ data.title }}</a>
+          <a @click="show" target="_blank" style="text-decoration: none">
+            {{
+            data.title
+            }}
+          </a>
+
+          <modal :scrollable="true" width="1140px" height="auto" :name="data.title">
+            <div class="myModal">
+              <div class="modal__title">
+                {{
+                data.title
+                }}
+              </div>
+              <br />
+              <div class="modal__text">
+                {{
+                data.textBody
+                }}
+              </div>
+            </div>
+          </modal>
         </v-card-title>
         <v-card-subtitle class="sub">{{ data.subTitle }}</v-card-subtitle>
-        <v-card-text class="text">{{ data.textBody }}</v-card-text>
+        <v-card-text class="text">By {{ data.author }}</v-card-text>
       </v-card>
     </div>
   </div>
@@ -17,12 +37,24 @@
 export default {
   props: {
     data: Object
+  },
+  methods: {
+    show() {
+      this.$modal.show(this.data.title);
+    },
+    hide() {
+      this.$modal.hide(this.data.title);
+    }
   }
 };
 </script>
 
 <style scoped>
 /* ARTICLES */
+
+* {
+  word-break: break-word;
+}
 
 .article__box {
   display: flex;
@@ -37,7 +69,7 @@ export default {
 }
 
 .news__img {
-  width: auto;
+  width: 200px;
   height: 100%;
 }
 
@@ -51,11 +83,25 @@ export default {
   font-family: "Lato", "Arial", sans-serif;
   font-weight: 300;
   font-size: 100%;
-  margin-right: 40px;
   text-decoration: none;
   color: rgb(54, 54, 54);
   transition: color 0.3s;
   word-spacing: 2px;
   list-style: none;
+}
+
+.myModal {
+  display: flex;
+  padding: 35px;
+  text-align: left;
+  flex-direction: column;
+}
+
+.modal__title {
+  font-size: 130%;
+  align-self: center;
+}
+
+.modal__text {
 }
 </style>

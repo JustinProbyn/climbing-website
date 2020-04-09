@@ -14,32 +14,35 @@
     </div>
     <div>
       <div class="add-article-box">
-        <div class="inputs">
-          <!-- AUTHOR -->
+        <div class="page__content">
+          <div class="inputs">
+            <!-- AUTHOR -->
 
-          <v-text-field v-model="author" outlined clearable label="Authors" type="text"></v-text-field>
+            <v-text-field v-model="author" outlined clearable label="Author" type="text"></v-text-field>
 
-          <!-- TITLE -->
+            <!-- TITLE -->
 
-          <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
+            <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
 
-          <!-- SUB TITLE -->
+            <!-- SUB TITLE -->
 
-          <v-text-field v-model="subTitle" outlined clearable label="Sub Title" type="text"></v-text-field>
+            <v-text-field v-model="subTitle" outlined clearable label="Sub Title" type="text"></v-text-field>
 
-          <input type="file" @change="onFileSelected" />
-          <v-text-field v-model="imageName" outlined clearable label="Image Name" type="text"></v-text-field>
-          <v-btn @click="uploadImage">Upload</v-btn>
-        </div>
+            <input class="file" type="file" @change="onFileSelected" />
+            <div class="image__name-box">
+              <v-text-field v-model="imageName" outlined clearable label="Image Name" type="text"></v-text-field>
+            </div>
+          </div>
 
-        <!-- TEXT BODY -->
-        <div class="text__body">
-          <v-textarea v-model="textBody" label="Text Body" counter full-width single-line></v-textarea>
-        </div>
+          <!-- TEXT BODY -->
+          <div class="text__body">
+            <v-textarea v-model="textBody" label="Text Body" counter auto-grow single-line></v-textarea>
+          </div>
 
-        <!--  -->
-        <div class="btn__box">
-          <v-btn outlined color="#d35400" class="btn" @click="submitArticle">Submit</v-btn>
+          <!--  -->
+          <div class="btn__box">
+            <v-btn outlined color="#d35400" class="btn" @click="submitArticle">Submit</v-btn>
+          </div>
         </div>
       </div>
     </div>
@@ -66,6 +69,7 @@ export default {
       title: "",
       subTitle: "",
       textBody: "",
+      // Waypoint options
       stickyActive: false,
       intersectionOptions: {
         root: null,
@@ -83,41 +87,44 @@ export default {
     onFileSelected(event) {
       this.image = event.target.files[0];
     },
-    uploadImage() {
-      const storageRef = firebase.storage().ref();
-      const fileName = this.imageName;
-      const imageRef = storageRef.child("images/" + fileName + ".jpg");
-      const file = this.image;
-      imageRef.put(file);
-    },
+    // uploadImage() {
+    //   const storageRef = firebase.storage().ref();
+    //   const fileName = this.imageName;
+    //   const imageRef = storageRef.child("images/" + fileName + ".jpg");
+    //   const file = this.image;
+    //   imageRef.put(file);
+    // },
     submitArticle() {
       // Upload file
       const storageRef = firebase.storage().ref();
       const fileName = this.imageName;
       const imageRef = storageRef.child("images/" + fileName + ".jpg");
       const file = this.image;
-      imageRef.put(file);
+      imageRef.put(file).then(() => {
+        imageRef
+          .getDownloadURL()
+          .then(url => {
+            console.log(url);
+            const image = url;
+            const articleData = {
+              url: image,
+              author: this.author,
+              title: this.title,
+              subTitle: this.subTitle,
+              textBody: this.textBody
+            };
+            this.$store.dispatch("addArticle", articleData);
+            this.$store.dispatch("storeArticleData", articleData);
+            this.$router.push("news");
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      });
       // Get file
-      imageRef
-        .getDownloadURL()
-        .then(result => {
-          const image = result;
-          const articleData = {
-            image: image,
-            author: this.author,
-            title: this.title,
-            subTitle: this.subTitle,
-            textBody: this.textBody
-          };
-          this.$store.dispatch("addArticle", articleData);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
     },
+    // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {
-      // going: in, out
-      // direction: top, right, bottom, left
       if (going === this.$waypointMap.GOING_IN) {
         this.stickyActive = true;
       }
@@ -153,10 +160,10 @@ export default {
 .add-article-box {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
   flex-direction: column;
-  margin-left: 2%;
-  margin-top: 40px;
+  margin-top: 20px;
+  background-color: rgba(179, 179, 179, 0.151);
 }
 
 .inputs {
@@ -172,5 +179,23 @@ export default {
 .btn {
   max-width: 120px;
   padding: 20px;
+}
+
+.text__body {
+  height: 100%;
+  width: 100vh;
+}
+
+.file {
+  margin-top: 30px;
+}
+
+.page__content {
+  margin-left: 3%;
+  margin-top: 3%;
+}
+
+.image__name-box {
+  margin-top: 25px;
 }
 </style>

@@ -18,19 +18,19 @@
               <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
             </div>
             <li>
-              <router-link to="news">News</router-link>
+              <router-link v-if="auth" to="news">News</router-link>
             </li>
             <li>
-              <router-link to="training">Training</router-link>
+              <router-link v-if="auth" to="training">Training</router-link>
             </li>
             <li>
-              <router-link to="climbing-spots">Climbing spots</router-link>
+              <router-link v-if="auth" to="climbing-spots">Climbing spots</router-link>
             </li>
             <li>
-              <router-link to="gear">Gear</router-link>
+              <router-link v-if="auth" to="gear">Gear</router-link>
             </li>
             <li>
-              <router-link to="pictures">Pictures</router-link>
+              <router-link v-if="auth" to="pictures">Pictures</router-link>
             </li>
           </ul>
         </div>
@@ -41,7 +41,6 @@
 
 <script>
 import firebase from "firebase";
-// import SignUp from "../components/SignUp.vue";
 
 export default {
   name: "Home",
@@ -75,6 +74,7 @@ export default {
 </script>
 
 <style scoped>
+/*** GENERAL STYLE ***/
 * {
   margin: 0;
   padding: 0;
@@ -89,6 +89,8 @@ export default {
   left: 0px;
   z-index: 1000;
 }
+
+/*** HEADER ***/
 
 header {
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
@@ -125,8 +127,7 @@ header {
   margin-left: 5px;
 }
 
-.nav__bar {
-}
+/*** NAV BAR ***/
 
 .nav__bar--ul {
   display: flex;
@@ -160,7 +161,7 @@ header {
   color: #d35400;
 }
 
-/* Sign up/ Sign in / Sign out buttons */
+/*** BUTTONS ***/
 
 .btns {
   display: flex;

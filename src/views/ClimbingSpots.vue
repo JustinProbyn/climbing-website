@@ -32,14 +32,7 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn
-              @click="showCapeTown"
-              class="ma-2"
-              x-large
-              outlined
-              color="#E65100"
-              >Learn more</v-btn
-            >
+            <v-btn @click="showCapeTown" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
           </div>
           <modal
             style="z-index: 9999"
@@ -86,14 +79,7 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn
-              @click="showMontagu"
-              class="ma-2"
-              x-large
-              outlined
-              color="#E65100"
-              >Learn more</v-btn
-            >
+            <v-btn @click="showMontagu" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
           </div>
           <modal
             style="z-index: 9999"
@@ -137,14 +123,7 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn
-              @click="showRocklands"
-              class="ma-2"
-              x-large
-              outlined
-              color="#E65100"
-              >Learn more</v-btn
-            >
+            <v-btn @click="showRocklands" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
           </div>
           <modal
             style="z-index: 9999"
@@ -191,14 +170,7 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn
-              @click="showWaterval"
-              class="ma-2"
-              x-large
-              outlined
-              color="#E65100"
-              >Learn more</v-btn
-            >
+            <v-btn @click="showWaterval" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
           </div>
           <modal
             style="z-index: 9999"
@@ -242,14 +214,7 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn
-              @click="showOorlogs"
-              class="ma-2"
-              x-large
-              outlined
-              color="#E65100"
-              >Learn more</v-btn
-            >
+            <v-btn @click="showOorlogs" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
           </div>
           <modal
             style="z-index: 9999"
@@ -293,18 +258,19 @@ import Footer from "../components/Footer.vue";
 export default {
   data() {
     return {
+      // Waypoint options
       stickyActive: false,
       intersectionOptions: {
         root: null,
         rootMargin: "0px 0px 0px 0px",
-        threshold: [0.25, 0.75], //  if you want a 25% offset!
-      },
+        threshold: [0.25, 0.75]
+      }
     };
   },
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    stickynav: StickyNavBar,
+    stickynav: StickyNavBar
   },
   methods: {
     // CAPE TOWN MODAL
@@ -346,21 +312,17 @@ export default {
     hideOorlogs() {
       this.$modal.hide("modal-oorlogs-kloof");
     },
-
+    // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {
-      // going: in, out
-      // direction: top, right, bottom, left
       if (going === this.$waypointMap.GOING_IN) {
-        console.log("going down");
         this.stickyActive = true;
       }
 
       if (direction === this.$waypointMap.DIRECTION_TOP) {
-        console.log("going up");
         this.stickyActive = false;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

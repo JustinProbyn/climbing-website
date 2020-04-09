@@ -20,6 +20,7 @@ import Products from "../components/Products.vue";
 export default {
   data() {
     return {
+      // All products sent to Products.Vue (Component)
       products: [
         {
           type: "ropes",

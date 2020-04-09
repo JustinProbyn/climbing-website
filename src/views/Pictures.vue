@@ -127,17 +127,15 @@ export default {
     }
   }),
   methods: {
-    // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+    // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {
       // going: in, out
       // direction: top, right, bottom, left
       if (going === this.$waypointMap.GOING_IN) {
-        console.log("going down");
         this.stickyActive = true;
       }
 
       if (direction === this.$waypointMap.DIRECTION_TOP) {
-        console.log("going up");
         this.stickyActive = false;
       }
     }

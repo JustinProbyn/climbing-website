@@ -1,28 +1,29 @@
 <template>
-  <div class="p__container">
-    <div class="photo__content">
-      <v-hover class="photo__card">
-        <template v-slot:default="{ hover }">
-          <v-card class="mx-auto" max-width="344" max-height="360">
-            <v-img :src="data.url" :alt="data.alt"></v-img>
+  <div class="photo__content">
+    <v-hover class="photo__card">
+      <template v-slot:default="{ hover }">
+        <v-card class="mx-auto" max-width="344" max-height="360">
+          <v-img :src="data.url" :alt="data.alt"></v-img>
 
-            <v-card-text class="card__text">
-              <h2 class="title primary--text card__text">{{ data.caption }}</h2>
-              {{ data.text }}
-            </v-card-text>
+          <v-card-text class="card__text">
+            <h2 class="title primary--text card__text">{{ data.caption }}</h2>
+            {{ data.text }}
+          </v-card-text>
 
-            <v-expand-transition>
-              <v-overlay v-if="hover" absolute color="#d35400">
-                <v-btn @click="show">Englarge</v-btn>
-                <modal @before-close="beforeOpen" width="1140px" height="auto" name="img">
-                  <img :src="data.url" />
-                </modal>
-              </v-overlay>
-            </v-expand-transition>
-          </v-card>
-        </template>
-      </v-hover>
-    </div>
+          <v-expand-transition>
+            <v-overlay v-if="hover" absolute color="#d35400">
+              <v-btn @click="show">Englarge</v-btn>
+
+              <!-- Modal of enlarged image -->
+              <modal @before-close="beforeOpen" width="1140px" height="auto" name="img">
+                <img :src="data.url" />
+              </modal>
+              <!--  -->
+            </v-overlay>
+          </v-expand-transition>
+        </v-card>
+      </template>
+    </v-hover>
   </div>
 </template>
 
@@ -32,6 +33,7 @@ export default {
     return {};
   },
   props: {
+    // Receives data from Pictures.vue (View)
     data: Object
   },
   methods: {
@@ -47,6 +49,7 @@ export default {
 </script>
 
 <style scoped>
+/* CARD BODY */
 .photo__content {
   display: flex;
   max-width: 1140px;
@@ -57,9 +60,7 @@ export default {
   box-shadow: 5px 2px 5px rgb(187, 186, 186);
 }
 
-/* ***************** */
 /* PHOTO CARDS */
-
 .photo__card {
   height: 400px;
 }

@@ -83,6 +83,4 @@ a.router-link-active {
 .nav__bar--ul li a:active {
   color: #d35400;
 }
-
-/* Sticky navi */
 </style>
