@@ -3,11 +3,11 @@
     <v-hover class="photo__card">
       <template v-slot:default="{ hover }">
         <v-card class="mx-auto" max-width="344" max-height="360">
-          <v-img :src="data.url" :alt="data.alt"></v-img>
+          <v-img height="280" :src="data.url" :alt="data.imageName"></v-img>
 
           <v-card-text class="card__text">
-            <h2 class="title primary--text card__text">{{ data.caption }}</h2>
-            {{ data.text }}
+            <h2 class="title primary--text card__text">{{ data.imageName }}</h2>
+            {{ data.caption }}
           </v-card-text>
 
           <v-expand-transition>

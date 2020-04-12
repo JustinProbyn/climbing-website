@@ -1,7 +1,7 @@
 <template>
   <div class="product__container">
     <v-card class="mx-auto" max-width="250">
-      <v-img :src="product.img" height="200px"></v-img>
+      <v-img :src="product.img" height="250px"></v-img>
       <div class="btn__container">
         <v-card-actions>
           <v-btn class="btn" color="purple" text>

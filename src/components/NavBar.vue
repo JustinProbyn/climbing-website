@@ -12,7 +12,7 @@
           <router-link to="pictures">Pictures</router-link>
         </li>
         <li>
-          <router-link to="training">Training</router-link>
+          <router-link to="training">Training Tips</router-link>
         </li>
         <li>
           <router-link to="climbing-spots">Climbing spots</router-link>

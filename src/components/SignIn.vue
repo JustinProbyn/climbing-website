@@ -79,12 +79,19 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .catch(function(error) {
           console.log(error);
+        })
+        .then(() => {
+          if (firebase.auth().currentUser) {
+            this.$store.dispatch("SIGNIN_setState", userData);
+          } else {
+            alert("User doesn't exist");
+            return;
+          }
         });
       const userData = {
         email: this.email,
         password: this.password
       };
-      this.$store.dispatch("SIGNIN_setState", userData);
 
       //   adds localstorage for autologin feature
       localStorage.setItem("email", userData.email);

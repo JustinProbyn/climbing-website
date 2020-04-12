@@ -13,7 +13,12 @@
       }"
     ></div>
     <div class="pictures__box">
-      <pictures-box class="pictures__box--comp" v-for="data in datas" :data="data" :key="data.id"></pictures-box>
+      <pictures-box
+        class="pictures__box--comp"
+        v-for="data in getPictureData"
+        :data="data"
+        :key="data"
+      ></pictures-box>
     </div>
     <footer-comp></footer-comp>
   </div>
@@ -33,91 +38,91 @@ export default {
   data: () => ({
     componentKey: 1,
     datas: [
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Cape Town",
-        text:
-          "Travel to the best outdoor experience on planet Earth. A vacation you will never forget!",
-        caption: "CapeTown"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      },
-      {
-        id: "#",
-        url: require("../../public/img/cape-town-resized.jpg"),
-        alt: "Montagu",
-        text: "awdawdadawd never forget!",
-        caption: "Montagu"
-      }
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Cape Town",
+      //   text:
+      //     "Travel to the best outdoor experience on planet Earth. A vacation you will never forget!",
+      //   caption: "CapeTown"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // },
+      // {
+      //   id: "#",
+      //   url: require("../../public/img/cape-town-resized.jpg"),
+      //   alt: "Montagu",
+      //   text: "awdawdadawd never forget!",
+      //   caption: "Montagu"
+      // }
     ],
     stickyActive: false,
     intersectionOptions: {
@@ -138,6 +143,11 @@ export default {
       if (direction === this.$waypointMap.DIRECTION_TOP) {
         this.stickyActive = false;
       }
+    }
+  },
+  computed: {
+    getPictureData() {
+      return this.$store.getters.getPictureData;
     }
   },
   components: {

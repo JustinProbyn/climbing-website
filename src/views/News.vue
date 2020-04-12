@@ -160,10 +160,13 @@ export default {
   border: 1px solid black;
   height: 1000px;
   width: 500px;
-  float: right;
   margin-right: 10%;
   justify-content: center;
   margin-bottom: 20px;
+}
+
+.sidebar__comps {
+  height: 800px;
 }
 
 .thecrag-oembed-comps,

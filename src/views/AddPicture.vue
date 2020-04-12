@@ -1,0 +1,185 @@
+<template>
+  <v-app>
+    <div class="add-picture__header">
+      <h1>Add Picture</h1>
+      <navbar></navbar>
+      <stickynav v-if="stickyActive == false"></stickynav>
+      <div
+        v-waypoint="{
+          active: true,
+          callback: onWaypoint,
+          options: intersectionOptions
+        }"
+      ></div>
+    </div>
+    <div>
+      <div class="add-picture-box">
+        <div class="page__content">
+          <div class="inputs">
+            <!-- IMAGE AND IMAGE AND NAME -->
+            <input class="file" type="file" @change="onFileSelected" />
+            <div class="image__name-box">
+              <v-text-field v-model="imageName" outlined clearable label="Image Name" type="text"></v-text-field>
+            </div>
+            <!-- IMAGE SUB -->
+            <div class="image__caption-box">
+              <v-text-field v-model="caption" outlined clearable label="Image Caption" type="text"></v-text-field>
+            </div>
+          </div>
+
+          <!-- BUTTON -->
+          <div class="btn__box">
+            <v-btn outlined color="#d35400" class="btn" @click="submitPicture">Submit</v-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer-comp></footer-comp>
+  </v-app>
+</template>
+
+<script>
+import NavBar from "../components/NavBar.vue";
+import StickyNavBar from "../components/StickyNavBar.vue";
+import Footer from "../components/Footer.vue";
+import VueWaypoint from "vue-waypoint";
+import Vue from "vue";
+import firebase from "firebase";
+Vue.use(VueWaypoint);
+export default {
+  data() {
+    return {
+      image: null,
+      imageName: "",
+      caption: "",
+
+      // Waypoint options
+      stickyActive: false,
+      intersectionOptions: {
+        root: null,
+        rootMargin: "0px 0px 0px 0px",
+        threshold: [0.25, 0.75]
+      }
+    };
+  },
+  components: {
+    navbar: NavBar,
+    footerComp: Footer,
+    stickynav: StickyNavBar
+  },
+  methods: {
+    onFileSelected(event) {
+      this.image = event.target.files[0];
+    },
+    // uploadImage() {
+    //   const storageRef = firebase.storage().ref();
+    //   const fileName = this.imageName;
+    //   const imageRef = storageRef.child("images/" + fileName + ".jpg");
+    //   const file = this.image;
+    //   imageRef.put(file);
+    // },
+    submitPicture() {
+      // Upload file
+      const storageRef = firebase.storage().ref();
+      const fileName = this.imageName;
+      const imageNumber = Math.floor(Math.random() * 1000);
+      const imageRef = storageRef.child(
+        "images/" + fileName + imageNumber + ".jpg"
+      );
+      const file = this.image;
+      imageRef.put(file).then(() => {
+        imageRef
+          .getDownloadURL()
+          .then(url => {
+            const image = url;
+            const pictureData = {
+              url: image,
+              caption: this.caption,
+              imageName: this.imageName
+            };
+            this.$store.dispatch("addPicture", pictureData);
+            this.$store.dispatch("storePictureData", pictureData);
+            this.$router.push("pictures");
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      });
+      // Get file
+    },
+    // Waypoint that triggers Stickynav
+    onWaypoint({ going, direction }) {
+      if (going === this.$waypointMap.GOING_IN) {
+        this.stickyActive = true;
+      }
+
+      if (direction === this.$waypointMap.DIRECTION_TOP) {
+        this.stickyActive = false;
+      }
+    }
+  }
+};
+</script>
+
+<style scoped>
+.add-picture__header h1,
+.add-picture__header h2 {
+  display: flex;
+  font-family: "Lato", "Arial", sans-serif;
+  text-transform: uppercase;
+  font-size: 400%;
+  font-weight: 300;
+  color: #fff;
+  word-spacing: 2px;
+  letter-spacing: 1px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 20px;
+  background-image: url("../../public/img/climbing-header-3.jpg");
+  height: 200px;
+  background-position: 80%;
+  background-size: 100%;
+}
+
+.add-picture-box {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  flex-direction: column;
+  margin-top: 20px;
+  background-color: rgba(179, 179, 179, 0.151);
+}
+
+.inputs {
+  max-width: 300px;
+}
+
+.btn__box {
+  justify-content: flex-start;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.btn {
+  max-width: 120px;
+  padding: 20px;
+}
+
+.text__body {
+  height: 100%;
+  width: 100vh;
+}
+
+.file {
+  margin-top: 30px;
+}
+
+.page__content {
+  margin-left: 3%;
+  margin-top: 3%;
+}
+
+.image__name-box {
+  margin-top: 25px;
+}
+</style>

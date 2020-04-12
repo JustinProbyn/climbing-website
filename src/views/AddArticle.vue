@@ -36,7 +36,7 @@
 
           <!-- TEXT BODY -->
           <div class="text__body">
-            <v-textarea v-model="textBody" label="Text Body" counter auto-grow single-line></v-textarea>
+            <v-textarea v-model="textBody" label="Text Body" counter auto-grow multi-line></v-textarea>
           </div>
 
           <!--  -->

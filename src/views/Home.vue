@@ -21,7 +21,7 @@
               <router-link v-if="auth" to="news">News</router-link>
             </li>
             <li>
-              <router-link v-if="auth" to="training">Training</router-link>
+              <router-link v-if="auth" to="training">Training Tips</router-link>
             </li>
             <li>
               <router-link v-if="auth" to="climbing-spots">Climbing spots</router-link>

@@ -25,52 +25,52 @@ export default {
         {
           type: "ropes",
           img: require("../../public/img/rope.jpg"),
-          path: "ropes"
+          path: "/ropes"
         },
         {
           type: "Rope Bags",
-          img: require("../../public/img/rope.jpg"),
-          path: "rope-bags"
+          img: require("../../public/img/ropebag.jpg"),
+          path: "/rope-bags"
         },
         {
           type: "Belay devices",
-          img: require("../../public/img/rope.jpg"),
-          path: "belay-devices"
+          img: require("../../public/img/belaydevice.jpg"),
+          path: "/belay-devices"
         },
         {
           type: "climbing shoes",
-          img: require("../../public/img/rope.jpg"),
-          path: "climbing-shoes"
+          img: require("../../public/img/climbingshoes.jpg"),
+          path: "/climbing-shoes"
         },
         {
           type: "helmets",
-          img: require("../../public/img/rope.jpg"),
-          path: "helmets"
+          img: require("../../public/img/helmet.jpg"),
+          path: "/helmets"
         },
         {
           type: "chalk",
-          img: require("../../public/img/rope.jpg"),
-          path: "chalk"
+          img: require("../../public/img/chalk.jpg"),
+          path: "/chalk"
         },
         {
           type: "chalk bags",
-          img: require("../../public/img/rope.jpg"),
-          path: "chalk-bags"
+          img: require("../../public/img/chalkbag.jpg"),
+          path: "/chalk-bags"
         },
         {
           type: "quickdraws",
-          img: require("../../public/img/rope.jpg"),
-          path: "quickdraws"
+          img: require("../../public/img/quickdraws.jpg"),
+          path: "/quickdraws"
         },
         {
           type: "carabiners",
-          img: require("../../public/img/rope.jpg"),
-          path: "carabiners"
+          img: require("../../public/img/gear/carabiners/bd-_GridLock_Magnetron_Carabiner__51369.1533288829.jpg"),
+          path: "/carabiners"
         },
         {
           type: "slings and cords",
-          img: require("../../public/img/rope.jpg"),
-          path: "slings-and-cords"
+          img: require("../../public/img/gear/SnCs/390012_daisychain_140cm_rd_web__14894.1571837151.jpg"),
+          path: "/slings-and-cords"
         }
       ]
     };

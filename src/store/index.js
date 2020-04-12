@@ -11,7 +11,8 @@ export default new Vuex.Store({
       password: ""
     },
 
-    articleData: []
+    articleData: [],
+    pictureData: []
   },
 
   /*** MUTATIONS ***/
@@ -25,6 +26,7 @@ export default new Vuex.Store({
       state.userData.email = "";
       state.userData.password = "";
       state.articleData = [];
+      state.pictureData = [];
     },
 
     /* Articles Mutations */
@@ -32,7 +34,11 @@ export default new Vuex.Store({
     // pushes articles into state array which are displayed under "News"
     addArticleData(state, articleData) {
       state.articleData.push(articleData);
-      console.log(state.articleData);
+    },
+    // pushes caption into state
+    addPictureData(state, pictureData) {
+      state.pictureData.push(pictureData);
+      console.log(state.pictureData);
     }
   },
 
@@ -43,20 +49,38 @@ export default new Vuex.Store({
     // sets user and articles (from firestore) on sign in
     SIGNIN_setState({ commit }, userData) {
       commit("setUser", userData);
-      async function data() {
+
+      //set news articles on login
+      async function newsData() {
         const snapshot = await firebase
           .firestore()
           .collection("articledata")
           .get();
         return snapshot.docs.map(doc => doc.data());
       }
-      async function callAsync() {
-        const arrayData = await data();
-        for (let i = 0; i < arrayData.length; i++) {
+      async function callNewsData() {
+        const arrayData = await newsData();
+        for (let i = 0; i <= arrayData.length; i++) {
           commit("addArticleData", arrayData[i]);
         }
       }
-      callAsync();
+      callNewsData();
+
+      //set pictures on login
+      async function pictureData() {
+        const snapshot = await firebase
+          .firestore()
+          .collection("picturedata")
+          .get();
+        return snapshot.docs.map(doc => doc.data());
+      }
+      async function callPictureData() {
+        const arrayData = await pictureData();
+        for (let i = 0; i <= arrayData.length; i++) {
+          commit("addPictureData", arrayData[i]);
+        }
+      }
+      callPictureData();
     },
 
     // When page is refreshed sets user and articles (from firestore) - created() in App.vue
@@ -83,13 +107,29 @@ export default new Vuex.Store({
           .get();
         return snapshot.docs.map(doc => doc.data());
       }
-      async function callAsync() {
+      async function newsData() {
         const arrayData = await data();
         for (let i = 0; i < arrayData.length; i++) {
           commit("addArticleData", arrayData[i]);
         }
       }
-      callAsync();
+      newsData();
+
+      // load pictures from firestore
+      async function pdata() {
+        const snapshot = await firebase
+          .firestore()
+          .collection("picturedata")
+          .get();
+        return snapshot.docs.map(doc => doc.data());
+      }
+      async function pictureData() {
+        const arrayData = await pdata();
+        for (let i = 0; i < arrayData.length; i++) {
+          commit("addPictureData", arrayData[i]);
+        }
+      }
+      pictureData();
     },
 
     // sign out removing localstorage
@@ -107,7 +147,6 @@ export default new Vuex.Store({
 
     // stores articles on firestore
     storeArticleData(state, articleData) {
-      console.log(articleData);
       const fireStoreRef = firebase.firestore().collection("articledata");
       fireStoreRef
         .doc("articledata" + "-" + articleData.title)
@@ -123,6 +162,30 @@ export default new Vuex.Store({
         })
         .catch(function(error) {
           console.error("Error writing document: ", error);
+        });
+    },
+
+    /* Add Picture Actions */
+
+    addPicture({ commit }, pictureData) {
+      commit("addPictureData", pictureData);
+    },
+    storePictureData(state, pictureData) {
+      console.log(pictureData);
+      const fireStoreRef = firebase.firestore().collection("picturedata");
+      const imageNumber = Math.floor(Math.random() * 1000);
+      fireStoreRef
+        .doc("picture" + "-" + pictureData.imageName + imageNumber)
+        .set({
+          imageName: pictureData.imageName,
+          caption: pictureData.caption,
+          url: pictureData.url
+        })
+        .then(function() {
+          console.log("Picture successfully added!");
+        })
+        .catch(function(error) {
+          console.error("Error adding picture: ", error);
         });
     }
   },
@@ -143,6 +206,11 @@ export default new Vuex.Store({
     },
     getArticleId(state) {
       return state.articleID;
+    },
+
+    //Picture getters.
+    getPictureData(state) {
+      return state.pictureData;
     }
   },
   modules: {}

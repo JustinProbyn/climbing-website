@@ -10,7 +10,13 @@
             }}
           </a>
 
-          <modal :scrollable="true" width="1140px" height="auto" :name="data.title">
+          <modal
+            style=" z-index: 9999;"
+            :scrollable="true"
+            width="1140px"
+            height="auto"
+            :name="data.title"
+          >
             <div class="myModal">
               <div class="modal__title">
                 {{
@@ -18,7 +24,7 @@
                 }}
               </div>
               <br />
-              <div class="modal__text">
+              <div style="white-space: pre-line;" class="modal__text">
                 {{
                 data.textBody
                 }}
@@ -54,6 +60,9 @@ export default {
 
 * {
   word-break: break-word;
+}
+
+.articles {
 }
 
 .article__box {
@@ -102,6 +111,6 @@ export default {
   align-self: center;
 }
 
-.modal__text {
+.modal {
 }
 </style>
