@@ -33,7 +33,7 @@
           </modal>
         </v-card-title>
         <v-card-subtitle class="sub">{{ data.subTitle }}</v-card-subtitle>
-        <v-card-text class="text">By {{ data.author }}</v-card-text>
+        <v-card-text class="text">By {{ data.author }} - {{ data.date }}</v-card-text>
       </v-card>
     </div>
   </div>

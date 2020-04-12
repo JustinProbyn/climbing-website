@@ -1,6 +1,6 @@
 <template>
-  <div class="photo__content">
-    <v-hover class="photo__card">
+  <div :key="reload" class="photo__content">
+    <v-hover close-delay="200" class="photo__card">
       <template v-slot:default="{ hover }">
         <v-card class="mx-auto" max-width="344" max-height="360">
           <v-img height="280" :src="data.url" :alt="data.imageName"></v-img>
@@ -15,7 +15,7 @@
               <v-btn @click="show">Englarge</v-btn>
 
               <!-- Modal of enlarged image -->
-              <modal @before-close="beforeOpen" width="1140px" height="auto" name="img">
+              <modal @before-close="beforeClose" width="1140px" height="auto" name="img">
                 <img :src="data.url" />
               </modal>
               <!--  -->
@@ -30,7 +30,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      reload: 1
+    };
   },
   props: {
     // Receives data from Pictures.vue (View)
@@ -43,7 +45,9 @@ export default {
     hide() {
       this.$modal.hide("img");
     },
-    beforeOpen() {}
+    beforeClose() {
+      this.reload += 1;
+    }
   }
 };
 </script>

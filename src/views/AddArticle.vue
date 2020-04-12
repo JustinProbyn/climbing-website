@@ -106,7 +106,17 @@ export default {
           .then(url => {
             console.log(url);
             const image = url;
+
+            var currentDate = new Date();
+
+            var newDate = currentDate.getDate();
+            var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+            var year = currentDate.getFullYear();
+
+            var date = newDate + "/" + (month + 1) + "/" + year;
+
             const articleData = {
+              date: date,
               url: image,
               author: this.author,
               title: this.title,

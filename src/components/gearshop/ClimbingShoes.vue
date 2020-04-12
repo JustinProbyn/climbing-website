@@ -18,11 +18,17 @@
         </div>
         <div class="climbingShoe__price">
           <h4>
-            <strong>{{climbingShoe.climbingShoePrice}}</strong>
+            <strong>R{{climbingShoe.climbingShoePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</strong>
           </h4>
         </div>
         <div class="btn__container">
-          <btn class="ma-2 btn" outlined color="#d35400" @click="addToCart">Add to cart</btn>
+          <btn
+            :id="climbingShoe.id"
+            class="ma-2 btn"
+            outlined
+            color="#d35400"
+            @click="addToCart($event)"
+          >Add to cart</btn>
         </div>
       </v-card>
     </div>
@@ -39,28 +45,33 @@ export default {
     return {
       climbingShoes: [
         {
+          id: 1,
           climbingShoeName: "La Sportiva Genius",
-          climbingShoePrice: "R3,295",
+          climbingShoePrice: 3295,
           climbingShoePicture: require("../../../public/img/gear/climbingShoes/Screenshot_2019-03-04_at_13.19.50__40000.1551698403.png")
         },
         {
+          id: 2,
           climbingShoeName: "La Sportiva Futura",
-          climbingShoePrice: "R2,900",
+          climbingShoePrice: 2900,
           climbingShoePicture: require("../../../public/img/gear/climbingShoes/La_Sportiva_Futura__40135.1529410367.jpg")
         },
         {
+          id: 3,
           climbingShoeName: "Ocun Pearl LU",
-          climbingShoePrice: "R1,650",
+          climbingShoePrice: 1650,
           climbingShoePicture: require("../../../public/img/gear/climbingShoes/ocun-pearl__24530.1525952260.jpg")
         },
         {
+          id: 4,
           climbingShoeName: "Ocun Oxi QC",
-          climbingShoePrice: "R1,995",
+          climbingShoePrice: 1995,
           climbingShoePicture: require("../../../public/img/gear/climbingShoes/03755_Oxi_QC__70621.1529478170.jpg")
         },
         {
+          id: 5,
           climbingShoeName: "Evolv Shakra",
-          climbingShoePrice: "R2,150",
+          climbingShoePrice: 2150,
           climbingShoePicture: require("../../../public/img/gear/climbingShoes/evolv-shakra-side__24728.1529488995.jpg")
         }
       ]
@@ -71,7 +82,21 @@ export default {
     footerComp: Footer
   },
   methods: {
-    addToCart() {}
+    addToCart(event) {
+      const id = event.currentTarget.id;
+      for (let i = 0; i < this.climbingShoes.length; i++) {
+        if ((this.climbingShoes.id = id)) {
+          const shoeId = id - 1;
+
+          const cartData = {
+            cost: this.climbingShoes[shoeId].climbingShoePrice,
+            shoe: this.climbingShoes[shoeId].climbingShoeName
+          };
+          this.$store.dispatch("addToCart", cartData);
+          break;
+        }
+      }
+    }
   }
 };
 </script>

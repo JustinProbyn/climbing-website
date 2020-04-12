@@ -3,6 +3,7 @@
   <div class="gear__container">
     <div class="gear__header">
       <h1>Gear</h1>
+      <cart></cart>
       <navbar></navbar>
     </div>
     <div class="products__container">
@@ -17,6 +18,7 @@
 import NavBar from "../components/NavBar.vue";
 import Footer from "../components/Footer.vue";
 import Products from "../components/Products.vue";
+import Cart from "../components/Cart.vue";
 export default {
   data() {
     return {
@@ -78,7 +80,8 @@ export default {
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    products: Products
+    products: Products,
+    cart: Cart
   }
 };
 </script>

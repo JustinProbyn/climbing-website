@@ -12,7 +12,8 @@ export default new Vuex.Store({
     },
 
     articleData: [],
-    pictureData: []
+    pictureData: [],
+    cartData: []
   },
 
   /*** MUTATIONS ***/
@@ -39,6 +40,11 @@ export default new Vuex.Store({
     addPictureData(state, pictureData) {
       state.pictureData.push(pictureData);
       console.log(state.pictureData);
+    },
+    // pushes caption into state
+    setCart(state, cartData) {
+      state.cartData.push(cartData);
+      console.log(state.cartData);
     }
   },
 
@@ -155,7 +161,8 @@ export default new Vuex.Store({
           subTitle: articleData.subTitle,
           url: articleData.url,
           author: articleData.author,
-          textBody: articleData.textBody
+          textBody: articleData.textBody,
+          date: articleData.date
         })
         .then(function() {
           console.log("Document successfully written!");
@@ -187,6 +194,12 @@ export default new Vuex.Store({
         .catch(function(error) {
           console.error("Error adding picture: ", error);
         });
+    },
+
+    /* Cart Actions */
+
+    addToCart({ commit }, cartData) {
+      commit("setCart", cartData);
     }
   },
 
@@ -211,6 +224,11 @@ export default new Vuex.Store({
     //Picture getters.
     getPictureData(state) {
       return state.pictureData;
+    },
+
+    //Cart getters.
+    getCartData(state) {
+      return state.cartData;
     }
   },
   modules: {}
