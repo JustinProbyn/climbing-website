@@ -62,9 +62,6 @@ export default {
   word-break: break-word;
 }
 
-.articles {
-}
-
 .article__box {
   display: flex;
   box-shadow: 1px 1px 1px rgb(255, 255, 255);

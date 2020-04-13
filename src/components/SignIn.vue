@@ -26,7 +26,13 @@
         @blur="$v.password.$touch()"
       ></v-text-field>
       <div class="btns">
-        <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">submit</v-btn>
+        <v-btn
+          color="success"
+          :disabled="$v.$invalid"
+          class="mr-4"
+          @click="submit"
+          >submit</v-btn
+        >
         <v-btn color="info" @click="goToSignUp">Register</v-btn>
         <v-spacer></v-spacer>
         <v-btn @click="goToHome">Home</v-btn>
@@ -83,8 +89,11 @@ export default {
         .then(() => {
           if (firebase.auth().currentUser) {
             this.$store.dispatch("SIGNIN_setState", userData);
+            this.$router.push("/");
           } else {
             alert("User doesn't exist");
+            this.password = "";
+            this.email = "";
             return;
           }
         });
@@ -98,11 +107,6 @@ export default {
       localStorage.setItem("password", userData.password);
 
       // clears form
-      this.password = "";
-      this.email = "";
-
-      // moves page to home
-      this.$router.push("/");
     },
     goToHome() {
       this.$router.push("/");

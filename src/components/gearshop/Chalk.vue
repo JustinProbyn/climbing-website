@@ -1,73 +1,98 @@
 <template>
-<body>
-  <div class="chalks__container">
-    <div class="chalks__header">
-      <h1>Chalk</h1>
-      <navbar></navbar>
+  <body>
+    <div class="chalks__container">
+      <div class="chalks__header">
+        <h1>Chalks</h1>
+        <cart></cart>
+        <navbar></navbar>
+      </div>
+      <div class="product__container">
+        <v-card
+          v-for="item in items"
+          :key="item"
+          class="mx-auto card"
+          max-width="250"
+        >
+          <v-img :src="item.itemPicture" height="200px"></v-img>
+          <div class="chalk__name">
+            <h3>{{ item.itemName }}</h3>
+          </div>
+          <div class="chalk__price">
+            <h4>
+              <strong
+                >R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}</strong
+              >
+            </h4>
+          </div>
+          <div class="btn__container">
+            <btn
+              :id="item.id"
+              class="ma-2 btn"
+              outlined
+              color="#d35400"
+              @click="addToCart($event)"
+              >Add to cart</btn
+            >
+          </div>
+        </v-card>
+      </div>
+      <footer-comp></footer-comp>
     </div>
-    <div class="product__container">
-      <v-card v-for="chalk in chalks" :key="chalk" class="mx-auto card" max-width="250">
-        <v-img :src="chalk.chalkPicture" height="200px"></v-img>
-        <div class="chalk__name">
-          <h3>{{chalk.chalkName}}</h3>
-        </div>
-        <div class="chalk__price">
-          <h4>
-            <strong>{{chalk.chalkPrice}}</strong>
-          </h4>
-        </div>
-        <div class="btn__container">
-          <btn class="ma-2 btn" outlined color="#d35400" @click="addToCart">Add to cart</btn>
-        </div>
-      </v-card>
-    </div>
-    <footer-comp></footer-comp>
-  </div>
-</body>
+  </body>
 </template>
 
 <script>
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import { cartMixin } from "../../mixins/cartMixin.js";
+import Cart from "../../components/Cart.vue";
 export default {
   data() {
     return {
-      chalks: [
+      items: [
         {
-          chalkName: "Black Diamond Black Gold 200g Chalk",
-          chalkPrice: "R350",
-          chalkPicture: require("../../../public/img/gear/chalks/200g_Black_Gold__79117.1578569281.jpg")
+          id: 1,
+          itemName: "Black Diamond Black Gold 200g Chalk",
+          itemPrice: 350,
+          itemPicture: require("../../../public/img/gear/chalks/200g_Black_Gold__79117.1578569281.jpg")
         },
         {
-          chalkName: "Black Diamond Black Gold 30g",
-          chalkPrice: "R70",
-          chalkPicture: require("../../../public/img/gear/chalks/Black_Gold_30g__10984.1578496796.jpg")
+          id: 2,
+          itemName: "Black Diamond Black Gold 30g",
+          itemPrice: 70,
+          itemPicture: require("../../../public/img/gear/chalks/Black_Gold_30g__10984.1578496796.jpg")
         },
         {
-          chalkName: "Evolv Chalk",
-          chalkPrice: "R120",
-          chalkPicture: require("../../../public/img/gear/chalks/chalk_100g__03539.1529480141.jpg")
+          id: 3,
+          itemName: "Evolv Chalk",
+          itemPrice: 120,
+          itemPicture: require("../../../public/img/gear/chalks/chalk_100g__03539.1529480141.jpg")
         },
         {
-          chalkName: "Metolius Chalk Block (57g)",
-          chalkPrice: "R30",
-          chalkPicture: require("../../../public/img/gear/chalks/Block-Chalk__62853.1529673074.jpg")
+          id: 4,
+          itemName: "Metolius Chalk Block (57g)",
+          itemPrice: 30,
+          itemPicture: require("../../../public/img/gear/chalks/Block-Chalk__62853.1529673074.jpg")
         },
         {
-          chalkName: "Metolius ECO Chalk Ball",
-          chalkPrice: "R110",
-          chalkPicture: require("../../../public/img/gear/chalks/Eco_chalk_ball__50742.1529675932.jpg")
+          id: 5,
+          itemName: "Metolius ECO Chalk Ball",
+          itemPrice: 110,
+          itemPicture: require("../../../public/img/gear/chalks/Eco_chalk_ball__50742.1529675932.jpg")
         }
       ]
     };
   },
   components: {
     navbar: NavBar,
-    footerComp: Footer
+    footerComp: Footer,
+    cart: Cart
   },
-  methods: {
-    addToCart() {}
-  }
+  mixins: [cartMixin]
 };
 </script>
 

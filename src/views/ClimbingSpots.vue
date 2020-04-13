@@ -8,7 +8,7 @@
         v-waypoint="{
           active: true,
           callback: onWaypoint,
-          options: intersectionOptions,
+          options: intersectionOptions
         }"
       ></div>
     </div>
@@ -32,7 +32,14 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn @click="showCapeTown" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
+            <v-btn
+              @click="showCapeTown"
+              class="ma-2"
+              x-large
+              outlined
+              color="#E65100"
+              >Learn more</v-btn
+            >
           </div>
           <modal
             style="z-index: 9999"
@@ -79,7 +86,14 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn @click="showMontagu" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
+            <v-btn
+              @click="showMontagu"
+              class="ma-2"
+              x-large
+              outlined
+              color="#E65100"
+              >Learn more</v-btn
+            >
           </div>
           <modal
             style="z-index: 9999"
@@ -123,7 +137,14 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn @click="showRocklands" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
+            <v-btn
+              @click="showRocklands"
+              class="ma-2"
+              x-large
+              outlined
+              color="#E65100"
+              >Learn more</v-btn
+            >
           </div>
           <modal
             style="z-index: 9999"
@@ -170,7 +191,14 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn @click="showWaterval" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
+            <v-btn
+              @click="showWaterval"
+              class="ma-2"
+              x-large
+              outlined
+              color="#E65100"
+              >Learn more</v-btn
+            >
           </div>
           <modal
             style="z-index: 9999"
@@ -214,7 +242,14 @@
             culpa qui officia deserunt mollit anim id est laborum."
           </p>
           <div class="places-btns">
-            <v-btn @click="showOorlogs" class="ma-2" x-large outlined color="#E65100">Learn more</v-btn>
+            <v-btn
+              @click="showOorlogs"
+              class="ma-2"
+              x-large
+              outlined
+              color="#E65100"
+              >Learn more</v-btn
+            >
           </div>
           <modal
             style="z-index: 9999"

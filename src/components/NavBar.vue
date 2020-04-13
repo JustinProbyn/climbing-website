@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar__container">
+  <div style=" z-index: 9999;" class="nav-bar__container">
     <nav class="nav__bar">
       <ul class="nav__bar--ul">
         <li>

@@ -1,73 +1,98 @@
 <template>
-<body>
-  <div class="carabiners__container">
-    <div class="carabiners__header">
-      <h1>Carabiners</h1>
-      <navbar></navbar>
+  <body>
+    <div class="carabiners__container">
+      <div class="carabiners__header">
+        <h1>Carabiners</h1>
+        <cart></cart>
+        <navbar></navbar>
+      </div>
+      <div class="product__container">
+        <v-card
+          v-for="item in items"
+          :key="item"
+          class="mx-auto card"
+          max-width="250"
+        >
+          <v-img :src="item.itemPicture" height="200px"></v-img>
+          <div class="carabiner__name">
+            <h3>{{ item.itemName }}</h3>
+          </div>
+          <div class="carabiner__price">
+            <h4>
+              <strong
+                >R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}</strong
+              >
+            </h4>
+          </div>
+          <div class="btn__container">
+            <btn
+              :id="item.id"
+              class="ma-2 btn"
+              outlined
+              color="#d35400"
+              @click="addToCart($event)"
+              >Add to cart</btn
+            >
+          </div>
+        </v-card>
+      </div>
+      <footer-comp></footer-comp>
     </div>
-    <div class="product__container">
-      <v-card v-for="carabiner in carabiners" :key="carabiner" class="mx-auto card" max-width="250">
-        <v-img :src="carabiner.carabinerPicture" height="200px"></v-img>
-        <div class="carabiner__name">
-          <h3>{{carabiner.carabinerName}}</h3>
-        </div>
-        <div class="carabiner__price">
-          <h4>
-            <strong>{{carabiner.carabinerPrice}}</strong>
-          </h4>
-        </div>
-        <div class="btn__container">
-          <btn class="ma-2 btn" outlined color="#d35400" @click="addToCart">Add to cart</btn>
-        </div>
-      </v-card>
-    </div>
-    <footer-comp></footer-comp>
-  </div>
-</body>
+  </body>
 </template>
 
 <script>
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import { cartMixin } from "../../mixins/cartMixin.js";
+import Cart from "../../components/Cart.vue";
 export default {
   data() {
     return {
-      carabiners: [
+      items: [
         {
-          carabinerName: "Black Diamond Gridlock Magnetron Carabiner",
-          carabinerPrice: "R650",
-          carabinerPicture: require("../../../public/img/gear/carabiners/bd-_GridLock_Magnetron_Carabiner__51369.1533288829.jpg")
+          id: 1,
+          itemName: "Black Diamond Gridlock Magnetron Carabiner",
+          itemPrice: 650,
+          itemPicture: require("../../../public/img/gear/carabiners/bd-_GridLock_Magnetron_Carabiner__51369.1533288829.jpg")
         },
         {
-          carabinerName: "Black Diamond Neutrino Rackpack",
-          carabinerPrice: "R725",
-          carabinerPicture: require("../../../public/img/gear/carabiners/bd-NeutrinoRackpack_web__72617.1533296483.jpg")
+          id: 2,
+          itemName: "Black Diamond Neutrino Rackpack",
+          itemPrice: 725,
+          itemPicture: require("../../../public/img/gear/carabiners/bd-NeutrinoRackpack_web__72617.1533296483.jpg")
         },
         {
-          carabinerName: "DMM Ceros Twislock Carabiner",
-          carabinerPrice: "R385",
-          carabinerPicture: require("../../../public/img/gear/carabiners/DMM-ceros-kwiklock-belay-carabiner__20614.1559739661.jpg")
+          id: 3,
+          itemName: "DMM Ceros Twislock Carabiner",
+          itemPrice: 385,
+          itemPicture: require("../../../public/img/gear/carabiners/DMM-ceros-kwiklock-belay-carabiner__20614.1559739661.jpg")
         },
         {
-          carabinerName: "DMM Revolver Wire Gate Carabiner",
-          carabinerPrice: "R550",
-          carabinerPicture: require("../../../public/img/gear/carabiners/Revolver_wire__85500.1529660326.jpg")
+          id: 4,
+          itemName: "DMM Revolver Wire Gate Carabiner",
+          itemPrice: 550,
+          itemPicture: require("../../../public/img/gear/carabiners/Revolver_wire__85500.1529660326.jpg")
         },
         {
-          carabinerName: "DMM Spectre 2 - 5 Pack",
-          carabinerPrice: "R635",
-          carabinerPicture: require("../../../public/img/gear/carabiners/DMM_Spector_rack_pack__22524.1529663029.jpg")
+          id: 5,
+          itemName: "DMM Spectre 2 - 5 Pack",
+          itemPrice: 635,
+          itemPicture: require("../../../public/img/gear/carabiners/DMM_Spector_rack_pack__22524.1529663029.jpg")
         }
       ]
     };
   },
   components: {
     navbar: NavBar,
-    footerComp: Footer
+    footerComp: Footer,
+    cart: Cart
   },
-  methods: {
-    addToCart() {}
-  }
+  mixins: [cartMixin]
 };
 </script>
 

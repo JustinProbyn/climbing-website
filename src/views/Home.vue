@@ -4,18 +4,51 @@
       <header>
         <div class="hero-text">
           <h1>Climbing Website</h1>
-          <h2>
-            <span>&nbsp;</span>Ascend any height.
-          </h2>
+          <h2><span>&nbsp;</span>Ascend any height.</h2>
         </div>
         <div class="nav__bar">
           <ul class="nav__bar--ul">
             <div class="btns">
-              <v-btn outlined color="#d35400" class="btn" v-if="!auth" to="signup">Admin Sign Up</v-btn>
-              <v-btn outlined color="#d35400" class="btn" v-if="!auth" to="signin">Admin Sign In</v-btn>
-              <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-article">Add Article</v-btn>
-              <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-picture">Add Picture</v-btn>
-              <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
+              <v-btn
+                outlined
+                color="#d35400"
+                class="btn"
+                v-if="!auth"
+                to="signup"
+                >Admin Sign Up</v-btn
+              >
+              <v-btn
+                outlined
+                color="#d35400"
+                class="btn"
+                v-if="!auth"
+                to="signin"
+                >Admin Sign In</v-btn
+              >
+              <v-btn
+                outlined
+                color="#d35400"
+                class="btn"
+                v-if="auth"
+                to="add-article"
+                >Add Article</v-btn
+              >
+              <v-btn
+                outlined
+                color="#d35400"
+                class="btn"
+                v-if="auth"
+                to="add-picture"
+                >Add Picture</v-btn
+              >
+              <v-btn
+                outlined
+                color="#d35400"
+                class="btn"
+                v-if="auth"
+                @click="signOut"
+                >Sign Out</v-btn
+              >
             </div>
             <li>
               <router-link v-if="auth" to="news">News</router-link>
@@ -24,7 +57,9 @@
               <router-link v-if="auth" to="training">Training Tips</router-link>
             </li>
             <li>
-              <router-link v-if="auth" to="climbing-spots">Climbing spots</router-link>
+              <router-link v-if="auth" to="climbing-spots"
+                >Climbing spots</router-link
+              >
             </li>
             <li>
               <router-link v-if="auth" to="gear">Gear</router-link>

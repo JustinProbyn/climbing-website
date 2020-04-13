@@ -1,17 +1,21 @@
 <template>
-<body>
-  <div class="gear__container">
-    <div class="gear__header">
-      <h1>Gear</h1>
-      <cart></cart>
-      <navbar></navbar>
+  <body>
+    <div class="gear__container">
+      <div class="gear__header">
+        <h1>Gear</h1>
+        <cart></cart>
+        <navbar></navbar>
+      </div>
+      <div class="products__container">
+        <products
+          v-for="product in products"
+          :product="product"
+          :key="product"
+        ></products>
+      </div>
+      <footer-comp></footer-comp>
     </div>
-    <div class="products__container">
-      <products v-for="product in products" :product="product" :key="product"></products>
-    </div>
-    <footer-comp></footer-comp>
-  </div>
-</body>
+  </body>
 </template>
 
 <script>

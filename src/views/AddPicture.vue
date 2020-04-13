@@ -19,17 +19,31 @@
             <!-- IMAGE AND IMAGE AND NAME -->
             <input class="file" type="file" @change="onFileSelected" />
             <div class="image__name-box">
-              <v-text-field v-model="imageName" outlined clearable label="Image Name" type="text"></v-text-field>
+              <v-text-field
+                v-model="imageName"
+                outlined
+                clearable
+                label="Image Name"
+                type="text"
+              ></v-text-field>
             </div>
             <!-- IMAGE SUB -->
             <div class="image__caption-box">
-              <v-text-field v-model="caption" outlined clearable label="Image Caption" type="text"></v-text-field>
+              <v-text-field
+                v-model="caption"
+                outlined
+                clearable
+                label="Image Caption"
+                type="text"
+              ></v-text-field>
             </div>
           </div>
 
           <!-- BUTTON -->
           <div class="btn__box">
-            <v-btn outlined color="#d35400" class="btn" @click="submitPicture">Submit</v-btn>
+            <v-btn outlined color="#d35400" class="btn" @click="submitPicture"
+              >Submit</v-btn
+            >
           </div>
         </div>
       </div>

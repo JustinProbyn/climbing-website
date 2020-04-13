@@ -1,73 +1,98 @@
 <template>
-<body>
-  <div class="helmets__container">
-    <div class="helmets__header">
-      <h1>helmets</h1>
-      <navbar></navbar>
+  <body>
+    <div class="helmets__container">
+      <div class="helmets__header">
+        <h1>Helmets</h1>
+        <cart></cart>
+        <navbar></navbar>
+      </div>
+      <div class="product__container">
+        <v-card
+          v-for="item in items"
+          :key="item"
+          class="mx-auto card"
+          max-width="250"
+        >
+          <v-img :src="item.itemPicture" height="200px"></v-img>
+          <div class="helment__name">
+            <h3>{{ item.itemName }}</h3>
+          </div>
+          <div class="helmet__price">
+            <h4>
+              <strong
+                >R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}</strong
+              >
+            </h4>
+          </div>
+          <div class="btn__container">
+            <btn
+              :id="item.id"
+              class="ma-2 btn"
+              outlined
+              color="#d35400"
+              @click="addToCart($event)"
+              >Add to cart</btn
+            >
+          </div>
+        </v-card>
+      </div>
+      <footer-comp></footer-comp>
     </div>
-    <div class="product__container">
-      <v-card v-for="helmet in helmets" :key="helmet" class="mx-auto card" max-width="250">
-        <v-img :src="helmet.helmetPicture" height="200px"></v-img>
-        <div class="helmet__name">
-          <h3>{{helmet.helmetName}}</h3>
-        </div>
-        <div class="helmet__price">
-          <h4>
-            <strong>{{helmet.helmetPrice}}</strong>
-          </h4>
-        </div>
-        <div class="btn__container">
-          <btn class="ma-2 btn" outlined color="#d35400" @click="addToCart">Add to cart</btn>
-        </div>
-      </v-card>
-    </div>
-    <footer-comp></footer-comp>
-  </div>
-</body>
+  </body>
 </template>
 
 <script>
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import { cartMixin } from "../../mixins/cartMixin.js";
+import Cart from "../../components/Cart.vue";
 export default {
   data() {
     return {
-      helmets: [
+      items: [
         {
-          helmetName: "Black Diamond Half Dome Men's Helmet",
-          helmetPrice: "R1,050",
-          helmetPicture: require("../../../public/img/gear/helmets/bd-hd-hel-slate__34774.1561642997.jpg")
+          id: 1,
+          itemName: "Black Diamond Half Dome Men's Helmet",
+          itemPrice: 1050,
+          itemPicture: require("../../../public/img/gear/helmets/bd-hd-hel-slate__34774.1561642997.jpg")
         },
         {
-          helmetName: "Black Diamond Half Dome Women's Helmet",
-          helmetPrice: "R1,050",
-          helmetPicture: require("../../../public/img/gear/helmets/bd-HalfDome-Womens-caspian-1__05231.1533655545.jpg")
+          id: 2,
+          itemName: "Black Diamond Half Dome Women's Helmet",
+          itemPrice: 1050,
+          itemPicture: require("../../../public/img/gear/helmets/bd-HalfDome-Womens-caspian-1__05231.1533655545.jpg")
         },
         {
-          helmetName: "Black Diamond Vector Helmet",
-          helmetPrice: "R1,750",
-          helmetPicture: require("../../../public/img/gear/helmets/BD-vecotr-helmet-blue__62946.1570615860.jpg")
+          id: 3,
+          itemName: "Black Diamond Vector Helmet",
+          itemPrice: 1750,
+          itemPicture: require("../../../public/img/gear/helmets/BD-vecotr-helmet-blue__62946.1570615860.jpg")
         },
         {
-          helmetName: "Mammut Rock Rider Helmet",
-          helmetPrice: "R885",
-          helmetPicture: require("../../../public/img/gear/helmets/2030-00131-00315_main_50461__24024.1565097281.jpg")
+          id: 4,
+          itemName: "Mammut Rock Rider Helmet",
+          itemPrice: 885,
+          itemPicture: require("../../../public/img/gear/helmets/2030-00131-00315_main_50461__24024.1565097281.jpg")
         },
         {
-          helmetName: "Petzl Boreo Helmet",
-          helmetPrice: "R1,170",
-          helmetPicture: require("../../../public/img/gear/helmets/petzl-BOREO-view-1-fuschia__97605.1531840035.jpg")
+          id: 5,
+          itemName: "Petzl Boreo Helmet",
+          itemPrice: 1170,
+          itemPicture: require("../../../public/img/gear/helmets/petzl-BOREO-view-1-fuschia__97605.1531840035.jpg")
         }
       ]
     };
   },
   components: {
     navbar: NavBar,
-    footerComp: Footer
+    footerComp: Footer,
+    cart: Cart
   },
-  methods: {
-    addToCart() {}
-  }
+  mixins: [cartMixin]
 };
 </script>
 

@@ -18,30 +18,62 @@
           <div class="inputs">
             <!-- AUTHOR -->
 
-            <v-text-field v-model="author" outlined clearable label="Author" type="text"></v-text-field>
+            <v-text-field
+              v-model="author"
+              outlined
+              clearable
+              label="Author"
+              type="text"
+            ></v-text-field>
 
             <!-- TITLE -->
 
-            <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
+            <v-text-field
+              v-model="title"
+              outlined
+              clearable
+              label="Title"
+              type="text"
+            ></v-text-field>
 
             <!-- SUB TITLE -->
 
-            <v-text-field v-model="subTitle" outlined clearable label="Sub Title" type="text"></v-text-field>
+            <v-text-field
+              v-model="subTitle"
+              outlined
+              clearable
+              label="Sub Title"
+              type="text"
+            ></v-text-field>
 
             <input class="file" type="file" @change="onFileSelected" />
             <div class="image__name-box">
-              <v-text-field v-model="imageName" outlined clearable label="Image Name" type="text"></v-text-field>
+              <v-text-field
+                v-model="imageName"
+                outlined
+                clearable
+                label="Image Name"
+                type="text"
+              ></v-text-field>
             </div>
           </div>
 
           <!-- TEXT BODY -->
           <div class="text__body">
-            <v-textarea v-model="textBody" label="Text Body" counter auto-grow multi-line></v-textarea>
+            <v-textarea
+              v-model="textBody"
+              label="Text Body"
+              counter
+              auto-grow
+              multi-line
+            ></v-textarea>
           </div>
 
           <!--  -->
           <div class="btn__box">
-            <v-btn outlined color="#d35400" class="btn" @click="submitArticle">Submit</v-btn>
+            <v-btn outlined color="#d35400" class="btn" @click="submitArticle"
+              >Submit</v-btn
+            >
           </div>
         </div>
       </div>
@@ -49,8 +81,6 @@
     <footer-comp></footer-comp>
   </v-app>
 </template>
-
-
 
 <script>
 import NavBar from "../components/NavBar.vue";

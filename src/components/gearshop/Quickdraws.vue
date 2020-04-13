@@ -1,73 +1,98 @@
 <template>
-<body>
-  <div class="quickdraws__container">
-    <div class="quickdraws__header">
-      <h1>quickdraws</h1>
-      <navbar></navbar>
+  <body>
+    <div class="quickdraws__container">
+      <div class="quickdraws__header">
+        <h1>Quickdraws</h1>
+        <cart></cart>
+        <navbar></navbar>
+      </div>
+      <div class="product__container">
+        <v-card
+          v-for="item in items"
+          :key="item"
+          class="mx-auto card"
+          max-width="250"
+        >
+          <v-img :src="item.itemPicture" height="200px"></v-img>
+          <div class="quickdraw__name">
+            <h3>{{ item.itemName }}</h3>
+          </div>
+          <div class="quickdraw__price">
+            <h4>
+              <strong
+                >R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}</strong
+              >
+            </h4>
+          </div>
+          <div class="btn__container">
+            <btn
+              :id="item.id"
+              class="ma-2 btn"
+              outlined
+              color="#d35400"
+              @click="addToCart($event)"
+              >Add to cart</btn
+            >
+          </div>
+        </v-card>
+      </div>
+      <footer-comp></footer-comp>
     </div>
-    <div class="product__container">
-      <v-card v-for="quickdraw in quickdraws" :key="quickdraw" class="mx-auto card" max-width="250">
-        <v-img :src="quickdraw.quickdrawPicture" height="200px"></v-img>
-        <div class="quickdraw__name">
-          <h3>{{quickdraw.quickdrawName}}</h3>
-        </div>
-        <div class="quickdraw__price">
-          <h4>
-            <strong>{{quickdraw.quickdrawPrice}}</strong>
-          </h4>
-        </div>
-        <div class="btn__container">
-          <btn class="ma-2 btn" outlined color="#d35400" @click="addToCart">Add to cart</btn>
-        </div>
-      </v-card>
-    </div>
-    <footer-comp></footer-comp>
-  </div>
-</body>
+  </body>
 </template>
 
 <script>
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import { cartMixin } from "../../mixins/cartMixin.js";
+import Cart from "../../components/Cart.vue";
 export default {
   data() {
     return {
-      quickdraws: [
+      items: [
         {
-          quickdrawName: "Black Diamond Freewire Quickdraw",
-          quickdrawPrice: "R345",
-          quickdrawPicture: require("../../../public/img/gear/quickdraws/Freewire_12__14183.1578574366.jpg")
+          id: 1,
+          itemName: "Black Diamond Freewire Quickdraw",
+          itemPrice: 345,
+          itemPicture: require("../../../public/img/gear/quickdraws/Freewire_12__14183.1578574366.jpg")
         },
         {
-          quickdrawName: "DMM Alpha Trad Quickdraw",
-          quickdrawPrice: "R370",
-          quickdrawPicture: require("../../../public/img/gear/quickdraws/dmm-alphatrad-qd__70192.1560167274.jpg")
+          id: 2,
+          itemName: "DMM Alpha Trad Quickdraw",
+          itemPrice: 370,
+          itemPicture: require("../../../public/img/gear/quickdraws/dmm-alphatrad-qd__70192.1560167274.jpg")
         },
         {
-          quickdrawName: "Mammut Bionic Express Quickdraw",
-          quickdrawPrice: "R295",
-          quickdrawPicture: require("../../../public/img/gear/quickdraws/mammut-bionic-express-qd__00640.1530685822.jpg")
+          id: 3,
+          itemName: "Mammut Bionic Express Quickdraw",
+          itemPrice: 295,
+          itemPicture: require("../../../public/img/gear/quickdraws/mammut-bionic-express-qd__00640.1530685822.jpg")
         },
         {
-          quickdrawName: "Metolius FS Mini II Long Draw",
-          quickdrawPrice: "R258",
-          quickdrawPicture: require("../../../public/img/gear/quickdraws/metolius-fs-mini-longdraw-20__15932.1529677701.jpg")
+          id: 4,
+          itemName: "Metolius FS Mini II Long Draw",
+          itemPrice: 258,
+          itemPicture: require("../../../public/img/gear/quickdraws/metolius-fs-mini-longdraw-20__15932.1529677701.jpg")
         },
         {
-          quickdrawName: "Ocun Falcon Quickdraw 5 Pack",
-          quickdrawPrice: "R1,400",
-          quickdrawPicture: require("../../../public/img/gear/quickdraws/Ocun-Falcon-QD-Zoom-PA-15-22-blue-5-pack__02060.1574157896.jpg")
+          id: 5,
+          itemName: "Ocun Falcon Quickdraw 5 Pack",
+          itemPrice: 1400,
+          itemPicture: require("../../../public/img/gear/quickdraws/Ocun-Falcon-QD-Zoom-PA-15-22-blue-5-pack__02060.1574157896.jpg")
         }
       ]
     };
   },
   components: {
     navbar: NavBar,
-    footerComp: Footer
+    footerComp: Footer,
+    cart: Cart
   },
-  methods: {
-    addToCart() {}
-  }
+  mixins: [cartMixin]
 };
 </script>
 

@@ -39,12 +39,24 @@ export default new Vuex.Store({
     // pushes caption into state
     addPictureData(state, pictureData) {
       state.pictureData.push(pictureData);
-      console.log(state.pictureData);
     },
-    // pushes caption into state
+
+    /* Articles Mutations */
+    // updates cart with newly added item
     setCart(state, cartData) {
       state.cartData.push(cartData);
       console.log(state.cartData);
+    },
+    // loads cart from local storage on refresh
+    loadCart(state, cartData) {
+      state.cartData = cartData;
+    },
+    clearCart(state) {
+      state.cartData = [];
+      localStorage.removeItem("cartData");
+    },
+    deleteCartItem(state, index) {
+      state.cartData.splice(index, 1);
     }
   },
 
@@ -136,6 +148,10 @@ export default new Vuex.Store({
         }
       }
       pictureData();
+
+      // load cart items from local storage
+      var cartData = JSON.parse(localStorage.getItem("cartData"));
+      commit("loadCart", cartData);
     },
 
     // sign out removing localstorage
@@ -143,6 +159,7 @@ export default new Vuex.Store({
       localStorage.removeItem("password");
       localStorage.removeItem("email");
       commit("signOutUser");
+      commit("clearCart");
     },
 
     /* Article Actions */
@@ -178,7 +195,6 @@ export default new Vuex.Store({
       commit("addPictureData", pictureData);
     },
     storePictureData(state, pictureData) {
-      console.log(pictureData);
       const fireStoreRef = firebase.firestore().collection("picturedata");
       const imageNumber = Math.floor(Math.random() * 1000);
       fireStoreRef
@@ -200,6 +216,11 @@ export default new Vuex.Store({
 
     addToCart({ commit }, cartData) {
       commit("setCart", cartData);
+      localStorage.setItem("cartData", JSON.stringify(this.state.cartData));
+    },
+    deleteCartItem({ commit }, index) {
+      commit("deleteCartItem", index);
+      localStorage.setItem("cartData", JSON.stringify(this.state.cartData));
     }
   },
 

@@ -1,73 +1,98 @@
 <template>
-<body>
-  <div class="BDs__container">
-    <div class="BDs__header">
-      <h1>Belay Devices</h1>
-      <navbar></navbar>
+  <body>
+    <div class="BDs__container">
+      <div class="BDs__header">
+        <h1>Belay Devices</h1>
+        <cart></cart>
+        <navbar></navbar>
+      </div>
+      <div class="product__container">
+        <v-card
+          v-for="item in items"
+          :key="item"
+          class="mx-auto card"
+          max-width="250"
+        >
+          <v-img :src="item.itemPicture" height="200px"></v-img>
+          <div class="BD__name">
+            <h3>{{ item.itemName }}</h3>
+          </div>
+          <div class="BD__price">
+            <h4>
+              <strong
+                >R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}</strong
+              >
+            </h4>
+          </div>
+          <div class="btn__container">
+            <btn
+              :id="item.id"
+              class="ma-2 btn"
+              outlined
+              color="#d35400"
+              @click="addToCart($event)"
+              >Add to cart</btn
+            >
+          </div>
+        </v-card>
+      </div>
+      <footer-comp></footer-comp>
     </div>
-    <div class="product__container">
-      <v-card v-for="BD in BDs" :key="BD" class="mx-auto card" max-width="250">
-        <v-img :src="BD.BDPicture" height="200px"></v-img>
-        <div class="BD__name">
-          <h3>{{BD.BDName}}</h3>
-        </div>
-        <div class="BD__price">
-          <h4>
-            <strong>{{BD.BDPrice}}</strong>
-          </h4>
-        </div>
-        <div class="btn__container">
-          <btn class="ma-2 btn" outlined color="#d35400" @click="addToCart">Add to cart</btn>
-        </div>
-      </v-card>
-    </div>
-    <footer-comp></footer-comp>
-  </div>
-</body>
+  </body>
 </template>
 
 <script>
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import { cartMixin } from "../../mixins/cartMixin.js";
+import Cart from "../../components/Cart.vue";
 export default {
   data() {
     return {
-      BDs: [
+      items: [
         {
-          BDName: "Black Diamond ATC Pilot",
-          BDPrice: "R795",
-          BDPicture: require("../../../public/img/gear/BDs/BD-pilot-2__53236.1531741336.jpg")
+          id: 1,
+          itemName: "Black Diamond ATC Pilot",
+          itemPrice: 795,
+          itemPicture: require("../../../public/img/gear/BDs/BD-pilot-2__53236.1531741336.jpg")
         },
         {
-          BDName: "Black Diamond ATC XP",
-          BDPrice: "R395",
-          BDPicture: require("../../../public/img/gear/BDs/BD-ATC-XP-black__00533.1531741679.jpg")
+          id: 2,
+          itemName: "Black Diamond ATC XP",
+          itemPrice: 395,
+          itemPicture: require("../../../public/img/gear/BDs/BD-ATC-XP-black__00533.1531741679.jpg")
         },
         {
-          BDName: "Edelrid Giga Jul",
-          BDPrice: "R1,250",
-          BDPicture: require("../../../public/img/gear/BDs/73742_663a__60848.1571671926.jpg")
+          id: 3,
+          itemName: "Edelrid Giga Jul",
+          itemPrice: 1250,
+          itemPicture: require("../../../public/img/gear/BDs/73742_663a__60848.1571671926.jpg")
         },
         {
-          BDName: "DMM Mantis Belay Device",
-          BDPrice: "R325",
-          BDPicture: require("../../../public/img/gear/BDs/c63_12112_a1165or-mantis-belay-device-orange__37123.1561551150.jpg")
+          id: 4,
+          itemName: "DMM Mantis Belay Device",
+          itemPrice: 325,
+          itemPicture: require("../../../public/img/gear/BDs/c63_12112_a1165or-mantis-belay-device-orange__37123.1561551150.jpg")
         },
         {
-          BDName: "DMM Pivot Belay Device",
-          BDPrice: "R600",
-          BDPicture: require("../../../public/img/gear/BDs/dmm-PIVOT-RED__41155.1551953037.jpg")
+          id: 5,
+          itemName: "DMM Pivot Belay Device",
+          itemPrice: 600,
+          itemPicture: require("../../../public/img/gear/BDs/dmm-PIVOT-RED__41155.1551953037.jpg")
         }
       ]
     };
   },
   components: {
     navbar: NavBar,
-    footerComp: Footer
+    footerComp: Footer,
+    cart: Cart
   },
-  methods: {
-    addToCart() {}
-  }
+  mixins: [cartMixin]
 };
 </script>
 

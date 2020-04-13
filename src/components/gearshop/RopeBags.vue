@@ -1,73 +1,98 @@
 <template>
-<body>
-  <div class="ropeBags__container">
-    <div class="ropeBags__header">
-      <h1>Rope Bags</h1>
-      <navbar></navbar>
+  <body>
+    <div class="ropeBags__container">
+      <div class="ropeBags__header">
+        <h1>Rope Bags</h1>
+        <cart></cart>
+        <navbar></navbar>
+      </div>
+      <div class="product__container">
+        <v-card
+          v-for="item in items"
+          :key="item"
+          class="mx-auto card"
+          max-width="250"
+        >
+          <v-img :src="item.itemPicture" height="200px"></v-img>
+          <div class="ropeBag__name">
+            <h3>{{ item.itemName }}</h3>
+          </div>
+          <div class="ropeBag__price">
+            <h4>
+              <strong
+                >R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}</strong
+              >
+            </h4>
+          </div>
+          <div class="btn__container">
+            <btn
+              :id="item.id"
+              class="ma-2 btn"
+              outlined
+              color="#d35400"
+              @click="addToCart($event)"
+              >Add to cart</btn
+            >
+          </div>
+        </v-card>
+      </div>
+      <footer-comp></footer-comp>
     </div>
-    <div class="product__container">
-      <v-card v-for="ropeBag in ropeBags" :key="ropeBag" class="mx-auto card" max-width="250">
-        <v-img :src="ropeBag.ropeBagPicture" height="200px"></v-img>
-        <div class="ropeBag__name">
-          <h3>{{ ropeBag.ropeBagName }}</h3>
-        </div>
-        <div class="ropeBag__price">
-          <h4>
-            <strong>{{ ropeBag.ropeBagPrice }}</strong>
-          </h4>
-        </div>
-        <div class="btn__container">
-          <btn class="ma-2 btn" outlined color="#d35400" @click="addToCart">Add to cart</btn>
-        </div>
-      </v-card>
-    </div>
-    <footer-comp></footer-comp>
-  </div>
-</body>
+  </body>
 </template>
 
 <script>
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import { cartMixin } from "../../mixins/cartMixin.js";
+import Cart from "../../components/Cart.vue";
 export default {
   data() {
     return {
-      ropeBags: [
+      items: [
         {
-          ropeBagName: "Black Diamond Stone Duffel 42",
-          ropeBagPrice: "R1,495",
-          ropeBagPicture: require("../../../public/img/gear/rope-bags/bd-stone-42-nickel-1__97065.1561548951.jpg")
+          id: 1,
+          itemName: "Black Diamond Stone Duffel 42",
+          itemPrice: 1495,
+          itemPicture: require("../../../public/img/gear/rope-bags/bd-stone-42-nickel-1__97065.1561548951.jpg")
         },
         {
-          ropeBagName: "Black Diamond Super Chute Rope Bag",
-          ropeBagPrice: "R995",
-          ropeBagPicture: require("../../../public/img/gear/rope-bags/bd-Superchute-closed__37628.1533652572.jpg")
+          id: 2,
+          itemName: "Black Diamond Super Chute Rope Bag",
+          itemPrice: 995,
+          itemPicture: require("../../../public/img/gear/rope-bags/bd-Superchute-closed__37628.1533652572.jpg")
         },
         {
-          ropeBagName: "DMM Classic Rope Bag",
-          ropeBagPrice: "R1,050",
-          ropeBagPicture: require("../../../public/img/gear/rope-bags/DMM_CLassic__40396.1529574084.jpg")
+          id: 3,
+          itemName: "DMM Classic Rope Bag",
+          itemPrice: 1050,
+          itemPicture: require("../../../public/img/gear/rope-bags/DMM_CLassic__40396.1529574084.jpg")
         },
         {
-          ropeBagName: "DMM Flight Rope Bag",
-          ropeBagPrice: "R2,350",
-          ropeBagPicture: require("../../../public/img/gear/rope-bags/c63_12090_flight-sport-climbing-rope-bag-grey__14107.1547298226.jpg")
+          id: 4,
+          itemName: "DMM Flight Rope Bag",
+          itemPrice: 2350,
+          itemPicture: require("../../../public/img/gear/rope-bags/c63_12090_flight-sport-climbing-rope-bag-grey__14107.1547298226.jpg")
         },
         {
-          ropeBagName: "DMM Pitcher Rope Bag",
-          ropeBagPrice: "R800",
-          ropeBagPicture: require("../../../public/img/gear/rope-bags/DMM_Pitcher_Rope_Bag__99682.1529659287.jpg")
+          id: 5,
+          itemName: "DMM Pitcher Rope Bag",
+          itemPrice: 800,
+          itemPicture: require("../../../public/img/gear/rope-bags/DMM_Pitcher_Rope_Bag__99682.1529659287.jpg")
         }
       ]
     };
   },
   components: {
     navbar: NavBar,
-    footerComp: Footer
+    footerComp: Footer,
+    cart: Cart
   },
-  methods: {
-    addToCart() {}
-  }
+  mixins: [cartMixin]
 };
 </script>
 

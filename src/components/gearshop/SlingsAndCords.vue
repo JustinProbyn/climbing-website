@@ -2,22 +2,29 @@
 <body>
   <div class="SnCs__container">
     <div class="SnCs__header">
-      <h1>SnCs</h1>
+      <h1>Slings and Cords</h1>
+      <cart></cart>
       <navbar></navbar>
     </div>
     <div class="product__container">
-      <v-card v-for="SnC in SnCs" :key="SnC" class="mx-auto card" max-width="250">
-        <v-img :src="SnC.SnCPicture" height="200px"></v-img>
+      <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
+        <v-img :src="item.itemPicture" height="200px"></v-img>
         <div class="SnC__name">
-          <h3>{{SnC.SnCName}}</h3>
+          <h3>{{item.itemName}}</h3>
         </div>
         <div class="SnC__price">
           <h4>
-            <strong>{{SnC.SnCPrice}}</strong>
+            <strong>R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</strong>
           </h4>
         </div>
         <div class="btn__container">
-          <btn class="ma-2 btn" outlined color="#d35400" @click="addToCart">Add to cart</btn>
+          <btn
+            :id="item.id"
+            class="ma-2 btn"
+            outlined
+            color="#d35400"
+            @click="addToCart($event)"
+          >Add to cart</btn>
         </div>
       </v-card>
     </div>
@@ -29,45 +36,51 @@
 <script>
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import { cartMixin } from "../../mixins/cartMixin.js";
+import Cart from "../../components/Cart.vue";
 export default {
   data() {
     return {
-      SnCs: [
+      items: [
         {
-          SnCName: "Black Diamond Nylon Daisy Chain",
-          SnCPrice: "R375",
-          SnCPicture: require("../../../public/img/gear/SnCs/390012_daisychain_140cm_rd_web__14894.1571837151.jpg")
+          id: 1,
+          itemName: "Black Diamond Nylon Daisy Chain",
+          itemPrice: 375,
+          itemPicture: require("../../../public/img/gear/SnCs/390012_daisychain_140cm_rd_web__14894.1571837151.jpg")
         },
         {
-          SnCName: "Black Diamond Dynex Runners",
-          SnCPrice: "R245",
-          SnCPicture: require("../../../public/img/gear/SnCs/bd-DYNEX-slings-120cm__65220.1571916180.jpg")
+          id: 2,
+          itemName: "Black Diamond Dynex Runners",
+          itemPrice: 245,
+          itemPicture: require("../../../public/img/gear/SnCs/bd-DYNEX-slings-120cm__65220.1571916180.jpg")
         },
         {
-          SnCName: "Beal Accessory Cord",
-          SnCPrice: "R5",
-          SnCPicture: require("../../../public/img/gear/SnCs/beal-2-3mm-accessory-cord__55481.1533881198.jpg")
+          id: 3,
+          itemName: "Beal Accessory Cord",
+          itemPrice: 5,
+          itemPicture: require("../../../public/img/gear/SnCs/beal-2-3mm-accessory-cord__55481.1533881198.jpg")
         },
         {
-          SnCName: "Ocun Multipoint Belay Sling",
-          SnCPrice: "R450",
-          SnCPicture: require("../../../public/img/gear/SnCs/526b__70072.1537373840.jpg")
+          id: 4,
+          itemName: "Ocun Multipoint Belay Sling",
+          itemPrice: 450,
+          itemPicture: require("../../../public/img/gear/SnCs/526b__70072.1537373840.jpg")
         },
         {
-          SnCName: "Petzl Anneau Nylon Sling",
-          SnCPrice: "R105",
-          SnCPicture: require("../../../public/img/gear/SnCs/068w0000003wLFZAA2__31656.1551874979.jpg")
+          id: 5,
+          itemName: "Petzl Anneau Nylon Sling",
+          itemPrice: 105,
+          itemPicture: require("../../../public/img/gear/SnCs/068w0000003wLFZAA2__31656.1551874979.jpg")
         }
       ]
     };
   },
   components: {
     navbar: NavBar,
-    footerComp: Footer
+    footerComp: Footer,
+    cart: Cart
   },
-  methods: {
-    addToCart() {}
-  }
+  mixins: [cartMixin]
 };
 </script>
 
