@@ -9,39 +9,28 @@
             v-on="on"
             class="cart__icon"
             color="grey lighten-1"
-            >mdi-cart</v-icon
-          >
+          >mdi-cart</v-icon>
         </template>
-        <span class="cart__popup"
-          >{{ getCartData.length }} items in your cart</span
-        >
+        <span class="cart__popup">{{ getCartData.length }} items in your cart</span>
       </v-tooltip>
     </v-app>
     <div class="text-center">
       <v-dialog v-model="dialog" width="500">
         <v-card>
-          <v-card-title
-            class="headline grey lighten-2 cart__title"
-            primary-title
-            >Your cart</v-card-title
-          >
+          <v-card-title class="headline grey lighten-2 cart__title" primary-title>Your cart</v-card-title>
 
-          <v-card-text
-            class="itemsInCart"
-            v-for="(data, index) in getCartData"
-            :key="data"
-            
-            
-            >{{ data.product }}: R{{
-              data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }} <v-icon class="deleteIcon" @click.native="deleteCartItem(index)">mdi-delete-forever</v-icon></v-card-text
-          >
+          <v-card-text class="itemsInCart" v-for="(data, index) in getCartData" :key="data">
+            {{ data.product }}: R{{
+            data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }}
+            <v-icon class="deleteIcon" @click.native="deleteCartItem(index)">mdi-delete-forever</v-icon>
+          </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
             <div class="total">
               <h2>
                 Total: R{{
-                  totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 }}
               </h2>
             </div>
@@ -86,6 +75,8 @@ export default {
     },
     checkOut() {
       this.dialog = false;
+      this.$store.dispatch("clearCart");
+      //lead to checkout interface when implemented
     },
     deleteCartItem(index) {
       console.log("trying to delete");

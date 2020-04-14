@@ -12,7 +12,7 @@
           <router-link to="pictures">Pictures</router-link>
         </li>
         <li>
-          <router-link to="training">Training Tips</router-link>
+          <router-link to="sport-climbing">Expertise</router-link>
         </li>
         <li>
           <router-link to="climbing-spots">Climbing spots</router-link>
@@ -50,6 +50,8 @@ a.router-link-active {
 
 .nav__bar {
   list-style: none;
+
+  justify-self: center;
 }
 .nav__bar--ul {
   position: fixed;

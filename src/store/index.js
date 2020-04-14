@@ -214,6 +214,10 @@ export default new Vuex.Store({
 
     /* Cart Actions */
 
+    clearCart({ commit }) {
+      commit("clearCart");
+    },
+
     addToCart({ commit }, cartData) {
       commit("setCart", cartData);
       localStorage.setItem("cartData", JSON.stringify(this.state.cartData));
