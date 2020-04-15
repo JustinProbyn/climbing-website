@@ -12,11 +12,7 @@
           <router-link @click.native="$scrollToTop" to="pictures">Pictures</router-link>
         </li>
         <li>
-<<<<<<< HEAD
           <router-link @click.native="$scrollToTop" to="sport-climbing">Expertise</router-link>
-=======
-          <router-link to="sport-climbing">Expertise</router-link>
->>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
         </li>
         <li>
           <router-link @click.native="$scrollToTop" to="climbing-spots">Climbing spots</router-link>

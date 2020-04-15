@@ -112,7 +112,6 @@
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
-<<<<<<< HEAD
             <div class="divider"></div>
             <div class="recent__articles--header">Recent Articles</div>
             <div class="articles__container">
@@ -123,8 +122,6 @@
                 :key="data"
               ></articles>
             </div>
-=======
->>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
           </div>
         </div>
       </div>
@@ -137,10 +134,7 @@
 import Footer from "../components/Footer.vue";
 import NavBar from "../components/NavBar.vue";
 import StickyNavBar from "../components/StickyNavBar.vue";
-<<<<<<< HEAD
 import Articles from "../components/Articles.vue";
-=======
->>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
 export default {
   data() {
     return {
@@ -161,7 +155,6 @@ export default {
   components: {
     navbar: NavBar,
     footerComp: Footer,
-<<<<<<< HEAD
     stickynav: StickyNavBar,
     articles: Articles
   },
@@ -169,9 +162,6 @@ export default {
     getNewsData() {
       return this.$store.getters.getArticleData;
     }
-=======
-    stickynav: StickyNavBar
->>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
   },
   methods: {
     selectSport() {
@@ -285,22 +275,14 @@ export default {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-<<<<<<< HEAD
   width: 220px;
   padding: 15px;
   margin-left: -16px;
-=======
-
-  width: 170px;
->>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
 }
 
 .belay__list--item {
   margin-left: 15px;
-<<<<<<< HEAD
   text-decoration: none;
-=======
->>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
 }
 /* ---BODY BOXES--- */
 
@@ -333,7 +315,6 @@ export default {
   margin-bottom: 20px;
 }
 
-<<<<<<< HEAD
 /* news import */
 
 .divider {
@@ -380,8 +361,6 @@ export default {
   color: #d35400;
 }
 
-=======
->>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
 /* Main panel */
 .main__panel {
   display: flex;
