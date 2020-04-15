@@ -30,12 +30,14 @@
             class="itemsInCart"
             v-for="(data, index) in getCartData"
             :key="data"
-            
-            
-            >{{ data.product }}: R{{
-              data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }} <v-icon class="deleteIcon" @click.native="deleteCartItem(index)">mdi-delete-forever</v-icon></v-card-text
           >
+            {{ data.product }}: R{{
+              data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }}
+            <v-icon class="deleteIcon" @click.native="deleteCartItem(index)"
+              >mdi-delete-forever</v-icon
+            >
+          </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
             <div class="total">
@@ -86,6 +88,8 @@ export default {
     },
     checkOut() {
       this.dialog = false;
+      this.$store.dispatch("clearCart");
+      //lead to checkout interface when implemented
     },
     deleteCartItem(index) {
       console.log("trying to delete");
@@ -135,5 +139,6 @@ export default {
 
 .deleteIcon {
   font-size: 120%;
+  cursor: pointer;
 }
 </style>

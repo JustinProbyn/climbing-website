@@ -4,7 +4,7 @@
       <img class="news__img" :src="data.url" />
       <v-card class="article__info" height="100%">
         <v-card-title class="title">
-          <a @click="show" target="_blank" style="text-decoration: none">
+          <a @click="show" style="text-decoration: none">
             {{
             data.title
             }}
@@ -65,9 +65,9 @@ export default {
 .article__box {
   display: flex;
   box-shadow: 1px 1px 1px rgb(255, 255, 255);
-  height: 200px;
-  width: auto;
-  margin-right: 20px;
+  height: 210px;
+  width: 100%;
+  
 }
 
 .article__info {
@@ -75,7 +75,7 @@ export default {
 }
 
 .news__img {
-  width: 200px;
+  width: 210px;
   height: 100%;
 }
 

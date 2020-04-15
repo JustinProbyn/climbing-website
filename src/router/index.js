@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Gear from "../views/Gear.vue";
 import News from "../views/News.vue";
-import Training from "../views/Training.vue";
+import Expertise from "../views/Expertise.vue";
 import Pictures from "../views/Pictures.vue";
 import AddArticle from "../views/AddArticle.vue";
 import AddPicture from "../views/AddPicture.vue";
@@ -24,6 +24,16 @@ import ChalkBags from "../components/gearshop/ChalkBags";
 import Quickdraws from "../components/gearshop/Quickdraws";
 import Carabiners from "../components/gearshop/Carabiners";
 import SlingsAndCords from "../components/gearshop/SlingsAndCords";
+
+// EXPERTISE PAGE IMPORTS
+
+import SportClimbing from "../components/selectedExpertise/SportClimbing";
+import TradClimbing from "../components/selectedExpertise/TradClimbing";
+import Bouldering from "../components/selectedExpertise/Bouldering";
+import Rappelling from "../components/selectedExpertise/Rappelling";
+import LeadBelaying from "../components/selectedExpertise/LeadBelaying";
+import Training from "../components/selectedExpertise/Training";
+import TopRopeBelaying from "../components/selectedExpertise/TopRopeBelaying";
 
 Vue.use(VueRouter);
 
@@ -63,11 +73,7 @@ const routes = [
     name: "pictures",
     component: Pictures
   },
-  {
-    path: "/training",
-    name: "training",
-    component: Training
-  },
+
   {
     path: "/cart",
     name: "cart",
@@ -82,6 +88,51 @@ const routes = [
     path: "/signup",
     name: "signup",
     component: SignUp
+  },
+  {
+    path: "/expertise",
+    name: "expertise",
+    component: Expertise,
+    children: [
+      // EXPERTISE PAGE ROUTES
+
+      {
+        path: "/sport-climbing",
+        name: "sport-climbing",
+        component: SportClimbing
+      },
+      {
+        path: "/trad-climbing",
+        name: "trad-climbing",
+        component: TradClimbing
+      },
+      {
+        path: "/bouldering",
+        name: "bouldering",
+        component: Bouldering
+      },
+      {
+        path: "/rappelling",
+        name: "rappelling",
+        component: Rappelling
+      },
+
+      {
+        path: "/lead-belaying",
+        name: "lead-belaying",
+        component: LeadBelaying
+      },
+      {
+        path: "/training",
+        name: "training",
+        component: Training
+      },
+      {
+        path: "/top-rope-belaying",
+        name: "top-rope-belaying",
+        component: TopRopeBelaying
+      }
+    ]
   },
 
   // GEAR SHOP ROUTES
@@ -138,6 +189,9 @@ const routes = [
 ];
 
 const router = new VueRouter({
+    scrollBehavior() {
+    return { x: 0, y: 0 }
+  },
   routes
 });
 

@@ -14,12 +14,7 @@
     </div>
     <div class="news__body">
       <div class="articles__container">
-        <articles
-          class="news__articles"
-          v-for="data in getNewsData"
-          :data="data"
-          :key="data"
-        ></articles>
+        <articles class="news__articles" v-for="data in getNewsData" :data="data" :key="data"></articles>
       </div>
       <div class="sidebar">
         <h2 class="sidebar__title">Global Ascents</h2>
@@ -119,7 +114,6 @@ export default {
 }
 
 .news__header .news__nav {
-  float: right;
   font-size: 200%;
 }
 
@@ -151,6 +145,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 20px
 }
 
 .sidebar__title {
@@ -161,6 +156,7 @@ export default {
 
 .sidebar__comps,
 .sidebar__ascents {
+  border-radius: 7px;
   display: flex;
   border: 1px solid black;
   height: 1000px;

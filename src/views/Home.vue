@@ -1,65 +1,44 @@
-<template>
+<template v-slot:activator="{ on }">
   <v-app>
     <div class="body">
       <header>
         <div class="hero-text">
           <h1>Climbing Website</h1>
-          <h2><span>&nbsp;</span>Ascend any height.</h2>
+          <h2>
+            <span>&nbsp;</span>Ascend any height.
+          </h2>
         </div>
         <div class="nav__bar">
           <ul class="nav__bar--ul">
             <div class="btns">
-              <v-btn
-                outlined
-                color="#d35400"
-                class="btn"
-                v-if="!auth"
-                to="signup"
-                >Admin Sign Up</v-btn
-              >
-              <v-btn
-                outlined
-                color="#d35400"
-                class="btn"
-                v-if="!auth"
-                to="signin"
-                >Admin Sign In</v-btn
-              >
-              <v-btn
-                outlined
-                color="#d35400"
-                class="btn"
-                v-if="auth"
-                to="add-article"
-                >Add Article</v-btn
-              >
-              <v-btn
-                outlined
-                color="#d35400"
-                class="btn"
-                v-if="auth"
-                to="add-picture"
-                >Add Picture</v-btn
-              >
-              <v-btn
-                outlined
-                color="#d35400"
-                class="btn"
-                v-if="auth"
-                @click="signOut"
-                >Sign Out</v-btn
-              >
+              <v-row justify="center">
+                <v-dialog v-model="dialog" max-width="290">
+                  <template v-slot:activator="{ on }">
+                    <v-btn outlined color="#dad6d6" v-on="on" class="btn">Disclaimer</v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title class="headline">Disclaimer</v-card-title>
+                    <v-card-text
+                      style="width: 280px"
+                    >The content on this mock website is not original. It has been sourced from other websites that include climbing.co.za, climbing.com, frictionlabs.com and articlegenerator.org.</v-card-text>
+                  </v-card>
+                </v-dialog>
+              </v-row>
+
+              <v-btn outlined color="#d35400" class="btn" v-if="!auth" to="signup">Admin Sign Up</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="!auth" to="signin">Admin Sign In</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-article">Add Article</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-picture">Add Picture</v-btn>
+              <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
             </div>
             <li>
               <router-link v-if="auth" to="news">News</router-link>
             </li>
             <li>
-              <router-link v-if="auth" to="training">Training Tips</router-link>
+              <router-link v-if="auth" to="sport-climbing">Expertise</router-link>
             </li>
             <li>
-              <router-link v-if="auth" to="climbing-spots"
-                >Climbing spots</router-link
-              >
+              <router-link v-if="auth" to="climbing-spots">Climbing spots</router-link>
             </li>
             <li>
               <router-link v-if="auth" to="gear">Gear</router-link>
@@ -169,7 +148,7 @@ header {
   justify-content: flex-end;
   margin-top: 500px;
   list-style: none;
-  color: rgb(218, 214, 214);
+  color: #dad6d6;
   display: flex;
   margin-left: auto;
   margin-right: 150px;

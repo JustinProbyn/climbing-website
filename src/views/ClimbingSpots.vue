@@ -23,13 +23,13 @@
         <div class="places-text">
           <p class="places-title">Cape Town</p>
           <p class="places-body">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
+            The Cape is full of mountains and provides a mecca of climbing. Cape
+            Town being the main center is a good base to start from. There are a
+            few clubs mainly the MCSA Cape Town Section which has over 1200
+            members and a bouldering wall in their club room. The University
+            also has a good bouldering wall and there is a climbing gym in Cape
+            Town too. Good climbing is only a few minutes drive from Cape Town
+            and the furthermost areas about 4-5 hours away.
           </p>
           <div class="places-btns">
             <v-btn
@@ -40,7 +40,17 @@
               color="#E65100"
               >Learn more</v-btn
             >
+            <v-btn
+              @click="showCapeTownMap"
+              class="ma-2 map-btn"
+              x-large
+              outlined
+              color="#E65100"
+              >Climbing Map</v-btn
+            >
           </div>
+
+          <!-- CT Text Modal -->
           <modal
             style="z-index: 9999"
             width="1140px"
@@ -49,23 +59,62 @@
             styles="padding: 20px"
           >
             <p>
-              "CAPE TOWN Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum." "Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum."
+              With winter rainfall which often sets in and hot conditions in
+              summer, spring and autumn are the best times to visit. Most of the
+              areas are relatively safe and guidebooks cover most of the areas
+              and are available from the MCSA, Mountain Mail Order and the
+              climbing stores. The best areas are Rocklands for bouldering,
+              Montagu and Oudtshoorn for sport routes and Table Mountain, Du
+              Toit's Kloof (1hr from Cape Town) and Cederberg (3 hrs from Cape
+              Town) for trad routes.
             </p>
           </modal>
+          <!--  -->
+
+          <!-- CT MAP MODAL -->
+          <modal
+            style="z-index: 9999"
+            width="1140px"
+            height="auto"
+            name="modal-cape-town-map"
+            styles="padding: 20px"
+          >
+            <div>
+              <l-map
+                :zoom="zoom"
+                :center="center"
+                style="height: 500px; width: 100%"
+              >
+                <l-tile-layer :url="url" :attribution="attribution" />
+
+                <l-polygon
+                  :lat-lngs="polygonTB.latlngs"
+                  :color="polygonTB.color"
+                >
+                  <l-popup content="Table Mountain: 142" />
+                </l-polygon>
+                <l-polygon
+                  :lat-lngs="polygonGK.latlngs"
+                  :color="polygonGK.color"
+                >
+                  <l-popup content="Grootkop: 1" />
+                </l-polygon>
+                <l-polygon
+                  :lat-lngs="polygonAL.latlngs"
+                  :color="polygonAL.color"
+                >
+                  <l-popup content="Africa Ledge: 24" />
+                </l-polygon>
+                <l-polygon
+                  :lat-lngs="polygonHV.latlngs"
+                  :color="polygonHV.color"
+                >
+                  <l-popup content="Higgovale Quarry: 32" />
+                </l-polygon>
+              </l-map>
+            </div>
+          </modal>
+          <!--  -->
         </div>
         <div class="cape-town-img"></div>
       </div>
@@ -77,13 +126,14 @@
         <div class="places-text">
           <p class="places-title">Montagu</p>
           <p class="places-body">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
+            Montagu is recognised as one of the most outstanding climbing
+            destinations in South Africa due to the quality and number of
+            climbing routes available. Montagu’s rock walls offer a wide variety
+            of climbing opportunities at every level from beginner to expert.
+            The charming town of Montagu is situated in the Klein Karoo (semi
+            desert region) on the east side of the Langeberg mountain range 2
+            hours / 200km drive east of Cape Town. Montagu is well known for
+            it’s hot mineral springs as well as climbing and mountain biking.
           </p>
           <div class="places-btns">
             <v-btn
@@ -103,20 +153,18 @@
             styles="padding: 20px"
           >
             <p>
-              "MONTAGU Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum."
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum."
+              Once a sleepy little Karoo town where not much happened, the town
+              has since transformed into a vibrant energetic holiday
+              destination. Montagu’s hot springs were first documented in the
+              late 1700′s. The hot spring water comes out at 43° C from a
+              fissure estimated to be 3km deep and is unaffected by drought. In
+              1877, Thomas Bain built the Cogmans Kloof pass and the tunnel that
+              trade began to develop the area. Between 1902 and 1985 the Brink
+              Brother’s enterprises were of major significance to the town.
+              Their activities included general dealers, bottling works, canning
+              factory, dried fruit production and a department store. In 1936
+              Montagu was declared a health resort. This resulted in an influx
+              of wealthy people purchasing holiday houses.
             </p>
           </modal>
         </div>
@@ -128,13 +176,14 @@
         <div class="places-text">
           <p class="places-title">Rocklands</p>
           <p class="places-body">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
+            Rocklands is found in the Cederberg mountains 250km/3 hours north of
+            Cape Town. It is a very beautiful area in a semi-desert setting,
+            very isolated and very safe. Rocklands is undoubtedly famous for
+            it's world class bouldering but this should not deter you from
+            sampling the fine sport climbing. There is a large variety of
+            quality climbing of all grades in both bouldering and sport
+            climbing. All the sport routes are single pitch and you will have to
+            do a small amount of walking to get to the different areas.
           </p>
           <div class="places-btns">
             <v-btn
@@ -154,21 +203,14 @@
             styles="padding: 20px"
           >
             <p>
-              "ROCKLANDS Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum." "Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum."
+              Most of the original climbing is situated on CapeNature land and
+              thus day or week permits must be obtained. Permits for bouldering
+              are not covered by Wild Cards. Many of the newer areas being
+              developed are on private farms some which have small (30-40 rand)
+              day fees. The rock is a fine grain sandstone of medium hardness,
+              excellent for climbing on due to its varied features. It is quite
+              rough so you will surely need to plan rest days to re-grow some
+              skin.
             </p>
           </modal>
         </div>
@@ -182,13 +224,13 @@
         <div class="places-text">
           <p class="places-title">Waterval Boven</p>
           <p class="places-body">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
+            Waterval Boven – ‘Boven (aka The Restaurant at the End of the
+            Universe crags) – is arguably South Africa’s best sport climbing
+            area. These crags attract year round international visitors ever
+            since articles were published in 1993 in the German magazine
+            Rotpunkt as well as in other media. It has become famous for its
+            good selection of great quality routes (over 1000 of them!) of all
+            grades that are easily accessible.
           </p>
           <div class="places-btns">
             <v-btn
@@ -208,20 +250,13 @@
             styles="padding: 20px"
           >
             <p>
-              "WATERVAL Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum."
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum."
+              A PDF guide covers almost everything and can be downloaded
+              <a
+                href="http://www.climbing.co.za/areas/waterval-boven"
+                target="_blank"
+                >here</a
+              >
+              for free
             </p>
           </modal>
         </div>
@@ -233,13 +268,11 @@
         <div class="places-text">
           <p class="places-title">Oorlogs Kloof</p>
           <p class="places-body">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
+            There are several crags in Oorlogs Kloof with +/- 40 routes. There
+            are also a number of trad routes. Most of the walls are north facing
+            (best visited when the weather is cooler), but some are in gulleys
+            and a few face south (all day shade). The routes vary from 8-30m
+            long and from slabs to overhanging walls.
           </p>
           <div class="places-btns">
             <v-btn
@@ -259,21 +292,22 @@
             styles="padding: 20px"
           >
             <p>
-              "OORLOGS Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum."
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum."
+              There are several crags in Oorlogs Kloof with +/- 40 routes. There
+              are also a number of trad routes. Most of the walls are north
+              facing (best visited when the weather is cooler), but some are in
+              gulleys and a few face south (all day shade). The routes vary from
+              8-30m long and from slabs to overhanging walls.
             </p>
+            <div class="YT">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/jqf58lQTdY8"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
           </modal>
         </div>
         <div class="oorlogs-kloof-img"></div>
@@ -287,12 +321,117 @@
 </template>
 
 <script>
+import {
+  LMap,
+  LTileLayer,
+  // LCircle,
+  // LRectangle,
+  LPolygon,
+  // LPolyline,
+  LPopup
+  // LTooltip
+} from "vue2-leaflet";
+import { latLng } from "leaflet";
+
 import StickyNavBar from "../components/StickyNavBar.vue";
 import NavBar from "../components/NavBar.vue";
 import Footer from "../components/Footer.vue";
 export default {
   data() {
     return {
+      // Leaflet
+      zoom: 10,
+      center: [-33.918861, 18.4233],
+      circle: {
+        center: latLng(-33.990548, 18.37547),
+        radius: 50
+      },
+      // rectangle: {
+      //   bounds: [
+      //     [47.341456, -1.397133],
+      //     [47.303901, -1.243813]
+      //   ],
+      //   color: "red"
+      // },
+      polygonGK: {
+        latlngs: [
+          [-33.98926146295228, 18.374157444189272],
+          [-33.990079866400244, 18.37248374576398],
+          [-33.992161422259514, 18.371904388616763],
+          [-33.99434522199156, 18.375085488508425],
+          [-33.994165093995015, 18.37659020776578],
+          [-33.99391491558852, 18.377192363689623],
+          [-33.99352241198184, 18.377837434957705],
+          [-33.99231931597587, 18.378891543100558],
+          [-33.990404556888684, 18.3772419845564]
+        ],
+        color: "#e67e22"
+      },
+      polygonHV: {
+        latlngs: [
+          [-33.94207106623959, 18.400656553975104],
+          [-33.94255615134218, 18.401643606892584],
+          [-33.9429700291068, 18.401192995778082],
+          [-33.94266740900354, 18.40047416376209],
+          [-33.94233808590411, 18.40050098585224]
+        ],
+        color: "#ff00ff"
+      },
+      polygonAL: {
+        latlngs: [
+          [-33.95738117652143, 18.40340462866563],
+          [-33.95670484463528, 18.403034483821575],
+          [-33.9570578975068, 18.40359849971129],
+          [-33.95739315078089, 18.404323448141895],
+          [-33.95757865664648, 18.404813114175735],
+          [-33.95783707222324, 18.40526401984418],
+          [-33.95814922454298, 18.40503930339489],
+          [-33.9579003960959, 18.40455680032619]
+        ],
+        color: "#e67e22"
+      },
+      polygonTB: {
+        latlngs: [
+          [-33.962966943578344, 18.386297312150564],
+          [-33.98047735750262, 18.37462433851775],
+          [-33.993002920408884, 18.35917481459197],
+          [-33.998838063593205, 18.349046793351736],
+          [-34.007945778663974, 18.350076761613455],
+          [-34.00225357119536, 18.38741311110076],
+          [-33.996845620737226, 18.398249235520925],
+          [-33.993002920408884, 18.402218904862966],
+          [-33.98802138353731, 18.406703558335867],
+          [-33.98360892129344, 18.40809830702361],
+          [-33.98168729355271, 18.42586525953826],
+          [-33.966917778765804, 18.436980333695974],
+          [-33.96038634404443, 18.442881193528738],
+          [-33.95712933771505, 18.45084198988494],
+          [-33.945470724984155, 18.460648146043386],
+          [-33.938795227763734, 18.439211931596365],
+          [-33.952501682611334, 18.419513788590994],
+          [-33.947695774396244, 18.40934285200652],
+          [-33.943459230258085, 18.39711197889861],
+          [-33.945310519181746, 18.390760507951345],
+          [-33.9514337264619, 18.394559493531744],
+          [-33.956986952080136, 18.389237990846198]
+        ],
+        color: "#ff00ff",
+        fillOpacity: 0.75
+      },
+      polyline: {
+        type: "polyline",
+        latlngs: [
+          [47.334852, -1.509485],
+          [47.342596, -1.328731],
+          [47.241487, -1.190568],
+          [47.234787, -1.358337]
+        ],
+        color: "green"
+      },
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+
       // Waypoint options
       stickyActive: false,
       intersectionOptions: {
@@ -305,15 +444,29 @@ export default {
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    stickynav: StickyNavBar
+    stickynav: StickyNavBar,
+    LMap,
+    LTileLayer,
+    // LCircle,
+    // LRectangle,
+    LPolygon,
+    // LPolyline,
+    LPopup
+    // LTooltip
   },
   methods: {
-    // CAPE TOWN MODAL
+    // CAPE TOWN MODALS
     showCapeTown() {
       this.$modal.show("modal-cape-town");
     },
     hideCapetown() {
       this.$modal.hide("modal-cape-town");
+    },
+    showCapeTownMap() {
+      this.$modal.show("modal-cape-town-map");
+    },
+    hideCapetownMap() {
+      this.$modal.hide("modal-cape-town-map");
     },
 
     // MONTAGU MODAL
@@ -356,6 +509,10 @@ export default {
       if (direction === this.$waypointMap.DIRECTION_TOP) {
         this.stickyActive = false;
       }
+    },
+    // Leaflet
+    TB() {
+      this.$modal.show;
     }
   }
 };
@@ -366,10 +523,10 @@ export default {
 /******** LAYOUT ***********/
 
 * {
-  background-color: rgb(240, 240, 240);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Lato", "Arial", sans-serif;
 }
 
 .app {
@@ -379,7 +536,7 @@ export default {
 .climbing-spots__header h1,
 .climbing-spots__header h2 {
   display: flex;
-  font-family: "Lato", "Arial", sans-serif;
+
   text-transform: uppercase;
   font-size: 400%;
   font-weight: 300;
@@ -399,6 +556,9 @@ export default {
   font-size: 200%;
 }
 
+.climbing-spots__container {
+  background-color: rgb(240, 240, 240);
+}
 .spots__container {
   display: flex;
   flex-direction: column;
@@ -421,6 +581,24 @@ export default {
   margin-top: 10px;
 }
 
+.map-btn {
+  margin-left: 20px;
+}
+
+/* MODAL */
+
+.YT {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Leaflet */
+
+#mapid {
+  height: 180px;
+}
+
 /***************************/
 /******** PLACES ***********/
 
@@ -441,7 +619,7 @@ export default {
   padding: 20px;
   font-family: "Lato", "Arial", sans-serif;
   font-weight: 300;
-  font-size: 130%;
+  font-size: 120%;
 }
 
 .cape-town,

@@ -1,19 +1,48 @@
 <template>
-  <div class="training__container">
-    <div class="training__header">
-      <h1>
-        training
-      </h1>
-      <navbar></navbar>
+  <v-app>
+    <div class="training__container">
+      <div class="training__header">
+        <h1>training</h1>
+        <navbar></navbar>
+      </div>
+      <div class="training__body">
+        <div class="content">
+                  <v-row justify="space-around">
+          <v-menu bottom origin="center center" transition="scale-transition">
+            <template v-slot:activator="{ on }">
+              <v-btn color="primary" dark v-on="on">Scale Transition</v-btn>
+              
+            </template>
+
+            <v-list>
+              <v-list-item v-for="(skillLevel, index) in skillLevels" :key="index" @click="method">
+                <v-list-item-title>{{ skillLevel.level }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-row>
+        </div>
+        <div class="sidebar"></div>
+
+      </div>
+      <footer-comp></footer-comp>
     </div>
-    <footer-comp></footer-comp>
-  </div>
+  </v-app>
 </template>
 
 <script>
 import Footer from "../components/Footer.vue";
 import NavBar from "../components/NavBar.vue";
 export default {
+  data: () => ({
+    skillLevels: [{ level: "Beginner" }, { level: "Intermediate" }]
+  }),
+  methods: {
+    method() {
+      console.log("HI");
+    }
+  },
+
   components: {
     navbar: NavBar,
     footerComp: Footer

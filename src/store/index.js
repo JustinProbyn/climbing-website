@@ -34,7 +34,7 @@ export default new Vuex.Store({
 
     // pushes articles into state array which are displayed under "News"
     addArticleData(state, articleData) {
-      state.articleData.push(articleData);
+      state.articleData.unshift(articleData);
     },
     // pushes caption into state
     addPictureData(state, pictureData) {
@@ -213,6 +213,10 @@ export default new Vuex.Store({
     },
 
     /* Cart Actions */
+
+    clearCart({ commit }) {
+      commit("clearCart");
+    },
 
     addToCart({ commit }, cartData) {
       commit("setCart", cartData);

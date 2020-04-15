@@ -3,22 +3,22 @@
     <nav class="nav__bar">
       <ul class="nav__bar--ul">
         <li>
-          <router-link to="/">Home</router-link>
+          <router-link @click.native="$scrollToTop" to="/">Home</router-link>
         </li>
         <li>
-          <router-link to="news">News</router-link>
+          <router-link @click.native="$scrollToTop" to="news">News</router-link>
         </li>
         <li>
-          <router-link to="pictures">Pictures</router-link>
+          <router-link @click.native="$scrollToTop" to="pictures">Pictures</router-link>
         </li>
         <li>
-          <router-link to="training">Training Tips</router-link>
+          <router-link @click.native="$scrollToTop" to="sport-climbing">Expertise</router-link>
         </li>
         <li>
-          <router-link to="climbing-spots">Climbing spots</router-link>
+          <router-link @click.native="$scrollToTop" to="climbing-spots">Climbing spots</router-link>
         </li>
         <li>
-          <router-link to="gear">Gear</router-link>
+          <router-link @click.native="$scrollToTop" to="gear">Gear</router-link>
         </li>
       </ul>
     </nav>
@@ -32,7 +32,11 @@ export default {
       isActive: false
     };
   },
-  methods: {},
+  methods: {
+       scrollToTop () {
+      window.scrollTo(0, 0);
+    }
+  },
   computed: {
     auth() {
       return this.$store.getters.isLoggedIn;
@@ -54,7 +58,10 @@ a.router-link-active {
 }
 
 .nav__bar {
+  background-color: rgba(36, 36, 36, 0.151);
   list-style: none;
+  margin-right: 18px;
+  margin-left: 18px;
 }
 .nav__bar--ul {
   display: flex;

@@ -7,6 +7,12 @@ import vuetify from "./plugins/vuetify";
 import VModal from "vue-js-modal";
 import firebase from "firebase";
 import vuelidate from "vuelidate";
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import "leaflet/dist/leaflet.css";
+
+Vue.component("l-map", LMap);
+Vue.component("l-tile-layer", LTileLayer);
+Vue.component("l-marker", LMarker);
 
 Vue.use(vuelidate);
 
