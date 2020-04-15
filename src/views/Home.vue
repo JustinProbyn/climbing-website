@@ -20,7 +20,11 @@
                     <v-card-title class="headline">Disclaimer</v-card-title>
                     <v-card-text
                       style="width: 280px"
+<<<<<<< HEAD
                     >The content on this mock website is not original. It has been sourced from other websites that include climbing.co.za, climbing.com, frictionlabs.com and articlegenerator.org.</v-card-text>
+=======
+                    >The content on this mock website is not original. It has been sourced from other websites that comprise climbing.co.za, climbing.com, frictionlabs.com and articlegenerator.org.</v-card-text>
+>>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
                   </v-card>
                 </v-dialog>
               </v-row>
