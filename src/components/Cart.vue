@@ -19,7 +19,6 @@
         <v-card>
           <v-card-title class="headline grey lighten-2 cart__title" primary-title>Your cart</v-card-title>
 
-<<<<<<< HEAD
           <v-card-text
             class="itemsInCart"
             v-for="(data, index) in getCartData"
@@ -31,13 +30,6 @@
             <v-icon class="deleteIcon" @click.native="deleteCartItem(index)"
               >mdi-delete-forever</v-icon
             >
-=======
-          <v-card-text class="itemsInCart" v-for="(data, index) in getCartData" :key="data">
-            {{ data.product }}: R{{
-            data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }}
-            <v-icon class="deleteIcon" @click.native="deleteCartItem(index)">mdi-delete-forever</v-icon>
->>>>>>> aa16c50d93a8655e9a8a3f476cf7ebb477d6535e
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
