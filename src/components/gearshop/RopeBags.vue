@@ -105,6 +105,9 @@ export default {
   font-family: "Lato", "Arial", sans-serif;
 }
 
+.ropeBags__header {
+  width: 100%;
+}
 .ropeBags__header h1,
 .ropeBags__header h2 {
   display: flex;

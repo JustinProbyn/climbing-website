@@ -104,6 +104,9 @@ export default {
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
+.chalks__header {
+  width: 100%;
+}
 
 .chalks__header h1,
 .chalks__header h2 {

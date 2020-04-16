@@ -93,6 +93,10 @@ export default {
   font-family: "Lato", "Arial", sans-serif;
 }
 
+.SnCs__header {
+  width: 100%;
+}
+
 .SnCs__header h1,
 .SnCs__header h2 {
   display: flex;

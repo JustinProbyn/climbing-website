@@ -8,31 +8,23 @@
           </a>
         </li>
         <li>
-          <a href="#"
-            ><v-icon class="icons--icon--facebook" size="30"
-              >mdi-facebook</v-icon
-            >
-          </a>
-        </li>
-        <li>
-          <a href="#"
-            ><v-icon class="icons--icon--google-plus" size="30"
-              >mdi-google-plus</v-icon
-            >
+          <a href="#">
+            <v-icon class="icons--icon--facebook" size="30">mdi-facebook</v-icon>
           </a>
         </li>
         <li>
           <a href="#">
-            <v-icon class="icons--icon--linkedin" size="30"
-              >mdi-linkedin</v-icon
-            >
+            <v-icon class="icons--icon--google-plus" size="30">mdi-google-plus</v-icon>
           </a>
         </li>
         <li>
-          <a href="#"
-            ><v-icon class="icons--icon--instagram" size="30"
-              >mdi-instagram</v-icon
-            >
+          <a href="#">
+            <v-icon class="icons--icon--linkedin" size="30">mdi-linkedin</v-icon>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <v-icon class="icons--icon--instagram" size="30">mdi-instagram</v-icon>
           </a>
         </li>
       </ul>
@@ -63,7 +55,8 @@
 
 <style scoped>
 footer {
-  background-color: rgb(238, 236, 236);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.856);
+  background-color: rgb(255, 255, 255);
   font-family: "Lato", "Arial", sans-serif;
   font-weight: 300;
   width: 100vw;

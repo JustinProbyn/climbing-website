@@ -105,6 +105,10 @@ export default {
   font-family: "Lato", "Arial", sans-serif;
 }
 
+.helmets__header {
+  width: 100%;
+}
+
 .helmets__header h1,
 .helmets__header h2 {
   display: flex;

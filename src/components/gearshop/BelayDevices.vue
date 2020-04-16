@@ -1,48 +1,42 @@
 <template>
-  <body>
-    <div class="BDs__container">
-      <div class="BDs__header">
-        <h1>Belay Devices</h1>
-        <cart></cart>
-        <navbar></navbar>
-      </div>
-      <div class="product__container">
-        <v-card
-          v-for="item in items"
-          :key="item"
-          class="mx-auto card"
-          max-width="250"
-        >
-          <v-img :src="item.itemPicture" height="200px"></v-img>
-          <div class="BD__name">
-            <h3>{{ item.itemName }}</h3>
-          </div>
-          <div class="BD__price">
-            <h4>
-              <strong
-                >R{{
-                  item.itemPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }}</strong
-              >
-            </h4>
-          </div>
-          <div class="btn__container">
-            <btn
-              :id="item.id"
-              class="ma-2 btn"
-              outlined
-              color="#d35400"
-              @click="addToCart($event)"
-              >Add to cart</btn
-            >
-          </div>
-        </v-card>
-      </div>
-      <footer-comp></footer-comp>
+<body>
+  <div class="BDs__container">
+    <div class="BDs__header">
+      <h1>Belay Devices</h1>
+      <cart></cart>
+      <navbar></navbar>
     </div>
-  </body>
+    <div class="product__container">
+      <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
+        <v-img :src="item.itemPicture" height="200px"></v-img>
+        <div class="BD__name">
+          <h3>{{ item.itemName }}</h3>
+        </div>
+        <div class="BD__price">
+          <h4>
+            <strong>
+              R{{
+              item.itemPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }}
+            </strong>
+          </h4>
+        </div>
+        <div class="btn__container">
+          <btn
+            :id="item.id"
+            class="ma-2 btn"
+            outlined
+            color="#d35400"
+            @click="addToCart($event)"
+          >Add to cart</btn>
+        </div>
+      </v-card>
+    </div>
+    <footer-comp></footer-comp>
+  </div>
+</body>
 </template>
 
 <script>
@@ -104,7 +98,9 @@ export default {
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
-
+.BDs__header {
+  width: 100%;
+}
 .BDs__header h1,
 .BDs__header h2 {
   display: flex;

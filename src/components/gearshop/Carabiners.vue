@@ -1,48 +1,42 @@
 <template>
-  <body>
-    <div class="carabiners__container">
-      <div class="carabiners__header">
-        <h1>Carabiners</h1>
-        <cart></cart>
-        <navbar></navbar>
-      </div>
-      <div class="product__container">
-        <v-card
-          v-for="item in items"
-          :key="item"
-          class="mx-auto card"
-          max-width="250"
-        >
-          <v-img :src="item.itemPicture" height="200px"></v-img>
-          <div class="carabiner__name">
-            <h3>{{ item.itemName }}</h3>
-          </div>
-          <div class="carabiner__price">
-            <h4>
-              <strong
-                >R{{
-                  item.itemPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }}</strong
-              >
-            </h4>
-          </div>
-          <div class="btn__container">
-            <btn
-              :id="item.id"
-              class="ma-2 btn"
-              outlined
-              color="#d35400"
-              @click="addToCart($event)"
-              >Add to cart</btn
-            >
-          </div>
-        </v-card>
-      </div>
-      <footer-comp></footer-comp>
+<body>
+  <div class="carabiners__container">
+    <div class="carabiners__header">
+      <h1>Carabiners</h1>
+      <cart></cart>
+      <navbar></navbar>
     </div>
-  </body>
+    <div class="product__container">
+      <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
+        <v-img :src="item.itemPicture" height="200px"></v-img>
+        <div class="carabiner__name">
+          <h3>{{ item.itemName }}</h3>
+        </div>
+        <div class="carabiner__price">
+          <h4>
+            <strong>
+              R{{
+              item.itemPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }}
+            </strong>
+          </h4>
+        </div>
+        <div class="btn__container">
+          <btn
+            :id="item.id"
+            class="ma-2 btn"
+            outlined
+            color="#d35400"
+            @click="addToCart($event)"
+          >Add to cart</btn>
+        </div>
+      </v-card>
+    </div>
+    <footer-comp></footer-comp>
+  </div>
+</body>
 </template>
 
 <script>
@@ -103,6 +97,9 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
+}
+.carabiners__header {
+  width: 100%;
 }
 
 .carabiners__header h1,

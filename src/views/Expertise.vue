@@ -20,15 +20,12 @@
               to="sport-climbing"
               outlined
               class="skill__selector--btns"
-              >Sport Climbing</v-btn
-            >
+            >Sport Climbing</v-btn>
             <!--  -->
             <div class="text-center">
               <v-menu offset-y>
                 <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" outlined class="skill__selector--btns"
-                    >Belaying</v-btn
-                  >
+                  <v-btn v-on="on" outlined class="skill__selector--btns">Belaying</v-btn>
                 </template>
                 <v-list class="belay__list">
                   <v-list-item
@@ -55,29 +52,25 @@
               to="bouldering"
               outlined
               class="skill__selector--btns"
-              >Bouldering</v-btn
-            >
+            >Bouldering</v-btn>
             <v-btn
               @click="selectTrad"
               to="trad-climbing"
               outlined
               class="skill__selector--btns"
-              >Trad Climbing</v-btn
-            >
+            >Trad Climbing</v-btn>
             <v-btn
               @click="selectRappel"
               to="rappelling"
               outlined
               class="skill__selector--btns"
-              >Rappelling</v-btn
-            >
+            >Rappelling</v-btn>
             <v-btn
               @click="selectTrain"
               to="training"
               outlined
               class="skill__selector--btns"
-              >Training</v-btn
-            >
+            >Training</v-btn>
           </div>
         </div>
         <div class="expertise__body">
@@ -115,12 +108,7 @@
             <div class="divider"></div>
             <div class="recent__articles--header">Recent Articles</div>
             <div class="articles__container">
-              <articles
-                class="news__articles"
-                v-for="data in getNewsData"
-                :data="data"
-                :key="data"
-              ></articles>
+              <articles class="news__articles" v-for="data in getNewsData" :data="data" :key="data"></articles>
             </div>
           </div>
         </div>
@@ -242,7 +230,6 @@ export default {
   font-size: 250%;
   margin-top: 50px;
   margin-bottom: 30px;
-  color: rgb(80, 80, 80);
   text-transform: uppercase;
   color: #d35400;
 }
@@ -328,7 +315,6 @@ export default {
   font-family: "Lato", "Arial", sans-serif;
   font-size: 140%;
   font-weight: 300;
-  
 }
 
 .news__articles {
@@ -338,10 +324,9 @@ export default {
 
 .articles__container {
   display: flex;
-  flex-direction: column;
   width: 100%;
+  flex-wrap: wrap;
 }
-
 
 .articles__container:link,
 .articles__container:visited {

@@ -1,12 +1,14 @@
 <template>
   <div class="product__container">
     <v-card class="mx-auto" max-width="250">
-      <v-img :src="product.img" height="250px"></v-img>
+      <router-link :to="product.path">
+        <v-img style="cursor:pointer" :src="product.img" height="250px"></v-img>
+      </router-link>
       <div>
         <v-card-actions class="btn__container">
-          <router-link class="btn__container" :to="product.path"><v-btn class="btn" text>
-            {{ product.type }}
-          </v-btn></router-link>
+          <router-link class="btn__container" :to="product.path">
+            <v-btn class="btn" text>{{ product.type }}</v-btn>
+          </router-link>
         </v-card-actions>
       </div>
     </v-card>
@@ -38,11 +40,9 @@ export default {
 }
 
 .btn__container {
-    
 }
 .btn :link,
 .btn :visited {
-
   color: rgb(100, 100, 100);
 }
 
@@ -56,7 +56,6 @@ export default {
   flex-wrap: wrap;
   padding: 35px;
 }
-
 
 .item__title,
 .btn__container {

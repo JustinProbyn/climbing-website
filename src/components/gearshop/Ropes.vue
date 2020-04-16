@@ -93,6 +93,10 @@ export default {
   font-family: "Lato", "Arial", sans-serif;
 }
 
+.ropes__header {
+  width: 100%;
+}
+
 .ropes__header h1,
 .ropes__header h2 {
   display: flex;

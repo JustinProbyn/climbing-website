@@ -1,33 +1,30 @@
 <template>
-  <div class="news__container">
-    <div class="news__header">
-      <h1>News</h1>
+  <div class="news__body">
+    <header>
       <navbar></navbar>
-      <stickynav v-if="stickyActive == false"></stickynav>
-      <div
-        v-waypoint="{
+      <div class="whitepanel">
+        <div class="news__header">
+          <h1>News</h1>
+        </div>
+
+        <div class="news__body">
+          <div class="articles__container">
+            <stickynav v-if="stickyActive == false"></stickynav>
+            <div
+              v-waypoint="{
           active: true,
           callback: onWaypoint,
           options: intersectionOptions
-        }"
-      ></div>
-    </div>
-    <div class="news__body">
-      <div class="articles__container">
-        <articles class="news__articles" v-for="data in getNewsData" :data="data" :key="data"></articles>
-      </div>
-      <div class="sidebar">
-        <h2 class="sidebar__title">Global Ascents</h2>
-        <div class="sidebar__ascents">
-          <embed
-            class="thecrag-oembed-ascents"
-            src="http://www.thecrag.com/ascents?embed=1\"
-            style="width: 100%;"
-          />
+          }"
+            ></div>
+            <articles class="news__articles" v-for="data in getNewsData" :data="data" :key="data"></articles>
+          </div>
         </div>
+
+        <!-- </div> -->
       </div>
-    </div>
-    <footer-comp></footer-comp>
+    </header>
+    <footer-comp class="news__footer"></footer-comp>
   </div>
 </template>
 
@@ -86,6 +83,27 @@ export default {
   font-family: "Lato", "Arial", sans-serif;
 }
 
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../public/img/climbing.jpg");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.whitepanel {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+}
+
 .news__header h1,
 .news__header h2 {
   display: flex;
@@ -109,26 +127,32 @@ export default {
   font-size: 200%;
 }
 
+.news__header {
+}
+
 /* NEWS BODY */
 
 .news__body {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  flex-direction: column;
 }
 
 /* NEWS ARTICLES */
 
 .news__articles {
   display: flex;
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-left: 100px;
+  margin-bottom: 40px;
 }
 
 .articles__container {
   display: flex;
-  flex-direction: column;
-  margin-left: 10%;
-  width: 50%;
+  width: 100%;
+  margin-right: 20px;
+  flex-wrap: wrap;
+  height: auto;
 }
 
 /* SIDE BAR */
@@ -172,5 +196,11 @@ export default {
   text-transform: uppercase;
   font-size: 140%;
   font-weight: 300;
+}
+
+/* FOOTER */
+
+.news__footer {
+  display: flex;
 }
 </style>

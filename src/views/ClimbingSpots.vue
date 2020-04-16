@@ -76,16 +76,16 @@
                 <l-tile-layer :url="url" :attribution="attribution" />
 
                 <l-polygon :lat-lngs="polygonTB.latlngs" :color="polygonTB.color">
-                  <l-popup content="Table Mountain: 142" />
+                  <l-popup content="Table Mountain: 142 routes" />
                 </l-polygon>
                 <l-polygon :lat-lngs="polygonGK.latlngs" :color="polygonGK.color">
-                  <l-popup content="Grootkop: 1" />
+                  <l-popup content="Grootkop: 1 route" />
                 </l-polygon>
                 <l-polygon :lat-lngs="polygonAL.latlngs" :color="polygonAL.color">
-                  <l-popup content="Africa Ledge: 24" />
+                  <l-popup content="Africa Ledge: 24 routes" />
                 </l-polygon>
                 <l-polygon :lat-lngs="polygonHV.latlngs" :color="polygonHV.color">
-                  <l-popup content="Higgovale Quarry: 32" />
+                  <l-popup content="Higgovale Quarry: 32 routes" />
                 </l-polygon>
               </l-map>
             </div>

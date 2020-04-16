@@ -105,6 +105,10 @@ export default {
   font-family: "Lato", "Arial", sans-serif;
 }
 
+.climbingShoes__header {
+  width: 100%;
+}
+
 .climbingShoes__header h1,
 .climbingShoes__header h2 {
   display: flex;

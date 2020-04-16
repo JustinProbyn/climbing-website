@@ -2,90 +2,80 @@
   <v-app>
     <div class="body">
       <header class="home__header" :key="reloadPage">
-        <div class="hero-text">
-          <div class="menu">
-            <v-icon
-              @click="openMenu"
-              class="menu__icon"
-              style="color: #d35400; font-size: 200%; cursor: pointer; margin-left: 5px"
-            >mdi-menu</v-icon>
-            <div class="menu__popout">
-              <div
-                :class="[
+        <navbar class="nav__bar--home"></navbar>
+        <div class="menu">
+          <v-icon
+            @click="openMenu"
+            class="menu__icon"
+            style="color: #d35400; font-size: 200%; cursor: pointer; margin-left: 5px"
+          >mdi-menu</v-icon>
+          <div class="menu__popout">
+            <div
+              :class="[
                   showMenu
                     ? 'animated slideInLeft faster'
                     : 'animated slideOutLeft faster'
                 ]"
-              >
-                <div v-if="initMenu" class="btns-home">
-                  <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
+            >
+              <div v-if="initMenu" class="btns-home">
+                <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
 
-                  <v-dialog style="overflow-y:hidden" class="signInDialog" max-width="500">
-                    <template v-slot:activator="{ on }">
-                      <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth">Sign Up</v-btn>
-                    </template>
-                    <v-card height="538">
-                      <signup></signup>
-                    </v-card>
-                  </v-dialog>
+                <v-dialog class="signInDialog" max-width="500">
+                  <template v-slot:activator="{ on }">
+                    <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth">Sign Up</v-btn>
+                  </template>
+                  <v-card height="538">
+                    <signup></signup>
+                  </v-card>
+                </v-dialog>
 
-                  <v-dialog v-if="!auth" style="overflow-y:hidden" v-model="dialog" max-width="400">
-                    <template v-slot:activator="{ on }">
-                      <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on">Sign In</v-btn>
-                    </template>
-                    <v-card height="371">
-                      <signin @signedIn="initLoader"></signin>
-                    </v-card>
-                  </v-dialog>
-                  <!-- Sign in loader -->
-                  <v-dialog v-if="!auth" v-model="showLoader" hide-overlay persistent width="300">
-                    <v-card color="primary" dark>
-                      <v-card-text>
-                        Logging in
-                        <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-                      </v-card-text>
-                    </v-card>
-                  </v-dialog>
-                  <!--  -->
+                <v-dialog v-if="!auth" v-model="dialog" max-width="400">
+                  <template v-slot:activator="{ on }">
+                    <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on">Sign In</v-btn>
+                  </template>
+                  <v-card height="371">
+                    <signin @signedIn="initLoader"></signin>
+                  </v-card>
+                </v-dialog>
+                <!-- Sign in loader -->
+                <v-dialog v-if="!auth" v-model="showLoader" hide-overlay persistent width="300">
+                  <v-card color="primary" dark>
+                    <v-card-text>
+                      Logging in
+                      <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
+                <!--  -->
 
-                  <v-btn
-                    outlined
-                    color="#d35400"
-                    class="btn"
-                    v-if="auth"
-                    to="add-article"
-                  >Add Article</v-btn>
-                  <v-btn
-                    outlined
-                    color="#d35400"
-                    class="btn"
-                    v-if="auth"
-                    to="add-picture"
-                  >Add Picture</v-btn>
-                  <v-dialog max-width="290">
-                    <template v-slot:activator="{ on }">
-                      <v-btn outlined color="#d35400" v-on="on" class="btn">Disclaimer</v-btn>
-                    </template>
-                    <v-card>
-                      <v-card-title class="headline">Disclaimer</v-card-title>
-                      <v-card-text style="width: 280px">
-                        The content on this mock website is not original. It has
-                        been sourced from other websites that include
-                        climbing.co.za, climbing.com, frictionlabs.com and
-                        articlegenerator.org.
-                      </v-card-text>
-                    </v-card>
-                  </v-dialog>
-                </div>
+                <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-article">Add Article</v-btn>
+                <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-picture">Add Picture</v-btn>
+                <v-dialog max-width="290">
+                  <template v-slot:activator="{ on }">
+                    <v-btn outlined color="#d35400" v-on="on" class="btn">Disclaimer</v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title class="headline">Disclaimer</v-card-title>
+                    <v-card-text style="width: 280px">
+                      The content on this mock website is not original. It has
+                      been sourced from other websites that include
+                      climbing.co.za, climbing.com, frictionlabs.com and
+                      articlegenerator.org.
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
               </div>
             </div>
           </div>
+        </div>
+        <div class="header__text">
           <h1 class="animated fadeInDown">Climbing Website</h1>
           <h2 class="animated fadeInDown">
             <span>&nbsp;</span>Ascend any height.
           </h2>
         </div>
-        <div class="nav__bar">
+
+        <!-- <div class="nav__bar">
           <ul class="nav__bar--ul">
             <li>
               <router-link to="news">News</router-link>
@@ -103,7 +93,7 @@
               <router-link to="pictures">Pictures</router-link>
             </li>
           </ul>
-        </div>
+        </div>-->
       </header>
     </div>
   </v-app>
@@ -113,9 +103,11 @@
 import firebase from "firebase";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
+import NavBar from "../components/NavBar.vue";
 
 export default {
   components: {
+    navbar: NavBar,
     signin: SignIn,
     signup: SignUp
   },
@@ -189,16 +181,22 @@ header {
   background-attachment: fixed;
 }
 
-.hero-text {
+.header__text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30%;
+}
+
+.home__header {
   display: flex;
   flex-direction: column;
   height: 30%;
-  align-content: flex-start;
   width: 100%;
+  height: 100vh;
 }
 
-.hero-text h1,
-.hero-text h2 {
+.home__header h1,
+.home__header h2 {
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   font-weight: 300;
@@ -208,13 +206,10 @@ header {
   word-spacing: 2px;
   letter-spacing: 1px;
   align-self: flex-end;
-  margin-right: 200px;
-}
-.hero-text h1 {
-  margin-top: 100px;
+  margin-right: 150px;
 }
 
-.hero-text h2 {
+.home__header h2 {
   font-size: 180%;
   color: #d35400;
   margin-left: 5px;
@@ -223,11 +218,12 @@ header {
 
 .menu {
   display: flex;
-  margin-top: 20px;
+  margin-top: 52px;
   margin-left: 20px;
   justify-content: flex-start;
   flex-direction: column;
   position: absolute;
+  z-index: 9999;
 }
 
 .menu__popout {
@@ -247,7 +243,11 @@ header {
 
 /*** NAV BAR ***/
 
-.nav__bar--ul {
+.nav__bar--home {
+  margin-left: -12px;
+}
+
+/* .nav__bar--ul {
   display: flex;
   justify-content: flex-end;
   margin-top: 500px;
@@ -277,7 +277,7 @@ header {
 .nav__bar--ul li a:hover,
 .nav__bar--ul li a:active {
   color: #d35400;
-}
+} */
 
 /*** BUTTONS ***/
 

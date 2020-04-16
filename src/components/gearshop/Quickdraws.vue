@@ -104,6 +104,9 @@ export default {
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
+.quickdraws__header {
+  width: 100%;
+}
 
 .quickdraws__header h1,
 .quickdraws__header h2 {

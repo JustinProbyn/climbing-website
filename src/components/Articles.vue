@@ -1,43 +1,37 @@
 <template>
-  <div class="articles">
-    <div class="article__box">
-      <img class="news__img" :src="data.url" />
-      <v-card class="article__info" height="100%">
-        <v-card-title class="title">
-          <a @click="show" style="text-decoration: none">
-            {{
-            data.title
-            }}
-          </a>
-
-          <modal
-            style=" z-index: 9999;"
-            :scrollable="true"
-            width="1140px"
-            height="auto"
-            :name="data.title"
-          >
-            <div class="myModal">
-              <div class="modal__title">
-                {{
-                data.title
-                }}
-              </div>
-              <br />
-              <div style="white-space: pre-line;" class="modal__text">
-                {{
-                data.textBody
-                }}
-              </div>
+  <v-app class="articles__wrapper">
+    <div class="articles">
+      <v-dialog v-model="dialog" width="1140px" style="overflow: hidden">
+        <template v-slot:activator="{ on }">
+          <div v-on="on" class="article__box">
+            <div id="text" class="text">
+              {{
+              data.title
+              }}
             </div>
-          </modal>
-        </v-card-title>
-        <v-card-subtitle class="sub">{{ data.subTitle }}</v-card-subtitle>
-        <v-card-text class="text">By {{ data.author }} - {{ data.date }}</v-card-text>
-      </v-card>
+            <img id="img" class="news__img" :src="data.url" />
+          </div>
+        </template>
+        <v-card>
+          <v-card-title class="news__modal--title">
+            <span class="headline">
+              {{
+              data.title
+              }}
+            </span>
+          </v-card-title>
+          <v-card-text class="news__modal--text" style="white-space: pre-line; color=#000">
+            {{
+            data.textBody
+            }}
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </div>
-  </div>
+  </v-app>
 </template>
+
+
 
 <script>
 export default {
@@ -60,23 +54,63 @@ export default {
 
 * {
   word-break: break-word;
+  font-family: "Lato", "Arial", sans-serif;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+.articles__wrapper {
+  height: 420px;
+  border-radius: 6px;
+}
+.articles {
+  border-radius: 6px;
 }
 
 .article__box {
   display: flex;
-  box-shadow: 1px 1px 1px rgb(255, 255, 255);
-  height: 210px;
-  width: 100%;
-  
+  height: 420px;
+  width: 300px;
+  background-color: rgb(0, 0, 0);
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  border-radius: 6px;
+  border: 0.5px solid black;
 }
 
-.article__info {
-  width: 100%;
+#text {
+  display: flex;
+  z-index: 1;
+  position: absolute;
+  padding: 10px;
+  letter-spacing: 1px;
+  align-self: flex-end;
+  font-size: 120%;
+  color: #ffffff;
+  text-shadow: 2px 2px #313131;
+  cursor: pointer;
 }
 
-.news__img {
-  width: 210px;
-  height: 100%;
+#img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity: 0.7;
+  transform: scale(1.15);
+  transition: transform 0.5s, opacity 0.5s;
+}
+#text:hover + #img {
+  opacity: 1;
+  transform: scale(1.03);
+  cursor: pointer;
+}
+
+#img:hover {
+  opacity: 1;
+  transform: scale(1.03);
+  cursor: pointer;
 }
 
 .sub {
@@ -86,7 +120,6 @@ export default {
 
 .title a:link,
 .title a:visited {
-  font-family: "Lato", "Arial", sans-serif;
   font-weight: 300;
   font-size: 100%;
   text-decoration: none;
@@ -96,18 +129,11 @@ export default {
   list-style: none;
 }
 
-.myModal {
-  display: flex;
-  padding: 35px;
-  text-align: left;
-  flex-direction: column;
+.news__modal--text {
+  font-size: 110%;
 }
 
-.modal__title {
-  font-size: 130%;
-  align-self: center;
-}
-
-.modal {
+.news__modal--title {
+  font-size: 120%;
 }
 </style>

@@ -57,11 +57,14 @@ a.router-link-active {
   font-weight: 700;
 }
 
+.nav-bar__container {
+}
+
 .nav__bar {
-  background-color: rgba(36, 36, 36, 0.151);
+  background-color: rgba(36, 36, 36, 0.418);
   list-style: none;
-  margin-right: 18px;
-  margin-left: 18px;
+  width: 100vw;
+  margin-top: 50px;
 }
 .nav__bar--ul {
   display: flex;
@@ -69,7 +72,6 @@ a.router-link-active {
   list-style: none;
   color: rgb(218, 214, 214);
   display: flex;
-  width: 100vw;
   list-style: none;
 }
 
@@ -81,7 +83,7 @@ a.router-link-active {
   font-size: 150%;
   margin-right: 40px;
   text-decoration: none;
-  color: rgb(54, 54, 54);
+  color: rgb(219, 219, 219);
   transition: color 0.3s;
   word-spacing: 2px;
   list-style: none;
