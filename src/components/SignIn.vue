@@ -1,5 +1,5 @@
 <template>
-  <v-app @keyup.enter.native="submit">
+  <v-app class="form" @keyup.enter.native="submit">
     <v-card style="padding: 15px" width="500px" class="mx-auto mt-10">
       <v-card-title>
         <h2 class="display-1">Sign In</h2>
@@ -26,16 +26,8 @@
         @blur="$v.password.$touch()"
       ></v-text-field>
       <div class="btns">
-        <v-btn
-          color="success"
-          :disabled="$v.$invalid"
-          class="mr-4"
-          @click="submit"
-          >submit</v-btn
-        >
+        <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">submit</v-btn>
         <v-btn color="info" @click="goToSignUp">Register</v-btn>
-        <v-spacer></v-spacer>
-        <v-btn @click="goToHome">Home</v-btn>
       </div>
     </v-card>
   </v-app>
@@ -79,6 +71,7 @@ export default {
   methods: {
     /* checks if validation errors then signs into firebase */
     submit() {
+      this.$emit("signedIn");
       this.$v.$touch();
       firebase
         .auth()
@@ -126,5 +119,8 @@ export default {
 .btns {
   display: flex;
   margin-top: 20px;
+}
+.form {
+  margin-top: -50px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <v-app @keyup.enter.native="submit">
-    <v-card style="padding: 15px" width="500px" class="mx-auto mt-10">
+  <v-app class="form" @keyup.enter.native="submit">
+    <v-card style="padding: 15px" width="500px" class="form mx-auto mt-10">
       <v-card-title>
         <h2 class="display-1">Sign Up</h2>
       </v-card-title>
@@ -55,8 +55,6 @@
         <div class="btns">
           <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">Submit</v-btn>
           <v-btn @click="goToSignIn" color="info">Sign In</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn to="/">Home</v-btn>
         </div>
       </div>
     </v-card>
@@ -156,5 +154,9 @@ export default {
 .btns {
   display: flex;
   margin-top: 15px;
+}
+
+.form {
+  margin-top: -60px;
 }
 </style>

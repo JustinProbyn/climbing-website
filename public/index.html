@@ -1,79 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="#" />
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<link rel="icon" href="#" />
 
-    <!-- Leaflet  -->
-    <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="//unpkg.com/vue2-leaflet"></script>
-    <!--  -->
+		<!-- Leaflet  -->
+		<link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />
+		<script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
+		<script src="//unpkg.com/vue2-leaflet"></script>
+		<!--  -->
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
-    />
+		<!-- Google Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+		/>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
-    <!--  -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<!--  -->
 
-    <!-- Bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <!--  -->
+		<!-- Bootstrap -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+		<!--  -->
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
-    <!--  -->
+		<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+		<!--  -->
 
-    <!-- Bulma -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.min.css"
-    />
-    <!-- -->
+		<!-- Bulma -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.min.css"
+		/>
+		<!-- -->
 
-    <!-- Mdi Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
-    />
-    <!--  -->
+		<!-- Mdi Icons -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
+		/>
+		<!--  -->
 
-    <title>Climbing Website</title>
-  </head>
-  <body>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+		<!-- AnimateCSS -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+		/>
+		<!--  -->
+
+		<title>Climbing Website</title>
+	</head>
+	<body>
+		<script
+			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+			crossorigin="anonymous"
+		></script>
+		<div id="app"></div>
+		<!-- built files will be auto injected -->
+	</body>
 </html>

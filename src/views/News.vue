@@ -25,14 +25,6 @@
             style="width: 100%;"
           />
         </div>
-        <h2 class="sidebar__title">Comps</h2>
-        <div class="sidebar__comps">
-          <embed
-            class="thecrag-oembed-comps"
-            src="http://www.thecrag.com/competition?embed=1\"
-            style="width: 100%;"
-          />
-        </div>
       </div>
     </div>
     <footer-comp></footer-comp>
@@ -145,7 +137,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 20px
+  margin-left: 20px;
 }
 
 .sidebar__title {
