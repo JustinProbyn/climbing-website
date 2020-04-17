@@ -13,11 +13,29 @@ export default new Vuex.Store({
 
     articleData: [],
     pictureData: [],
-    cartData: []
+    cartData: [],
+    itemsInStock: {
+      shoes: [],
+      BDs: [],
+      chalk: [],
+      chalkbags: [],
+      helmets: [],
+      ropes: [],
+      ropebags: [],
+      quickdraw: [],
+      carabiners: [],
+      SnCs: []
+    }
   },
 
   /*** MUTATIONS ***/
   mutations: {
+    // Sets ItemsInStock
+
+    setGearshop(state, products) {
+      state.itemsInStock.BDs = products;
+    },
+
     // User sign in / out Mutations
     setUser(state, userData) {
       state.userData.email = userData.email;
@@ -44,6 +62,7 @@ export default new Vuex.Store({
     /* Articles Mutations */
     // updates cart with newly added item
     setCart(state, cartData) {
+      console.log(state.cartData);
       state.cartData.push(cartData);
       console.log(state.cartData);
     },
@@ -151,11 +170,14 @@ export default new Vuex.Store({
 
       // load cart items from local storage
       var cartData = JSON.parse(localStorage.getItem("cartData"));
-      commit("loadCart", cartData);
+      if (cartData) {
+        commit("loadCart", cartData);
+      } else return;
     },
 
     // sign out removing localstorage
     signOut({ commit }) {
+      localStorage.removeItem("cartData");
       localStorage.removeItem("password");
       localStorage.removeItem("email");
       commit("signOutUser");
@@ -225,6 +247,11 @@ export default new Vuex.Store({
     deleteCartItem({ commit }, index) {
       commit("deleteCartItem", index);
       localStorage.setItem("cartData", JSON.stringify(this.state.cartData));
+    },
+
+    /* Gearshop Actions*/
+    sendToGearshop({ commit }, products) {
+      commit("setGearshop", products);
     }
   },
 
@@ -254,6 +281,11 @@ export default new Vuex.Store({
     //Cart getters.
     getCartData(state) {
       return state.cartData;
+    },
+
+    //Gearshop getters
+    getGearshopData(state) {
+      return state.itemsInStock;
     }
   },
   modules: {}

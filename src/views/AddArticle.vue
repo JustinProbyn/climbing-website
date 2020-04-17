@@ -1,84 +1,66 @@
 <template>
   <v-app>
-    <div class="add-article__header">
-      <h1>Add Article</h1>
-      <navbar></navbar>
-      <stickynav v-if="stickyActive == false"></stickynav>
-      <div
-        v-waypoint="{
+    <div class="add-article__body">
+      <header>
+        <navbar v-if="stickyActive == true"></navbar>
+        <stickynav v-if="stickyActive == false"></stickynav>
+
+        <div class="whitepanel">
+          <div
+            v-waypoint="{
           active: true,
           callback: onWaypoint,
           options: intersectionOptions
         }"
-      ></div>
-    </div>
-    <div>
-      <div class="add-article-box">
-        <div class="page__content">
-          <div class="inputs">
-            <!-- AUTHOR -->
+          ></div>
+          <div class="add-article__header">
+            <h1>Add Article</h1>
+          </div>
 
-            <v-text-field
-              v-model="author"
-              outlined
-              clearable
-              label="Author"
-              type="text"
-            ></v-text-field>
+          <div>
+            <div class="add-article-box">
+              <div class="page__content">
+                <div class="inputs">
+                  <!-- AUTHOR -->
 
-            <!-- TITLE -->
+                  <v-text-field v-model="author" outlined clearable label="Author" type="text"></v-text-field>
 
-            <v-text-field
-              v-model="title"
-              outlined
-              clearable
-              label="Title"
-              type="text"
-            ></v-text-field>
+                  <!-- TITLE -->
 
-            <!-- SUB TITLE -->
+                  <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
 
-            <v-text-field
-              v-model="subTitle"
-              outlined
-              clearable
-              label="Sub Title"
-              type="text"
-            ></v-text-field>
+                  <!-- SUB TITLE -->
 
-            <input class="file" type="file" @change="onFileSelected" />
-            <div class="image__name-box">
-              <v-text-field
-                v-model="imageName"
-                outlined
-                clearable
-                label="Image Name"
-                type="text"
-              ></v-text-field>
+                  <v-text-field v-model="subTitle" outlined clearable label="Sub Title" type="text"></v-text-field>
+
+                  <input class="file" type="file" @change="onFileSelected" />
+                  <div class="image__name-box">
+                    <v-text-field
+                      v-model="imageName"
+                      outlined
+                      clearable
+                      label="Image Name"
+                      type="text"
+                    ></v-text-field>
+                  </div>
+                </div>
+
+                <!-- TEXT BODY -->
+                <div class="text__body">
+                  <v-textarea v-model="textBody" label="Text Body" counter auto-grow multi-line></v-textarea>
+                </div>
+
+                <!--  -->
+                <div class="btn__box">
+                  <v-btn outlined color="#d35400" class="btn" @click="submitArticle">Submit</v-btn>
+                </div>
+              </div>
             </div>
           </div>
-
-          <!-- TEXT BODY -->
-          <div class="text__body">
-            <v-textarea
-              v-model="textBody"
-              label="Text Body"
-              counter
-              auto-grow
-              multi-line
-            ></v-textarea>
-          </div>
-
-          <!--  -->
-          <div class="btn__box">
-            <v-btn outlined color="#d35400" class="btn" @click="submitArticle"
-              >Submit</v-btn
-            >
-          </div>
         </div>
-      </div>
+      </header>
+      <footer-comp></footer-comp>
     </div>
-    <footer-comp></footer-comp>
   </v-app>
 </template>
 
@@ -178,8 +160,38 @@ export default {
 </script>
 
 <style scoped>
+/* LAYOUT */
+.add-article__body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../public/img/climbing.jpg");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.whitepanel {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+}
+
+/* TITLE */
 .add-article__header h1,
-.nadd-article__header h2 {
+.add-article__header h2 {
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   text-transform: uppercase;
@@ -203,7 +215,6 @@ export default {
   width: 100vw;
   flex-direction: column;
   margin-top: 20px;
-  background-color: rgba(179, 179, 179, 0.151);
 }
 
 .inputs {

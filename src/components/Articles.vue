@@ -1,7 +1,7 @@
 <template>
   <v-app class="articles__wrapper">
     <div class="articles">
-      <v-dialog v-model="dialog" width="1140px" style="overflow: hidden">
+      <v-dialog v-model="dialog" width="900px" style="overflow: hidden">
         <template v-slot:activator="{ on }">
           <div v-on="on" class="article__box">
             <div id="text" class="text">
@@ -12,7 +12,7 @@
             <img id="img" class="news__img" :src="data.url" />
           </div>
         </template>
-        <v-card>
+        <v-card style="border: 1px solid black">
           <v-card-title class="news__modal--title">
             <span class="headline">
               {{
@@ -55,9 +55,6 @@ export default {
 * {
   word-break: break-word;
   font-family: "Lato", "Arial", sans-serif;
-}
-::-webkit-scrollbar {
-  display: none;
 }
 
 .articles__wrapper {

@@ -1,25 +1,31 @@
 <template>
-  <div class="pictures__container">
-    <div class="pictures__header">
-      <h1>Pictures</h1>
-      <navbar></navbar>
+  <div class="pictures__body">
+    <header>
+      <navbar v-if="stickyActive == true"></navbar>
       <stickynav v-if="stickyActive == false"></stickynav>
-    </div>
-    <div
-      v-waypoint="{
+
+      <div class="whitepanel">
+        <div
+          v-waypoint="{
         active: true,
         callback: onWaypoint,
         options: intersectionOptions
-      }"
-    ></div>
-    <div class="pictures__box">
-      <pictures-box
-        class="pictures__box--comp"
-        v-for="data in getPictureData"
-        :data="data"
-        :key="data"
-      ></pictures-box>
-    </div>
+        }"
+        ></div>
+        <div class="pictures__header">
+          <h1>Pictures</h1>
+        </div>
+
+        <div class="pictures__container">
+          <pictures-box
+            class="pictures__box--comp"
+            v-for="data in getPictureData"
+            :data="data"
+            :key="data"
+          ></pictures-box>
+        </div>
+      </div>
+    </header>
     <footer-comp></footer-comp>
   </div>
 </template>
@@ -74,22 +80,45 @@ export default {
 </script>
 
 <style scoped>
+/* GENERAL LAYOUT */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Lato", "Arial", sans-serif;
 }
 
-.spacer {
+.pictures__body {
   display: flex;
-  border-bottom: 1px solid rgb(216, 214, 214);
-  width: 500px;
-  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
 }
+
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../public/img/climbing.jpg");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.whitepanel {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+}
+
+/* TITLE */
 
 .pictures__header h1,
 .pictures__header h2 {
-  font-family: "Lato", "Arial", sans-serif;
   display: flex;
   font-size: 400%;
   color: #fff;
@@ -111,13 +140,13 @@ h2 {
   font-weight: 300;
 }
 
-.pictures__box {
-  max-width: 100vw;
+.pictures__container {
   display: flex;
-  flex: 1;
+  width: 100%;
+  margin-right: 20px;
   flex-wrap: wrap;
+  height: auto;
   justify-content: center;
-  margin-left: 160px;
 }
 
 .footer {

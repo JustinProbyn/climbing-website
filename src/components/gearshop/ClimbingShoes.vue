@@ -1,48 +1,44 @@
 <template>
-  <body>
-    <div class="climbingShoes__container">
-      <div class="climbingShoes__header">
-        <h1>climbingShoes</h1>
-        <cart></cart>
-        <navbar></navbar>
-      </div>
-      <div class="product__container">
-        <v-card
-          v-for="item in items"
-          :key="item"
-          class="mx-auto card"
-          max-width="250"
-        >
-          <v-img :src="item.itemPicture" height="200px"></v-img>
-          <div class="climbingShoe__name">
-            <h3>{{ item.itemName }}</h3>
-          </div>
-          <div class="climbingShoe__price">
-            <h4>
-              <strong>
-                R{{
+  <div class="climbing-shoes__body">
+    <header>
+      <navbar></navbar>
+      <cart></cart>
+      <div class="whitepanel">
+        <div class="climbing-shoes__header">
+          <h1>Climbing Shoes</h1>
+        </div>
+        <div class="product__container">
+          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
+            <v-img :src="item.itemPicture" height="200px"></v-img>
+            <div class="climbing-shoe__name">
+              <h3>{{ item.itemName }}</h3>
+            </div>
+            <div class="climbing-shoe__price">
+              <h4>
+                <strong>
+                  R{{
                   item.itemPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }}
-              </strong>
-            </h4>
-          </div>
-          <div class="btn__container">
-            <btn
-              :id="item.id"
-              class="ma-2 btn"
-              outlined
-              color="#d35400"
-              @click="addToCart($event)"
-              >Add to cart</btn
-            >
-          </div>
-        </v-card>
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  }}
+                </strong>
+              </h4>
+            </div>
+            <div class="btn__container">
+              <btn
+                :id="item.id"
+                class="ma-2 btn"
+                outlined
+                color="#d35400"
+                @click="addToCart($event)"
+              >Add to cart</btn>
+            </div>
+          </v-card>
+        </div>
       </div>
       <footer-comp></footer-comp>
-    </div>
-  </body>
+    </header>
+  </div>
 </template>
 
 <script>
@@ -90,7 +86,7 @@ export default {
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    cart: Cart
+    cart: Cart,
   },
   mixins: [cartMixin]
 };
@@ -104,13 +100,11 @@ export default {
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
-
-.climbingShoes__header {
+.climbing-shoes__header {
   width: 100%;
 }
-
-.climbingShoes__header h1,
-.climbingShoes__header h2 {
+.climbing-shoes__header h1,
+.climbing-shoes__header h2 {
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   text-transform: uppercase;
@@ -128,32 +122,50 @@ export default {
   background-size: 100%;
 }
 
-.climbingShoes__header .pictures__nav {
+.climbing-shoes__header .pictures__nav {
   float: right;
   font-size: 200%;
 }
 
-.climbingShoes__container {
+.climbing-shoes__body {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-/* climbingShoe ITEMS */
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../../public/img/climbing.jpg");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
-.climbingShoe__name {
+.whitepanel {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+}
+
+/* climbing-shoe ITEMS */
+
+.climbing-shoe__name {
   display: flex;
   justify-content: center;
   margin-top: 7px;
 }
 
-.climbingShoe__price {
+.climbing-shoe__price {
   display: flex;
   justify-content: center;
   margin-top: 7px;
-}
-
-.climbing__shoe {
 }
 
 .btn__container :hover,
@@ -185,7 +197,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   padding: 35px;
-  width: 100vw;
+  width: 100%;
   height: auto;
 }
 

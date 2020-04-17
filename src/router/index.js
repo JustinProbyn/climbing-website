@@ -1,93 +1,72 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Gear from "../views/Gear.vue";
-import News from "../views/News.vue";
 import Expertise from "../views/Expertise.vue";
-import Pictures from "../views/Pictures.vue";
-import AddArticle from "../views/AddArticle.vue";
-import AddPicture from "../views/AddPicture.vue";
-import ClimbingSpots from "../views/ClimbingSpots.vue";
-import Cart from "../components/Cart.vue";
-import SignUp from "../components/SignUp.vue";
-import SignIn from "../components/SignIn.vue";
 
 // GEAR SHOP IMPORTS
-
-import Ropes from "../components/gearshop/Ropes";
-import RopeBags from "../components/gearshop/RopeBags";
-import BelayDevices from "../components/gearshop/BelayDevices";
-import ClimbingShoes from "../components/gearshop/ClimbingShoes";
-import Helmets from "../components/gearshop/Helmets";
-import Chalk from "../components/gearshop/Chalk";
-import ChalkBags from "../components/gearshop/ChalkBags";
-import Quickdraws from "../components/gearshop/Quickdraws";
-import Carabiners from "../components/gearshop/Carabiners";
-import SlingsAndCords from "../components/gearshop/SlingsAndCords";
-
-// EXPERTISE PAGE IMPORTS
-
-import SportClimbing from "../components/selectedExpertise/SportClimbing";
-import TradClimbing from "../components/selectedExpertise/TradClimbing";
-import Bouldering from "../components/selectedExpertise/Bouldering";
-import Rappelling from "../components/selectedExpertise/Rappelling";
-import LeadBelaying from "../components/selectedExpertise/LeadBelaying";
-import Training from "../components/selectedExpertise/Training";
-import TopRopeBelaying from "../components/selectedExpertise/TopRopeBelaying";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: { hideButton: true }
   },
   {
     path: "/add-article",
     name: "add-article",
-    component: AddArticle
+    component: () =>
+      import(/*webpackChunkName "AddArticle" */ "../views/AddArticle.vue")
   },
   {
     path: "/add-picture",
     name: "add-picture",
-    component: AddPicture
+    component: () =>
+      import(/*webpackChunkName "AddPicture" */ "../views/AddPicture.vue")
   },
   {
     path: "/climbing-spots",
     name: "climbing-spots",
-    component: ClimbingSpots
+    component: () =>
+      import(/*webpackChunkName "ClimbingSpots" */ "../views/ClimbingSpots.vue")
   },
   {
     path: "/news",
     name: "news",
-    component: News
+    component: () => import(/*webpackChunkName "News" */ "../views/News.vue")
   },
   {
     path: "/gear",
     name: "gear",
-    component: Gear
+    component: () => import(/*webpackChunkName "Gear" */ "../views/Gear.vue")
   },
+
   {
     path: "/pictures",
     name: "pictures",
-    component: Pictures
+    component: () =>
+      import(/*webpackChunkName "Pictures" */ "../views/Pictures.vue")
   },
 
   {
     path: "/cart",
     name: "cart",
-    component: Cart
+    component: () =>
+      import(/*webpackChunkName "Cart" */ "../components/SignIn.vue")
   },
   {
     path: "/signin",
     name: "signin",
-    component: SignIn
+    component: () =>
+      import(/*webpackChunkName "SignIn" */ "../components/SignIn.vue")
   },
   {
     path: "/signup",
     name: "signup",
-    component: SignUp
+    component: () =>
+      import(/*webpackChunkName "SignUp" */ "../components/Cart.vue")
   },
   {
     path: "/expertise",
@@ -99,38 +78,59 @@ const routes = [
       {
         path: "/sport-climbing",
         name: "sport-climbing",
-        component: SportClimbing
+        component: () =>
+          import(
+            /*webpackChunkName "SportClimbing" */ "../components/selectedExpertise/SportClimbing"
+          )
       },
       {
         path: "/trad-climbing",
         name: "trad-climbing",
-        component: TradClimbing
+        component: () =>
+          import(
+            /*webpackChunkName "TradClimbing" */ "../components/selectedExpertise/TradClimbing"
+          )
       },
       {
         path: "/bouldering",
         name: "bouldering",
-        component: Bouldering
+        component: () =>
+          import(
+            /*webpackChunkName "Bouldering" */ "../components/selectedExpertise/Bouldering"
+          )
       },
       {
         path: "/rappelling",
         name: "rappelling",
-        component: Rappelling
+        component: () =>
+          import(
+            /*webpackChunkName "Rappelling" */ "../components/selectedExpertise/Rappelling"
+          )
       },
 
       {
         path: "/lead-belaying",
         name: "lead-belaying",
-        component: LeadBelaying
+        component: () =>
+          import(
+            /*webpackChunkName "LeadBelaying" */ "../components/selectedExpertise/LeadBelaying"
+          )
       },
       {
         path: "/training",
         name: "training",
-        component: Training
+        component: () =>
+          import(
+            /*webpackChunkName "Training" */ "../components/selectedExpertise/Training"
+          )
       },
       {
         path: "/top-rope-belaying",
         name: "top-rope-belaying",
-        component: TopRopeBelaying
+        component: () =>
+          import(
+            /*webpackChunkName "TopRopeBelaying" */ "../components/selectedExpertise/TopRopeBelaying"
+          )
       }
     ]
   },
@@ -139,58 +139,80 @@ const routes = [
   {
     path: "/ropes",
     name: "ropes",
-    component: Ropes
+    component: () =>
+      import(/*webpackChunkName "Ropes" */ "../components/gearshop/Ropes")
   },
   {
     path: "/rope-bags",
     name: "rope-bags",
-    component: RopeBags
+    component: () =>
+      import(/*webpackChunkName "RopeBags" */ "../components/gearshop/RopeBags")
   },
   {
     path: "/belay-devices",
     name: "belay-devices",
-    component: BelayDevices
+    component: () =>
+      import(
+        /*webpackChunkName "BelayDevices" */ "../components/gearshop/BelayDevices"
+      )
   },
   {
     path: "/climbing-shoes",
     name: "climbing-shoes",
-    component: ClimbingShoes
+    component: () =>
+      import(
+        /*webpackChunkName "ClimbingShoes" */ "../components/gearshop/ClimbingShoes"
+      )
   },
   {
     path: "/helmets",
     name: "helmets",
-    component: Helmets
+    component: () =>
+      import(/*webpackChunkName "Helmets" */ "../components/gearshop/Helmets")
   },
   {
     path: "/chalk",
     name: "chalk",
-    component: Chalk
+    component: () =>
+      import(/*webpackChunkName "Chalk" */ "../components/gearshop/Chalk")
   },
   {
     path: "/chalk-bags",
     name: "chalk-bags",
-    component: ChalkBags
+    component: () =>
+      import(
+        /*webpackChunkName "ChalkBags" */ "../components/gearshop/ChalkBags"
+      )
   },
   {
     path: "/quickdraws",
     name: "quickdraws",
-    component: Quickdraws
+    component: () =>
+      import(
+        /*webpackChunkName "Quickdraws" */ "../components/gearshop/Quickdraws"
+      )
   },
   {
     path: "/carabiners",
     name: "carabiners",
-    component: Carabiners
+    component: () =>
+      import(
+        /*webpackChunkName "Carabiners" */ "../components/gearshop/Carabiners"
+      )
   },
   {
     path: "/slings-and-cords",
     name: "slings-and-cords",
-    component: SlingsAndCords
+    component: () =>
+      import(
+        /*webpackChunkName "SlingsAndCords" */ "../components/gearshop/SlingsAndCords"
+      )
   }
 ];
 
 const router = new VueRouter({
-    scrollBehavior() {
-    return { x: 0, y: 0 }
+  scrollBehavior() {
+    return { x: 0, y: 0 };
   },
   routes
 });

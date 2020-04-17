@@ -1,24 +1,24 @@
 <template>
   <div class="news__body">
     <header>
-      <navbar></navbar>
-      <div class="whitepanel">
-        <div class="news__header">
-          <h1>News</h1>
-        </div>
+      <navbar v-if="stickyActive == true"></navbar>
+      <stickynav v-if="stickyActive == false"></stickynav>
 
-        <div class="news__body">
-          <div class="articles__container">
-            <stickynav v-if="stickyActive == false"></stickynav>
-            <div
-              v-waypoint="{
+      <div class="whitepanel">
+        <div
+          v-waypoint="{
           active: true,
           callback: onWaypoint,
           options: intersectionOptions
           }"
-            ></div>
-            <articles class="news__articles" v-for="data in getNewsData" :data="data" :key="data"></articles>
-          </div>
+        ></div>
+        <div class="news__header">
+          <h1>News</h1>
+        </div>
+        
+
+        <div class="articles__container">
+          <articles class="news__articles" v-for="data in getNewsData" :data="data" :key="data"></articles>
         </div>
 
         <!-- </div> -->
@@ -76,11 +76,39 @@ export default {
 </script>
 
 <style scoped>
+/* GENERAL */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
+}
+.news__header h1,
+.news__header h2 {
+  display: flex;
+  text-transform: uppercase;
+  font-size: 400%;
+  font-weight: 300;
+  color: #fff;
+  word-spacing: 2px;
+  letter-spacing: 1px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 20px;
+  background-image: url("../../public/img/climbing-header-3.jpg");
+  height: 200px;
+  background-position: 80%;
+  background-size: 100%;
+}
+
+.news__header .pictures__nav {
+  font-size: 200%;
+}
+
+.news__body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 header {
@@ -99,108 +127,19 @@ header {
   margin-left: 5%;
   background-color: rgb(255, 255, 255);
   width: 90%;
-  margin-top: 50px;
+  margin-top: 150px;
   margin-bottom: 50px;
   border-radius: 5px;
 }
 
-.news__header h1,
-.news__header h2 {
-  display: flex;
-  font-family: "Lato", "Arial", sans-serif;
-  text-transform: uppercase;
-  font-size: 400%;
-  font-weight: 300;
-  color: #fff;
-  word-spacing: 2px;
-  letter-spacing: 1px;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 20px;
-  background-image: url("../../public/img/climbing-header-3.jpg");
-  height: 200px;
-  background-position: 80%;
-  background-size: 100%;
-}
-
-.news__header .news__nav {
-  font-size: 200%;
-}
-
-.news__header {
-}
-
-/* NEWS BODY */
-
-.news__body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-/* NEWS ARTICLES */
-
-.news__articles {
-  display: flex;
-  margin-top: 40px;
-  margin-left: 100px;
-  margin-bottom: 40px;
-}
-
 .articles__container {
   display: flex;
-  width: 100%;
-  margin-right: 20px;
-  flex-wrap: wrap;
-  height: auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  justify-content: space-between;
 }
-
-/* SIDE BAR */
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 20px;
-}
-
-.sidebar__title {
-  display: flex;
-  margin-bottom: 10px;
-  justify-content: center;
-}
-
-.sidebar__comps,
-.sidebar__ascents {
-  border-radius: 7px;
-  display: flex;
-  border: 1px solid black;
-  height: 1000px;
-  width: 500px;
-  margin-right: 10%;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.sidebar__comps {
-  height: 800px;
-}
-
-.thecrag-oembed-comps,
-.thecrag-oembed-ascents {
-  padding: 15px;
-}
-
-.sidebar h2 {
-  font-family: "Lato", "Arial", sans-serif;
-  text-transform: uppercase;
-  font-size: 140%;
-  font-weight: 300;
-}
-
-/* FOOTER */
-
-.news__footer {
-  display: flex;
+.news__articles {
+  margin-left: 50px;
+  margin-right: 50px;
 }
 </style>

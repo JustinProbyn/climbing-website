@@ -82,7 +82,6 @@ export default {
         .then(() => {
           if (firebase.auth().currentUser) {
             this.$store.dispatch("SIGNIN_setState", userData);
-            this.$router.push("/");
           } else {
             alert("User doesn't exist");
             this.password = "";
@@ -100,9 +99,6 @@ export default {
       localStorage.setItem("password", userData.password);
 
       // clears form
-    },
-    goToHome() {
-      this.$router.push("/");
     },
     goToSignUp() {
       this.$router.push("signup");

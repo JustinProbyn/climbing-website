@@ -59,7 +59,7 @@ export default {
   max-width: 1140px;
   justify-self: center;
   margin-top: 35px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   margin-right: 140px;
   box-shadow: 5px 2px 5px rgb(187, 186, 186);
 }

@@ -1,9 +1,10 @@
 <template>
-  <div style=" z-index: 9999;" class="nav-bar__container">
+  <div style=" z-index: 99;" class="nav-bar__container">
+    <v-icon v-if="!$route.meta.hideButton" class="go-back" @click="goBack">mdi-arrow-left-bold</v-icon>
     <nav class="nav__bar">
       <ul class="nav__bar--ul">
         <li>
-          <router-link @click.native="$scrollToTop" to="/">Home</router-link>
+          <router-link v-if="!$route.meta.hideButton" @click.native="$scrollToTop" to="/home">Home</router-link>
         </li>
         <li>
           <router-link @click.native="$scrollToTop" to="news">News</router-link>
@@ -35,6 +36,9 @@ export default {
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    goBack() {
+      return this.$router.go(-1);
     }
   },
   computed: {
@@ -51,6 +55,7 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Lato", "Arial", sans-serif;
 }
 
 a.router-link-active {
@@ -58,6 +63,7 @@ a.router-link-active {
 }
 
 .nav-bar__container {
+  position: absolute;
 }
 
 .nav__bar {
@@ -73,6 +79,8 @@ a.router-link-active {
   color: rgb(218, 214, 214);
   display: flex;
   list-style: none;
+  padding-left: 0px;
+  list-style: none;
 }
 
 .nav__bar--ul li a:link,
@@ -86,7 +94,6 @@ a.router-link-active {
   color: rgb(219, 219, 219);
   transition: color 0.3s;
   word-spacing: 2px;
-  list-style: none;
 }
 
 .nav__bar--ul li a:hover,
@@ -108,5 +115,19 @@ a.router-link-active {
 
 .nav-bar__header .nav-bar__nav {
   font-size: 200%;
+}
+
+.go-back {
+  position: absolute;
+  font-size: 270%;
+  color: rgb(211, 211, 211);
+  z-index: 9999;
+  margin-top: 49px;
+  margin-left: 85px;
+}
+
+.go-back:hover,
+.go-back:active {
+  color: #d35400;
 }
 </style>

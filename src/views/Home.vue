@@ -184,7 +184,7 @@ header {
 .header__text {
   display: flex;
   flex-direction: column;
-  margin-top: 30%;
+  margin-top: 35%;
 }
 
 .home__header {
@@ -244,7 +244,6 @@ header {
 /*** NAV BAR ***/
 
 .nav__bar--home {
-  margin-left: -12px;
 }
 
 /* .nav__bar--ul {
