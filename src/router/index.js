@@ -207,6 +207,22 @@ const routes = [
       import(
         /*webpackChunkName "SlingsAndCords" */ "../components/gearshop/SlingsAndCords"
       )
+  },
+  {
+    path: "/harnesses",
+    name: "harnesses",
+    component: () =>
+      import(
+        /*webpackChunkName "Harnesses" */ "../components/gearshop/Harnesses"
+      )
+  },
+  {
+    path: "/crash-pads",
+    name: "crash-pads",
+    component: () =>
+      import(
+        /*webpackChunkName "CrashPads" */ "../components/gearshop/CrashPads"
+      )
   }
 ];
 

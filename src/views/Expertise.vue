@@ -149,7 +149,6 @@ export default {
   },
   created() {
     this.currentTitle = "Sport Climbing";
-    this.$router.push("sport-climbing");
   },
   components: {
     navbar: NavBar,
@@ -223,6 +222,7 @@ header {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  width: 100%;
 }
 
 .whitepanel {

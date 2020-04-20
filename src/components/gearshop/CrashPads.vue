@@ -1,23 +1,23 @@
 <template>
-  <div class="ropeBags__body">
+  <div class="crashPads__body">
     <header>
       <navbar></navbar>
       <cart></cart>
       <div class="whitepanel">
-        <div class="ropeBags__header">
-          <h1>Rope Bags</h1>
+        <div class="crashPads__header">
+          <h1>Crash Pads</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="(ropeBag, i) in getGear" :key="i" class="mx-auto card" max-width="250">
-            <v-img :src="ropeBag.itemPicture" height="200px"></v-img>
-            <div class="ropeBag__name">
-              <h3>{{ ropeBag.itemName }}</h3>
+          <v-card v-for="(crashPad, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="crashPad.itemPicture" height="200px"></v-img>
+            <div class="crashPad__name">
+              <h3>{{ crashPad.itemName }}</h3>
             </div>
-            <div class="ropeBag__price">
+            <div class="crashPad__price">
               <h4>
                 <strong>
                   R{{
-                  ropeBag.itemPrice
+                  crashPad.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -26,7 +26,7 @@
             </div>
             <div class="btn__container">
               <button
-                :id="ropeBag.id"
+                :id="crashPad.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
@@ -49,11 +49,21 @@ import Cart from "../../components/Cart.vue";
 export default {
   computed: {
     getGear() {
-      return this.$store.getters.getGearshopData.ropeBags;
+      return this.$store.getters.getGearshopData.crashPads;
+    }
+  },
+  methods: {
+    test() {
+      console.log(this.getcrashPads);
     }
   },
   data() {
     return {};
+  },
+  //send all product data to state
+  created() {
+    const crashPads = this.items;
+    this.$store.dispatch("sendToGearshop", crashPads);
   },
   components: {
     navbar: NavBar,
@@ -72,11 +82,11 @@ export default {
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
-.ropeBags__header {
+.crashPads__header {
   width: 100%;
 }
-.ropeBags__header h1,
-.ropeBags__header h2 {
+.crashPads__header h1,
+.crashPads__header h2 {
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   text-transform: uppercase;
@@ -94,12 +104,12 @@ export default {
   background-size: 100%;
 }
 
-.ropeBags__header .pictures__nav {
+.crashPads__header .pictures__nav {
   float: right;
   font-size: 200%;
 }
 
-.ropeBags__body {
+.crashPads__body {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -126,15 +136,15 @@ header {
   border-radius: 5px;
 }
 
-/* ropeBag ITEMS */
+/* crashPad ITEMS */
 
-.ropeBag__name {
+.crashPad__name {
   display: flex;
   justify-content: center;
   margin-top: 7px;
 }
 
-.ropeBag__price {
+.crashPad__price {
   display: flex;
   justify-content: center;
   margin-top: 7px;

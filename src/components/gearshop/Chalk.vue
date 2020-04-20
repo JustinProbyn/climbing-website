@@ -8,16 +8,16 @@
           <h1>Chalk</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card v-for="(chalk, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="chalk.itemPicture" height="200px"></v-img>
             <div class="chalk__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ chalk.itemName }}</h3>
             </div>
             <div class="chalk__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  chalk.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -25,13 +25,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="chalk.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -47,41 +47,13 @@ import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.chalk;
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "Black Diamond Black Gold 200g Chalk",
-          itemPrice: 350,
-          itemPicture: require("../../../public/img/gear/chalks/200g_Black_Gold__79117.1578569281.jpg")
-        },
-        {
-          id: 2,
-          itemName: "Black Diamond Black Gold 30g",
-          itemPrice: 70,
-          itemPicture: require("../../../public/img/gear/chalks/Black_Gold_30g__10984.1578496796.jpg")
-        },
-        {
-          id: 3,
-          itemName: "Evolv Chalk",
-          itemPrice: 120,
-          itemPicture: require("../../../public/img/gear/chalks/chalk_100g__03539.1529480141.jpg")
-        },
-        {
-          id: 4,
-          itemName: "Metolius Chalk Block (57g)",
-          itemPrice: 30,
-          itemPicture: require("../../../public/img/gear/chalks/Block-Chalk__62853.1529673074.jpg")
-        },
-        {
-          id: 5,
-          itemName: "Metolius ECO Chalk Ball",
-          itemPrice: 110,
-          itemPicture: require("../../../public/img/gear/chalks/Eco_chalk_ball__50742.1529675932.jpg")
-        }
-      ]
-    };
+    return {};
   },
   components: {
     navbar: NavBar,

@@ -1,23 +1,23 @@
 <template>
-  <div class="ropeBags__body">
+  <div class="harnesses__body">
     <header>
       <navbar></navbar>
       <cart></cart>
       <div class="whitepanel">
-        <div class="ropeBags__header">
-          <h1>Rope Bags</h1>
+        <div class="harnesses__header">
+          <h1>harnesses</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="(ropeBag, i) in getGear" :key="i" class="mx-auto card" max-width="250">
-            <v-img :src="ropeBag.itemPicture" height="200px"></v-img>
-            <div class="ropeBag__name">
-              <h3>{{ ropeBag.itemName }}</h3>
+          <v-card v-for="(harness, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="harness.itemPicture" height="200px"></v-img>
+            <div class="harness__name">
+              <h3>{{ harness.itemName }}</h3>
             </div>
-            <div class="ropeBag__price">
+            <div class="harness__price">
               <h4>
                 <strong>
                   R{{
-                  ropeBag.itemPrice
+                  harness.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -26,7 +26,7 @@
             </div>
             <div class="btn__container">
               <button
-                :id="ropeBag.id"
+                :id="harness.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
@@ -49,7 +49,7 @@ import Cart from "../../components/Cart.vue";
 export default {
   computed: {
     getGear() {
-      return this.$store.getters.getGearshopData.ropeBags;
+      return this.$store.getters.getGearshopData.harnesses;
     }
   },
   data() {
@@ -72,11 +72,11 @@ export default {
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
-.ropeBags__header {
+.harnesses__header {
   width: 100%;
 }
-.ropeBags__header h1,
-.ropeBags__header h2 {
+.harnesses__header h1,
+.harnesses__header h2 {
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   text-transform: uppercase;
@@ -94,12 +94,12 @@ export default {
   background-size: 100%;
 }
 
-.ropeBags__header .pictures__nav {
+.harnesses__header .pictures__nav {
   float: right;
   font-size: 200%;
 }
 
-.ropeBags__body {
+.harnesses__body {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -126,15 +126,15 @@ header {
   border-radius: 5px;
 }
 
-/* ropeBag ITEMS */
+/* harness ITEMS */
 
-.ropeBag__name {
+.harness__name {
   display: flex;
   justify-content: center;
   margin-top: 7px;
 }
 
-.ropeBag__price {
+.harness__price {
   display: flex;
   justify-content: center;
   margin-top: 7px;

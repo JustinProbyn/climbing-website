@@ -8,16 +8,21 @@
           <h1>Carabiners</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card
+            v-for="(carabiner, i) in getGear"
+            :key="i"
+            class="mx-auto card"
+            max-width="250"
+          >
+            <v-img :src="carabiner.itemPicture" height="200px"></v-img>
             <div class="carabiner__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ carabiner.itemName }}</h3>
             </div>
             <div class="carabiner__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  carabiner.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -25,13 +30,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="carabiner.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -47,41 +52,13 @@ import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.carabiners;
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "Black Diamond Gridlock Magnetron Carabiner",
-          itemPrice: 650,
-          itemPicture: require("../../../public/img/gear/carabiners/bd-_GridLock_Magnetron_Carabiner__51369.1533288829.jpg")
-        },
-        {
-          id: 2,
-          itemName: "Black Diamond Neutrino Rackpack",
-          itemPrice: 725,
-          itemPicture: require("../../../public/img/gear/carabiners/bd-NeutrinoRackpack_web__72617.1533296483.jpg")
-        },
-        {
-          id: 3,
-          itemName: "DMM Ceros Twislock Carabiner",
-          itemPrice: 385,
-          itemPicture: require("../../../public/img/gear/carabiners/DMM-ceros-kwiklock-belay-carabiner__20614.1559739661.jpg")
-        },
-        {
-          id: 4,
-          itemName: "DMM Revolver Wire Gate Carabiner",
-          itemPrice: 550,
-          itemPicture: require("../../../public/img/gear/carabiners/Revolver_wire__85500.1529660326.jpg")
-        },
-        {
-          id: 5,
-          itemName: "DMM Spectre 2 - 5 Pack",
-          itemPrice: 635,
-          itemPicture: require("../../../public/img/gear/carabiners/DMM_Spector_rack_pack__22524.1529663029.jpg")
-        }
-      ]
-    };
+    return {};
   },
   components: {
     navbar: NavBar,

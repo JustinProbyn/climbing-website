@@ -2,23 +2,22 @@
   <div class="chalkBags__body">
     <header>
       <navbar></navbar>
-
       <cart></cart>
       <div class="whitepanel">
         <div class="chalkBags__header">
           <h1>Chalk Bags</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card v-for="(chalkBag, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="chalkBag.itemPicture" height="200px"></v-img>
             <div class="chalkBag__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ chalkBag.itemName }}</h3>
             </div>
             <div class="chalkBag__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  chalkBag.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -26,13 +25,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="chalkBag.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -49,46 +48,18 @@ import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.chalkBags;
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "Beal Maxi Cocoon Chalk Bag",
-          itemPrice: 395,
-          itemPicture: require("../../../public/img/gear/chalkBags/Maxi_4__51975.1569407938.jpg")
-        },
-        {
-          id: 2,
-          itemName: "Black Diamond Creek Chalk Bag",
-          itemPrice: 495,
-          itemPicture: require("../../../public/img/gear/chalkBags/630153_Creek_Chalk_Bag_web__59173.1553518136.jpg")
-        },
-        {
-          id: 3,
-          itemName: "Black Diamond Freerider Chalk Bag",
-          itemPrice: 425,
-          itemPicture: require("../../../public/img/gear/chalkBags/Honnold_Signature_ChalkBag__04786.1553518328.jpg")
-        },
-        {
-          id: 4,
-          itemName: "DMM Trad Chalk bag",
-          itemPrice: 445,
-          itemPicture: require("../../../public/img/gear/chalkBags/dmm-trad-RED__42760.1553865391.jpg")
-        },
-        {
-          id: 5,
-          itemName: "Evolv Andes Chalk Bag",
-          itemPrice: 390,
-          itemPicture: require("../../../public/img/gear/chalkBags/evolv-andes-emerald__29047.1562672292.jpg")
-        }
-      ]
-    };
+    return {};
   },
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    cart: Cart,
+    cart: Cart
   },
   mixins: [cartMixin]
 };

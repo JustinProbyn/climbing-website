@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import firebase from "firebase";
+import gear from "./modules/gear";
+import cart from "./modules/cart";
 
 Vue.use(Vuex);
 
@@ -12,30 +14,11 @@ export default new Vuex.Store({
     },
 
     articleData: [],
-    pictureData: [],
-    cartData: [],
-    itemsInStock: {
-      shoes: [],
-      BDs: [],
-      chalk: [],
-      chalkbags: [],
-      helmets: [],
-      ropes: [],
-      ropebags: [],
-      quickdraw: [],
-      carabiners: [],
-      SnCs: []
-    }
+    pictureData: []
   },
 
   /*** MUTATIONS ***/
   mutations: {
-    // Sets ItemsInStock
-
-    setGearshop(state, products) {
-      state.itemsInStock.BDs = products;
-    },
-
     // User sign in / out Mutations
     setUser(state, userData) {
       state.userData.email = userData.email;
@@ -57,25 +40,6 @@ export default new Vuex.Store({
     // pushes caption into state
     addPictureData(state, pictureData) {
       state.pictureData.push(pictureData);
-    },
-
-    /* Articles Mutations */
-    // updates cart with newly added item
-    setCart(state, cartData) {
-      console.log(state.cartData);
-      state.cartData.push(cartData);
-      console.log(state.cartData);
-    },
-    // loads cart from local storage on refresh
-    loadCart(state, cartData) {
-      state.cartData = cartData;
-    },
-    clearCart(state) {
-      state.cartData = [];
-      localStorage.removeItem("cartData");
-    },
-    deleteCartItem(state, index) {
-      state.cartData.splice(index, 1);
     }
   },
 
@@ -167,12 +131,6 @@ export default new Vuex.Store({
         }
       }
       pictureData();
-
-      // load cart items from local storage
-      var cartData = JSON.parse(localStorage.getItem("cartData"));
-      if (cartData) {
-        commit("loadCart", cartData);
-      } else return;
     },
 
     // sign out removing localstorage
@@ -232,26 +190,6 @@ export default new Vuex.Store({
         .catch(function(error) {
           console.error("Error adding picture: ", error);
         });
-    },
-
-    /* Cart Actions */
-
-    clearCart({ commit }) {
-      commit("clearCart");
-    },
-
-    addToCart({ commit }, cartData) {
-      commit("setCart", cartData);
-      localStorage.setItem("cartData", JSON.stringify(this.state.cartData));
-    },
-    deleteCartItem({ commit }, index) {
-      commit("deleteCartItem", index);
-      localStorage.setItem("cartData", JSON.stringify(this.state.cartData));
-    },
-
-    /* Gearshop Actions*/
-    sendToGearshop({ commit }, products) {
-      commit("setGearshop", products);
     }
   },
 
@@ -276,17 +214,10 @@ export default new Vuex.Store({
     //Picture getters.
     getPictureData(state) {
       return state.pictureData;
-    },
-
-    //Cart getters.
-    getCartData(state) {
-      return state.cartData;
-    },
-
-    //Gearshop getters
-    getGearshopData(state) {
-      return state.itemsInStock;
     }
   },
-  modules: {}
+  modules: {
+    gear,
+    cart
+  }
 });

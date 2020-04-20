@@ -15,10 +15,9 @@
         <div class="news__header">
           <h1>News</h1>
         </div>
-        
 
         <div class="articles__container">
-          <articles class="news__articles" v-for="data in getNewsData" :data="data" :key="data"></articles>
+          <articles class="news__articles" v-for="(data, i) in getNewsData" :data="data" :key="i"></articles>
         </div>
 
         <!-- </div> -->

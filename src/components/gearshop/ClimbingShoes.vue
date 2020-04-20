@@ -8,16 +8,16 @@
           <h1>Climbing Shoes</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card v-for="(shoe, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="shoe.itemPicture" height="200px"></v-img>
             <div class="climbing-shoe__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ shoe.itemName }}</h3>
             </div>
             <div class="climbing-shoe__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  shoe.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -25,13 +25,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="shoe.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -47,46 +47,18 @@ import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.shoes;
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "La Sportiva Genius",
-          itemPrice: 3295,
-          itemPicture: require("../../../public/img/gear/climbingShoes/Screenshot_2019-03-04_at_13.19.50__40000.1551698403.png")
-        },
-        {
-          id: 2,
-          itemName: "La Sportiva Futura",
-          itemPrice: 2900,
-          itemPicture: require("../../../public/img/gear/climbingShoes/La_Sportiva_Futura__40135.1529410367.jpg")
-        },
-        {
-          id: 3,
-          itemName: "Ocun Pearl LU",
-          itemPrice: 1650,
-          itemPicture: require("../../../public/img/gear/climbingShoes/ocun-pearl__24530.1525952260.jpg")
-        },
-        {
-          id: 4,
-          itemName: "Ocun Oxi QC",
-          itemPrice: 1995,
-          itemPicture: require("../../../public/img/gear/climbingShoes/03755_Oxi_QC__70621.1529478170.jpg")
-        },
-        {
-          id: 5,
-          itemName: "Evolv Shakra",
-          itemPrice: 2150,
-          itemPicture: require("../../../public/img/gear/climbingShoes/evolv-shakra-side__24728.1529488995.jpg")
-        }
-      ]
-    };
+    return {};
   },
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    cart: Cart,
+    cart: Cart
   },
   mixins: [cartMixin]
 };

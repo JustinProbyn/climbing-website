@@ -8,16 +8,16 @@
           <h1>Quickdraws</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card v-for="(quickdraw, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="quickdraw.itemPicture" height="200px"></v-img>
             <div class="quickdraw__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ quickdraw.itemName }}</h3>
             </div>
             <div class="quickdraw__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  quickdraw.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -25,13 +25,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="quickdraw.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -47,46 +47,18 @@ import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.quickdraws;
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "Black Diamond Freewire Quickdraw",
-          itemPrice: 345,
-          itemPicture: require("../../../public/img/gear/quickdraws/Freewire_12__14183.1578574366.jpg")
-        },
-        {
-          id: 2,
-          itemName: "DMM Alpha Trad Quickdraw",
-          itemPrice: 370,
-          itemPicture: require("../../../public/img/gear/quickdraws/dmm-alphatrad-qd__70192.1560167274.jpg")
-        },
-        {
-          id: 3,
-          itemName: "Mammut Bionic Express Quickdraw",
-          itemPrice: 295,
-          itemPicture: require("../../../public/img/gear/quickdraws/mammut-bionic-express-qd__00640.1530685822.jpg")
-        },
-        {
-          id: 4,
-          itemName: "Metolius FS Mini II Long Draw",
-          itemPrice: 258,
-          itemPicture: require("../../../public/img/gear/quickdraws/metolius-fs-mini-longdraw-20__15932.1529677701.jpg")
-        },
-        {
-          id: 5,
-          itemName: "Ocun Falcon Quickdraw 5 Pack",
-          itemPrice: 1400,
-          itemPicture: require("../../../public/img/gear/quickdraws/Ocun-Falcon-QD-Zoom-PA-15-22-blue-5-pack__02060.1574157896.jpg")
-        }
-      ]
-    };
+    return {};
   },
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    cart: Cart,
+    cart: Cart
   },
   mixins: [cartMixin]
 };

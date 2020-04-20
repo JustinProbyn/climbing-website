@@ -8,16 +8,16 @@
           <h1>Slings and Cords</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card v-for="(SnC, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="SnC.itemPicture" height="200px"></v-img>
             <div class="SnC__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ SnC.itemName }}</h3>
             </div>
             <div class="SnC__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  SnC.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -25,13 +25,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="SnC.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -47,41 +47,13 @@ import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.SnCs;
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "Black Diamond Nylon Daisy Chain",
-          itemPrice: 375,
-          itemPicture: require("../../../public/img/gear/SnCs/390012_daisychain_140cm_rd_web__14894.1571837151.jpg")
-        },
-        {
-          id: 2,
-          itemName: "Black Diamond Dynex Runners",
-          itemPrice: 245,
-          itemPicture: require("../../../public/img/gear/SnCs/bd-DYNEX-slings-120cm__65220.1571916180.jpg")
-        },
-        {
-          id: 3,
-          itemName: "Beal Accessory Cord",
-          itemPrice: 5,
-          itemPicture: require("../../../public/img/gear/SnCs/beal-2-3mm-accessory-cord__55481.1533881198.jpg")
-        },
-        {
-          id: 4,
-          itemName: "Ocun Multipoint Belay Sling",
-          itemPrice: 450,
-          itemPicture: require("../../../public/img/gear/SnCs/526b__70072.1537373840.jpg")
-        },
-        {
-          id: 5,
-          itemName: "Petzl Anneau Nylon Sling",
-          itemPrice: 105,
-          itemPicture: require("../../../public/img/gear/SnCs/068w0000003wLFZAA2__31656.1551874979.jpg")
-        }
-      ]
-    };
+    return {};
   },
   components: {
     navbar: NavBar,

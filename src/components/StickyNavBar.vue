@@ -7,19 +7,19 @@
           <router-link to="/home">Home</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="news">News</router-link>
+          <router-link @click.native="scrollToTop" to="news">News</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="pictures">Pictures</router-link>
+          <router-link @click.native="scrollToTop" to="pictures">Pictures</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="sport-climbing">Expertise</router-link>
+          <router-link @click.native="scrollToTop" to="sport-climbing">Expertise</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="climbing-spots">Climbing spots</router-link>
+          <router-link @click.native="scrollToTop" to="climbing-spots">Climbing spots</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="gear">Gear</router-link>
+          <router-link @click.native="scrollToTop" to="gear">Gear</router-link>
         </li>
       </ul>
     </nav>
@@ -74,7 +74,7 @@ a.router-link-active {
 
 .stickynav__bar--ul {
   position: fixed;
-  background-color: rgba(39, 41, 41, 0.897);
+  background-color: rgba(39, 41, 41, 0.781);
   display: flex;
   justify-content: center;
   list-style: none;

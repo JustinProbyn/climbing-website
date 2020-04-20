@@ -1,25 +1,25 @@
 <template>
-  <div style=" z-index: 99;" class="nav-bar__container">
+  <div style=" z-index: 1;" class="nav-bar__container">
     <v-icon v-if="!$route.meta.hideButton" class="go-back" @click="goBack">mdi-arrow-left-bold</v-icon>
     <nav class="nav__bar">
       <ul class="nav__bar--ul">
         <li>
-          <router-link v-if="!$route.meta.hideButton" @click.native="$scrollToTop" to="/home">Home</router-link>
+          <router-link v-if="!$route.meta.hideButton" @click.native="scrollToTop" to="/home">Home</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="news">News</router-link>
+          <router-link @click.native="scrollToTop" to="news">News</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="pictures">Pictures</router-link>
+          <router-link @click.native="scrollToTop" to="pictures">Pictures</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="sport-climbing">Expertise</router-link>
+          <router-link @click.native="scrollToTop" to="sport-climbing">Expertise</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="climbing-spots">Climbing spots</router-link>
+          <router-link @click.native="scrollToTop" to="climbing-spots">Climbing spots</router-link>
         </li>
         <li>
-          <router-link @click.native="$scrollToTop" to="gear">Gear</router-link>
+          <router-link @click.native="scrollToTop" to="gear">Gear</router-link>
         </li>
       </ul>
     </nav>
@@ -121,7 +121,7 @@ a.router-link-active {
   position: absolute;
   font-size: 270%;
   color: rgb(211, 211, 211);
-  z-index: 9999;
+  z-index: 1;
   margin-top: 49px;
   margin-left: 85px;
 }

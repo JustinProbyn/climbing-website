@@ -19,9 +19,9 @@
         <div class="pictures__container">
           <pictures-box
             class="pictures__box--comp"
-            v-for="data in getPictureData"
+            v-for="(data, i) in getPictureData"
             :data="data"
-            :key="data"
+            :key="i"
           ></pictures-box>
         </div>
       </div>

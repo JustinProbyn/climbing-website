@@ -2,23 +2,22 @@
   <div class="helmets__body">
     <header>
       <navbar></navbar>
-      <goback></goback>
       <cart></cart>
       <div class="whitepanel">
         <div class="helmets__header">
           <h1>Helmets</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card v-for="(helmet, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="helmet.itemPicture" height="200px"></v-img>
             <div class="helmet__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ helmet.itemName }}</h3>
             </div>
             <div class="helmet__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  helmet.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -26,13 +25,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="helmet.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -48,41 +47,13 @@ import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.helmets;
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "Black Diamond Half Dome Men's Helmet",
-          itemPrice: 1050,
-          itemPicture: require("../../../public/img/gear/helmets/bd-hd-hel-slate__34774.1561642997.jpg")
-        },
-        {
-          id: 2,
-          itemName: "Black Diamond Half Dome Women's Helmet",
-          itemPrice: 1050,
-          itemPicture: require("../../../public/img/gear/helmets/bd-HalfDome-Womens-caspian-1__05231.1533655545.jpg")
-        },
-        {
-          id: 3,
-          itemName: "Black Diamond Vector Helmet",
-          itemPrice: 1750,
-          itemPicture: require("../../../public/img/gear/helmets/BD-vecotr-helmet-blue__62946.1570615860.jpg")
-        },
-        {
-          id: 4,
-          itemName: "Mammut Rock Rider Helmet",
-          itemPrice: 885,
-          itemPicture: require("../../../public/img/gear/helmets/2030-00131-00315_main_50461__24024.1565097281.jpg")
-        },
-        {
-          id: 5,
-          itemName: "Petzl Boreo Helmet",
-          itemPrice: 1170,
-          itemPicture: require("../../../public/img/gear/helmets/petzl-BOREO-view-1-fuschia__97605.1531840035.jpg")
-        }
-      ]
-    };
+    return {};
   },
   components: {
     navbar: NavBar,

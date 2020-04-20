@@ -4,7 +4,6 @@
       <header>
         <navbar v-if="stickyActive == true"></navbar>
         <stickynav v-if="stickyActive == false"></stickynav>
-        <goback></goback>
         <cart></cart>
         <div class="whitepanel">
           <div
@@ -20,7 +19,7 @@
 
           <gear-suggester></gear-suggester>
           <div class="products__container">
-            <products v-for="product in products" :product="product" :key="product"></products>
+            <products v-for="(product, i) in products" :product="product" :key="i"></products>
           </div>
         </div>
         <footer-comp></footer-comp>
@@ -74,6 +73,11 @@ export default {
           path: "/helmets"
         },
         {
+          type: "harnesses",
+          img: require("../../public/img/harnesses.jpg"),
+          path: "/harnesses"
+        },
+        {
           type: "chalk",
           img: require("../../public/img/chalk.jpg"),
           path: "/chalk"
@@ -97,6 +101,11 @@ export default {
           type: "slings and cords",
           img: require("../../public/img/gear/SnCs/390012_daisychain_140cm_rd_web__14894.1571837151.jpg"),
           path: "/slings-and-cords"
+        },
+        {
+          type: "crashPads",
+          img: require("../../public/img/gear/crashPads/dominator__28788.1529421510.jpg"),
+          path: "/crash-pads"
         }
       ]
     };
@@ -148,6 +157,7 @@ header {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  width: 100%;
 }
 
 .whitepanel {
@@ -158,7 +168,6 @@ header {
   width: 90%;
   margin-top: 150px;
   margin-bottom: 50px;
-  border-radius: 5px;
 }
 
 /* TITLE */

@@ -8,16 +8,16 @@
           <h1>Belay Devices</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card v-for="(belayDevice, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="belayDevice.itemPicture" height="200px"></v-img>
             <div class="BD__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ belayDevice.itemName }}</h3>
             </div>
             <div class="BD__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  belayDevice.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -25,13 +25,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="belayDevice.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -47,41 +47,18 @@ import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.belayDevices;
+    }
+  },
+  methods: {
+    test() {
+      console.log(this.getBDs);
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "Black Diamond ATC Pilot",
-          itemPrice: 795,
-          itemPicture: require("../../../public/img/gear/BDs/BD-pilot-2__53236.1531741336.jpg")
-        },
-        {
-          id: 2,
-          itemName: "Black Diamond ATC XP",
-          itemPrice: 395,
-          itemPicture: require("../../../public/img/gear/BDs/BD-ATC-XP-black__00533.1531741679.jpg")
-        },
-        {
-          id: 3,
-          itemName: "Edelrid Giga Jul",
-          itemPrice: 1250,
-          itemPicture: require("../../../public/img/gear/BDs/73742_663a__60848.1571671926.jpg")
-        },
-        {
-          id: 4,
-          itemName: "DMM Mantis Belay Device",
-          itemPrice: 325,
-          itemPicture: require("../../../public/img/gear/BDs/c63_12112_a1165or-mantis-belay-device-orange__37123.1561551150.jpg")
-        },
-        {
-          id: 5,
-          itemName: "DMM Pivot Belay Device",
-          itemPrice: 600,
-          itemPicture: require("../../../public/img/gear/BDs/dmm-PIVOT-RED__41155.1551953037.jpg")
-        }
-      ]
-    };
+    return {};
   },
   //send all product data to state
   created() {
@@ -91,7 +68,7 @@ export default {
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    cart: Cart,
+    cart: Cart
   },
   mixins: [cartMixin]
 };

@@ -15,7 +15,13 @@
               <v-btn @click="show">Englarge</v-btn>
 
               <!-- Modal of enlarged image -->
-              <modal @before-close="beforeClose" width="1140px" height="auto" name="img">
+              <modal
+                style="z-index: 9999"
+                @before-close="beforeClose"
+                width="1140px"
+                height="auto"
+                name="img"
+              >
                 <img :src="data.url" />
               </modal>
               <!--  -->

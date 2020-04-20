@@ -8,16 +8,16 @@
           <h1>Ropes</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="item in items" :key="item" class="mx-auto card" max-width="250">
-            <v-img :src="item.itemPicture" height="200px"></v-img>
+          <v-card v-for="(rope, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+            <v-img :src="rope.itemPicture" height="200px"></v-img>
             <div class="rope__name">
-              <h3>{{ item.itemName }}</h3>
+              <h3>{{ rope.itemName }}</h3>
             </div>
             <div class="rope__price">
               <h4>
                 <strong>
                   R{{
-                  item.itemPrice
+                  rope.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -25,13 +25,13 @@
               </h4>
             </div>
             <div class="btn__container">
-              <btn
-                :id="item.id"
+              <button
+                :id="rope.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</btn>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -47,46 +47,18 @@ import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
+  computed: {
+    getGear() {
+      return this.$store.getters.getGearshopData.ropes;
+    }
+  },
   data() {
-    return {
-      items: [
-        {
-          id: 1,
-          itemName: "Beal Antidote 10.2mm x 60m",
-          itemPrice: 2300,
-          itemPicture: require("../../../public/img/gear/ropes/beal-antidote-blue__74743.1534508332.png")
-        },
-        {
-          id: 2,
-          itemName: "Beal Cobra 8.6mm",
-          itemPrice: 2695,
-          itemPicture: require("../../../public/img/gear/ropes/beal-cobra-green__62711.1534421904.png")
-        },
-        {
-          id: 3,
-          itemName: "Beal Diablo 9.8mm",
-          itemPrice: 2995,
-          itemPicture: require("../../../public/img/gear/ropes/beal-diablo-red-1__33088.1574086088.png")
-        },
-        {
-          id: 4,
-          itemName: "Beal Joker 9.1mm",
-          itemPrice: 3595,
-          itemPicture: require("../../../public/img/gear/ropes/BL__12361.1550060605.jpg")
-        },
-        {
-          id: 5,
-          itemName: "Beal Stinger 9.4mm",
-          itemPrice: 3495,
-          itemPicture: require("../../../public/img/gear/ropes/beal-stinger-anis__63887.1574074523.png")
-        }
-      ]
-    };
+    return {};
   },
   components: {
     navbar: NavBar,
     footerComp: Footer,
-    cart: Cart,
+    cart: Cart
   },
   mixins: [cartMixin]
 };
