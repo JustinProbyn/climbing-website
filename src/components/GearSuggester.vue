@@ -53,7 +53,7 @@
     </v-card-actions>
 
     <div>
-      <div :key="refresh" class="gear__suggester--output">
+      <div class="gear__suggester--output">
         <div>{{searchText}}</div>
         <div v-if="showIconsKey">
           <div v-if="boulderingSelected">
@@ -457,6 +457,13 @@ export default {
       this.isUpdating = true;
       this.refresh += 1;
 
+      // if (this.refresh >= 3) {
+      //       items[1]
+      //         .splice(index, 1, removedItems.shift())
+      //         .slice()
+      //         .filter(value => Object.keys(value).length !== 0);
+      //     }
+
       /*****SETTING BUDGET*****/
 
       for (let i = 0; i < Object.entries(this.getItemsInStock).length; i++) {
@@ -464,8 +471,7 @@ export default {
           items[1].forEach(el => {
             if (el.itemPrice > this.tickValue) {
               const index = items[1].indexOf(el);
-
-              items[1]
+              items[1] = items[1]
                 .splice(index, 1)
                 .slice()
                 .filter(value => Object.keys(value).length !== 0);
@@ -682,6 +688,22 @@ export default {
           this.suggestedChalkBags = this.getItemsInStock.chalkBags;
         }
       }
+
+      // Pop back in here
+      //  const index = items[1].indexOf(el);
+
+      // let removed = items[1]
+      //   .splice(index, 1)
+      //   .slice()
+      //   .filter(value => Object.keys(value).length !== 0);
+      // setTimeout(() => {
+      //   items[1]
+      //     .splice(index, 1, removed.shift())
+      //     .slice()
+      //     .filter(value => Object.keys(value).length !== 0);
+      // }, 1000);
+
+      // function ends here
     }
   }
 };
