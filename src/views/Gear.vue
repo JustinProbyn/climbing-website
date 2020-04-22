@@ -152,7 +152,6 @@ export default {
 header {
   background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
-  height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

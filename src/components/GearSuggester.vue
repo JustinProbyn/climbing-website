@@ -5,7 +5,6 @@
         <v-row align="center">
           <v-col style="width: 100%">
             <v-select
-              @click="test"
               :disabled="isUpdating"
               :items="climbing"
               filled
@@ -18,24 +17,29 @@
               multiple
               v-model="selectedClimbing"
               outlined
-            ><v-avatar
-                class="accent white--text"
-                left
-                v-text="selectedClimbing"
-              ></v-avatar></v-select>
+            >
+              <v-avatar class="accent white--text" left v-text="selectedClimbing"></v-avatar>
+            </v-select>
           </v-col>
         </v-row>
       </v-container>
+      <v-btn @click="test">TEST</v-btn>
+      <v-btn @click="test2">TEST2</v-btn>
 
-    <v-radio-group class="radio__group" v-model="selectedBudget" row>
-      <v-radio color="orange darken-3" label="R1,000" value="1000"></v-radio>
-      <v-radio color="orange darken-3" label="R2,000" value="2000"></v-radio>
-      <v-radio color="orange darken-3" label="R3,000" value="3000"></v-radio>
-      <v-radio color="orange darken-3" label="R4,000" value="4000"></v-radio>
-      <v-radio color="orange darken-3" label="R5,000" value="5000"></v-radio>
-      <v-radio color="orange darken-3" label="R6,000" value="6000"></v-radio>
-    </v-radio-group>
-
+      <v-card-text slider__container>
+        <v-slider
+          thumb-label="always"
+          class="slider"
+          track-color="grey"
+          color="orange darken-3"
+          v-model="tickValue"
+          step="500"
+          max="5500"
+          min="500"
+          ticks="always"
+          :tick-labels="tickLabels"
+        ></v-slider>
+      </v-card-text>
     </v-card>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -359,6 +363,8 @@ export default {
     getItemsInStock() {
       return this.$store.getters.getGearshopData;
     }
+
+    //
   },
   watch: {
     isUpdating(val) {
@@ -397,9 +403,9 @@ export default {
         { type: "Bouldering" }
       ],
       //   SELECTED
-      selectedBudget: '',
+      selectedBudget: "",
       selectedClimbing: [],
-      // 
+      //
       suggestedShoes: [],
       suggestedRopes: [],
       suggestedChalk: [],
@@ -411,12 +417,40 @@ export default {
       suggestedHarnesses: [],
       suggestedQuickdraws: [],
       suggestedCarabiners: [],
-      suggestedCrashPads: []
+      suggestedCrashPads: [],
+
+      // slider
+      tickValue: "",
+      tickLabels: [
+        "R500",
+        "R1,000",
+        "R1,500",
+        "R2,000",
+        "R2,500",
+        "R3,000",
+        "R3,500",
+        "R4,000",
+        "R4,500",
+        "R5,000",
+        "R5,500"
+      ]
     };
   },
   methods: {
     test() {
-      console.log(this.selectedClimbing);
+      for (let i = 0; i < Object.entries(this.getItemsInStock).length; i++) {
+        Object.entries(this.getItemsInStock).forEach(items => {
+          items[1].forEach(el => {
+            if (el.itemPrice > this.tickValue) {
+              const index = items[1].indexOf(el);
+              items[1] = items[1].splice(index, 1);
+            }
+          });
+        });
+      }
+    },
+    test2() {
+      console.log(Object.entries(this.getItemsInStock));
     },
     // Contained Add to cart Method
     addToCart(event) {
@@ -437,7 +471,8 @@ export default {
     },
     productSearch() {
       this.isUpdating = true;
-      console.log(this.selectedClimbing);
+
+      /*****SETTING BUDGET*****/
 
       /**********CLEARING OPTIONS************/
       if (this.suggestedCrashPads.length > 1) {
@@ -659,7 +694,6 @@ export default {
   position: absolute;
   flex-wrap: wrap;
   width: 35%;
-  height: 100%;
   margin-top: 275px;
   margin-left: 20px;
 }
@@ -704,16 +738,13 @@ export default {
 
 .selector__container {
   height: 100px;
+}
+/* slider */
 
+.slider__container {
 }
 
-/* Radios */
-
-.radio__group {
-margin-left: 40px;
+.slider {
+  font-size: 80%;
 }
-
-
-
-
 </style>
