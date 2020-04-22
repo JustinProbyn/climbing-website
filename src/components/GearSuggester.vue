@@ -53,7 +53,7 @@
     </v-card-actions>
 
     <div>
-      <div class="gear__suggester--output">
+      <div :key="refresh" class="gear__suggester--output">
         <div>{{searchText}}</div>
         <div v-if="showIconsKey">
           <div v-if="boulderingSelected">
@@ -301,27 +301,6 @@
               >{{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedRopeBags.length > 0">
-              <v-expansion-panel-header>
-                Rope Bags
-                <div class="climbingIcons">
-                  <v-icon
-                    v-if="leadInGymSelected"
-                    class="leadGymIcon"
-                    color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
-                  <v-icon
-                    v-if="leadOutsideSelected"
-                    class="leadOutsideIcon"
-                    color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
-                </div>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content
-                v-for="(item,i) in suggestedRopeBags"
-                :key="i"
-              >{{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</v-expansion-panel-content>
-            </v-expansion-panel>
             <!--  -->
             <v-expansion-panel v-if="this.suggestedBelayDevices.length > 0">
               <v-expansion-panel-header>
@@ -383,6 +362,9 @@ export default {
   },
   data() {
     return {
+      // reloads dropdowns
+      refresh: 1,
+      //
       searchText: "",
       isUpdating: false,
       boulderingTrue: false,
@@ -444,13 +426,15 @@ export default {
             if (el.itemPrice > this.tickValue) {
               const index = items[1].indexOf(el);
               items[1] = items[1].splice(index, 1);
+              // .slice()
+              // .filter(value => Object.keys(value).length !== 0);
             }
           });
         });
       }
     },
     test2() {
-      console.log(Object.entries(this.getItemsInStock));
+      console.log(this.getItemsInStock);
     },
     // Contained Add to cart Method
     addToCart(event) {
@@ -471,8 +455,24 @@ export default {
     },
     productSearch() {
       this.isUpdating = true;
+      this.refresh += 1;
 
       /*****SETTING BUDGET*****/
+
+      for (let i = 0; i < Object.entries(this.getItemsInStock).length; i++) {
+        Object.entries(this.getItemsInStock).forEach(items => {
+          items[1].forEach(el => {
+            if (el.itemPrice > this.tickValue) {
+              const index = items[1].indexOf(el);
+
+              items[1]
+                .splice(index, 1)
+                .slice()
+                .filter(value => Object.keys(value).length !== 0);
+            }
+          });
+        });
+      }
 
       /**********CLEARING OPTIONS************/
       if (this.suggestedCrashPads.length > 1) {
