@@ -9,8 +9,13 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/home",
-    name: "Home",
+    // catch all 404 - define at the very end
+    path: "*",
+    component: () => import("../views//404/404.vue")
+  },
+  {
+    path: "/",
+    name: "home",
     component: Home,
     meta: { hideButton: true }
   },
@@ -230,6 +235,7 @@ const router = new VueRouter({
   scrollBehavior() {
     return { x: 0, y: 0 };
   },
+  mode: "history",
   routes
 });
 

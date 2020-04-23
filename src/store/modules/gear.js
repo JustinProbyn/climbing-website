@@ -369,13 +369,13 @@ const gear = {
         {
           id: 3,
           itemName: "Edelrid Mantle Crash Pad",
-          itemPrice: 5125,
+          itemPrice: 4125,
           itemPicture: require("../../../public/img/gear/crashPads/__23919.1572874068.jpg")
         },
         {
           id: 4,
           itemName: "Ocun Dominator Boulder Pad",
-          itemPrice: 5625,
+          itemPrice: 5425,
           itemPicture: require("../../../public/img/gear/crashPads/dominator__28788.1529421510.jpg")
         },
         {

@@ -4,7 +4,7 @@
     <nav class="nav__bar">
       <ul class="nav__bar--ul">
         <li>
-          <router-link v-if="!$route.meta.hideButton" @click.native="scrollToTop" to="/home">Home</router-link>
+          <router-link v-if="!$route.meta.hideButton" @click.native="scrollToTop" to="/">Home</router-link>
         </li>
         <li>
           <router-link @click.native="scrollToTop" to="news">News</router-link>

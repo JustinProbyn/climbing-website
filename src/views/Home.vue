@@ -74,26 +74,6 @@
             <span>&nbsp;</span>Ascend any height.
           </h2>
         </div>
-
-        <!-- <div class="nav__bar">
-          <ul class="nav__bar--ul">
-            <li>
-              <router-link to="news">News</router-link>
-            </li>
-            <li>
-              <router-link to="sport-climbing">Expertise</router-link>
-            </li>
-            <li>
-              <router-link to="climbing-spots">Climbing spots</router-link>
-            </li>
-            <li>
-              <router-link to="gear">Gear</router-link>
-            </li>
-            <li>
-              <router-link to="pictures">Pictures</router-link>
-            </li>
-          </ul>
-        </div>-->
       </header>
     </div>
   </v-app>
@@ -240,43 +220,6 @@ header {
 .v-application--wrap {
   min-height: 20vh;
 }
-
-/*** NAV BAR ***/
-
-.nav__bar--home {
-}
-
-/* .nav__bar--ul {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 500px;
-  list-style: none;
-  color: #dad6d6;
-  display: flex;
-  margin-left: 400px;
-  margin-right: 150px;
-  background-color: rgba(0, 0, 0, 0.151);
-  width: 100%;
-  justify-content: center;
-}
-
-.nav__bar--ul li a:link,
-.nav__bar--ul li a:visited {
-  font-family: "Lato", "Arial", sans-serif;
-  font-weight: 300;
-  text-transform: uppercase;
-  font-size: 150%;
-  padding-right: 40px;
-  text-decoration: none;
-  color: rgb(218, 214, 214);
-  transition: color 0.3s;
-  word-spacing: 2px;
-}
-
-.nav__bar--ul li a:hover,
-.nav__bar--ul li a:active {
-  color: #d35400;
-} */
 
 /*** BUTTONS ***/
 

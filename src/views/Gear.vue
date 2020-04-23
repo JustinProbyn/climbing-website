@@ -160,8 +160,6 @@ header {
 }
 
 .whitepanel {
-  display: flex;
-  flex-direction: column;
   margin-left: 5%;
   background-color: rgb(255, 255, 255);
   width: 90%;
@@ -192,7 +190,6 @@ header {
 /* BODY */
 
 .gear__header .pictures__nav {
-  float: right;
   font-size: 200%;
 }
 

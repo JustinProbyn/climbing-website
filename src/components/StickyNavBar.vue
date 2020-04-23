@@ -4,7 +4,7 @@
     <nav class="stickynav__bar">
       <ul class="stickynav__bar--ul">
         <li class="go-back-btn--box">
-          <router-link to="/home">Home</router-link>
+          <router-link to="/">Home</router-link>
         </li>
         <li>
           <router-link @click.native="scrollToTop" to="news">News</router-link>

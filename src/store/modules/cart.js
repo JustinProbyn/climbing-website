@@ -5,10 +5,8 @@ const cart = {
   mutations: {
     // updates cart with newly added item
     setCart(state, cartData) {
-      console.log(state.cartData);
       state.cartData.push(cartData);
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
-      console.log(state.cartData);
     },
     // loads cart from local storage on refresh
     loadCart(state, cartData) {
@@ -19,10 +17,8 @@ const cart = {
       localStorage.removeItem("cartData");
     },
     deleteCartItem(state, index) {
-      console.log(index);
       state.cartData.splice(index, 1);
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
-      console.log(state.cartData);
     }
   },
   actions: {
