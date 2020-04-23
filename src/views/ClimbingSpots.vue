@@ -58,7 +58,7 @@
                 width="1140px"
                 height="auto"
                 name="modal-cape-town"
-                styles="padding: 20px"
+                styles="padding: 20px; border: 1px solid black"
               >
                 <p>
                   With winter rainfall which often sets in and hot conditions in
@@ -79,7 +79,7 @@
                 width="1140px"
                 height="auto"
                 name="modal-cape-town-map"
-                styles="padding: 20px"
+                styles="padding: 20px; border: 1px solid black"
               >
                 <div>
                   <l-map :zoom="zoom" :center="center" style="height: 500px; width: 100%">
@@ -129,7 +129,7 @@
                 width="1140px"
                 height="auto"
                 name="modal-montagu"
-                styles="padding: 20px"
+                styles="padding: 20px; border: 1px solid black"
               >
                 <p>
                   Once a sleepy little Karoo town where not much happened, the town
@@ -178,7 +178,7 @@
                 width="1140px"
                 height="auto"
                 name="modal-rocklands"
-                styles="padding: 20px"
+                styles="padding: 20px; border: 1px solid black"
               >
                 <p>
                   Most of the original climbing is situated on CapeNature land and
@@ -224,7 +224,7 @@
                 width="1140px"
                 height="auto"
                 name="modal-waterval-boven"
-                styles="padding: 20px"
+                styles="padding: 20px; border: 1px solid black"
               >
                 <p>
                   A PDF guide covers almost everything and can be downloaded

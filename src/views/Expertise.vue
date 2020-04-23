@@ -16,15 +16,10 @@
             <h1>Expertise</h1>
           </div>
 
-          <div class="selected__title">{{ currentTitle }}</div>
+          <div class="selected__title">{{$route.name}}</div>
           <div class="skill__selector">
             <div class="skill__selector--btns-box">
-              <v-btn
-                @click="selectSport"
-                to="sport-climbing"
-                outlined
-                class="skill__selector--btns"
-              >Sport Climbing</v-btn>
+              <v-btn to="sport-climbing" outlined class="skill__selector--btns">Sport Climbing</v-btn>
               <!--  -->
               <div class="text-center">
                 <v-menu offset-y>
@@ -32,18 +27,10 @@
                     <v-btn v-on="on" outlined class="skill__selector--btns">Belaying</v-btn>
                   </template>
                   <v-list class="belay__list">
-                    <v-list-item
-                      class="belay__list--item"
-                      to="top-rope-belaying"
-                      @click="selectTopRopeBelay"
-                    >
+                    <v-list-item class="belay__list--item" to="top-rope-belaying">
                       <v-list-item-title>Top Rope Belaying</v-list-item-title>
                     </v-list-item>
-                    <v-list-item
-                      class="belay__list--item"
-                      to="lead-belaying"
-                      @click="selectLeadBelay"
-                    >
+                    <v-list-item class="belay__list--item" to="lead-belaying">
                       <v-list-item-title>Lead Belaying</v-list-item-title>
                     </v-list-item>
                   </v-list>
@@ -51,76 +38,16 @@
               </div>
 
               <!--  -->
-              <v-btn
-                @click="selectBoulder"
-                to="bouldering"
-                outlined
-                class="skill__selector--btns"
-              >Bouldering</v-btn>
-              <v-btn
-                @click="selectTrad"
-                to="trad-climbing"
-                outlined
-                class="skill__selector--btns"
-              >Trad Climbing</v-btn>
-              <v-btn
-                @click="selectRappel"
-                to="rappelling"
-                outlined
-                class="skill__selector--btns"
-              >Rappelling</v-btn>
-              <v-btn
-                @click="selectTrain"
-                to="training"
-                outlined
-                class="skill__selector--btns"
-              >Training</v-btn>
+              <v-btn to="bouldering" outlined class="skill__selector--btns">Bouldering</v-btn>
+              <v-btn to="trad-climbing" outlined class="skill__selector--btns">Trad Climbing</v-btn>
+              <v-btn to="rappelling" outlined class="skill__selector--btns">Rappelling</v-btn>
+              <v-btn to="training" outlined class="skill__selector--btns">Training</v-btn>
             </div>
           </div>
           <div class="expertise__body">
             <div class="main__panel">
               <router-view></router-view>
             </div>
-
-            <!-- <div class="sidebar">
-            
-              <iframe
-                width="100%"
-                height="350"
-                src="https://www.youtube.com/embed/Hlw9GVBs890"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              <br />
-              <iframe
-                width="100%"
-                height="350"
-                src="https://www.youtube.com/embed/TzNH5dm1bGo"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              <br />
-              <iframe
-                width="100%"
-                height="350"
-                src="https://www.youtube.com/embed/b2v4brHpdxY"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              <div class="divider"></div>
-              <div class="recent__articles--header">Recent Articles</div>
-              <div class="articles__container">
-                <articles
-                  class="news__articles"
-                  v-for="data in getNewsData"
-                  :data="data"
-                  :key="data"
-                ></articles>
-              </div>
-            </div>-->
           </div>
         </div>
       </header>
@@ -133,7 +60,6 @@
 import Footer from "../components/Footer.vue";
 import NavBar from "../components/NavBar.vue";
 import StickyNavBar from "../components/StickyNavBar.vue";
-// import Articles from "../components/Articles.vue";
 export default {
   data() {
     return {
@@ -147,14 +73,10 @@ export default {
       }
     };
   },
-  created() {
-    this.currentTitle = "Sport Climbing";
-  },
   components: {
     navbar: NavBar,
     footerComp: Footer,
     stickynav: StickyNavBar
-    // articles: Articles,
   },
   computed: {
     getNewsData() {
@@ -162,27 +84,6 @@ export default {
     }
   },
   methods: {
-    selectSport() {
-      this.currentTitle = "Sport Climbing";
-    },
-    selectLeadBelay() {
-      this.currentTitle = "Lead Belaying";
-    },
-    selectTopRopeBelay() {
-      this.currentTitle = "Top Rope Belaying";
-    },
-    selectBoulder() {
-      this.currentTitle = "Bouldering";
-    },
-    selectTrad() {
-      this.currentTitle = "Trad Climbing";
-    },
-    selectRappel() {
-      this.currentTitle = "Rappelling";
-    },
-    selectTrain() {
-      this.currentTitle = "Training";
-    },
     onWaypoint({ going, direction }) {
       if (going === this.$waypointMap.GOING_IN) {
         this.stickyActive = true;

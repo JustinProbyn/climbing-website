@@ -2,9 +2,17 @@
   <div>
     <div class="cart__container">
       <v-app>
-        <v-icon @click="cartPopup = true" icon class="cart__icon" color="grey lighten-1">mdi-cart</v-icon>
+        <v-icon
+          @click="cartPopup = !cartPopup"
+          icon
+          class="cart__icon"
+          color="grey lighten-1"
+        >mdi-cart</v-icon>
       </v-app>
-      <div @click="cartPopup = true" class="cart__popup">{{ getCartData.length }} items in your cart</div>
+      <div
+        @click="cartPopup = !cartPopup"
+        class="cart__popup"
+      >{{ getCartData.length }} items in your cart</div>
     </div>
 
     <div class="text-center">

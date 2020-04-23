@@ -56,7 +56,7 @@
                   </template>
                   <v-card>
                     <v-card-title class="headline">Disclaimer</v-card-title>
-                    <v-card-text style="width: 280px">
+                    <v-card-text styles="padding: 20px; border: 1px solid black; width: 280px">
                       The content on this mock website is not original. It has
                       been sourced from other websites that include
                       climbing.co.za, climbing.com, frictionlabs.com and

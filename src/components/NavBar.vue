@@ -4,22 +4,22 @@
     <nav class="nav__bar">
       <ul class="nav__bar--ul">
         <li>
-          <router-link v-if="!$route.meta.hideButton" @click.native="scrollToTop" to="/">Home</router-link>
+          <router-link v-if="!$route.meta.hideButton" to="/">Home</router-link>
         </li>
         <li>
-          <router-link @click.native="scrollToTop" to="news">News</router-link>
+          <router-link to="news">News</router-link>
         </li>
         <li>
-          <router-link @click.native="scrollToTop" to="pictures">Pictures</router-link>
+          <router-link to="pictures">Pictures</router-link>
         </li>
         <li>
-          <router-link @click.native="scrollToTop" to="sport-climbing">Expertise</router-link>
+          <router-link to="sport-climbing">Expertise</router-link>
         </li>
         <li>
-          <router-link @click.native="scrollToTop" to="climbing-spots">Climbing spots</router-link>
+          <router-link to="climbing-spots">Climbing spots</router-link>
         </li>
         <li>
-          <router-link @click.native="scrollToTop" to="gear">Gear</router-link>
+          <router-link to="gear">Gear</router-link>
         </li>
       </ul>
     </nav>
@@ -34,9 +34,6 @@ export default {
     };
   },
   methods: {
-    scrollToTop() {
-      window.scrollTo(0, 0);
-    },
     goBack() {
       return this.$router.go(-1);
     }
