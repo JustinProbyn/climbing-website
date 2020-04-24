@@ -464,7 +464,6 @@ export default {
         Object.entries(this.getItemsInStock)[i].forEach(product => {
           for (let i = 0; i < product.length; i++)
             if (product[i].itemName == id) {
-              console.log(product[i].itemName);
               const cartData = {
                 cost: product[i].itemPrice,
                 product: product[i].itemName
@@ -474,18 +473,6 @@ export default {
             }
         });
       }
-
-      // for (let i = 0; i < product.length; i++) {
-      //   if ((product.id = id)) {
-      //     const productId = id - 1;
-      //     const cartData = {
-      //       cost: product[productId].itemPrice,
-      //       product: product[productId].itemName
-      //     };
-      //     this.$store.dispatch("addToCart", cartData);
-      //     break;
-      //   }
-      // }
     },
 
     /* GEAR SUGGESTOR LOGIC */
