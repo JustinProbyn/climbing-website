@@ -18,7 +18,11 @@
               v-model="selectedClimbing"
               outlined
             >
-              <v-avatar class="accent white--text" left v-text="selectedClimbing"></v-avatar>
+              <v-avatar
+                class="accent white--text"
+                left
+                v-text="selectedClimbing"
+              ></v-avatar>
             </v-select>
           </v-col>
         </v-row>
@@ -40,12 +44,20 @@
     </v-card>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn class="btn" :disabled="disableButton" depressed @click="productSearch">Search</v-btn>
+      <v-btn
+        class="btn"
+        :disabled="disableButton"
+        depressed
+        @click="productSearch"
+        >Search</v-btn
+      >
     </v-card-actions>
+
+    <v-btn @click="test">TEST</v-btn>
 
     <div>
       <div class="gear__suggester--output">
-        <div class="search__text">{{searchText}}</div>
+        <div class="search__text">{{ searchText }}</div>
         <!-- <div v-if="showIconsKey">
           <div v-if="boulderingSelected">
             Bouldering:
@@ -72,7 +84,7 @@
         <v-row class="panels" justify="center">
           <v-expansion-panels accordion>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedShoes.length > 0">
+            <v-expansion-panel v-if="this.products.suggestedShoes.length > 0">
               <v-expansion-panel-header style="color: #d35400">
                 Shoes
                 <div class="climbingIcons">
@@ -80,32 +92,48 @@
                     v-if="boulderingSelected"
                     class="boulderingIcon"
                     color="#c0392b"
-                  >mdi-alpha-b-box</v-icon>
+                    >mdi-alpha-b-box</v-icon
+                  >
                   <v-icon
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                   <v-icon
                     v-if="leadInGymSelected"
                     class="leadGymIcon"
                     color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
-                  <v-icon v-if="topropeSelected" class="topropeIcon" color="#27ae60">mdi-alpha-t-box</v-icon>
+                    >mdi-alpha-g-box</v-icon
+                  >
+                  <v-icon
+                    v-if="topropeSelected"
+                    class="topropeIcon"
+                    color="#27ae60"
+                    >mdi-alpha-t-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedShoes" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedShoes"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedChalk.length > 0">
+            <v-expansion-panel v-if="this.products.suggestedChalk.length > 0">
               <v-expansion-panel-header style="color: #d35400">
                 Chalk
                 <div class="climbingIcons">
@@ -113,32 +141,50 @@
                     v-if="boulderingSelected"
                     class="boulderingIcon"
                     color="#c0392b"
-                  >mdi-alpha-b-box</v-icon>
+                    >mdi-alpha-b-box</v-icon
+                  >
                   <v-icon
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                   <v-icon
                     v-if="leadInGymSelected"
                     class="leadGymIcon"
                     color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
-                  <v-icon v-if="topropeSelected" class="topropeIcon" color="#27ae60">mdi-alpha-t-box</v-icon>
+                    >mdi-alpha-g-box</v-icon
+                  >
+                  <v-icon
+                    v-if="topropeSelected"
+                    class="topropeIcon"
+                    color="#27ae60"
+                    >mdi-alpha-t-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedChalk" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedChalk"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedChalkBags.length > 0">
+            <v-expansion-panel
+              v-if="this.products.suggestedChalkBags.length > 0"
+            >
               <v-expansion-panel-header style="color: #d35400">
                 Chalk Bags
                 <div class="climbingIcons">
@@ -146,32 +192,50 @@
                     v-if="boulderingSelected"
                     class="boulderingIcon"
                     color="#c0392b"
-                  >mdi-alpha-b-box</v-icon>
+                    >mdi-alpha-b-box</v-icon
+                  >
                   <v-icon
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                   <v-icon
                     v-if="leadInGymSelected"
                     class="leadGymIcon"
                     color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
-                  <v-icon v-if="topropeSelected" class="topropeIcon" color="#27ae60">mdi-alpha-t-box</v-icon>
+                    >mdi-alpha-g-box</v-icon
+                  >
+                  <v-icon
+                    v-if="topropeSelected"
+                    class="topropeIcon"
+                    color="#27ae60"
+                    >mdi-alpha-t-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedChalkBags" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedChalkBags"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedCarabiners.length > 0">
+            <v-expansion-panel
+              v-if="this.products.suggestedCarabiners.length > 0"
+            >
               <v-expansion-panel-header style="color: #d35400">
                 Carabiners
                 <div class="climbingIcons">
@@ -179,26 +243,38 @@
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                   <v-icon
                     v-if="leadInGymSelected"
                     class="leadGymIcon"
                     color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
+                    >mdi-alpha-g-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedCarabiners" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedCarabiners"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedQuickdraws.length > 0">
+            <v-expansion-panel
+              v-if="this.products.suggestedQuickdraws.length > 0"
+            >
               <v-expansion-panel-header style="color: #d35400">
                 Quickdraws
                 <div class="climbingIcons">
@@ -206,21 +282,32 @@
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedQuickdraws" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedQuickdraws"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedRopeBags.length > 0">
+            <v-expansion-panel
+              v-if="this.products.suggestedRopeBags.length > 0"
+            >
               <v-expansion-panel-header style="color: #d35400">
                 Rope Bags
                 <div class="climbingIcons">
@@ -228,44 +315,66 @@
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                   <v-icon
                     v-if="leadInGymSelected"
                     class="leadGymIcon"
                     color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
+                    >mdi-alpha-g-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedRopeBags" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedRopeBags"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedCrashPads.length > 0">
+            <v-expansion-panel
+              v-if="this.products.suggestedCrashPads.length > 0"
+            >
               <v-expansion-panel-header style="color: #d35400">
                 Crash Pads
                 <div class="climbingIcons">
-                  <v-icon v-if="boulderingSelected" color="#c0392b">mdi-alpha-b-box</v-icon>
+                  <v-icon v-if="boulderingSelected" color="#c0392b"
+                    >mdi-alpha-b-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedCrashPads" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedCrashPads"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedHelmets.length > 0">
+            <v-expansion-panel v-if="this.products.suggestedHelmets.length > 0">
               <v-expansion-panel-header style="color: #d35400">
                 Helmets
                 <div class="climbingIcons">
@@ -273,21 +382,32 @@
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedHelmets" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedHelmets"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedHarnesses.length > 0">
+            <v-expansion-panel
+              v-if="this.products.suggestedHarnesses.length > 0"
+            >
               <v-expansion-panel-header style="color: #d35400">
                 Harnesses
                 <div class="climbingIcons">
@@ -295,27 +415,42 @@
                     v-if="leadInGymSelected"
                     class="leadGymIcon"
                     color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
+                    >mdi-alpha-g-box</v-icon
+                  >
                   <v-icon
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
-                  <v-icon v-if="topropeSelected" class="topropeIcon" color="#27ae60">mdi-alpha-t-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
+                  <v-icon
+                    v-if="topropeSelected"
+                    class="topropeIcon"
+                    color="#27ae60"
+                    >mdi-alpha-t-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedHarnesses" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedHarnesses"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedRopes.length > 0">
+            <v-expansion-panel v-if="this.products.suggestedRopes.length > 0">
               <v-expansion-panel-header style="color: #d35400">
                 Ropes
                 <div class="climbingIcons">
@@ -323,27 +458,39 @@
                     v-if="leadInGymSelected"
                     class="leadGymIcon"
                     color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
+                    >mdi-alpha-g-box</v-icon
+                  >
                   <v-icon
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedRopes" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedRopes"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
             <!--  -->
-            <v-expansion-panel v-if="this.suggestedBelayDevices.length > 0">
+            <v-expansion-panel
+              v-if="this.products.suggestedBelayDevices.length > 0"
+            >
               <v-expansion-panel-header style="color: #d35400">
                 Belay Devices
                 <div class="climbingIcons">
@@ -351,22 +498,32 @@
                     v-if="leadInGymSelected"
                     class="leadGymIcon"
                     color="#2980b9"
-                  >mdi-alpha-g-box</v-icon>
+                    >mdi-alpha-g-box</v-icon
+                  >
                   <v-icon
                     v-if="leadOutsideSelected"
                     class="leadOutsideIcon"
                     color="#d35400"
-                  >mdi-alpha-o-box</v-icon>
+                    >mdi-alpha-o-box</v-icon
+                  >
                 </div>
               </v-expansion-panel-header>
-              <v-expansion-panel-content v-for="(item,i) in suggestedBelayDevices" :key="i">
-                {{item.itemName}} : R{{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+              <v-expansion-panel-content
+                v-for="(item, i) in products.suggestedBelayDevices"
+                :key="i"
+              >
+                {{ item.itemName }} : R{{
+                  item.itemPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }}
                 <v-btn
                   outlined
                   class="addToCartBtn"
                   :id="item.itemName"
                   @click="addToCart($event)"
-                >Add to cart</v-btn>
+                  >Add to cart</v-btn
+                >
               </v-expansion-panel-content>
             </v-expansion-panel>
             <!--  -->
@@ -380,7 +537,6 @@
 
   <!--  -->
 </template>
-
 
 <script>
 export default {
@@ -408,18 +564,20 @@ export default {
       selectedBudget: "",
       selectedClimbing: [],
       //
-      suggestedShoes: [],
-      suggestedRopes: [],
-      suggestedChalk: [],
-      suggestedChalkBags: [],
-      suggestedSnCs: [],
-      suggestedBelayDevices: [],
-      suggestedRopeBags: [],
-      suggestedHelmets: [],
-      suggestedHarnesses: [],
-      suggestedQuickdraws: [],
-      suggestedCarabiners: [],
-      suggestedCrashPads: [],
+      products: {
+        suggestedShoes: [],
+        suggestedRopes: [],
+        suggestedChalk: [],
+        suggestedChalkBags: [],
+        suggestedSnCs: [],
+        suggestedBelayDevices: [],
+        suggestedRopeBags: [],
+        suggestedHelmets: [],
+        suggestedHarnesses: [],
+        suggestedQuickdraws: [],
+        suggestedCarabiners: [],
+        suggestedCrashPads: []
+      },
 
       // slider
       tickValue: "",
@@ -454,9 +612,7 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log(this.suggestedShoes);
-    },
+    test() {},
     // Contained Add to cart Method
     addToCart(event) {
       const id = event.currentTarget.id;
@@ -498,42 +654,49 @@ export default {
       }
 
       /**********CLEARING OPTIONS************/
-      if (this.suggestedCrashPads.length >= 1) {
-        this.suggestedCrashPads = [];
-      }
-      if (this.suggestedShoes.length >= 1) {
-        this.suggestedShoes = [];
-      }
-      if (this.suggestedRopes.length >= 1) {
-        this.suggestedRopes = [];
-      }
-      if (this.suggestedChalk.length >= 1) {
-        this.suggestedChalk = [];
-      }
-      if (this.suggestedChalkBags.length >= 1) {
-        this.suggestedChalkBags = [];
-      }
-      if (this.suggestedSnCs.length >= 1) {
-        this.suggestedSnCs = [];
-      }
-      if (this.suggestedRopeBags.length >= 1) {
-        this.suggestedRopeBags = [];
-      }
-      if (this.suggestedBelayDevices.length >= 1) {
-        this.suggestedBelayDevices = [];
-      }
-      if (this.suggestedHelmets.length >= 1) {
-        this.suggestedHelmets = [];
-      }
-      if (this.suggestedQuickdraws.length >= 1) {
-        this.suggestedQuickdraws = [];
-      }
-      if (this.suggestedCarabiners.length >= 1) {
-        this.suggestedCarabiners = [];
-      }
-      if (this.suggestedHarnesses.length >= 1) {
-        this.suggestedHarnesses = [];
-      }
+
+      Object.entries(this.products).forEach(el => {
+        if (el[1].length >= 1) {
+          this.products[el[0]] = [];
+        }
+      });
+
+      // if (this.products.suggestedCrashPads.length >= 1) {
+      //   this.products.suggestedCrashPads = [];
+      // }
+      // if (this.products.suggestedShoes.length >= 1) {
+      //   this.products.suggestedShoes = [];
+      // }
+      // if (this.products.suggestedRopes.length >= 1) {
+      //   this.products.suggestedRopes = [];
+      // }
+      // if (this.products.suggestedChalk.length >= 1) {
+      //   this.products.suggestedChalk = [];
+      // }
+      // if (this.products.suggestedChalkBags.length >= 1) {
+      //   this.products.suggestedChalkBags = [];
+      // }
+      // if (this.products.suggestedSnCs.length >= 1) {
+      //   this.products.suggestedSnCs = [];
+      // }
+      // if (this.products.suggestedRopeBags.length >= 1) {
+      //   this.products.suggestedRopeBags = [];
+      // }
+      // if (this.products.suggestedBelayDevices.length >= 1) {
+      //   this.products.suggestedBelayDevices = [];
+      // }
+      // if (this.products.suggestedHelmets.length >= 1) {
+      //   this.products.suggestedHelmets = [];
+      // }
+      // if (this.products.suggestedQuickdraws.length >= 1) {
+      //   this.products.suggestedQuickdraws = [];
+      // }
+      // if (this.products.suggestedCarabiners.length >= 1) {
+      //   this.products.suggestedCarabiners = [];
+      // }
+      // if (this.products.suggestedHarnesses.length >= 1) {
+      //   this.products.suggestedHarnesses = [];
+      // }
       /*****CLEARING ICONS*****/
 
       if (!this.selectedClimbing.includes("Lead (in gym)")) {
@@ -568,36 +731,37 @@ export default {
           this.leadInGymSelected = false;
         } else this.leadInGymSelected = true;
 
-        if (this.suggestedShoes.length <= 0) {
-          this.suggestedShoes = clonedGetItemsinStock.shoes;
+        if (this.products.suggestedShoes.length <= 0) {
+          this.products.suggestedShoes = clonedGetItemsinStock.shoes;
         }
 
-        if (this.suggestedHarnesses.length <= 0) {
-          this.suggestedHarnesses = clonedGetItemsinStock.harnesses;
+        if (this.products.suggestedHarnesses.length <= 0) {
+          this.products.suggestedHarnesses = clonedGetItemsinStock.harnesses;
         }
 
-        if (this.suggestedRopes.length <= 0) {
-          this.suggestedRopes = clonedGetItemsinStock.ropes;
+        if (this.products.suggestedRopes.length <= 0) {
+          this.products.suggestedRopes = clonedGetItemsinStock.ropes;
         }
 
-        if (this.suggestedRopeBags.length <= 0) {
-          this.suggestedRopeBags = clonedGetItemsinStock.ropeBags;
+        if (this.products.suggestedRopeBags.length <= 0) {
+          this.products.suggestedRopeBags = clonedGetItemsinStock.ropeBags;
         }
 
-        if (this.suggestedCarabiners.length <= 0) {
-          this.suggestedCarabiners = clonedGetItemsinStock.carabiners;
+        if (this.products.suggestedCarabiners.length <= 0) {
+          this.products.suggestedCarabiners = clonedGetItemsinStock.carabiners;
         }
 
-        if (this.suggestedBelayDevices.length <= 0) {
-          this.suggestedBelayDevices = clonedGetItemsinStock.belayDevices;
+        if (this.products.suggestedBelayDevices.length <= 0) {
+          this.products.suggestedBelayDevices =
+            clonedGetItemsinStock.belayDevices;
         }
 
-        if (this.suggestedChalk.length <= 0) {
-          this.suggestedChalk = clonedGetItemsinStock.chalk;
+        if (this.products.suggestedChalk.length <= 0) {
+          this.products.suggestedChalk = clonedGetItemsinStock.chalk;
         }
 
-        if (this.suggestedChalkBags.length <= 0) {
-          this.suggestedChalkBags = clonedGetItemsinStock.chalkBags;
+        if (this.products.suggestedChalkBags.length <= 0) {
+          this.products.suggestedChalkBags = clonedGetItemsinStock.chalkBags;
         }
       }
       /********************* */
@@ -610,46 +774,47 @@ export default {
           this.leadOutsideSelected = false;
         } else this.leadOutsideSelected = true;
 
-        if (this.suggestedShoes.length <= 0) {
-          this.suggestedShoes = clonedGetItemsinStock.shoes;
+        if (this.products.suggestedShoes.length <= 0) {
+          this.products.suggestedShoes = clonedGetItemsinStock.shoes;
         }
 
-        if (this.suggestedHarnesses.length <= 0) {
-          this.suggestedHarnesses = clonedGetItemsinStock.harnesses;
+        if (this.products.suggestedHarnesses.length <= 0) {
+          this.products.suggestedHarnesses = clonedGetItemsinStock.harnesses;
         }
 
-        if (this.suggestedRopes.length <= 0) {
-          this.suggestedRopes = clonedGetItemsinStock.ropes;
+        if (this.products.suggestedRopes.length <= 0) {
+          this.products.suggestedRopes = clonedGetItemsinStock.ropes;
         }
 
-        if (this.suggestedRopeBags.length <= 0) {
-          this.suggestedRopeBags = clonedGetItemsinStock.ropeBags;
+        if (this.products.suggestedRopeBags.length <= 0) {
+          this.products.suggestedRopeBags = clonedGetItemsinStock.ropeBags;
         }
 
-        if (this.suggestedCarabiners.length <= 0) {
-          this.suggestedCarabiners = clonedGetItemsinStock.carabiners;
+        if (this.products.suggestedCarabiners.length <= 0) {
+          this.products.suggestedCarabiners = clonedGetItemsinStock.carabiners;
         }
 
-        if (this.suggestedBelayDevices.length <= 0) {
-          this.suggestedBelayDevices = clonedGetItemsinStock.belayDevices;
+        if (this.products.suggestedBelayDevices.length <= 0) {
+          this.products.suggestedBelayDevices =
+            clonedGetItemsinStock.belayDevices;
         }
 
-        if (this.suggestedHelmets.length <= 0) {
-          this.suggestedHelmets = clonedGetItemsinStock.helmets;
+        if (this.products.suggestedHelmets.length <= 0) {
+          this.products.suggestedHelmets = clonedGetItemsinStock.helmets;
         }
 
-        if (this.suggestedChalk.length <= 0) {
-          this.suggestedChalk = clonedGetItemsinStock.chalk;
+        if (this.products.suggestedChalk.length <= 0) {
+          this.products.suggestedChalk = clonedGetItemsinStock.chalk;
         }
 
-        if (this.suggestedChalkBags.length <= 0) {
-          this.suggestedChalkBags = clonedGetItemsinStock.chalkBags;
+        if (this.products.suggestedChalkBags.length <= 0) {
+          this.products.suggestedChalkBags = clonedGetItemsinStock.chalkBags;
         }
-        if (this.suggestedQuickdraws.length <= 0) {
-          this.suggestedQuickdraws = clonedGetItemsinStock.quickdraws;
+        if (this.products.suggestedQuickdraws.length <= 0) {
+          this.products.suggestedQuickdraws = clonedGetItemsinStock.quickdraws;
         }
-        if (this.suggestedSnCs.length <= 0) {
-          this.suggestedSnCs = clonedGetItemsinStock.SnCs;
+        if (this.products.suggestedSnCs.length <= 0) {
+          this.products.suggestedSnCs = clonedGetItemsinStock.SnCs;
         }
       }
       /********************* */
@@ -662,20 +827,20 @@ export default {
           this.boulderingSelected = false;
         } else this.boulderingSelected = true;
 
-        if (this.suggestedShoes.length <= 0) {
-          this.suggestedShoes = clonedGetItemsinStock.shoes;
+        if (this.products.suggestedShoes.length <= 0) {
+          this.products.suggestedShoes = clonedGetItemsinStock.shoes;
         }
 
-        if (this.suggestedCrashPads.length <= 0) {
-          this.suggestedCrashPads = clonedGetItemsinStock.crashPads;
+        if (this.products.suggestedCrashPads.length <= 0) {
+          this.products.suggestedCrashPads = clonedGetItemsinStock.crashPads;
         }
 
-        if (this.suggestedChalk.length <= 0) {
-          this.suggestedChalk = clonedGetItemsinStock.chalk;
+        if (this.products.suggestedChalk.length <= 0) {
+          this.products.suggestedChalk = clonedGetItemsinStock.chalk;
         }
 
-        if (this.suggestedChalkBags.length <= 0) {
-          this.suggestedChalkBags = clonedGetItemsinStock.chalkBags;
+        if (this.products.suggestedChalkBags.length <= 0) {
+          this.products.suggestedChalkBags = clonedGetItemsinStock.chalkBags;
         }
       }
 
@@ -689,27 +854,26 @@ export default {
           this.topropeSelected = false;
         } else this.topropeSelected = true;
 
-        if (this.suggestedShoes.length <= 0) {
-          this.suggestedShoes = clonedGetItemsinStock.shoes;
+        if (this.products.suggestedShoes.length <= 0) {
+          this.products.suggestedShoes = clonedGetItemsinStock.shoes;
         }
 
-        if (this.suggestedHarnesses.length <= 0) {
-          this.suggestedHarnesses = clonedGetItemsinStock.harnesses;
+        if (this.products.suggestedHarnesses.length <= 0) {
+          this.products.suggestedHarnesses = clonedGetItemsinStock.harnesses;
         }
 
-        if (this.suggestedChalk.length <= 0) {
-          this.suggestedChalk = clonedGetItemsinStock.chalk;
+        if (this.products.suggestedChalk.length <= 0) {
+          this.products.suggestedChalk = clonedGetItemsinStock.chalk;
         }
 
-        if (this.suggestedChalkBags.length <= 0) {
-          this.suggestedChalkBags = clonedGetItemsinStock.chalkBags;
+        if (this.products.suggestedChalkBags.length <= 0) {
+          this.products.suggestedChalkBags = clonedGetItemsinStock.chalkBags;
         }
       }
     }
   }
 };
 </script>
-
 
 <style scoped>
 /* layout */

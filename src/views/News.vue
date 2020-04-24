@@ -133,12 +133,16 @@ header {
 
 .articles__container {
   display: flex;
-  margin-top: 20px;
   margin-bottom: 40px;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .news__articles {
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.articles__wrapper {
+  margin-top: 20px;
 }
 </style>

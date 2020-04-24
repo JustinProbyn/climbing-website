@@ -36,7 +36,6 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
-import firebase from "firebase";
 
 export default {
   mixins: [validationMixin],
@@ -73,26 +72,12 @@ export default {
     submit() {
       this.$emit("signedIn");
       this.$v.$touch();
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .catch(function(error) {
-          console.log(error);
-        })
-        .then(() => {
-          if (firebase.auth().currentUser) {
-            this.$store.dispatch("SIGNIN_setState", userData);
-          } else {
-            alert("User doesn't exist");
-            this.password = "";
-            this.email = "";
-            return;
-          }
-        });
       const userData = {
         email: this.email,
         password: this.password
       };
+      console.log(userData);
+      this.$store.dispatch("firestoreSignIn", userData);
 
       //   adds localstorage for autologin feature
       localStorage.setItem("email", userData.email);

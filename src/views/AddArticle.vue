@@ -23,20 +23,38 @@
                 <div class="inputs">
                   <!-- AUTHOR -->
 
-                  <v-text-field v-model="author" outlined clearable label="Author" type="text"></v-text-field>
+                  <v-text-field
+                    v-model="articleData.author"
+                    outlined
+                    clearable
+                    label="Author"
+                    type="text"
+                  ></v-text-field>
 
                   <!-- TITLE -->
 
-                  <v-text-field v-model="title" outlined clearable label="Title" type="text"></v-text-field>
+                  <v-text-field
+                    v-model="articleData.title"
+                    outlined
+                    clearable
+                    label="Title"
+                    type="text"
+                  ></v-text-field>
 
                   <!-- SUB TITLE -->
 
-                  <v-text-field v-model="subTitle" outlined clearable label="Sub Title" type="text"></v-text-field>
+                  <v-text-field
+                    v-model="articleData.subTitle"
+                    outlined
+                    clearable
+                    label="Sub Title"
+                    type="text"
+                  ></v-text-field>
 
                   <input class="file" type="file" @change="onFileSelected" />
                   <div class="image__name-box">
                     <v-text-field
-                      v-model="imageName"
+                      v-model="articleData.imageName"
                       outlined
                       clearable
                       label="Image Name"
@@ -47,7 +65,13 @@
 
                 <!-- TEXT BODY -->
                 <div class="text__body">
-                  <v-textarea v-model="textBody" label="Text Body" counter auto-grow multi-line></v-textarea>
+                  <v-textarea
+                    v-model="articleData.textBody"
+                    label="Text Body"
+                    counter
+                    auto-grow
+                    multi-line
+                  ></v-textarea>
                 </div>
 
                 <!--  -->
@@ -70,17 +94,19 @@ import StickyNavBar from "../components/StickyNavBar.vue";
 import Footer from "../components/Footer.vue";
 import VueWaypoint from "vue-waypoint";
 import Vue from "vue";
-import firebase from "firebase";
 Vue.use(VueWaypoint);
 export default {
   data() {
     return {
-      image: null,
-      imageName: "",
-      author: "",
-      title: "",
-      subTitle: "",
-      textBody: "",
+      articleData: {
+        image: null,
+        imageName: "",
+        author: "",
+        title: "",
+        subTitle: "",
+        textBody: ""
+      },
+
       // Waypoint options
       stickyActive: false,
       intersectionOptions: {
@@ -97,7 +123,7 @@ export default {
   },
   methods: {
     onFileSelected(event) {
-      this.image = event.target.files[0];
+      this.articleData.image = event.target.files[0];
     },
     // uploadImage() {
     //   const storageRef = firebase.storage().ref();
@@ -107,43 +133,7 @@ export default {
     //   imageRef.put(file);
     // },
     submitArticle() {
-      // Upload file
-      const storageRef = firebase.storage().ref();
-      const fileName = this.imageName;
-      const imageRef = storageRef.child("images/" + fileName + ".jpg");
-      const file = this.image;
-      imageRef.put(file).then(() => {
-        imageRef
-          .getDownloadURL()
-          .then(url => {
-            console.log(url);
-            const image = url;
-
-            var currentDate = new Date();
-
-            var newDate = currentDate.getDate();
-            var month = currentDate.getMonth(); //Be careful! January is 0 not 1
-            var year = currentDate.getFullYear();
-
-            var date = newDate + "/" + (month + 1) + "/" + year;
-
-            const articleData = {
-              date: date,
-              url: image,
-              author: this.author,
-              title: this.title,
-              subTitle: this.subTitle,
-              textBody: this.textBody
-            };
-            this.$store.dispatch("addArticle", articleData);
-            this.$store.dispatch("storeArticleData", articleData);
-            this.$router.push("news");
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      });
-      // Get file
+      this.$store.dispatch("submitArticle", this.articleData);
     },
     // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {

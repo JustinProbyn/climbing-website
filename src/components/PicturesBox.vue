@@ -1,30 +1,25 @@
 <template>
   <div :key="reload" class="photo__content">
-      <template>
-        <v-card class="mx-auto" max-width="344" max-height="360">
-          <div class="img__container" @click="show">
-            <img id="img"  height="280" :src="data.url" :alt="data.imageName" />
-            <div class="img__overlay"><div class="text">Enlarge</div></div>
-            
+    <template>
+      <v-card class="mx-auto" max-width="344" max-height="360">
+        <div class="img__container" @click="show">
+          <img id="img" height="280" :src="data.url" :alt="data.imageName" />
+          <div class="img__overlay">
+            <div class="text">Enlarge</div>
           </div>
+        </div>
 
-          <v-card-text class="card__text">
-            <h2 class="title primary--text card__text">{{ data.imageName }}</h2>
-            {{ data.caption }}
-          </v-card-text>
+        <v-card-text class="card__text">
+          <h2 class="title primary--text card__text">{{ data.imageName }}</h2>
+          {{ data.caption }}
+        </v-card-text>
 
-          <!-- Modal of enlarged image -->
-          <modal
-            style="z-index: 9999"
-            @before-close="beforeClose"
-            width="1000px"
-            height="auto"
-            :name="data.imageName"
-          >
-            <img :src="data.url" />
-          </modal>
-        </v-card>
-      </template>
+        <!-- Modal of enlarged image -->
+        <modal style="z-index: 9999" width="1000px" height="auto" :name="data.imageName">
+          <img :src="data.url" />
+        </modal>
+      </v-card>
+    </template>
   </div>
 </template>
 
@@ -51,7 +46,6 @@ export default {
 </script>
 
 <style scoped>
-
 * {
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
@@ -92,8 +86,8 @@ export default {
   height: 100%;
   width: 100%;
   opacity: 0;
-  transition: .5s ease;
-  background-color:#d35400;
+  transition: 0.5s ease;
+  background-color: #d35400;
   border-radius: 4px;
 }
 
@@ -111,7 +105,7 @@ export default {
   transition: transform 0.5s, opacity 0.5s;
 }
 
- #img {
+#img {
   width: 100%;
   height: 280px;
   object-fit: cover;
@@ -129,5 +123,4 @@ export default {
 .img__container:hover .img__overlay .text {
   opacity: 1;
 }
-
 </style>

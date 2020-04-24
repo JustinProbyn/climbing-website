@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import firebase from "firebase";
 import {
   required,
   maxLength,
@@ -85,11 +84,13 @@ export default {
 
   data() {
     return {
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      showPassword: false
+      userData: {
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        showPassword: false
+      }
     };
   },
   computed: {
@@ -129,15 +130,7 @@ export default {
     //checks if there are any errors in form and creates user with firebase
     submit() {
       this.$v.$touch();
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .catch(function(error) {
-          console.log(error);
-          // ...
-        });
-      //moves user to signin page
-      this.$router.push("signin");
+      this.$store.dispatch("firestoreSignUp", this.userData);
     },
     goToSignIn() {
       this.$router.push("signin");

@@ -25,7 +25,7 @@
                   <input class="file" type="file" @change="onFileSelected" />
                   <div class="image__name-box">
                     <v-text-field
-                      v-model="imageName"
+                      v-model="imageData.imageName"
                       outlined
                       clearable
                       label="Image Name"
@@ -35,7 +35,7 @@
                   <!-- IMAGE SUB -->
                   <div class="image__caption-box">
                     <v-text-field
-                      v-model="caption"
+                      v-model="imageData.caption"
                       outlined
                       clearable
                       label="Image Caption"
@@ -64,14 +64,15 @@ import StickyNavBar from "../components/StickyNavBar.vue";
 import Footer from "../components/Footer.vue";
 import VueWaypoint from "vue-waypoint";
 import Vue from "vue";
-import firebase from "firebase";
 Vue.use(VueWaypoint);
 export default {
   data() {
     return {
-      image: null,
-      imageName: "",
-      caption: "",
+      imageData: {
+        image: null,
+        imageName: "",
+        caption: ""
+      },
 
       // Waypoint options
       stickyActive: false,
@@ -89,43 +90,10 @@ export default {
   },
   methods: {
     onFileSelected(event) {
-      this.image = event.target.files[0];
+      this.imageData.image = event.target.files[0];
     },
-    // uploadImage() {
-    //   const storageRef = firebase.storage().ref();
-    //   const fileName = this.imageName;
-    //   const imageRef = storageRef.child("images/" + fileName + ".jpg");
-    //   const file = this.image;
-    //   imageRef.put(file);
-    // },
     submitPicture() {
-      // Upload file
-      const storageRef = firebase.storage().ref();
-      const fileName = this.imageName;
-      const imageNumber = Math.floor(Math.random() * 1000);
-      const imageRef = storageRef.child(
-        "images/" + fileName + imageNumber + ".jpg"
-      );
-      const file = this.image;
-      imageRef.put(file).then(() => {
-        imageRef
-          .getDownloadURL()
-          .then(url => {
-            const image = url;
-            const pictureData = {
-              url: image,
-              caption: this.caption,
-              imageName: this.imageName
-            };
-            this.$store.dispatch("addPicture", pictureData);
-            this.$store.dispatch("storePictureData", pictureData);
-            this.$router.push("pictures");
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      });
-      // Get file
+      this.$store.dispatch("submitPicture", this.imageData);
     },
     // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {

@@ -29,7 +29,7 @@
                   </v-card>
                 </v-dialog>
 
-                <v-dialog v-if="!auth" v-model="dialog" max-width="400">
+                <v-dialog v-if="!auth" max-width="400">
                   <template v-slot:activator="{ on }">
                     <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on">Sign In</v-btn>
                   </template>
@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import firebase from "firebase";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import NavBar from "../components/NavBar.vue";
@@ -110,17 +109,8 @@ export default {
       this.showLoader = true;
     },
     signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(function() {
-          console.log(" Sign-out successful.");
-        })
-        .catch(function(er) {
-          console.log(er);
-        });
       this.reloadPage += 1;
-      this.$store.dispatch("signOut");
+      this.$store.dispatch("firestoreSignOut");
       // removes store localstorage and removes state.userData
     }
   },
