@@ -7,9 +7,12 @@ export const cartMixin = {
           const productId = id - 1;
 
           const cartData = {
+            count: 1,
+            img: this.getGear[productId].itemPicture,
             cost: this.getGear[productId].itemPrice,
             product: this.getGear[productId].itemName
           };
+          event.currentTarget.innerHTML = "Item added!";
           this.$store.dispatch("addToCart", cartData);
           break;
         }

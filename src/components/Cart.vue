@@ -9,10 +9,7 @@
           color="grey lighten-1"
         >mdi-cart</v-icon>
       </v-app>
-      <div
-        @click="cartPopup = !cartPopup"
-        class="cart__popup"
-      >{{ getCartData.length }} items in your cart</div>
+      <div @click="cartPopup = !cartPopup" class="cart__popup">{{ totalCount }} items in your cart</div>
     </div>
 
     <div class="text-center">
@@ -21,7 +18,7 @@
           <v-card-title class="headline grey lighten-2 cart__title" primary-title>Your cart</v-card-title>
 
           <v-card-text class="itemsInCart" v-for="(data, index) in getCartData" :key="index">
-            {{ data.product }}: R{{
+            {{data.count}} x {{ data.product }}: R{{
             data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }}
             <v-icon class="deleteIcon" @click="deleteCartItem(index)">mdi-delete-forever</v-icon>
@@ -62,16 +59,25 @@ export default {
     totalCost() {
       const result = [];
       for (let i = 0; i < this.getCartData.length; i++) {
-        const total = this.getCartData[i].cost;
+        const total = this.getCartData[i].cost * this.getCartData[i].count;
         result.push(total);
       }
-      return result.reduce((a, b) => a + b, 0);
+      return result.reduce((acumm, cost) => acumm + cost, 0);
+    },
+    totalCount() {
+      const result = [];
+      for (let i = 0; i < this.getCartData.length; i++) {
+        const total = this.getCartData[i].count;
+        result.push(total);
+      }
+      return result.reduce((acumm, count) => acumm + count, 0);
     }
   },
   methods: {
     checkOut() {
       this.dialog = false;
-      this.$store.dispatch("clearCart");
+      this.$router.push("checkout");
+      // this.$store.dispatch("clearCart");
       //lead to checkout interface when implemented
     },
     deleteCartItem(index) {
@@ -132,7 +138,7 @@ export default {
   color: rgb(211, 211, 211);
   border: 1px solid rgb(211, 211, 211);
   height: 35px;
-  width: 150px;
+  width: 160px;
   padding: 5px;
   border-radius: 8px;
   margin-left: 5px;

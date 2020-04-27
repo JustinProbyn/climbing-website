@@ -5,6 +5,14 @@ const cart = {
   mutations: {
     // updates cart with newly added item
     setCart(state, cartData) {
+      state.cartData.forEach(el => {
+        console.log(el);
+
+        if (el.product == cartData.product) {
+          cartData.count = cartData.count + 1;
+          state.cartData.splice(state.cartData.indexOf(el), 1);
+        }
+      });
       state.cartData.push(cartData);
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
     },

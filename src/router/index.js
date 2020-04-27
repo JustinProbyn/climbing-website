@@ -56,6 +56,13 @@ const routes = [
   },
 
   {
+    path: "/checkout",
+    name: "checkout",
+    component: () =>
+      import(/*webpackChunkName "Checkout" */ "../views/Checkout.vue")
+  },
+
+  {
     path: "/cart",
     name: "cart",
     component: () =>
@@ -73,6 +80,7 @@ const routes = [
     component: () =>
       import(/*webpackChunkName "SignUp" */ "../components/Cart.vue")
   },
+
   {
     path: "/expertise",
     name: "expertise",
