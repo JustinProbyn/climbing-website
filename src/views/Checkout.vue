@@ -55,7 +55,7 @@
                 }}
               </h3>
             </div>
-            <checkoutcomp></checkoutcomp>
+            <checkoutcomp :finalAmount="finalAmount"></checkoutcomp>
             <!--we're going to add our checkout here-->
           </div>
         </div>
@@ -88,8 +88,12 @@ export default {
         rootMargin: "0px 0px 0px 0px",
         threshold: [0.25, 0.75]
       },
-      paymentSuccessful: true
+      paymentSuccessful: true,
+      finalAmount: 0
     };
+  },
+  created() {
+    this.finalAmount = this.totalCost;
   },
   computed: {
     getCartData() {

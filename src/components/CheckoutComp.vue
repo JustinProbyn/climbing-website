@@ -8,7 +8,7 @@
 
     <div class="col s12 card-element">
       <label>Card Number</label>
-      <div id="card-number-element" ref="cardnumber" class="input-value"></div>
+      <div id="card-number-element" ref="cardnumber"></div>
     </div>
 
     <div class="col s6 card-element">
@@ -32,6 +32,9 @@
 <script>
 import firebase from "firebase";
 export default {
+  props: {
+    finalAmount: Number
+  },
   data() {
     return {
       currentUser: null,
@@ -40,57 +43,36 @@ export default {
       cardCvc: undefined,
       cardExp: undefined,
       cardNumber: undefined,
-      amount: "",
-      newCreditCard: {
-        number: "4242424242424242",
-        cvc: "111",
-        exp_month: 1,
-        exp_year: 2020,
-        address_zip: "00000"
-      }
+      amount: 0
     };
   },
   methods: {
-    //   Get Stripe token
     newPayment() {
-      this.stripe.createToken(this.cardNumber).then(result => {
+      //   Get Stripe token
+      this.stripe.createToken(this.cardExp).then(result => {
         if (result.error) {
           this.stripeValidationError = result.error.message;
         } else {
-          var payment = {
-            amount: this.amount,
-            source: result.token
-          };
-          //   Saving 'payment' to firestore triggers function to send a payment to stripe
+          this.currentUser = firebase.auth().currentUser;
           firebase
             .firestore()
             .collection("stripe_customers")
             .doc(this.currentUser.uid)
             .collection("charges")
-            .add({
-              payment
-            });
+            .add({ amount: this.finalAmount, source: result.token });
         }
       });
+      //   Saving 'payment' to firestore triggers function to send a payment to stripe
     }
   },
   mounted() {
     this.stripe = window.Stripe(this.spk);
     this.cardCvc = this.stripe.elements().create("cardCvc");
     this.cardExp = this.stripe.elements().create("cardExpiry");
-    this.card = this.stripe.elements().create("card");
     this.cardNumber = this.stripe.elements().create("cardNumber");
     this.cardExp.mount(this.$refs.cardexpiry);
     this.cardCvc.mount(this.$refs.cardcvc);
     this.cardNumber.mount(this.$refs.cardnumber);
-
-    //get firebase user
-    var user = firebase.auth().currentUser;
-    if (user) {
-      this.currentUser = user;
-    } else {
-      this.currentUser = null;
-    }
   }
 };
 </script>
