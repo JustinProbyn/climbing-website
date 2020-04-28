@@ -26,8 +26,14 @@
         @blur="$v.password.$touch()"
       ></v-text-field>
       <div class="btns">
-        <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">submit</v-btn>
-        <v-btn color="info" @click="goToSignUp">Register</v-btn>
+        <v-btn
+          color="success"
+          :disabled="$v.$invalid"
+          class="mr-4"
+          @click="submit"
+          >submit</v-btn
+        >
+        <!-- <v-btn color="info" @click="goToSignUp">Register</v-btn> -->
       </div>
     </v-card>
   </v-app>
@@ -62,7 +68,7 @@ export default {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
       !this.$v.email.email && errors.push("Must be valid e-mail");
-      !this.$v.email.required && errors.push("E-mail is required");
+      !this.$v.email.required && errors.push("Email is required");
       return errors;
     }
   },
@@ -84,10 +90,10 @@ export default {
       localStorage.setItem("password", userData.password);
 
       // clears form
-    },
-    goToSignUp() {
-      this.$router.push("signup");
     }
+    // goToSignUp() {
+    //   this.$router.push("signup");
+    // }
   }
 };
 </script>

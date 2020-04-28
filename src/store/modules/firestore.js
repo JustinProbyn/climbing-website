@@ -27,14 +27,13 @@ const firestore = {
         });
     },
     // signs user up
-    firestoreSignUp(userData) {
+    firestoreSignUp(state, userData) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(userData.email, userData.password)
         .catch(function(error) {
           console.log(error);
         });
-      router.push("signin");
     },
     // signs out
     firestoreSignOut({ dispatch }) {

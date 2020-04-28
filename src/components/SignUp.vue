@@ -53,8 +53,14 @@
           @blur="$v.confirmPassword.$touch()"
         ></v-text-field>
         <div class="btns">
-          <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">Submit</v-btn>
-          <v-btn @click="goToSignIn" color="info">Sign In</v-btn>
+          <v-btn
+            color="success"
+            :disabled="$v.$invalid"
+            class="mr-4"
+            @click="submit"
+            >Submit</v-btn
+          >
+          <!-- <v-btn @click="goToSignIn" color="info">Sign In</v-btn> -->
         </div>
       </div>
     </v-card>
@@ -84,13 +90,11 @@ export default {
 
   data() {
     return {
-      userData: {
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        showPassword: false
-      }
+      showPassword: false,
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
     };
   },
   computed: {
@@ -114,7 +118,7 @@ export default {
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Must be valid e-mail");
+      !this.$v.email.email && errors.push("Must be valid email");
       !this.$v.email.required && errors.push("Email is required");
       return errors;
     },
@@ -130,11 +134,17 @@ export default {
     //checks if there are any errors in form and creates user with firebase
     submit() {
       this.$v.$touch();
-      this.$store.dispatch("firestoreSignUp", this.userData);
-    },
-    goToSignIn() {
-      this.$router.push("signin");
+      const userData = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      };
+      console.log(userData);
+      this.$store.dispatch("firestoreSignUp", userData);
     }
+    // goToSignIn() {
+    //   this.$router.push("signin");
+    // }
   }
 };
 </script>

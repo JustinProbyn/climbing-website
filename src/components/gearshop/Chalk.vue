@@ -8,7 +8,12 @@
           <h1>Chalk</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="(chalk, i) in getGear" :key="i" class="mx-auto card" max-width="250">
+          <v-card
+            v-for="(chalk, i) in getGear"
+            :key="i"
+            class="mx-auto card"
+            max-width="250"
+          >
             <v-img :src="chalk.itemPicture" height="200px"></v-img>
             <div class="chalk__name">
               <h3>{{ chalk.itemName }}</h3>
@@ -17,9 +22,9 @@
               <h4>
                 <strong>
                   R{{
-                  chalk.itemPrice
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    chalk.itemPrice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
                 </strong>
               </h4>
@@ -31,7 +36,9 @@
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</button>
+              >
+                Add to cart
+              </button>
             </div>
           </v-card>
         </div>
@@ -140,6 +147,8 @@ header {
   margin-top: 7px;
 }
 
+/* Button */
+
 .btn__container :hover,
 .btn__container :active {
   background-color: #d35400;
@@ -165,6 +174,15 @@ header {
 .v-btn__content {
   width: 100%;
 }
+
+.btn__container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/*  */
 .product__container {
   display: flex;
   flex-wrap: wrap;
@@ -176,12 +194,5 @@ header {
 .card {
   padding: 15px;
   display: flex;
-}
-
-.btn__container {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  margin-top: 8px;
 }
 </style>

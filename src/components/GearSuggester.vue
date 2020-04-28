@@ -204,6 +204,8 @@ export default {
           for (let i = 0; i < product.length; i++)
             if (product[i].itemName == id) {
               const cartData = {
+                count: 1,
+                img: product[i].itemPicture,
                 cost: product[i].itemPrice,
                 product: product[i].itemName
               };
