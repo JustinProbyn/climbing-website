@@ -3,35 +3,38 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 
 const stripe = require("stripe")(functions.config().stripe.token);
-const currency = functions.config().stripe.currency || "ZAR";
+// Token has been saved as function config
 
-// Charge customer on Stripe when a charge is saved to Firestore
+// Charge customer on Stripe when a paymentToken is saved to Firestore
 exports.createStripeCharge = functions.firestore
-  .document("stripe_customers/{userId}/charges/{id}")
-  .onCreate(async (snap, context) => {});
+  .document("stripe_customers/{userId}/paymentsToken/{id}")
+  .onCreate(async (snap, context) => {
+    try {
+      const charge = {
+        amount: snap.data().payment.amount * 100,
+        source: snap.data().payment.source.id,
+        currency: "zar"
+      };
+      const idempotencyKey = context.params.pushId;
+      const response = await stripe.charges.create(charge, {
+        idempotency_key: idempotencyKey
+      });
 
-// User created on Firestore --> register them with Stripe
-exports.createStripeCustomer = functions.auth.user().onCreate(async user => {
-  const customer = await stripe.customers.create({ email: user.email });
-  return admin
-    .firestore()
-    .collection("stripe_customers")
-    .doc(user.uid)
-    .set({ customer_id: customer.id });
-});
+      await snap.ref.set(response, {
+        merge: true
+      });
+    } catch (error) {
+      await snap.ref.set(
+        {
+          error: userFacingMessage(error)
+        },
+        {
+          merge: true
+        }
+      );
+    }
+  });
 
-// If user deleted from Firestore --> also deleted from Stripe
-exports.cleanupUser = functions.auth.user().onDelete(async user => {
-  const snapshot = await admin
-    .firestore()
-    .collection("stripe_customers")
-    .doc(user.uid)
-    .get();
-  const customer = snapshot.data();
-  await stripe.customers.del(customer.customer_id);
-  return admin
-    .firestore()
-    .collection("stripe_customers")
-    .doc(user.uid)
-    .delete();
-});
+function userFacingMessage(error) {
+  return error.type ? error.message : "An error occurred";
+}

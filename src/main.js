@@ -11,6 +11,9 @@ import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import "leaflet/dist/leaflet.css";
 import VueWaypoint from "vue-waypoint";
 
+import VueMask from "v-mask";
+Vue.use(VueMask);
+
 Vue.use(VueWaypoint);
 
 Vue.component("l-map", LMap);
