@@ -24,6 +24,30 @@
                 </strong>
               </h4>
             </div>
+                        <div class="counter">
+              <v-btn
+                :id="chalkBag.id"
+                :disabled="disabled"
+                @click="decreaseProduct($event)"
+                outlined
+                x-small
+                class="decrease"
+              >
+                <v-icon style="font-size: 120%">mdi-minus</v-icon>
+              </v-btn>
+
+              <div>{{chalkBag.count}}</div>
+
+              <v-btn
+                :id="belayDevice.id"
+                @click="increaseProduct($event)"
+                outlined
+                x-small
+                class="increase"
+              >
+                <v-icon style="font-size: 120%;">mdi-plus</v-icon>
+              </v-btn>
+            </div>
             <div class="btn__container">
               <button
                 :id="chalkBag.id"
@@ -46,6 +70,7 @@ import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
+import { IncreaseDecreaseMixin } from '../../mixins/IncreaseDecreaseMixin';
 
 export default {
   computed: {
@@ -61,7 +86,7 @@ export default {
     footerComp: Footer,
     cart: Cart
   },
-  mixins: [cartMixin]
+  mixins: [cartMixin, IncreaseDecreaseMixin]
 };
 </script>
 
@@ -184,5 +209,21 @@ header {
   width: 100%;
   justify-content: center;
   margin-top: 8px;
+}
+/* product counter */
+
+.counter {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.increase {
+  margin-left: 40px;
+}
+
+.decrease {
+  margin-right: 40px;
 }
 </style>

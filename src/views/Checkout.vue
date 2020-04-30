@@ -16,47 +16,71 @@
           <div class="checkout__header">
             <h1>Checkout</h1>
           </div>
-
-          <div class="checkout__container" v-if="getCartData.length >= 1">
-            <h1>Cart</h1>
-            <div class="cartitems" v-for="(item, i) in getCartData" :key="i">
-              <div class="carttext">
-                <h4>{{ item.product }}</h4>
-                <p>
-                  R{{
-                    item.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }}
-                  x
-                  {{ item.count }}
-                </p>
-                <p>
-                  Total for this item:
-                  <strong
-                    >R{{
+          <div class="checkout__container">
+            <div class="checkout__container--items" v-if="getCartData.length >= 1">
+              <v-card class="cartitems" v-for="(item, i) in getCartData" :key="i">
+                <div class="carttext">
+                  <h4>{{ item.count }} X {{ item.product }}</h4>
+                  <br />
+                  <p>
+                    Total for this item:
+                    <strong>
+                      R{{
                       (item.cost * item.count)
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                    }}</strong
-                  >
-                </p>
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                      }}
+                    </strong>
+                  </p>
+                </div>
+                <img
+                  class="cartimg"
+                  style="height: 200px"
+                  :src="`../../${item.img}`"
+                  :alt="`Image of ${item.product}`"
+                />
+                <v-btn @click="deleteCartItem(i)" class="ma-2" outlined color="#E65100">Delete item</v-btn>
+              </v-card>
+            </div>
+            <div class="payment__container">
+              <div class="cost__breakdown">
+                <v-card>
+                  <v-card-title></v-card-title>
+                  <v-simple-table fixed-header>
+                    <template v-slot:default>
+                      <thead>
+                        <tr>
+                          <th class="text-left">Product</th>
+                          <th class="text-left">Quantity</th>
+                          <th class="text-left">Cost</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="item in getCartData" :key="item.name">
+                          <td>{{ item.product }}</td>
+                          <td>{{ item.count }}</td>
+                          <td>
+                            R{{ item.cost.toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>
+                  <div class="total">
+                    <div class="total_text">Total:</div>
+                    <div class="total_cost">
+                      R{{
+                      totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                      }}
+                    </div>
+                  </div>
+                </v-card>
               </div>
-              <img
-                class="cartimg"
-                style="width: 200px"
-                :src="`../../${item.img}`"
-                :alt="`Image of ${item.product}`"
-              />
+              <div class="checkout__container--payment">
+                <checkoutcomp class="checkout__comp" style="width: 100%" :finalAmount="finalAmount"></checkoutcomp>
+              </div>
             </div>
-
-            <div class="total">
-              <h3>
-                Total: R{{
-                  totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }}
-              </h3>
-            </div>
-            <checkoutcomp :finalAmount="finalAmount"></checkoutcomp>
-            <!--we're going to add our checkout here-->
           </div>
         </div>
         <footer-comp></footer-comp>
@@ -90,6 +114,8 @@ export default {
       },
       paymentSuccessful: true,
       finalAmount: 0
+
+      //  cost table
     };
   },
   created() {
@@ -117,6 +143,9 @@ export default {
     }
   },
   methods: {
+    test() {
+      console.log(this.getListData);
+    },
     // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {
       // going: in, out
@@ -128,6 +157,9 @@ export default {
       if (direction === this.$waypointMap.DIRECTION_TOP) {
         this.stickyActive = false;
       }
+    },
+    deleteCartItem(index) {
+      this.$store.dispatch("deleteCartItem", index);
     }
   }
 };
@@ -143,8 +175,6 @@ export default {
 
 .checkout__body {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 
 header {
@@ -187,7 +217,76 @@ header {
 
 /* BODY */
 
+.checkout__container {
+  display: flex;
+}
+
+.payment__container {
+  width: 80%;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  height: auto;
+}
+
 .checkout__header .pictures__nav {
   font-size: 200%;
+}
+
+.checkout__container--items {
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: flex;
+  width: 60%;
+  margin-bottom: 30px;
+}
+
+.checkout__container--payment {
+  width: 100%;
+}
+
+.checkout__comp {
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.cost__breakdown {
+  box-shadow: 2px 2px 2px rgb(187, 186, 186);
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* cart items */
+
+.cartitems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 380px;
+  padding: 10px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+/* Table */
+.table_head {
+  margin-top: 10px;
+}
+.total {
+  border-top: 1px solid rgb(212, 212, 212);
+  display: flex;
+  text-transform: uppercase;
+  color: #d35400;
+  height: 45px;
+  align-items: center;
+}
+
+.total_cost {
+  margin-left: 78%;
+}
+
+.total_text {
+  margin-left: 18px;
 }
 </style>

@@ -1,34 +1,43 @@
 <template>
-  <section class="payment-form">
-    <h5 class="#e0e0e0 grey lighten-4">
-      Payment Method
-      <span class="right">$25</span>
-    </h5>
+  <v-app>
+    <v-card class="payment-form">
+      <h1 class="checkout__heading">Payment</h1>
 
-    <div class="error red center-align white-text"></div>
+      <div class="card-element">
+        <input v-model="cardHolderName" placeholder="Card holder" type="text" id="card-holder-name" />
+      </div>
 
-    <div class="col s12 card-element">
-      <label>Card Number</label>
-      <div id="card-number-element" class="input-value"></div>
-    </div>
+      <div class="card-element">
+        <label>Card Number</label>
+        <div id="card-number-element" class="input-value"></div>
+      </div>
 
-    <div class="col s6 card-element">
-      <label>Expiry Date</label>
-      <div id="card-expiry-element"></div>
-    </div>
+      <div class="card-element--smaller">
+        <div style="width: 40%" id="card-expiry-element"></div>
+        <div style="width: 40%" id="card-cvc-element"></div>
+      </div>
 
-    <div class="col s6 card-element">
-      <label>CVC</label>
-      <div id="card-cvc-element"></div>
-    </div>
+      <div class="card-element">
+        <input v-model="address" placeholder="Address" type="text" id="address-element" />
+      </div>
 
-    <div class="col s12 place-order-button-block">
-      <button class="btn col s12 #e91e63 pink" @click="newPayment">
-        Place Order
-      </button>
-      <v-btn @click="test">TEST</v-btn>
-    </div>
-  </section>
+      <div class="card-element">
+        <input v-model="address_zip" placeholder="Zip" type="text" id="address-zip-element" />
+        <label>7700</label>
+      </div>
+
+      <div class="checkout__btn__container">
+        <button
+          class="checkout__btn"
+          @click="newPayment"
+        >Pay R{{finalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</button>
+      </div>
+      <v-overlay :value="overlay">
+        <p v-if="overlayText" class="overlay__text">Payment successful! Thank you</p>
+        <v-progress-circular v-if="overlayLoading" indeterminate size="64"></v-progress-circular>
+      </v-overlay>
+    </v-card>
+  </v-app>
 </template>
 
 <script>
@@ -39,21 +48,26 @@ export default {
   },
   data() {
     return {
+      // overlay
+      overlay: false,
+      overlayLoading: false,
+      overlayText: false,
+      //
       stripe: null,
       cardNumber: null,
       cardExp: null,
       cardCvc: null,
       currentUser: null,
       amount: 0,
-      card: {
-        name: "",
-        number: "4242424242424242",
-        exp_month: null,
-        exp_year: null,
-        cvc: "",
-        address_zip: ""
-      }
+      address: "",
+      address_zip: "",
+      cardHolderName: ""
     };
+  },
+  computed: {
+    getCartData() {
+      return this.$store.getters.getCartData;
+    }
   },
   methods: {
     test() {
@@ -68,13 +82,19 @@ export default {
       console.log(p.data());
     },
     newPayment() {
+      this.overlay = true;
+      this.overlayLoading = true;
       this.stripe.createToken(this.cardNumber).then(result => {
         if (result.error) {
           console.log(result.error);
         } else {
           const payment = {
+            productsBought: this.getCartData,
             amount: this.amount,
-            source: result.token
+            source: result.token,
+            address: this.address,
+            address_zip: this.address_zip,
+            name: this.cardHolderName
           };
 
           this.currentUser = firebase.auth().currentUser;
@@ -95,7 +115,12 @@ export default {
                   } else if (
                     (doc.id, " => ", doc.data().status == "succeeded")
                   ) {
-                    alert(doc.data().status);
+                    this.overlay = true;
+                    this.overlayLoading = false;
+                    this.overlayText = true;
+                    setTimeout(() => {
+                      this.overlay = false;
+                    }, 2000);
                   }
                 }
               });
@@ -122,14 +147,25 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /* form */
 
+* {
+  font-family: "Lato", "Arial", sans-serif;
+}
+
+.checkout__heading {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
 .payment-form {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  width: 100%;
   margin: 20px auto;
+  padding: 15px;
   border: 1px solid #ececec;
 }
 .payment-form h5 {
@@ -142,27 +178,48 @@ export default {
 }
 #card-number-element,
 #card-expiry-element,
+#address-element,
+#card-holder-name,
+#address-zip-element,
 #card-cvc-element {
   background: white;
   padding: 5px;
-  border: 1px solid #ececec;
+  box-shadow: 2px 2px 2px rgb(187, 186, 186);
+  border-radius: 5px;
+  height: 40px;
 }
+
+#card-cvc-element input {
+}
+
 .place-order-button-block {
   margin: 10px 0;
 }
 
+/* form layout */
+
+.card-element--smaller {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+
 /* Buttons */
-.btn__container :hover,
-.btn__container :active {
+.checkout__btn__container :hover,
+.checkout__btn__container :active {
   background-color: #d35400;
   color: #fff;
 }
 
-.btn :hover {
+.payment-form .checkout__btn__container {
+  width: 100%;
+}
+
+.checkout__btn :hover {
   color: #fff;
 }
 
-.btn {
+.checkout__btn {
   width: 100%;
   border: 1px solid #d35400;
   color: #d35400;
@@ -172,15 +229,25 @@ export default {
   font-weight: 400;
   transition: color 0.3s;
   transition: background-color 0.3s;
+  width: 100%;
 }
 
 .v-btn__content {
   width: 100%;
 }
 
-.btn__container {
+.checkout__btn__container {
   display: flex;
   width: 25%;
   margin-top: 8px;
+}
+
+/* Overlay */
+
+.overlay__text {
+  font-size: 200%;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
 }
 </style>

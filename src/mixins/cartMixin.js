@@ -7,7 +7,7 @@ export const cartMixin = {
           const productId = id - 1;
 
           const cartData = {
-            count: 1,
+            count: this.getGear[productId].count,
             img: this.getGear[productId].itemPicture,
             cost: this.getGear[productId].itemPrice,
             product: this.getGear[productId].itemName

@@ -8,12 +8,7 @@
           <h1>Chalk</h1>
         </div>
         <div class="product__container">
-          <v-card
-            v-for="(chalk, i) in getGear"
-            :key="i"
-            class="mx-auto card"
-            max-width="250"
-          >
+          <v-card v-for="(chalk, i) in getGear" :key="i" class="mx-auto card" max-width="250">
             <v-img :src="chalk.itemPicture" height="200px"></v-img>
             <div class="chalk__name">
               <h3>{{ chalk.itemName }}</h3>
@@ -22,12 +17,36 @@
               <h4>
                 <strong>
                   R{{
-                    chalk.itemPrice
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  chalk.itemPrice
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
                 </strong>
               </h4>
+            </div>
+                        <div class="counter">
+              <v-btn
+                :id="chalk.id"
+                :disabled="disabled"
+                @click="decreaseProduct($event)"
+                outlined
+                x-small
+                class="decrease"
+              >
+                <v-icon style="font-size: 120%">mdi-minus</v-icon>
+              </v-btn>
+
+              <div>{{chalk.count}}</div>
+
+              <v-btn
+                :id="chalk.id"
+                @click="increaseProduct($event)"
+                outlined
+                x-small
+                class="increase"
+              >
+                <v-icon style="font-size: 120%;">mdi-plus</v-icon>
+              </v-btn>
             </div>
             <div class="btn__container">
               <button
@@ -36,9 +55,7 @@
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >
-                Add to cart
-              </button>
+              >Add to cart</button>
             </div>
           </v-card>
         </div>
@@ -52,6 +69,7 @@
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
+import { IncreaseDecreaseMixin } from "../../mixins/IncreaseDecreaseMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
   computed: {
@@ -67,7 +85,7 @@ export default {
     footerComp: Footer,
     cart: Cart
   },
-  mixins: [cartMixin]
+  mixins: [cartMixin, IncreaseDecreaseMixin]
 };
 </script>
 
@@ -194,5 +212,21 @@ header {
 .card {
   padding: 15px;
   display: flex;
+}
+/* product counter */
+
+.counter {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.increase {
+  margin-left: 40px;
+}
+
+.decrease {
+  margin-right: 40px;
 }
 </style>

@@ -8,12 +8,7 @@
           <h1>Carabiners</h1>
         </div>
         <div class="product__container">
-          <v-card
-            v-for="(carabiner, i) in getGear"
-            :key="i"
-            class="mx-auto card"
-            max-width="250"
-          >
+          <v-card v-for="(carabiner, i) in getGear" :key="i" class="mx-auto card" max-width="250">
             <v-img :src="carabiner.itemPicture" height="200px"></v-img>
             <div class="carabiner__name">
               <h3>{{ carabiner.itemName }}</h3>
@@ -28,6 +23,30 @@
                   }}
                 </strong>
               </h4>
+            </div>
+                        <div class="counter">
+              <v-btn
+                :id="carabiner.id"
+                :disabled="disabled"
+                @click="decreaseProduct($event)"
+                outlined
+                x-small
+                class="decrease"
+              >
+                <v-icon style="font-size: 120%">mdi-minus</v-icon>
+              </v-btn>
+
+              <div>{{carabiner.count}}</div>
+
+              <v-btn
+                :id="carabiner.id"
+                @click="increaseProduct($event)"
+                outlined
+                x-small
+                class="increase"
+              >
+                <v-icon style="font-size: 120%;">mdi-plus</v-icon>
+              </v-btn>
             </div>
             <div class="btn__container">
               <button
@@ -50,6 +69,7 @@
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
+import { IncreaseDecreaseMixin } from "../../mixins/IncreaseDecreaseMixin.js";
 import Cart from "../../components/Cart.vue";
 export default {
   computed: {
@@ -65,7 +85,7 @@ export default {
     footerComp: Footer,
     cart: Cart
   },
-  mixins: [cartMixin]
+  mixins: [cartMixin, IncreaseDecreaseMixin]
 };
 </script>
 
@@ -189,5 +209,21 @@ header {
   width: 100%;
   justify-content: center;
   margin-top: 8px;
+}
+/* product counter */
+
+.counter {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.increase {
+  margin-left: 40px;
+}
+
+.decrease {
+  margin-right: 40px;
 }
 </style>
