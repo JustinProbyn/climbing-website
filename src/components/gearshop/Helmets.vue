@@ -78,7 +78,7 @@ export default {
     }
   },
   data() {
-    return {};
+    return { disabled: false, product: "helmets" };
   },
   components: {
     navbar: NavBar,

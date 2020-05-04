@@ -8,8 +8,11 @@
       </div>
 
       <div class="card-element">
-        <label>Card Number</label>
-        <div id="card-number-element" class="input-value"></div>
+        <div
+          placeholder="Stripe test card number is 4242 4242 4242 4242"
+          id="card-number-element"
+          class="input-value"
+        ></div>
       </div>
 
       <div class="card-element--smaller">
@@ -23,7 +26,6 @@
 
       <div class="card-element">
         <input v-model="address_zip" placeholder="Zip" type="text" id="address-zip-element" />
-        <label>7700</label>
       </div>
 
       <div class="checkout__btn__container">

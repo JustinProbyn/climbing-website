@@ -53,13 +53,7 @@
           @blur="$v.confirmPassword.$touch()"
         ></v-text-field>
         <div class="btns">
-          <v-btn
-            color="success"
-            :disabled="$v.$invalid"
-            class="mr-4"
-            @click="submit"
-            >Submit</v-btn
-          >
+          <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">Submit</v-btn>
           <!-- <v-btn @click="goToSignIn" color="info">Sign In</v-btn> -->
         </div>
       </div>
@@ -133,18 +127,15 @@ export default {
   methods: {
     //checks if there are any errors in form and creates user with firebase
     submit() {
+      this.$emit("signedUp");
       this.$v.$touch();
       const userData = {
         username: this.username,
         email: this.email,
         password: this.password
       };
-      console.log(userData);
       this.$store.dispatch("firestoreSignUp", userData);
     }
-    // goToSignIn() {
-    //   this.$router.push("signin");
-    // }
   }
 };
 </script>

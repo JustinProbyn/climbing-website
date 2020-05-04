@@ -4,7 +4,7 @@ export const IncreaseDecreaseMixin = {
       const id = event.currentTarget.id;
       for (let i = 0; i < this.getGear.length; i++) {
         if ((this.getGear.id = id)) {
-          const product = "belayDevices";
+          const product = this.product;
           this.$store.dispatch("increaseCount", { id, product });
           break;
         }
@@ -14,7 +14,7 @@ export const IncreaseDecreaseMixin = {
       const id = event.currentTarget.id;
       for (let i = 0; i < this.getGear.length; i++) {
         if ((this.getGear.id = id)) {
-          const product = "belayDevices";
+          const product = this.product;
           this.$store.dispatch("decreaseCount", { id, product });
           break;
         }

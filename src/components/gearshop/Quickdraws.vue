@@ -78,7 +78,7 @@ export default {
     }
   },
   data() {
-    return {};
+    return { disabled: false, product: "quickdraws" };
   },
   components: {
     navbar: NavBar,

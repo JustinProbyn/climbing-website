@@ -26,7 +26,7 @@
             </div>
             <div class="counter">
               <v-btn
-                :id="climbingShoe.id"
+                :id="shoe.id"
                 :disabled="disabled"
                 @click="decreaseProduct($event)"
                 outlined
@@ -36,10 +36,10 @@
                 <v-icon style="font-size: 120%">mdi-minus</v-icon>
               </v-btn>
 
-              <div>{{climbingShoe.count}}</div>
+              <div>{{shoe.count}}</div>
 
               <v-btn
-                :id="climbingShoe.id"
+                :id="shoe.id"
                 @click="increaseProduct($event)"
                 outlined
                 x-small
@@ -78,7 +78,7 @@ export default {
     }
   },
   data() {
-    return {};
+    return { disabled: false, product: "shoes" };
   },
   components: {
     navbar: NavBar,

@@ -66,19 +66,21 @@ const routes = [
     path: "/cart",
     name: "cart",
     component: () =>
-      import(/*webpackChunkName "Cart" */ "../components/SignIn.vue")
+      import(/*webpackChunkName "Cart" */ "../components/Cart.vue")
   },
   {
     path: "/signin",
+    redirect: "/",
     name: "signin",
     component: () =>
       import(/*webpackChunkName "SignIn" */ "../components/SignIn.vue")
   },
   {
     path: "/signup",
+    redirect: "/",
     name: "signup",
     component: () =>
-      import(/*webpackChunkName "SignUp" */ "../components/Cart.vue")
+      import(/*webpackChunkName "SignUp" */ "../components/SignUp.vue")
   },
 
   {

@@ -20,28 +20,53 @@
               <div v-if="initMenu" class="btns-home">
                 <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
 
-                <v-dialog class="signInDialog" max-width="500">
+                <v-dialog v-if="!auth" max-width="500">
                   <template v-slot:activator="{ on }">
                     <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth">Sign Up</v-btn>
                   </template>
                   <v-card height="538">
-                    <signup></signup>
+                    <signup @signedUp="initSignupDialog"></signup>
                   </v-card>
                 </v-dialog>
+                <!--  -->
+                <v-dialog
+                  v-if="!auth && userSignedUp"
+                  v-model="SignupShowDialog"
+                  hide-overlay
+                  persistent
+                  width="300"
+                >
+                  <v-card class="signin__text" color="primary" dark>
+                    <v-card-text class="signin__text">
+                      <p style="margin-bottom: 60px">
+                        Thank you for registering.
+                        <br />Please sign in
+                      </p>
+                      <signin @signedIn="initSigninLoader"></signin>
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
+                <!--  -->
 
                 <v-dialog v-if="!auth" max-width="400">
                   <template v-slot:activator="{ on }">
                     <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on">Sign In</v-btn>
                   </template>
                   <v-card height="371">
-                    <signin @signedIn="initLoader"></signin>
+                    <signin @signedIn="initSigninLoader"></signin>
                   </v-card>
                 </v-dialog>
                 <!-- Sign in loader -->
-                <v-dialog v-if="!auth" v-model="showLoader" hide-overlay persistent width="300">
+                <v-dialog
+                  v-if="!auth"
+                  v-model="SigninShowLoader"
+                  hide-overlay
+                  persistent
+                  width="300"
+                >
                   <v-card color="primary" dark>
                     <v-card-text>
-                      Logging in
+                      Logging in...
                       <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
                     </v-card-text>
                   </v-card>
@@ -97,16 +122,25 @@ export default {
       showMenu: false,
       reloadPage: 0,
       initMenu: false,
-      showLoader: false
+      SigninShowLoader: false,
+      SignupShowDialog: false
     };
   },
+  watch: {},
   methods: {
     openMenu() {
       this.showMenu = !this.showMenu;
       this.initMenu = true;
+      console.log(this.signupPopup);
     },
-    initLoader() {
-      this.showLoader = true;
+    initSigninLoader() {
+      this.SigninShowLoader = true;
+    },
+    initSignupDialog() {
+      this.SignupShowDialog = true;
+      // setTimeout(() => {
+      //   this.SignupShowDialog = false;
+      // }, 2000);
     },
     signOut() {
       this.reloadPage += 1;
@@ -117,6 +151,10 @@ export default {
   computed: {
     auth() {
       return this.$store.getters.isLoggedIn;
+      // checks if state.userData.email exists then shows UI components based result
+    },
+    userSignedUp() {
+      return this.$store.getters.isSignedUp;
       // checks if state.userData.email exists then shows UI components based result
     }
   }
@@ -183,6 +221,12 @@ header {
   font-size: 180%;
   color: #d35400;
   margin-left: 5px;
+}
+
+/* Signin form */
+
+.signin__text {
+  padding: 5px;
 }
 /*** MENU ***/
 

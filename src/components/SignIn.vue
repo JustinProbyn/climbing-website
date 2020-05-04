@@ -26,13 +26,7 @@
         @blur="$v.password.$touch()"
       ></v-text-field>
       <div class="btns">
-        <v-btn
-          color="success"
-          :disabled="$v.$invalid"
-          class="mr-4"
-          @click="submit"
-          >submit</v-btn
-        >
+        <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">submit</v-btn>
         <!-- <v-btn color="info" @click="goToSignUp">Register</v-btn> -->
       </div>
     </v-card>

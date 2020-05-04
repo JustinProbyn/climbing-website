@@ -1,6 +1,10 @@
 <template>
   <div class="gear__suggester--container">
-    <h2>Let us suggest some gear</h2>
+    <h2>
+      Let us suggest some gear for you.
+      <br />
+      <br />Select what type of climbing you would like to do and your budget for each item.
+    </h2>
     <v-card class="selecter__panel">
       <v-container class="selector__container" fluid>
         <v-row align="center">
@@ -53,21 +57,25 @@
                 {{i.replace(/^\w/, c => c.toUpperCase()).replace(/([A-Z])/g," $1")}}
                 <div class="climbingIcons">
                   <v-icon
-                    v-if="boulderingSelected"
+                    v-if="boulderingSelected && boulderingGear.includes(i)"
                     class="boulderingIcon"
                     color="#c0392b"
                   >mdi-alpha-b-box</v-icon>
                   <v-icon
-                    v-if="leadOutsideSelected"
+                    v-if="leadOutsideSelected && leadOutSideGear.includes(i)"
                     class="leadOutsideIcon"
                     color="#d35400"
                   >mdi-alpha-o-box</v-icon>
                   <v-icon
-                    v-if="leadInGymSelected"
+                    v-if="leadInGymSelected && leadInGymGear.includes(i)"
                     class="leadGymIcon"
                     color="#2980b9"
                   >mdi-alpha-g-box</v-icon>
-                  <v-icon v-if="topropeselected" class="topropeIcon" color="#27ae60">mdi-alpha-t-box</v-icon>
+                  <v-icon
+                    v-if="topropeSelected && topropeGear.includes(i)"
+                    class="topropeIcon"
+                    color="#27ae60"
+                  >mdi-alpha-t-box</v-icon>
                 </div>
               </v-expansion-panel-header>
               <v-expansion-panel-content v-for="(item, i) in product" :key="i">
@@ -108,7 +116,7 @@ export default {
       leadInGymSelected: false,
       leadOutsideSelected: false,
       boulderingSelected: false,
-      topropeselected: false,
+      topropeSelected: false,
       showIconsKey: false,
 
       //   OPTIONS
@@ -250,12 +258,15 @@ export default {
 
       if (!this.selectedClimbing.includes("Lead (in gym)")) {
         this.leadInGymSelected = false;
-      } else if (!this.selectedClimbing.includes("Lead (outside)")) {
+      }
+      if (!this.selectedClimbing.includes("Lead (outside)")) {
         this.leadOutsideSelected = false;
-      } else if (!this.selectedClimbing.includes("Bouldering")) {
+      }
+      if (!this.selectedClimbing.includes("Bouldering")) {
         this.boulderingSelected = false;
-      } else if (!this.selectedClimbing.includes("Toprope")) {
-        this.topropeselected = false;
+      }
+      if (!this.selectedClimbing.includes("Toprope")) {
+        this.topropeSelected = false;
       }
 
       /**********SETTING TEXT************/
@@ -344,8 +355,8 @@ export default {
           this.selectedClimbing.length <= 1 &&
           this.selectedClimbing.includes("Toprope")
         ) {
-          this.topropeselected = false;
-        } else this.topropeselected = true;
+          this.topropeSelected = false;
+        } else this.topropeSelected = true;
 
         Object.entries(this.products).forEach(el => {
           if (el[1].length <= 0) {
@@ -373,7 +384,6 @@ export default {
   width: 35%;
   margin-top: 275px;
   margin-left: 20px;
-  padding: 20px;
 }
 
 /* h2 header */
@@ -381,14 +391,14 @@ export default {
 h2 {
   display: flex;
   justify-content: center;
-  text-transform: uppercase;
   margin-bottom: 15px;
   font-weight: 400;
   font-size: 110%;
-  border: 1px solid #d35400;
   padding: 5px;
   color: rgb(94, 94, 94);
-  border-radius: 5px;
+  background-color: rgb(243, 243, 243);
+  padding: 5px;
+  border-radius: 3px;
 }
 
 /* Gear Form */
@@ -429,6 +439,7 @@ h2 {
   text-decoration: none;
   color: rgb(219, 219, 219);
   transition: color 0.3s;
+
   word-spacing: 2px;
 }
 

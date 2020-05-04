@@ -77,13 +77,8 @@ export default {
       return this.$store.getters.getGearshopData.crashPads;
     }
   },
-  methods: {
-    test() {
-      console.log(this.getcrashPads);
-    }
-  },
   data() {
-    return {};
+    return { disabled: false, product: "crashPads" };
   },
   //send all product data to state
   created() {

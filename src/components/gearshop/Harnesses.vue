@@ -24,7 +24,7 @@
                 </strong>
               </h4>
             </div>
-                        <div class="counter">
+            <div class="counter">
               <v-btn
                 :id="harness.id"
                 :disabled="disabled"
@@ -70,7 +70,7 @@ import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
-import { IncreaseDecreaseMixin } from '../../mixins/IncreaseDecreaseMixin';
+import { IncreaseDecreaseMixin } from "../../mixins/IncreaseDecreaseMixin";
 export default {
   computed: {
     getGear() {
@@ -78,7 +78,7 @@ export default {
     }
   },
   data() {
-    return {};
+    return { disabled: false, product: "harnesses" };
   },
   components: {
     navbar: NavBar,

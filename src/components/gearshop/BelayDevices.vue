@@ -75,20 +75,11 @@ import Cart from "../../components/Cart.vue";
 export default {
   data() {
     return {
-      disabled: false
+      disabled: false,
+      product: "belayDevices"
     };
   },
-  watch: {
-    productNumber: function() {
-      if (this.belayDevice.count == 0) {
-        this.disabled = true;
-        return;
-      }
-      if (this.belayDevice.count > 0) {
-        this.disabled = false;
-      }
-    }
-  },
+  watch: {},
   computed: {
     getGear() {
       return this.$store.getters.getGearshopData.belayDevices;

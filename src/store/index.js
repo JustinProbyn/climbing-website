@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    userSignedUp: false,
     userData: {
       email: "",
       password: ""
@@ -19,7 +20,7 @@ export default new Vuex.Store({
 
   /*** MUTATIONS ***/
   mutations: {
-    // User sign in / out Mutations
+    // User sign in / up/ out Mutations
     setUser(state, userData) {
       state.userData.email = userData.email;
       state.userData.password = userData.password;
@@ -29,6 +30,12 @@ export default new Vuex.Store({
       state.userData.password = "";
       state.articleData = [];
       state.pictureData = [];
+    },
+    userSignedUp(state) {
+      state.userSignedUp = true;
+    },
+    popupClose(state) {
+      state.userSignedUp = false;
     },
 
     /* Articles Mutations */
@@ -44,7 +51,13 @@ export default new Vuex.Store({
   },
 
   /*** ACTIONS ***/
+
   actions: {
+    // closing popup on home page for sign up
+
+    userSignedUpPopupClose({ commit }) {
+      commit("popupClose");
+    },
     // sign out removing localstorage
     signOut({ commit }) {
       localStorage.removeItem("cartData");
@@ -69,12 +82,15 @@ export default new Vuex.Store({
 
   /*** GETTERS ***/
   getters: {
-    // User sign in / out Getters
+    // User sign in / out/ out Getters
     getUserData(state) {
       return state.userData;
     },
     isLoggedIn(state) {
       return state.userData.email;
+    },
+    isSignedUp(state) {
+      return state.userSignedUp;
     },
 
     // Articles Getters

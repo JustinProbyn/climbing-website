@@ -78,7 +78,8 @@ export default {
     }
   },
   data() {
-    return {};
+    return {disabled: false,
+      product: "SnCs"};
   },
   components: {
     navbar: NavBar,

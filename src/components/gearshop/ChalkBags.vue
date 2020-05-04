@@ -24,7 +24,7 @@
                 </strong>
               </h4>
             </div>
-                        <div class="counter">
+            <div class="counter">
               <v-btn
                 :id="chalkBag.id"
                 :disabled="disabled"
@@ -39,7 +39,7 @@
               <div>{{chalkBag.count}}</div>
 
               <v-btn
-                :id="belayDevice.id"
+                :id="chalkBag.id"
                 @click="increaseProduct($event)"
                 outlined
                 x-small
@@ -70,7 +70,7 @@ import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import { cartMixin } from "../../mixins/cartMixin.js";
 import Cart from "../../components/Cart.vue";
-import { IncreaseDecreaseMixin } from '../../mixins/IncreaseDecreaseMixin';
+import { IncreaseDecreaseMixin } from "../../mixins/IncreaseDecreaseMixin";
 
 export default {
   computed: {
@@ -79,7 +79,7 @@ export default {
     }
   },
   data() {
-    return {};
+    return { disabled: false, product: "chalkBags" };
   },
   components: {
     navbar: NavBar,

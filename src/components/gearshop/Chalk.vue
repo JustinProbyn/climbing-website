@@ -24,7 +24,7 @@
                 </strong>
               </h4>
             </div>
-                        <div class="counter">
+            <div class="counter">
               <v-btn
                 :id="chalk.id"
                 :disabled="disabled"
@@ -78,7 +78,10 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      disabled: false,
+      product: "chalk"
+    };
   },
   components: {
     navbar: NavBar,

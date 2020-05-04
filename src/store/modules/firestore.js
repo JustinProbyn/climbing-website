@@ -27,12 +27,15 @@ const firestore = {
         });
     },
     // signs user up
-    firestoreSignUp(state, userData) {
+    firestoreSignUp({ commit }, userData) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(userData.email, userData.password)
+        .then(() => {
+          commit("userSignedUp");
+        })
         .catch(function(error) {
-          console.log(error);
+          alert(error.message);
         });
     },
     // signs out
