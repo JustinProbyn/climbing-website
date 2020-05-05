@@ -27,7 +27,7 @@
             <div class="counter">
               <v-btn
                 :id="harness.id"
-                :disabled="disabled"
+                :disabled="harness.count <= 1 ? !disabled : disabled"
                 @click="decreaseProduct($event)"
                 outlined
                 x-small

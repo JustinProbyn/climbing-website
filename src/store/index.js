@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     userSignedUp: false,
     userData: {
+      username: "",
       email: "",
       password: ""
     },
@@ -24,12 +25,17 @@ export default new Vuex.Store({
     setUser(state, userData) {
       state.userData.email = userData.email;
       state.userData.password = userData.password;
+      state.userData.username = userData.username;
     },
     signOutUser(state) {
       state.userData.email = "";
       state.userData.password = "";
+      state.userData.username = "";
       state.articleData = [];
       state.pictureData = [];
+    },
+    setUsername(state, username) {
+      state.userData.username = username;
     },
     userSignedUp(state) {
       state.userSignedUp = true;
@@ -63,6 +69,7 @@ export default new Vuex.Store({
       localStorage.removeItem("cartData");
       localStorage.removeItem("password");
       localStorage.removeItem("email");
+      localStorage.removeItem("username");
       commit("signOutUser");
       commit("clearCart");
     },
@@ -82,7 +89,7 @@ export default new Vuex.Store({
 
   /*** GETTERS ***/
   getters: {
-    // User sign in / out/ out Getters
+    // User sign in / up/ out Getters
     getUserData(state) {
       return state.userData;
     },
@@ -91,6 +98,9 @@ export default new Vuex.Store({
     },
     isSignedUp(state) {
       return state.userSignedUp;
+    },
+    getUsername(state) {
+      return state.userData.username;
     },
 
     // Articles Getters

@@ -8,7 +8,6 @@ const firestore = {
     /***SIGNIN/SIGNOUT ACTIONS***/
     // signs in and dispatches action to set data from firestore
     firestoreSignIn({ commit, dispatch }, userData) {
-      console.log(userData);
       firebase
         .auth()
         .signInWithEmailAndPassword(userData.email, userData.password)
@@ -17,6 +16,15 @@ const firestore = {
         })
         .then(() => {
           if (firebase.auth().currentUser) {
+            //sets username in index.js store
+            const fbRef = firebase
+              .firestore()
+              .collection("userdata")
+              .doc(userData.email);
+            fbRef.get().then(doc => {
+              commit("setUsername", doc.data().username);
+              localStorage.setItem("username", doc.data().username);
+            });
             //sets user in index.js store
             commit("setUser", userData);
             dispatch("setNewsAndPictureData");
@@ -31,7 +39,17 @@ const firestore = {
       firebase
         .auth()
         .createUserWithEmailAndPassword(userData.email, userData.password)
+
         .then(() => {
+          const fireStoreRef = firebase
+            .firestore()
+            .collection("userdata")
+            .doc(userData.email);
+          fireStoreRef.set({
+            username: userData.username,
+            email: userData.email,
+            password: userData.password
+          });
           commit("userSignedUp");
         })
         .catch(function(error) {
@@ -210,9 +228,15 @@ const firestore = {
       if (!password) {
         return;
       }
+
+      const username = localStorage.getItem("username");
+      if (!password) {
+        return;
+      }
       commit("setUser", {
         email: email,
-        password: password
+        password: password,
+        username: username
       });
 
       // load articles from firestore

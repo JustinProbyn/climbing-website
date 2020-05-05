@@ -21,6 +21,14 @@
         <li>
           <router-link to="gear">Gear</router-link>
         </li>
+        <li v-if="getUsername">
+          <p class="nav-bar__username">
+            Welcome {{getUsername}}!
+            <router-link to="user-account">
+              <v-icon class="nav-bar__username-icon">mdi-account-circle</v-icon>
+            </router-link>
+          </p>
+        </li>
       </ul>
     </nav>
   </div>
@@ -42,6 +50,9 @@ export default {
     auth() {
       return this.$store.getters.isLoggedIn;
       // checks if state.userData.email exists then shows UI components based result
+    },
+    getUsername() {
+      return this.$store.getters.getUsername;
     }
   }
 };
@@ -126,5 +137,17 @@ a.router-link-active {
 .go-back:hover,
 .go-back:active {
   color: #d35400;
+}
+
+.nav-bar__username {
+  color: #d35400;
+  position: absolute;
+  margin-left: 300px;
+  margin-top: -3px;
+}
+
+.nav-bar__username-icon {
+  color: #d35400;
+  margin-left: 5px;
 }
 </style>

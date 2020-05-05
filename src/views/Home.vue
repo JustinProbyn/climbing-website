@@ -131,7 +131,6 @@ export default {
     openMenu() {
       this.showMenu = !this.showMenu;
       this.initMenu = true;
-      console.log(this.signupPopup);
     },
     initSigninLoader() {
       this.SigninShowLoader = true;

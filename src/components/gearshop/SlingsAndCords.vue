@@ -27,7 +27,7 @@
             <div class="counter">
               <v-btn
                 :id="SnC.id"
-                :disabled="disabled"
+                :disabled="SnC.count <= 1 ? !disabled : disabled"
                 @click="decreaseProduct($event)"
                 outlined
                 x-small
@@ -78,8 +78,7 @@ export default {
     }
   },
   data() {
-    return {disabled: false,
-      product: "SnCs"};
+    return { disabled: false, product: "SnCs" };
   },
   components: {
     navbar: NavBar,

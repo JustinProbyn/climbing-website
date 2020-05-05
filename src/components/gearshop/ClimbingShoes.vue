@@ -27,7 +27,7 @@
             <div class="counter">
               <v-btn
                 :id="shoe.id"
-                :disabled="disabled"
+                :disabled="shoe.count <= 1 ? !disabled : disabled"
                 @click="decreaseProduct($event)"
                 outlined
                 x-small

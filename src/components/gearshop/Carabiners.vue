@@ -27,7 +27,7 @@
             <div class="counter">
               <v-btn
                 :id="carabiner.id"
-                :disabled="disabled"
+                :disabled="carabiner.count <= 1 ? !disabled : disabled"
                 @click="decreaseProduct($event)"
                 outlined
                 x-small

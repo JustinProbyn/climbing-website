@@ -20,6 +20,14 @@ const routes = [
     meta: { hideButton: true }
   },
   {
+    path: "/user-account",
+    name: "user-account",
+    component: () =>
+      import(
+        /*webpackChunkName "UserAccountPage" */ "../views/UserAccountPage.vue"
+      )
+  },
+  {
     path: "/add-article",
     name: "add-article",
     component: () =>

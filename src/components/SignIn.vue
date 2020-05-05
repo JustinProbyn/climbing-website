@@ -76,7 +76,6 @@ export default {
         email: this.email,
         password: this.password
       };
-      console.log(userData);
       this.$store.dispatch("firestoreSignIn", userData);
 
       //   adds localstorage for autologin feature

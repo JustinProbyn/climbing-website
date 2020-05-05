@@ -27,7 +27,7 @@
             <div class="counter">
               <v-btn
                 :id="chalk.id"
-                :disabled="disabled"
+                :disabled="chalk.count <= 1 ? !disabled : disabled"
                 @click="decreaseProduct($event)"
                 outlined
                 x-small

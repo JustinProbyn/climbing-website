@@ -27,7 +27,7 @@
             <div class="counter">
               <v-btn
                 :id="crashPad.id"
-                :disabled="disabled"
+                :disabled="crashPad.count <= 1 ? !disabled : disabled"
                 @click="decreaseProduct($event)"
                 outlined
                 x-small
