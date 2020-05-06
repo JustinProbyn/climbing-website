@@ -1,10 +1,9 @@
 <template>
   <div class="gear__suggester--container">
-    <h2>
-      Let us suggest some gear for you.
-      <br />
-      <br />Select what type of climbing you would like to do and your budget for each item.
-    </h2>
+    <h2 style="color: #d35400; font-size: 115%">Let us suggest some gear for you</h2>
+    <h2
+      style="font-size: 100%"
+    >Select what type of climbing you would like to do and your budget for each item.</h2>
     <v-card class="selecter__panel">
       <v-container class="selector__container" fluid>
         <v-row align="center">
@@ -391,7 +390,6 @@ export default {
 h2 {
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
   font-weight: 400;
   font-size: 110%;
   padding: 5px;
@@ -459,6 +457,7 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .selector__container {
@@ -474,6 +473,8 @@ h2 {
 
 .panels {
   margin-top: 15px;
+  margin-left: 5px;
+  width: 100%;
 }
 
 .addToCartAlert {

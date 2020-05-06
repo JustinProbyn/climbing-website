@@ -39,7 +39,20 @@
                   :src="`../../${item.img}`"
                   :alt="`Image of ${item.product}`"
                 />
-                <v-btn @click="deleteCartItem(i)" class="ma-2" outlined color="#E65100">Delete item</v-btn>
+                <v-btn
+                  v-if="item.count <= 1"
+                  @click="deleteCartItem(i)"
+                  class="ma-2"
+                  outlined
+                  color="#E65100"
+                >Remove item</v-btn>
+                <v-btn
+                  v-else
+                  @click="deleteCartItem(i)"
+                  class="ma-2"
+                  outlined
+                  color="#E65100"
+                >Remove items</v-btn>
               </v-card>
             </div>
             <div class="payment__container">
@@ -70,15 +83,87 @@
                   <div class="total">
                     <div class="total_text">Total:</div>
                     <div class="total_cost">
-                      R{{
-                      totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                      }}
+                      <div class="items-total">
+                        R{{
+                        totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        }}
+                      </div>
                     </div>
                   </div>
                 </v-card>
+                <!-- Grand Total -->
+                <div class="total">
+                  <div class="total_text">VAT</div>
+                  <div class="total_cost--VAT">
+                    <div
+                      class="items-total-VAT"
+                    >R{{(totalCost * 0.15).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</div>
+                  </div>
+                </div>
+                <div class="total">
+                  <div class="total_text">Delivery cost</div>
+                  <div class="total_cost--delivery">
+                    <div class="delivery-cost">R{{deliveryCost}}</div>
+                  </div>
+                </div>
+                <div class="total">
+                  <div style="color: #d35400;" class="total_text">Grand total</div>
+                  <div class="total_cost--grand">
+                    <div
+                      class="grand-total"
+                    >R{{totalCostVATAndDelivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</div>
+                  </div>
+                </div>
+
+                <!-- Delivery -->
+              </div>
+
+              <div class="delivery-method">
+                <p>Please select a delivery method:</p>
+                <v-radio-group v-model="radio" row mandatory>
+                  <v-radio value="collection" label="Collection"></v-radio>
+                  <v-radio value="courier" label="Door-to-door courier"></v-radio>
+                </v-radio-group>
+                <div v-if="radio == 'collection'" class="collect-selected">
+                  <p>Please note: Due to the Coronavirus pandemic, in order to prioritise the health and safety of our customers and employees, until further notice we are no longer accepting collections.</p>
+                </div>
+
+                <div v-if="radio == 'courier'" class="courier-selected">
+                  <div class="delivery-address">
+                    <p>Please complete your delivery address:</p>
+                    <v-text-field
+                      v-model="deliveryAddress.streetNameNumber"
+                      label="Street name and Street/Unit number"
+                      outlined
+                    ></v-text-field>
+                    <v-text-field v-model="deliveryAddress.suburb" label="Suburb" outlined></v-text-field>
+                    <div class="address-small--input">
+                      <v-text-field
+                        v-model="deliveryAddress.city"
+                        class="address-city"
+                        label="City"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        v-model="deliveryAddress.province"
+                        class="address-province"
+                        label="Province"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  v-if="radio == 'courier'"
+                  class="delivery-cost"
+                >Delivery cost: R{{deliveryCost}}</div>
               </div>
               <div class="checkout__container--payment">
-                <checkoutcomp class="checkout__comp" style="width: 100%" :finalAmount="finalAmount"></checkoutcomp>
+                <checkoutcomp
+                  class="checkout__comp"
+                  :deliveryCost="deliveryCost"
+                  :finalAmount="finalAmount"
+                ></checkoutcomp>
               </div>
             </div>
           </div>
@@ -105,6 +190,16 @@ export default {
   },
   data() {
     return {
+      // Delivery radios
+      radio: "",
+      // delivery address
+      deliveryAddress: {
+        streetNameNumber: "",
+        suburb: "",
+        city: "",
+        province: ""
+      },
+      deliveryCost: 25,
       // Waypoint options
       stickyActive: false,
       intersectionOptions: {
@@ -132,6 +227,9 @@ export default {
         result.push(total);
       }
       return result.reduce((acumm, cost) => acumm + cost, 0);
+    },
+    totalCostVATAndDelivery() {
+      return this.totalCost + this.totalCost * 0.15 + this.deliveryCost;
     },
     totalCount() {
       const result = [];
@@ -217,10 +315,6 @@ header {
 
 /* BODY */
 
-.checkout__container {
-  display: flex;
-}
-
 .payment__container {
   width: 80%;
   margin-right: 30px;
@@ -228,6 +322,11 @@ header {
   height: auto;
 }
 
+/* checkout form */
+
+.checkout__container {
+  display: flex;
+}
 .checkout__header .pictures__nav {
   font-size: 200%;
 }
@@ -238,6 +337,7 @@ header {
   display: flex;
   width: 60%;
   margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .checkout__container--payment {
@@ -245,15 +345,12 @@ header {
 }
 
 .checkout__comp {
-  margin-bottom: 40px;
-  width: 100%;
-}
-
-.cost__breakdown {
-  box-shadow: 2px 2px 2px rgb(187, 186, 186);
-  border-radius: 3px;
-  width: 100%;
+  display: flex;
+  padding: 15px;
+  width: 50%;
   margin-top: 20px;
+  margin-left: 50%;
+  height: 550px;
 }
 
 /* cart items */
@@ -266,27 +363,88 @@ header {
   height: 380px;
   padding: 10px;
   margin-left: 30px;
-  margin-top: 20px;
 }
 
 /* Table */
+
+.cost__breakdown {
+  box-shadow: 2px 2px 2px rgb(187, 186, 186);
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 20px;
+}
+
 .table_head {
   margin-top: 10px;
+}
+.grand-total {
+  color: #d35400;
+  font-size: 110%;
+  width: 100%;
 }
 .total {
   border-top: 1px solid rgb(212, 212, 212);
   display: flex;
-  text-transform: uppercase;
-  color: #d35400;
-  height: 45px;
+  font-size: 90%;
+  height: 50px;
   align-items: center;
 }
 
 .total_cost {
-  margin-left: 78%;
+  margin-left: 73%;
+}
+
+.total_cost--VAT {
+  margin-left: 75%;
+}
+
+.total_cost--delivery {
+  margin-left: 67%;
+}
+
+.total_cost--grand {
+  margin-left: 68%;
 }
 
 .total_text {
-  margin-left: 18px;
+  margin-left: 17px;
+  text-transform: uppercase;
+}
+
+/* delivery */
+
+.delivery-method {
+  margin-top: 20px;
+  position: absolute;
+  width: 24%;
+  height: 550px;
+  box-shadow: 1px 1px 1px 1px rgb(214, 214, 214);
+
+  border-radius: 3px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* address */
+
+.delivery-address {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.address-small--input {
+  display: flex;
+}
+
+.address-city {
+  width: 40%;
+}
+.address-province {
+  width: 40%;
+  margin-left: 5px;
 }
 </style>

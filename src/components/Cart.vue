@@ -23,6 +23,10 @@
             }}
             <v-icon class="deleteIcon" @click="deleteCartItem(index)">mdi-delete-forever</v-icon>
           </v-card-text>
+          <p
+            class="no-items-text"
+            v-if="getCartData.length < 1"
+          >You have no items in your shopping cart</p>
           <v-divider></v-divider>
           <v-card-actions>
             <div class="total">
@@ -32,6 +36,7 @@
                 }}
               </h2>
             </div>
+
             <v-spacer></v-spacer>
 
             <v-btn
@@ -209,5 +214,9 @@ export default {
 .btn__close {
   margin-left: 700px;
   margin-top: -400px;
+}
+
+.no-items-text {
+  margin-left: 25px;
 }
 </style>

@@ -1,8 +1,24 @@
 <template>
-  <v-app>
-    <v-card class="payment-form">
-      <h1 class="checkout__heading">Payment</h1>
-
+  <v-card class="payment-form">
+    <h1 class="checkout__heading">Payment</h1>
+    <h2 class="payment-type--text">Please select a payment method:</h2>
+    <div class="payment-type">
+      <div
+        @click="eftSelectedClass = !eftSelectedClass, cardSelectedClass = !cardSelectedClass, cardSelected = true, eftSelected = false"
+        class="card-select"
+      >
+        <div :class="{'selected': cardSelectedClass}">
+          <img src="../../public/img/debitcard.jpg" alt="Debit card example" />
+        </div>
+      </div>
+      <div
+        @click="eftSelectedClass = !eftSelectedClass, cardSelectedClass = !cardSelectedClass, cardSelected = false, eftSelected = true"
+        class="eft-select"
+      >
+        <div :class="{'selected': eftSelectedClass}">EFT</div>
+      </div>
+    </div>
+    <div v-show="cardSelected" class="card-selected">
       <div class="card-element">
         <input v-model="cardHolderName" placeholder="Card holder" type="text" id="card-holder-name" />
       </div>
@@ -20,36 +36,63 @@
         <div style="width: 40%" id="card-cvc-element"></div>
       </div>
 
-      <div class="card-element">
-        <input v-model="address" placeholder="Address" type="text" id="address-element" />
-      </div>
-
-      <div class="card-element">
-        <input v-model="address_zip" placeholder="Zip" type="text" id="address-zip-element" />
-      </div>
-
       <div class="checkout__btn__container">
         <button
           class="checkout__btn"
           @click="newPayment"
-        >Pay R{{finalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</button>
+        >Pay R{{this.totalCostVATDelivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</button>
       </div>
-      <v-overlay :value="overlay">
-        <p v-if="overlayText" class="overlay__text">Payment successful! Thank you</p>
-        <v-progress-circular v-if="overlayLoading" indeterminate size="64"></v-progress-circular>
-      </v-overlay>
-    </v-card>
-  </v-app>
+    </div>
+    <div v-show="eftSelected" class="eft-selected">
+      <p style="font-size: 90%">
+        Please transfer the the amount of
+        <span
+          style="color:#d35400;"
+        >R{{this.totalCostVATDelivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</span> to the follow bank details within two days.
+      </p>
+      <div style="font-size: 90%" class="account-details">
+        <p>
+          <strong>Account holder:</strong> Climbing Website
+        </p>
+        <p>
+          <strong>Account number:</strong> 12345678910
+        </p>
+        <p>
+          <strong>Branch code:</strong> 250655
+        </p>
+        <p>
+          <strong>Bank name:</strong> FNB
+        </p>
+      </div>
+      <p style="font-size: 90%">
+        Once the order is placed you will receive an order confirmation via email. Please use the order number as reference for the payment.
+        Please email proof of payment to email@email.com.
+      </p>
+      <div class="checkout__btn__container">
+        <button class="placeorder__btn">Place order</button>
+      </div>
+    </div>
+    <v-overlay :value="overlay">
+      <p v-if="overlayText" class="overlay__text">Payment successful! Thank you</p>
+      <v-progress-circular v-if="overlayLoading" indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+  </v-card>
 </template>
 
 <script>
 import firebase from "firebase";
 export default {
   props: {
-    finalAmount: Number
+    finalAmount: Number,
+    deliveryCost: Number
   },
   data() {
     return {
+      // payment type
+      cardSelected: true,
+      cardSelectedClass: true,
+      eftSelected: false,
+      eftSelectedClass: false,
       // overlay
       overlay: false,
       overlayLoading: false,
@@ -61,12 +104,16 @@ export default {
       cardCvc: null,
       currentUser: null,
       amount: 0,
-      address: "",
-      address_zip: "",
       cardHolderName: ""
     };
   },
   computed: {
+    totalCostVAT() {
+      return this.finalAmount + this.finalAmount * 0.15;
+    },
+    totalCostVATDelivery() {
+      return this.totalCostVAT + this.deliveryCost;
+    },
     getCartData() {
       return this.$store.getters.getCartData;
     }
@@ -155,19 +202,55 @@ export default {
 * {
   font-family: "Lato", "Arial", sans-serif;
 }
+/* choose paymenty type */
+
+.payment-type--text {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.payment-type {
+  display: flex;
+  justify-content: space-around;
+  height: 130px;
+  width: 100%;
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.eft-select,
+.card-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 95%;
+
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #d35400;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
+}
+
+/*  */
 
 .checkout__heading {
   text-transform: uppercase;
   display: flex;
   justify-content: center;
-  padding: 15px;
+  margin-bottom: 10px;
 }
 .payment-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: 20px auto;
-  padding: 15px;
   border: 1px solid #ececec;
 }
 .payment-form h5 {
@@ -180,29 +263,25 @@ export default {
 }
 #card-number-element,
 #card-expiry-element,
-#address-element,
 #card-holder-name,
-#address-zip-element,
 #card-cvc-element {
   background: white;
   padding: 5px;
   box-shadow: 2px 2px 2px rgb(187, 186, 186);
   border-radius: 5px;
   height: 40px;
+  margin-top: 30px;
 }
 
-#card-cvc-element input {
-}
-
-.place-order-button-block {
-  margin: 10px 0;
+#card-holder-name {
+  width: 100%;
+  margin-top: 10px;
 }
 
 /* form layout */
 
 .card-element--smaller {
   display: flex;
-  margin-top: 20px;
   justify-content: space-between;
 }
 
@@ -221,7 +300,8 @@ export default {
   color: #fff;
 }
 
-.checkout__btn {
+.checkout__btn,
+.placeorder__btn {
   width: 100%;
   border: 1px solid #d35400;
   color: #d35400;
@@ -232,6 +312,12 @@ export default {
   transition: color 0.3s;
   transition: background-color 0.3s;
   width: 100%;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+
+.checkout__btn {
+  margin-top: 30px;
 }
 
 .v-btn__content {

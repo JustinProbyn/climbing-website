@@ -18,6 +18,9 @@
           </div>
 
           <gear-suggester></gear-suggester>
+          <div class="mock-promotion">
+            <p style="background-color: black; color: white; padding: 3px">Promotional item</p>
+          </div>
           <div class="products__container">
             <products v-for="(product, i) in products" :product="product" :key="i"></products>
           </div>
@@ -146,7 +149,6 @@ export default {
 .gear__body {
   display: flex;
   justify-content: center;
-  flex-direction: column;
 }
 
 header {
@@ -165,6 +167,7 @@ header {
   width: 90%;
   margin-top: 150px;
   margin-bottom: 50px;
+  display: flex;
 }
 
 /* TITLE */
@@ -199,5 +202,24 @@ header {
   flex-wrap: wrap;
   width: 65%;
   align-self: flex-end;
+}
+
+/* promotion panel */
+
+.mock-promotion {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  height: 330px;
+  width: 35%;
+  border: 1px solid black;
+  border-radius: 3px;
+  justify-self: flex-start;
+  margin-top: 1300px;
+  margin-left: 25px;
+  background-image: url("../../public/img/belaying-article-1.jpg");
+  opacity: 0.8;
 }
 </style>
