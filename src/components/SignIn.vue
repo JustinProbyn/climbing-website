@@ -77,16 +77,7 @@ export default {
         password: this.password
       };
       this.$store.dispatch("firestoreSignIn", userData);
-
-      //   adds localstorage for autologin feature
-      localStorage.setItem("email", userData.email);
-      localStorage.setItem("password", userData.password);
-
-      // clears form
     }
-    // goToSignUp() {
-    //   this.$router.push("signup");
-    // }
   }
 };
 </script>

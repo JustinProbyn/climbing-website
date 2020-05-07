@@ -6,7 +6,7 @@ import firestore from "./modules/firestore";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     userSignedUp: false,
     userData: {
@@ -16,7 +16,8 @@ export default new Vuex.Store({
     },
 
     articleData: [],
-    pictureData: []
+    pictureData: [],
+    orderData: []
   },
 
   /*** MUTATIONS ***/
@@ -33,6 +34,7 @@ export default new Vuex.Store({
       state.userData.username = "";
       state.articleData = [];
       state.pictureData = [];
+      state.orderData = [];
     },
     setUsername(state, username) {
       state.userData.username = username;
@@ -44,7 +46,10 @@ export default new Vuex.Store({
       state.userSignedUp = false;
     },
 
-    /* Articles Mutations */
+    /* Order mutations */
+    loadOrder(state, order) {
+      state.orderData.unshift(order);
+    },
 
     // pushes articles into state array which are displayed under "News"
     addArticleData(state, articleData) {
@@ -103,6 +108,11 @@ export default new Vuex.Store({
       return state.userData.username;
     },
 
+    // Order getters
+    getOrderData(state) {
+      return state.orderData;
+    },
+
     // Articles Getters
     getArticleData(state) {
       return state.articleData;
@@ -122,3 +132,5 @@ export default new Vuex.Store({
     firestore
   }
 });
+
+export default store;

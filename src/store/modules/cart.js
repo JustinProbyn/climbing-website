@@ -42,7 +42,7 @@ const cart = {
     },
     loadCartOnRefresh({ commit }) {
       // load cart items from local storage
-      var cartData = JSON.parse(localStorage.getItem("cartData"));
+      const cartData = JSON.parse(localStorage.getItem("cartData"));
       if (cartData) {
         commit("loadCart", cartData);
       } else return;

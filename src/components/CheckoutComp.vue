@@ -84,10 +84,13 @@ import firebase from "firebase";
 export default {
   props: {
     finalAmount: Number,
-    deliveryCost: Number
+    deliveryCost: Number,
+    deliveryAddress: Object
   },
   data() {
     return {
+      // disable pay button
+      disabled: false,
       // payment type
       cardSelected: true,
       cardSelectedClass: true,
@@ -116,67 +119,75 @@ export default {
     },
     getCartData() {
       return this.$store.getters.getCartData;
+    },
+    getOrderData() {
+      return this.$store.getters.getOrderData;
     }
   },
   methods: {
     test() {
-      this.currentUser = firebase.auth().currentUser;
-      const p = firebase
-        .firestore()
-        .collection("stripe_customers")
-        .doc(this.currentUser.uid)
-        .collection("paymentsToken")
-        .get();
-
-      console.log(p.data());
+      console.log(this.deliveryAddress);
     },
     newPayment() {
-      this.overlay = true;
-      this.overlayLoading = true;
-      this.stripe.createToken(this.cardNumber).then(result => {
-        if (result.error) {
-          console.log(result.error);
-        } else {
-          const payment = {
-            productsBought: this.getCartData,
-            amount: this.amount,
-            source: result.token,
-            address: this.address,
-            address_zip: this.address_zip,
-            name: this.cardHolderName
-          };
+      if (
+        this.deliveryAddress.city == "" ||
+        this.deliveryAddress.province == "" ||
+        this.deliveryAddress.suburb == "" ||
+        this.deliveryAddress.streetNameNumber == ""
+      ) {
+        alert("Please enter a full delivery address");
+        return;
+      } else {
+        this.stripe.createToken(this.cardNumber).then(result => {
+          if (result.error) {
+            alert(result.error.message);
+            return;
+          } else {
+            this.overlay = true;
+            this.overlayLoading = true;
+            const payment = {
+              // orderId:
+              productsBought: this.getCartData,
+              amount: this.amount,
+              source: result.token,
+              name: this.cardHolderName,
+              deliveryAddress: this.deliveryAddress
+            };
+            this.currentUser = firebase.auth().currentUser;
+            const paymentsRef = firebase
+              .firestore()
+              .collection("stripe_customers")
+              .doc(this.currentUser.uid)
+              .collection("paymentsToken");
 
-          this.currentUser = firebase.auth().currentUser;
-          const paymentsRef = firebase
-            .firestore()
-            .collection("stripe_customers")
-            .doc(this.currentUser.uid)
-            .collection("paymentsToken");
-
-          paymentsRef.add({ payment }).then(docRef => {
-            paymentsRef.onSnapshot(querySnapshot => {
-              querySnapshot.forEach(doc => {
-                if (doc.id == docRef.id) {
-                  if ((doc.id, " => ", doc.data().error)) {
-                    alert(doc.id, " => ", doc.data().error);
-                    paymentsRef.doc(doc.id).delete();
-                    return;
-                  } else if (
-                    (doc.id, " => ", doc.data().status == "succeeded")
-                  ) {
-                    this.overlay = true;
-                    this.overlayLoading = false;
-                    this.overlayText = true;
-                    setTimeout(() => {
-                      this.overlay = false;
-                    }, 2000);
+            paymentsRef.add({ payment }).then(docRef => {
+              paymentsRef.onSnapshot(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                  if (doc.id == docRef.id) {
+                    if ((doc.id, " => ", doc.data().error)) {
+                      alert(doc.id, " => ", doc.data().error);
+                      paymentsRef.doc(doc.id).delete();
+                      return;
+                    } else if (
+                      (doc.id, " => ", doc.data().status == "succeeded")
+                    ) {
+                      this.overlay = true;
+                      this.overlayLoading = false;
+                      this.overlayText = true;
+                      setTimeout(() => {
+                        this.overlay = false;
+                        this.$router.push("user-account");
+                        // action in cart module - shows orders (stored on firebase) for user on account page
+                        this.$store.dispatch("clearCart");
+                      }, 2000);
+                    }
                   }
-                }
+                });
               });
             });
-          });
-        }
-      });
+          }
+        });
+      }
     }
   },
   mounted() {
@@ -202,7 +213,7 @@ export default {
 * {
   font-family: "Lato", "Arial", sans-serif;
 }
-/* choose paymenty type */
+/* choose payment type */
 
 .payment-type--text {
   display: flex;
@@ -240,7 +251,12 @@ export default {
   border-radius: 3px;
 }
 
-/*  */
+/* form layout */
+
+.card-element--smaller {
+  display: flex;
+  justify-content: space-between;
+}
 
 .checkout__heading {
   text-transform: uppercase;
@@ -276,13 +292,6 @@ export default {
 #card-holder-name {
   width: 100%;
   margin-top: 10px;
-}
-
-/* form layout */
-
-.card-element--smaller {
-  display: flex;
-  justify-content: space-between;
 }
 
 /* Buttons */

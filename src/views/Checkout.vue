@@ -20,7 +20,11 @@
             <div class="checkout__container--items" v-if="getCartData.length >= 1">
               <v-card class="cartitems" v-for="(item, i) in getCartData" :key="i">
                 <div class="carttext">
-                  <h4>{{ item.count }} X {{ item.product }}</h4>
+                  <h4 style="margin-bottom: 20px" class="cartitem_quantity">
+                    Qty
+                    <v-chip style="margin-left: 10px; padding: 10px" size="22">{{item.count}}</v-chip>
+                  </h4>
+                  <h4>{{ item.product }}</h4>
                   <br />
                   <p>
                     Total for this item:
@@ -80,8 +84,11 @@
                       </tbody>
                     </template>
                   </v-simple-table>
+                </v-card>
+                <!--  -->
+                <div class="totals">
                   <div class="total">
-                    <div class="total_text">Total:</div>
+                    <div class="total_text">Total</div>
                     <div class="total_cost">
                       <div class="items-total">
                         R{{
@@ -90,31 +97,30 @@
                       </div>
                     </div>
                   </div>
-                </v-card>
-                <!-- Grand Total -->
-                <div class="total">
-                  <div class="total_text">VAT</div>
-                  <div class="total_cost--VAT">
-                    <div
-                      class="items-total-VAT"
-                    >R{{(totalCost * 0.15).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</div>
+                  <!-- Grand Total -->
+                  <div class="total">
+                    <div class="total_text">VAT</div>
+                    <div class="total_cost--VAT">
+                      <div
+                        class="items-total-VAT"
+                      >R{{(totalCost * 0.15).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</div>
+                    </div>
+                  </div>
+                  <div class="total">
+                    <div class="total_text">Delivery cost</div>
+                    <div class="total_cost--delivery">
+                      <div class="delivery-cost">R{{deliveryCost}}</div>
+                    </div>
+                  </div>
+                  <div class="total">
+                    <div style="color: #d35400;" class="total_text">Grand total</div>
+                    <div class="total_cost--grand">
+                      <div
+                        class="grand-total"
+                      >R{{totalCostVATAndDelivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</div>
+                    </div>
                   </div>
                 </div>
-                <div class="total">
-                  <div class="total_text">Delivery cost</div>
-                  <div class="total_cost--delivery">
-                    <div class="delivery-cost">R{{deliveryCost}}</div>
-                  </div>
-                </div>
-                <div class="total">
-                  <div style="color: #d35400;" class="total_text">Grand total</div>
-                  <div class="total_cost--grand">
-                    <div
-                      class="grand-total"
-                    >R{{totalCostVATAndDelivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</div>
-                  </div>
-                </div>
-
                 <!-- Delivery -->
               </div>
 
@@ -163,6 +169,7 @@
                   class="checkout__comp"
                   :deliveryCost="deliveryCost"
                   :finalAmount="finalAmount"
+                  :deliveryAddress="deliveryAddress"
                 ></checkoutcomp>
               </div>
             </div>
@@ -241,13 +248,8 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log(this.getListData);
-    },
     // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {
-      // going: in, out
-      // direction: top, right, bottom, left
       if (going === this.$waypointMap.GOING_IN) {
         this.stickyActive = true;
       }
@@ -257,7 +259,7 @@ export default {
       }
     },
     deleteCartItem(index) {
-      this.$store.dispatch("deleteCartItem", index);
+      this.$store.dispatch("deleteCartItem", index); //action in cart module
     }
   }
 };
@@ -359,19 +361,28 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 300px;
-  height: 380px;
+  height: 410px;
   padding: 10px;
   margin-left: 30px;
+}
+.cartitems h4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Table */
 
 .cost__breakdown {
-  box-shadow: 2px 2px 2px rgb(187, 186, 186);
   border-radius: 3px;
   width: 100%;
   margin-top: 20px;
+}
+.totals {
+  margin-top: 30px;
+  box-shadow: 2px 2px 2px rgb(187, 186, 186);
 }
 
 .table_head {
@@ -391,7 +402,7 @@ header {
 }
 
 .total_cost {
-  margin-left: 73%;
+  margin-left: 72.8%;
 }
 
 .total_cost--VAT {
@@ -399,7 +410,7 @@ header {
 }
 
 .total_cost--delivery {
-  margin-left: 67%;
+  margin-left: 66.7%;
 }
 
 .total_cost--grand {

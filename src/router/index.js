@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Expertise from "../views/Expertise.vue";
+import firebase from "firebase";
+import cart from "../store/modules/cart";
 
 // GEAR SHOP IMPORTS
 
@@ -25,7 +27,13 @@ const routes = [
     component: () =>
       import(
         /*webpackChunkName "UserAccountPage" */ "../views/UserAccountPage.vue"
-      )
+      ),
+    beforeEnter: (to, from, next) => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (!user) next({ name: "home" });
+        else next();
+      });
+    }
   },
   {
     path: "/add-article",
@@ -67,7 +75,11 @@ const routes = [
     path: "/checkout",
     name: "checkout",
     component: () =>
-      import(/*webpackChunkName "Checkout" */ "../views/Checkout.vue")
+      import(/*webpackChunkName "Checkout" */ "../views/Checkout.vue"),
+    beforeEnter: (to, from, next) => {
+      if (cart.state.cartData.length <= 0) next({ name: "gear" });
+      else next();
+    }
   },
 
   {

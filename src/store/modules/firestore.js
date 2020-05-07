@@ -16,6 +16,9 @@ const firestore = {
         })
         .then(() => {
           if (firebase.auth().currentUser) {
+            //   adds localstorage for autologin feature
+            localStorage.setItem("email", userData.email);
+            localStorage.setItem("password", userData.password);
             //sets username in index.js store
             const fbRef = firebase
               .firestore()
@@ -28,6 +31,7 @@ const firestore = {
             //sets user in index.js store
             commit("setUser", userData);
             dispatch("setNewsAndPictureData");
+            dispatch("setOrderDataOnLogin");
           } else {
             alert("User doesn't exist");
             return;
@@ -103,6 +107,64 @@ const firestore = {
         }
       }
       callPictureData();
+    },
+
+    /****ORDER/PAYMENT ACTIONS ******/
+
+    makePayment({ commit }, payment) {
+      console.log(payment);
+      this.currentUser = firebase.auth().currentUser;
+      const paymentsRef = firebase
+        .firestore()
+        .collection("stripe_customers")
+        .doc(this.currentUser.uid)
+        .collection("paymentsToken");
+
+      paymentsRef.add({ payment }).then(docRef => {
+        paymentsRef.onSnapshot(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            if (doc.id == docRef.id) {
+              if ((doc.id, " => ", doc.data().error)) {
+                alert(doc.id, " => ", doc.data().error);
+                paymentsRef.doc(doc.id).delete();
+                return;
+              } else if ((doc.id, " => ", doc.data().status == "succeeded")) {
+                this.overlay = true;
+                this.overlayLoading = false;
+                this.overlayText = true;
+                setTimeout(() => {
+                  this.overlay = false;
+
+                  // action in cart module - shows orders (stored on firebase) for user on account page
+                  commit("clearCart");
+                }, 2000);
+              }
+            }
+          });
+        });
+      });
+    },
+
+    setOrderDataOnLogin({ commit }) {
+      // load order from firestore
+      firebase.auth().onAuthStateChanged(user => {
+        async function odata() {
+          const snapshot = await firebase
+            .firestore()
+            .collection("stripe_customers")
+            .doc(user.uid)
+            .collection("paymentsToken")
+            .get();
+          return snapshot.docs.map(doc => doc.data());
+        }
+        async function orderData() {
+          const arrayData = await odata();
+          arrayData.forEach(order => {
+            commit("loadOrder", order.payment);
+          });
+        }
+        orderData();
+      });
     },
 
     /***ADDING PICTURES***/
@@ -270,6 +332,26 @@ const firestore = {
         }
       }
       pictureData();
+
+      // load order from firestore
+      firebase.auth().onAuthStateChanged(user => {
+        async function odata() {
+          const snapshot = await firebase
+            .firestore()
+            .collection("stripe_customers")
+            .doc(user.uid)
+            .collection("paymentsToken")
+            .get();
+          return snapshot.docs.map(doc => doc.data());
+        }
+        async function orderData() {
+          const arrayData = await odata();
+          arrayData.forEach(order => {
+            commit("loadOrder", order.payment);
+          });
+        }
+        orderData();
+      });
     }
     /**********/
   },

@@ -5,9 +5,8 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch("onRefresh");
-    this.$store.dispatch("loadCartOnRefresh");
-    // tries to login in with localstorage data when page reloads
+    this.$store.dispatch("onRefresh"); //action in firestore module
+    this.$store.dispatch("loadCartOnRefresh"); //action in cart module
   }
 };
 </script>

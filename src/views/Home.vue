@@ -134,12 +134,17 @@ export default {
     },
     initSigninLoader() {
       this.SigninShowLoader = true;
+      if (this.auth) {
+        this.reloadPage += 1;
+      }
+      if (!this.auth) {
+        setTimeout(() => {
+          this.SigninShowLoader = false;
+        }, 1500);
+      }
     },
     initSignupDialog() {
       this.SignupShowDialog = true;
-      // setTimeout(() => {
-      //   this.SignupShowDialog = false;
-      // }, 2000);
     },
     signOut() {
       this.reloadPage += 1;
