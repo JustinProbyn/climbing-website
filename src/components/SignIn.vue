@@ -77,6 +77,7 @@ export default {
         password: this.password
       };
       this.$store.dispatch("firestoreSignIn", userData);
+      this.$forceUpdate;
     }
   }
 };

@@ -1,7 +1,7 @@
-<template v-slot:activator="{ on }">
+<template :key="reloadPage" v-slot:activator="{ on }">
   <v-app>
     <div class="body">
-      <header class="home__header" :key="reloadPage">
+      <header class="home__header">
         <navbar class="nav__bar--home"></navbar>
         <div class="menu">
           <v-icon
@@ -128,15 +128,16 @@ export default {
   },
   watch: {},
   methods: {
+    test() {
+      console.log(this.getOrderData);
+      this.$forceUpdate();
+    },
     openMenu() {
       this.showMenu = !this.showMenu;
       this.initMenu = true;
     },
     initSigninLoader() {
       this.SigninShowLoader = true;
-      if (this.auth) {
-        this.reloadPage += 1;
-      }
       if (!this.auth) {
         setTimeout(() => {
           this.SigninShowLoader = false;
@@ -147,12 +148,14 @@ export default {
       this.SignupShowDialog = true;
     },
     signOut() {
-      this.reloadPage += 1;
       this.$store.dispatch("firestoreSignOut");
       // removes store localstorage and removes state.userData
     }
   },
   computed: {
+    getOrderData() {
+      return this.$store.getters.getOrderData;
+    },
     auth() {
       return this.$store.getters.isLoggedIn;
       // checks if state.userData.email exists then shows UI components based result

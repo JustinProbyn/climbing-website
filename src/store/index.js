@@ -47,7 +47,10 @@ const store = new Vuex.Store({
     },
 
     /* Order mutations */
-    loadOrder(state, order) {
+    loadOrderOnLogin(state, order) {
+      state.orderData.unshift(order);
+    },
+    loadOrderOnRefresh(state, order) {
       state.orderData.unshift(order);
     },
 
@@ -68,15 +71,6 @@ const store = new Vuex.Store({
 
     userSignedUpPopupClose({ commit }) {
       commit("popupClose");
-    },
-    // sign out removing localstorage
-    signOut({ commit }) {
-      localStorage.removeItem("cartData");
-      localStorage.removeItem("password");
-      localStorage.removeItem("email");
-      localStorage.removeItem("username");
-      commit("signOutUser");
-      commit("clearCart");
     },
 
     /* Article Actions */

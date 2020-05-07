@@ -61,7 +61,7 @@ const firestore = {
         });
     },
     // signs out
-    firestoreSignOut({ dispatch }) {
+    firestoreSignOut({ commit }) {
       firebase
         .auth()
         .signOut()
@@ -72,7 +72,12 @@ const firestore = {
           console.log(er);
         });
       //this action in index.js clears cart and local storage
-      dispatch("signOut");
+      localStorage.removeItem("cartData");
+      localStorage.removeItem("password");
+      localStorage.removeItem("email");
+      localStorage.removeItem("username");
+      commit("signOutUser");
+      commit("clearCart");
     },
     //set news articles and pictures on login
     setNewsAndPictureData({ commit }) {
@@ -111,39 +116,39 @@ const firestore = {
 
     /****ORDER/PAYMENT ACTIONS ******/
 
-    makePayment({ commit }, payment) {
-      console.log(payment);
-      this.currentUser = firebase.auth().currentUser;
-      const paymentsRef = firebase
-        .firestore()
-        .collection("stripe_customers")
-        .doc(this.currentUser.uid)
-        .collection("paymentsToken");
+    // makePayment({ commit }, payment) {
+    //   console.log(payment);
+    //   this.currentUser = firebase.auth().currentUser;
+    //   const paymentsRef = firebase
+    //     .firestore()
+    //     .collection("stripe_customers")
+    //     .doc(this.currentUser.uid)
+    //     .collection("paymentsToken");
 
-      paymentsRef.add({ payment }).then(docRef => {
-        paymentsRef.onSnapshot(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            if (doc.id == docRef.id) {
-              if ((doc.id, " => ", doc.data().error)) {
-                alert(doc.id, " => ", doc.data().error);
-                paymentsRef.doc(doc.id).delete();
-                return;
-              } else if ((doc.id, " => ", doc.data().status == "succeeded")) {
-                this.overlay = true;
-                this.overlayLoading = false;
-                this.overlayText = true;
-                setTimeout(() => {
-                  this.overlay = false;
+    //   paymentsRef.add({ payment }).then(docRef => {
+    //     paymentsRef.onSnapshot(querySnapshot => {
+    //       querySnapshot.forEach(doc => {
+    //         if (doc.id == docRef.id) {
+    //           if ((doc.id, " => ", doc.data().error)) {
+    //             alert(doc.id, " => ", doc.data().error);
+    //             paymentsRef.doc(doc.id).delete();
+    //             return;
+    //           } else if ((doc.id, " => ", doc.data().status == "succeeded")) {
+    //             this.overlay = true;
+    //             this.overlayLoading = false;
+    //             this.overlayText = true;
+    //             setTimeout(() => {
+    //               this.overlay = false;
 
-                  // action in cart module - shows orders (stored on firebase) for user on account page
-                  commit("clearCart");
-                }, 2000);
-              }
-            }
-          });
-        });
-      });
-    },
+    //               // action in cart module - shows orders (stored on firebase) for user on account page
+    //               commit("clearCart");
+    //             }, 2000);
+    //           }
+    //         }
+    //       });
+    //     });
+    //   });
+    // },
 
     setOrderDataOnLogin({ commit }) {
       // load order from firestore
@@ -160,7 +165,7 @@ const firestore = {
         async function orderData() {
           const arrayData = await odata();
           arrayData.forEach(order => {
-            commit("loadOrder", order.payment);
+            commit("loadOrderOnLogin", order.payment);
           });
         }
         orderData();
@@ -335,6 +340,9 @@ const firestore = {
 
       // load order from firestore
       firebase.auth().onAuthStateChanged(user => {
+        if (!user) {
+          return;
+        }
         async function odata() {
           const snapshot = await firebase
             .firestore()
@@ -347,7 +355,7 @@ const firestore = {
         async function orderData() {
           const arrayData = await odata();
           arrayData.forEach(order => {
-            commit("loadOrder", order.payment);
+            commit("loadOrderOnRefresh", order.payment);
           });
         }
         orderData();
