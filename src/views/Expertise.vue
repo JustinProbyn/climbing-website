@@ -2,8 +2,8 @@
   <v-app>
     <div class="expertise__body">
       <header>
+        <stickynav v-cloak v-if="stickyActive == false"></stickynav>
         <navbar v-if="stickyActive == true"></navbar>
-        <stickynav v-if="stickyActive == false"></stickynav>
         <div class="whitepanel">
           <div
             v-waypoint="{
@@ -65,7 +65,7 @@ export default {
     return {
       currentTitle: "",
       // Waypoint options
-      stickyActive: false,
+      stickyActive: true,
       intersectionOptions: {
         root: null,
         rootMargin: "0px 0px 0px 0px",
@@ -99,6 +99,10 @@ export default {
 
 <style>
 /* ---GENERAL--- */
+[v-cloak] {
+  display: none;
+}
+
 * {
   box-sizing: border-box;
   word-break: break-word;

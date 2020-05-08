@@ -56,7 +56,14 @@ const routes = [
   {
     path: "/news",
     name: "news",
-    component: () => import(/*webpackChunkName "News" */ "../views/News.vue")
+    component: () => import(/*webpackChunkName "News" */ "../views/News.vue"),
+    beforeEnter: (to, from, next) => {
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        alert("Sign in to view the latest News articles");
+        next(from);
+      } else next();
+    }
   },
   {
     path: "/gear",
@@ -68,7 +75,14 @@ const routes = [
     path: "/pictures",
     name: "pictures",
     component: () =>
-      import(/*webpackChunkName "Pictures" */ "../views/Pictures.vue")
+      import(/*webpackChunkName "Pictures" */ "../views/Pictures.vue"),
+    beforeEnter: (to, from, next) => {
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        alert("Sign in to view the latest Pictures");
+        next(from);
+      } else next();
+    }
   },
 
   {

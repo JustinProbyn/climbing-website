@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       // Waypoint options
-      stickyActive: false,
+      stickyActive: true,
       intersectionOptions: {
         root: null,
         rootMargin: "0px 0px 0px 0px",
@@ -124,8 +124,6 @@ export default {
   methods: {
     // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {
-      // going: in, out
-      // direction: top, right, bottom, left
       if (going === this.$waypointMap.GOING_IN) {
         this.stickyActive = true;
       }

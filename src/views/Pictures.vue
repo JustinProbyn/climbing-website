@@ -44,7 +44,7 @@ export default {
   data: () => ({
     componentKey: 1,
     datas: [],
-    stickyActive: false,
+    stickyActive: true,
     intersectionOptions: {
       root: null,
       rootMargin: "0px 0px 0px 0px",

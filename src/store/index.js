@@ -107,7 +107,7 @@ const store = new Vuex.Store({
       return state.orderData;
     },
 
-    // Articles Getters
+    // Articles etters
     getArticleData(state) {
       return state.articleData;
     },
@@ -115,7 +115,7 @@ const store = new Vuex.Store({
       return state.articleID;
     },
 
-    //Picture getters.
+    //Picture getters
     getPictureData(state) {
       return state.pictureData;
     }

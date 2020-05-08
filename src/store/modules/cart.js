@@ -16,7 +16,7 @@ const cart = {
       state.cartData.push(cartData);
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
     },
-    // loads cart from local storage on refresh
+    // loads cart from localstorage on refresh
     loadCart(state, cartData) {
       state.cartData = cartData;
     },
@@ -41,7 +41,7 @@ const cart = {
       commit("deleteCartItem", index);
     },
     loadCartOnRefresh({ commit }) {
-      // load cart items from local storage
+      // load cart items from localstorage
       const cartData = JSON.parse(localStorage.getItem("cartData"));
       if (cartData) {
         commit("loadCart", cartData);

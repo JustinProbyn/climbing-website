@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       // Waypoint options
-      stickyActive: false,
+      stickyActive: true,
       intersectionOptions: {
         root: null,
         rootMargin: "0px 0px 0px 0px",

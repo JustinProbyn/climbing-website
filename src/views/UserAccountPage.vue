@@ -13,7 +13,7 @@
           }"
           ></div>
           <div class="user-account__header">
-            <h1>Your Profile</h1>
+            <h1>Your Orders</h1>
             <div v-if="getOrderData.length > 1" class="orders">
               <div class="pending-orders-heading">Your pending orders are as follows:</div>
               <div v-for="(order, i) in getOrderData" :key="i" class="orders_separate">
@@ -59,7 +59,7 @@ export default {
     return {
       currentTitle: "",
       // Waypoint options
-      stickyActive: false,
+      stickyActive: true,
       intersectionOptions: {
         root: null,
         rootMargin: "0px 0px 0px 0px",
@@ -115,6 +115,9 @@ export default {
   flex-direction: row;
 }
 
+h4 {
+  text-align: center;
+}
 header {
   background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");

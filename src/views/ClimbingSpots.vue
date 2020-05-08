@@ -403,7 +403,7 @@ export default {
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 
       // Waypoint options
-      stickyActive: false,
+      stickyActive: true,
       intersectionOptions: {
         root: null,
         rootMargin: "0px 0px 0px 0px",

@@ -16,22 +16,19 @@ const firestore = {
         })
         .then(() => {
           if (firebase.auth().currentUser) {
-            //   adds localstorage for autologin feature
-            localStorage.setItem("email", userData.email);
-            localStorage.setItem("password", userData.password);
-            //sets username in index.js store
+            localStorage.setItem("email", userData.email); //  adds localstorage for autologin feature
+            localStorage.setItem("password", userData.password); //  adds localstorage for autologin feature
             const fbRef = firebase
               .firestore()
               .collection("userdata")
               .doc(userData.email);
             fbRef.get().then(doc => {
               commit("setUsername", doc.data().username);
-              localStorage.setItem("username", doc.data().username);
+              localStorage.setItem("username", doc.data().username); //sets username in index.js store
             });
-            //sets user in index.js store
-            commit("setUser", userData);
-            dispatch("setNewsAndPictureData");
-            dispatch("setOrderDataOnLogin");
+            commit("setUser", userData); //sets user in index.js store
+            dispatch("setNewsAndPictureData"); //This action sets pictures and news articles for authed users on login
+            dispatch("setOrderDataOnLogin"); //sets a user's order when they login in
           } else {
             alert("User doesn't exist");
             return;
@@ -43,7 +40,6 @@ const firestore = {
       firebase
         .auth()
         .createUserWithEmailAndPassword(userData.email, userData.password)
-
         .then(() => {
           const fireStoreRef = firebase
             .firestore()
@@ -71,7 +67,7 @@ const firestore = {
         .catch(function(er) {
           console.log(er);
         });
-      //this action in index.js clears cart and local storage
+      //this action, in index.js, clears cart and local storage on signout
       localStorage.removeItem("cartData");
       localStorage.removeItem("password");
       localStorage.removeItem("email");
@@ -116,40 +112,6 @@ const firestore = {
 
     /****ORDER/PAYMENT ACTIONS ******/
 
-    // makePayment({ commit }, payment) {
-    //   console.log(payment);
-    //   this.currentUser = firebase.auth().currentUser;
-    //   const paymentsRef = firebase
-    //     .firestore()
-    //     .collection("stripe_customers")
-    //     .doc(this.currentUser.uid)
-    //     .collection("paymentsToken");
-
-    //   paymentsRef.add({ payment }).then(docRef => {
-    //     paymentsRef.onSnapshot(querySnapshot => {
-    //       querySnapshot.forEach(doc => {
-    //         if (doc.id == docRef.id) {
-    //           if ((doc.id, " => ", doc.data().error)) {
-    //             alert(doc.id, " => ", doc.data().error);
-    //             paymentsRef.doc(doc.id).delete();
-    //             return;
-    //           } else if ((doc.id, " => ", doc.data().status == "succeeded")) {
-    //             this.overlay = true;
-    //             this.overlayLoading = false;
-    //             this.overlayText = true;
-    //             setTimeout(() => {
-    //               this.overlay = false;
-
-    //               // action in cart module - shows orders (stored on firebase) for user on account page
-    //               commit("clearCart");
-    //             }, 2000);
-    //           }
-    //         }
-    //       });
-    //     });
-    //   });
-    // },
-
     setOrderDataOnLogin({ commit }) {
       // load order from firestore
       firebase.auth().onAuthStateChanged(user => {
@@ -165,7 +127,7 @@ const firestore = {
         async function orderData() {
           const arrayData = await odata();
           arrayData.forEach(order => {
-            commit("loadOrderOnLogin", order.payment);
+            commit("loadOrderOnLogin", order.payment); //mutation in index.js
           });
         }
         orderData();
@@ -193,9 +155,9 @@ const firestore = {
               caption: imageData.caption,
               imageName: imageData.imageName
             };
-            dispatch("addPicture", pictureData); // in index.js
+            dispatch("addPicture", pictureData); // action in index.js
 
-            dispatch("storePictureData", pictureData); // in firestore.js
+            dispatch("storePictureData", pictureData); // action in firestore.js
             router.push("pictures");
           })
           .catch(function(error) {
@@ -224,7 +186,6 @@ const firestore = {
 
     /***ADDING ARTICLES***/
     submitArticle({ dispatch }, articleData) {
-      console.log(articleData);
       //Uploads image for article on firestore
       const storageRef = firebase.storage().ref();
       const fileName = articleData.imageName;
@@ -235,15 +196,11 @@ const firestore = {
           .getDownloadURL()
           .then(url => {
             // dispatches storeArticleData to store headline, text, url, etc.
-            console.log(url);
             const image = url;
-
             var currentDate = new Date();
-
             var newDate = currentDate.getDate();
             var month = currentDate.getMonth();
             var year = currentDate.getFullYear();
-
             var date = newDate + "/" + (month + 1) + "/" + year;
 
             const articleTextData = {
@@ -284,8 +241,8 @@ const firestore = {
         });
     },
     /***REFRESHING PAGE***/
-    // When page is refreshed sets user and articles (from firestore) - created() in App.vue
-    // load user from local storage. Data was stored in SignIn.vue
+    // When page is refreshed sets user, articles, and a user's orders (from firestore). Action dispatched to do so in App.vue on created()
+    // load user from localstorage. Data was stored in SignIn.vue
     onRefresh({ commit }) {
       const email = localStorage.getItem("email");
       if (!email) {
@@ -295,7 +252,6 @@ const firestore = {
       if (!password) {
         return;
       }
-
       const username = localStorage.getItem("username");
       if (!password) {
         return;

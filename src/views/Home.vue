@@ -32,13 +32,12 @@
                 <v-dialog
                   v-if="!auth && userSignedUp"
                   v-model="SignupShowDialog"
-                  hide-overlay
-                  persistent
                   width="300"
+                  persistent
                 >
-                  <v-card class="signin__text" color="primary" dark>
+                  <v-card v-if="userSignedUp" class="signin__text" dark>
                     <v-card-text class="signin__text">
-                      <p style="margin-bottom: 60px">
+                      <p style="margin-bottom: 60px; text-align: center">
                         Thank you for registering.
                         <br />Please sign in
                       </p>
