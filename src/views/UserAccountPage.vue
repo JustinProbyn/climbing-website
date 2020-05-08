@@ -15,7 +15,7 @@
           <div class="user-account__header">
             <h1>Your Orders</h1>
             <div
-              style="margin-bottom: 30px"
+              style="margin-bottom: 20px"
               v-if="getOrderData <= 0"
               class="pending-orders-heading"
             >You have no current orders.</div>
