@@ -19,7 +19,7 @@
             >
               <div v-if="initMenu" class="btns-home">
                 <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
-                <v-btn @click="test">Test</v-btn>
+
                 <v-dialog v-if="!auth" max-width="500">
                   <template v-slot:activator="{ on }">
                     <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth">Sign Up</v-btn>
@@ -127,9 +127,6 @@ export default {
   },
   watch: {},
   methods: {
-    test() {
-      this.$store.dispatch("setGearShopItems");
-    },
     openMenu() {
       this.showMenu = !this.showMenu;
       this.initMenu = true;
