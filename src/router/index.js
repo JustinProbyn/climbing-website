@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Expertise from "../views/Expertise.vue";
 import firebase from "firebase";
 import cart from "../store/modules/cart";
+import store from "../store/index";
 
 // GEAR SHOP IMPORTS
 
@@ -58,9 +59,8 @@ const routes = [
     name: "news",
     component: () => import(/*webpackChunkName "News" */ "../views/News.vue"),
     beforeEnter: (to, from, next) => {
-      const user = firebase.auth().currentUser;
-      if (!user) {
-        alert("Sign in to view the latest News articles");
+      if (store.state.articleData.length <= 0) {
+        alert("Please sign in to view the latest news articles");
         next(from);
       } else next();
     }
@@ -77,9 +77,8 @@ const routes = [
     component: () =>
       import(/*webpackChunkName "Pictures" */ "../views/Pictures.vue"),
     beforeEnter: (to, from, next) => {
-      const user = firebase.auth().currentUser;
-      if (!user) {
-        alert("Sign in to view the latest Pictures");
+      if (store.state.articleData.length <= 0) {
+        alert("Please sign in to view the latest pictures");
         next(from);
       } else next();
     }

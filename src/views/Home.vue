@@ -161,7 +161,6 @@ export default {
     },
     userSignedUp() {
       return this.$store.getters.isSignedUp;
-      // checks if state.userData.email exists then shows UI components based result
     }
   }
 };

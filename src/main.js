@@ -42,5 +42,12 @@ new Vue({
   router,
   store,
   vuetify,
+  created() {
+    firebase.auth().onAuthStateChanged(async firebaseUser => {
+      if (firebaseUser) {
+        this.$store.dispatch("whenUserIsLoggedIn", firebaseUser);
+      }
+    });
+  },
   render: h => h(App)
 }).$mount("#app");

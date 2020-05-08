@@ -7,33 +7,32 @@ const firestore = {
   actions: {
     /***SIGNIN/SIGNOUT ACTIONS***/
     // signs in and dispatches action to set data from firestore
-    firestoreSignIn({ commit, dispatch }, userData) {
+    firestoreSignIn(state, userData) {
       firebase
         .auth()
         .signInWithEmailAndPassword(userData.email, userData.password)
         .catch(function(error) {
-          console.log(error);
-        })
-        .then(() => {
-          if (firebase.auth().currentUser) {
-            localStorage.setItem("email", userData.email); //  adds localstorage for autologin feature
-            localStorage.setItem("password", userData.password); //  adds localstorage for autologin feature
-            const fbRef = firebase
-              .firestore()
-              .collection("userdata")
-              .doc(userData.email);
-            fbRef.get().then(doc => {
-              commit("setUsername", doc.data().username);
-              localStorage.setItem("username", doc.data().username); //sets username in index.js store
-            });
-            commit("setUser", userData); //sets user in index.js store
-            dispatch("setNewsAndPictureData"); //This action sets pictures and news articles for authed users on login
-            dispatch("setOrderDataOnLogin"); //sets a user's order when they login in
-          } else {
-            alert("User doesn't exist");
-            return;
-          }
+          alert(error.message);
         });
+    },
+    whenUserIsLoggedIn({ commit, dispatch }) {
+      const user = firebase.auth().currentUser;
+      if (user) {
+        const fbRef = firebase
+          .firestore()
+          .collection("userdata")
+          .doc(user.email);
+        fbRef.get().then(doc => {
+          commit("setUsername", doc.data().username);
+          localStorage.setItem("username", doc.data().username); //sets username in index.js store
+        });
+        commit("setUser", user); //sets user in index.js store
+        dispatch("setNewsAndPictureData"); //This action sets pictures and news articles for authed users on login
+        dispatch("setOrderDataOnLogin"); //loads a user's order when they login in
+      } else {
+        alert("User doesn't exist");
+        return;
+      }
     },
     // signs user up
     firestoreSignUp({ commit }, userData) {
@@ -69,15 +68,14 @@ const firestore = {
         });
       //this action, in index.js, clears cart and local storage on signout
       localStorage.removeItem("cartData");
-      localStorage.removeItem("password");
       localStorage.removeItem("email");
       localStorage.removeItem("username");
       commit("signOutUser");
       commit("clearCart");
     },
-    //set news articles and pictures on login
+    //set news articles and pictures
     setNewsAndPictureData({ commit }) {
-      //set news on login
+      //set news
       async function newsData() {
         const snapshot = await firebase
           .firestore()
@@ -87,13 +85,13 @@ const firestore = {
       }
       async function callNewsData() {
         const arrayData = await newsData();
-        for (let i = 0; i <= arrayData.length; i++) {
+        for (let i = 0; i < arrayData.length; i++) {
           commit("addArticleData", arrayData[i]);
         }
       }
       callNewsData();
 
-      //set pictures on login
+      //set pictures
       async function pictureData() {
         const snapshot = await firebase
           .firestore()
@@ -103,7 +101,7 @@ const firestore = {
       }
       async function callPictureData() {
         const arrayData = await pictureData();
-        for (let i = 0; i <= arrayData.length; i++) {
+        for (let i = 0; i < arrayData.length; i++) {
           commit("addPictureData", arrayData[i]);
         }
       }
@@ -241,80 +239,22 @@ const firestore = {
         });
     },
     /***REFRESHING PAGE***/
-    // When page is refreshed sets user, articles, and a user's orders (from firestore). Action dispatched to do so in App.vue on created()
-    // load user from localstorage. Data was stored in SignIn.vue
+    // When page is refreshed sets user. Action dispatched to do so in App.vue on created()
     onRefresh({ commit }) {
-      const email = localStorage.getItem("email");
-      if (!email) {
-        return;
-      }
-      const password = localStorage.getItem("password");
-      if (!password) {
-        return;
-      }
-      const username = localStorage.getItem("username");
-      if (!password) {
-        return;
-      }
-      commit("setUser", {
-        email: email,
-        password: password,
-        username: username
-      });
-
-      // load articles from firestore
-      async function data() {
-        const snapshot = await firebase
-          .firestore()
-          .collection("articledata")
-          .get();
-        return snapshot.docs.map(doc => doc.data());
-      }
-      async function newsData() {
-        const arrayData = await data();
-        for (let i = 0; i < arrayData.length; i++) {
-          commit("addArticleData", arrayData[i]);
-        }
-      }
-      newsData();
-
-      // load pictures from firestore
-      async function pdata() {
-        const snapshot = await firebase
-          .firestore()
-          .collection("picturedata")
-          .get();
-        return snapshot.docs.map(doc => doc.data());
-      }
-      async function pictureData() {
-        const arrayData = await pdata();
-        for (let i = 0; i < arrayData.length; i++) {
-          commit("addPictureData", arrayData[i]);
-        }
-      }
-      pictureData();
-
-      // load order from firestore
       firebase.auth().onAuthStateChanged(user => {
-        if (!user) {
+        if (user) {
+          const email = user.email;
+          const username = localStorage.getItem("username");
+          if (!username) {
+            return;
+          }
+          commit("setUser", {
+            email: email,
+            username: username
+          });
+        } else if (!user) {
           return;
         }
-        async function odata() {
-          const snapshot = await firebase
-            .firestore()
-            .collection("stripe_customers")
-            .doc(user.uid)
-            .collection("paymentsToken")
-            .get();
-          return snapshot.docs.map(doc => doc.data());
-        }
-        async function orderData() {
-          const arrayData = await odata();
-          arrayData.forEach(order => {
-            commit("loadOrderOnRefresh", order.payment);
-          });
-        }
-        orderData();
       });
     }
     /**********/

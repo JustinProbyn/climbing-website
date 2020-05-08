@@ -11,8 +11,7 @@ const store = new Vuex.Store({
     userSignedUp: false,
     userData: {
       username: "",
-      email: "",
-      password: ""
+      email: ""
     },
 
     articleData: [],
@@ -25,7 +24,6 @@ const store = new Vuex.Store({
     // User sign in / up/ out Mutations
     setUser(state, userData) {
       state.userData.email = userData.email;
-      state.userData.password = userData.password;
       state.userData.username = userData.username;
     },
     signOutUser(state) {
