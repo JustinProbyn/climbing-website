@@ -33,7 +33,10 @@
                   />
                 </v-card>
                 <v-card class="orders-individual">
-                  <div>Cost: R{{order.amount}}</div>
+                  <div>
+                    Cost: R{{order.amount.toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+                  </div>
                   <div>
                     This order is being delivered to
                     <strong>{{order.deliveryAddress.streetNameNumber}}, {{order.deliveryAddress.suburb}}, {{order.deliveryAddress.city}}, {{order.deliveryAddress.province}}</strong>
