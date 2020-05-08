@@ -14,6 +14,11 @@
           ></div>
           <div class="user-account__header">
             <h1>Your Orders</h1>
+            <div
+              style="margin-bottom: 30px"
+              v-if="getOrderData <= 0"
+              class="pending-orders-heading"
+            >You have no current orders.</div>
             <div v-if="getOrderData.length > 1" class="orders">
               <div class="pending-orders-heading">Your pending orders are as follows:</div>
               <div v-for="(order, i) in getOrderData" :key="i" class="orders_separate">
