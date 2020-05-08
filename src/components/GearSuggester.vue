@@ -130,7 +130,7 @@ export default {
       selectedClimbing: [],
       //
       leadOutSideGear: [
-        "shoes",
+        "climbingShoes",
         "carabiners",
         "ropes",
         "ropeBags",
@@ -142,7 +142,7 @@ export default {
         "harnesses"
       ],
       leadInGymGear: [
-        "shoes",
+        "climbingShoes",
         "carabiners",
         "ropes",
         "ropeBags",
@@ -151,11 +151,11 @@ export default {
         "belayDevices",
         "harnesses"
       ],
-      boulderingGear: ["shoes", "chalk", "chalkBags", "crashPads"],
-      topropeGear: ["shoes", "chalk", "chalkBags", "harnesses"],
+      boulderingGear: ["climbingShoes", "chalk", "chalkBags", "crashPads"],
+      topropeGear: ["climbingShoes", "chalk", "chalkBags", "harnesses"],
       //
       products: {
-        shoes: [],
+        climbingShoes: [],
         ropes: [],
         chalk: [],
         chalkBags: [],

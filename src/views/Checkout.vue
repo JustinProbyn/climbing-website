@@ -259,7 +259,10 @@ export default {
       }
     },
     deleteCartItem(index) {
-      this.$store.dispatch("deleteCartItem", index); //action in cart module
+      this.$store.dispatch("deleteCartItem", index);
+      if (this.getCartData.length <= 0) {
+        this.$router.push("gear");
+      } //action in cart module
     }
   }
 };

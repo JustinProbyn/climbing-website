@@ -1,23 +1,28 @@
 <template>
-  <div class="SnCs__body">
+  <div class="slingAndCords__body">
     <header>
       <navbar></navbar>
       <cart></cart>
       <div class="whitepanel">
-        <div class="SnCs__header">
+        <div class="slingAndCords__header">
           <h1>Slings and Cords</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="(SnC, i) in getGear" :key="i" class="mx-auto card" max-width="250">
-            <v-img :src="SnC.itemPicture" height="200px"></v-img>
-            <div class="SnC__name">
-              <h3>{{ SnC.itemName }}</h3>
+          <v-card
+            v-for="(slingAndCord, i) in getGear"
+            :key="i"
+            class="mx-auto card"
+            max-width="250"
+          >
+            <v-img :src="slingAndCord.itemPicture" height="200px"></v-img>
+            <div class="slingAndCord__name">
+              <h3>{{ slingAndCord.itemName }}</h3>
             </div>
-            <div class="SnC__price">
+            <div class="slingAndCord__price">
               <h4>
                 <strong>
                   R{{
-                  SnC.itemPrice
+                  slingAndCord.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -26,8 +31,8 @@
             </div>
             <div class="counter">
               <v-btn
-                :id="SnC.id"
-                :disabled="SnC.count <= 1 ? !disabled : disabled"
+                :id="slingAndCord.id"
+                :disabled="slingAndCord.count <= 1 ? !disabled : disabled"
                 @click="decreaseProduct($event)"
                 outlined
                 x-small
@@ -36,10 +41,10 @@
                 <v-icon style="font-size: 120%">mdi-minus</v-icon>
               </v-btn>
 
-              <div>{{SnC.count}}</div>
+              <div>{{slingAndCord.count}}</div>
 
               <v-btn
-                :id="SnC.id"
+                :id="slingAndCord.id"
                 @click="increaseProduct($event)"
                 outlined
                 x-small
@@ -50,7 +55,7 @@
             </div>
             <div class="btn__container">
               <button
-                :id="SnC.id"
+                :id="slingAndCord.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
@@ -74,11 +79,11 @@ import { IncreaseDecreaseMixin } from "../../mixins/IncreaseDecreaseMixin";
 export default {
   computed: {
     getGear() {
-      return this.$store.getters.getGearshopData.SnCs;
+      return this.$store.getters.getGearshopData.slingAndCords;
     }
   },
   data() {
-    return { disabled: false, product: "SnCs" };
+    return { disabled: false, product: "slingAndCords" };
   },
   components: {
     navbar: NavBar,
@@ -97,11 +102,11 @@ export default {
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
-.SnCs__header {
+.slingAndCords__header {
   width: 100%;
 }
-.SnCs__header h1,
-.SnCs__header h2 {
+.slingAndCords__header h1,
+.slingAndCords__header h2 {
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   text-transform: uppercase;
@@ -119,12 +124,12 @@ export default {
   background-size: 100%;
 }
 
-.SnCs__header .pictures__nav {
+.slingAndCords__header .pictures__nav {
   float: right;
   font-size: 200%;
 }
 
-.SnCs__body {
+.slingAndCords__body {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -151,15 +156,15 @@ header {
   border-radius: 5px;
 }
 
-/* SnC ITEMS */
+/* slingAndCord ITEMS */
 
-.SnC__name {
+.slingAndCord__name {
   display: flex;
   justify-content: center;
   margin-top: 7px;
 }
 
-.SnC__price {
+.slingAndCord__price {
   display: flex;
   justify-content: center;
   margin-top: 7px;

@@ -92,7 +92,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (cart.state.cartData.length <= 0) next({ name: "gear" });
       else next();
-    }
+    },
   },
 
   {

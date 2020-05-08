@@ -1,8 +1,8 @@
-// import firebase from "firebase";
+import firebase from "firebase";
 const gear = {
   state: {
     itemsInStock: {
-      shoes: [
+      climbingShoes: [
         {
           id: 1,
           count: 1,
@@ -449,84 +449,62 @@ const gear = {
     }
   },
   mutations: {
-    //     // Sets ItemsInStock
+    // Sets ItemsInStock
 
-    //     setGearshop(state, products) {
-    //       state.itemsInStock.BDs = products;
-    //     },
-    //     increaseCountMutation(state, { id, product }) {
-    //       Object.entries(state.itemsInStock).forEach(el => {
-    //         if (el[0] == product) {
-    //           Object.entries(el[1]).forEach(item => {
-    //             if (item[1].id == id) {
-    //               return item[1].count++;
-    //             }
-    //           });
-    //         }
-    //       });
-    //     },
-    //     decreaseCountMutation(state, { id, product }) {
-    //       Object.entries(state.itemsInStock).forEach(el => {
-    //         if (el[0] == product) {
-    //           Object.entries(el[1]).forEach(item => {
-    //             if (item[1].id == id) {
-    //               return item[1].count--;
-    //             }
-    //           });
-    //         }
-    //       });
-    //     }
-    //   },
-    //   actions: {
-    //     /*===============================================
-    // =================================================*/
-    //     submitPicture({ dispatch }, imageData) {
-    //       // Upload file
-    //       const storageRef = firebase.storage().ref();
-    //       const fileName = imageData.imageName;
-    //       const imageNumber = Math.floor(Math.random() * 1000);
-    //       const imageRef = storageRef.child(
-    //         "images/" + fileName + imageNumber + ".jpg"
-    //       );
-    //       const file = imageData.image;
-    //       imageRef.put(file).then(() => {
-    //         imageRef
-    //           .getDownloadURL()
-    //           .then(url => {
-    //             const image = url;
-    //             const pictureData = {
-    //               url: image,
-    //               caption: imageData.caption,
-    //               imageName: imageData.imageName
-    //             };
-    //             dispatch("addPicture", pictureData); // action in index.js
+    setGearshop(state, products) {
+      state.itemsInStock.BDs = products;
+    },
+    increaseCountMutation(state, { id, product }) {
+      Object.entries(state.itemsInStock).forEach(el => {
+        if (el[0] == product) {
+          Object.entries(el[1]).forEach(item => {
+            if (item[1].id == id) {
+              return item[1].count++;
+            }
+          });
+        }
+      });
+    },
+    decreaseCountMutation(state, { id, product }) {
+      Object.entries(state.itemsInStock).forEach(el => {
+        if (el[0] == product) {
+          Object.entries(el[1]).forEach(item => {
+            if (item[1].id == id) {
+              return item[1].count--;
+            }
+          });
+        }
+      });
+    }
+  },
+  actions: {
+    /*===============================================
+=================================================*/
+    submitPicture({ dispatch }, imageData) {
+      // Upload file
+      const storageRef = firebase.storage().ref();
 
-    //             dispatch("storePictureData", pictureData); // action in firestore.js
-    //             router.push("pictures");
-    //           })
-    //           .catch(function(error) {
-    //             console.log(error);
-    //           });
-    //       });
-    //     },
-    //     // store pictures on firestore
-    //     storePictureData(state, pictureData) {
-    //       const fireStoreRef = firebase.firestore().collection("picturedata");
-    //       const imageNumber = Math.floor(Math.random() * 1000);
-    //       fireStoreRef
-    //         .doc("picture" + "-" + pictureData.imageName + imageNumber)
-    //         .set({
-    //           imageName: pictureData.imageName,
-    //           caption: pictureData.caption,
-    //           url: pictureData.url
-    //         })
-    //         .then(function() {
-    //           console.log("Picture successfully added!");
-    //         })
-    //         .catch(function(error) {
-    //           console.error("Error adding picture: ", error);
-    //         });
-    //     },
+      const imageRef = storageRef.child("gearShopImages/");
+      const file = imageData.image;
+      imageRef.put(file).then(() => {
+        imageRef
+          .getDownloadURL()
+          .then(url => {
+            const image = url;
+            const pictureData = {
+              url: image,
+              caption: imageData.caption,
+              imageName: imageData.imageName
+            };
+            dispatch("addPicture", pictureData); // action in index.js
+
+            dispatch("storeGearPictureData", pictureData); // action in firestore.js
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      });
+    },
 
     /*===============================================
 =================================================*/

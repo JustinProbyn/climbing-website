@@ -8,16 +8,21 @@
           <h1>Climbing Shoes</h1>
         </div>
         <div class="product__container">
-          <v-card v-for="(shoe, i) in getGear" :key="i" class="mx-auto card" max-width="250">
-            <v-img :src="shoe.itemPicture" height="200px"></v-img>
+          <v-card
+            v-for="(climbingShoe, i) in getGear"
+            :key="i"
+            class="mx-auto card"
+            max-width="250"
+          >
+            <v-img :src="climbingShoe.itemPicture" height="200px"></v-img>
             <div class="climbing-shoe__name">
-              <h3>{{ shoe.itemName }}</h3>
+              <h3>{{ climbingShoe.itemName }}</h3>
             </div>
             <div class="climbing-shoe__price">
               <h4>
                 <strong>
                   R{{
-                  shoe.itemPrice
+                  climbingShoe.itemPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
@@ -26,8 +31,8 @@
             </div>
             <div class="counter">
               <v-btn
-                :id="shoe.id"
-                :disabled="shoe.count <= 1 ? !disabled : disabled"
+                :id="climbingShoe.id"
+                :disabled="climbingShoe.count <= 1 ? !disabled : disabled"
                 @click="decreaseProduct($event)"
                 outlined
                 x-small
@@ -36,10 +41,10 @@
                 <v-icon style="font-size: 120%">mdi-minus</v-icon>
               </v-btn>
 
-              <div>{{shoe.count}}</div>
+              <div>{{climbingShoe.count}}</div>
 
               <v-btn
-                :id="shoe.id"
+                :id="climbingShoe.id"
                 @click="increaseProduct($event)"
                 outlined
                 x-small
@@ -50,7 +55,7 @@
             </div>
             <div class="btn__container">
               <button
-                :id="shoe.id"
+                :id="climbingShoe.id"
                 class="ma-2 btn"
                 outlined
                 color="#d35400"
@@ -74,11 +79,11 @@ import { IncreaseDecreaseMixin } from "../../mixins/IncreaseDecreaseMixin";
 export default {
   computed: {
     getGear() {
-      return this.$store.getters.getGearshopData.shoes;
+      return this.$store.getters.getGearshopData.climbingShoes;
     }
   },
   data() {
-    return { disabled: false, product: "shoes" };
+    return { disabled: false, product: "climbingShoes" };
   },
   components: {
     navbar: NavBar,
