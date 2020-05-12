@@ -1,4 +1,4 @@
-This is a mock website centered around rock climbing I coded from scratch as a portfolio piece. 
+This is a mock website, centered around rock climbing, I coded from scratch as a portfolio piece. 
 
 It is the first time putting what I have learnt from a couple of online courses in action.
 
