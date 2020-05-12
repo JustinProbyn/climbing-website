@@ -31,6 +31,12 @@
 </template>
 
 <script>
+/**
+ * The Pictures page.
+ * This page displays all the pictures from PicturesBox.vue (component).
+ * This page feeds PicturesBox.vue picture data as a prop so it can display the news articles.
+ * The computed property 'getPictureData' receives the picture data from the store which was pulled from Firestore.
+ */
 import NavBar from "../components/NavBar.vue";
 import StickyNavBar from "../components/StickyNavBar.vue";
 import PicturesBox from "../components/PicturesBox.vue";

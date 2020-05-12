@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Expertise from "../views/Expertise.vue";
 import firebase from "firebase";
 import cart from "../store/modules/cart";
+import gear from "../store/modules/gear";
 import store from "../store/index";
 
 // GEAR SHOP IMPORTS
@@ -12,7 +13,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    // catch all 404 - define at the very end
+    // catch all 404
     path: "*",
     component: () => import("../views/404/404.vue")
   },
@@ -58,6 +59,7 @@ const routes = [
     path: "/news",
     name: "news",
     component: () => import(/*webpackChunkName "News" */ "../views/News.vue"),
+    //The route is blocked if there are no articles loaded because the user isn't signed in
     beforeEnter: (to, from, next) => {
       if (store.state.articleData.length <= 0) {
         alert("Please sign in to view the latest news articles");
@@ -68,7 +70,13 @@ const routes = [
   {
     path: "/gear",
     name: "gear",
-    component: () => import(/*webpackChunkName "Gear" */ "../views/Gear.vue")
+    component: () => import(/*webpackChunkName "Gear" */ "../views/Gear.vue"),
+    beforeEnter: (to, from, next) => {
+      if (gear.state.itemsInStock.length <= 0) {
+        alert("Please sign in to visit the gear shop");
+        next(from);
+      } else next();
+    }
   },
 
   {
@@ -76,8 +84,9 @@ const routes = [
     name: "pictures",
     component: () =>
       import(/*webpackChunkName "Pictures" */ "../views/Pictures.vue"),
+    //The route is blocked if there are no pictures loaded because the user isn't signed in
     beforeEnter: (to, from, next) => {
-      if (store.state.articleData.length <= 0) {
+      if (store.state.pictureData.length <= 0) {
         alert("Please sign in to view the latest pictures");
         next(from);
       } else next();
@@ -92,7 +101,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (cart.state.cartData.length <= 0) next({ name: "gear" });
       else next();
-    },
+    }
   },
 
   {

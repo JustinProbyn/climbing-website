@@ -1,3 +1,8 @@
+/**
+ * This is a mixin function that increases or decreases the amount of a product
+ * a user adds to the cart.
+ * It is used with each item in the gear shop
+ */
 export const IncreaseDecreaseMixin = {
   methods: {
     increaseProduct(event) {

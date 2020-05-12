@@ -28,6 +28,12 @@
 </template>
 
 <script>
+/**
+ * The News page.
+ * This page displays all the articles from Articles.vue (component).
+ * This page feeds Articles.vue article data as a prop so it can display the news articles.
+ * The computed property 'getNewsData' receives the article data from the store which was pulled from Firestore.
+ */
 import NavBar from "../components/NavBar.vue";
 import Footer from "../components/Footer.vue";
 import Articles from "../components/Articles.vue";

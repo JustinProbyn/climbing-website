@@ -291,6 +291,11 @@
 </template>
 
 <script>
+/**
+ * This is the Climbing Spots page.
+ * It was one of the first pages I created and simply displays modals for different climbing areas in South Africa.abnf
+ * I made use of Leaflet here as a way to gain experience with the library.
+ */
 import {
   LMap,
   LTileLayer,

@@ -1,7 +1,15 @@
+/**
+ * The cart module. It manages the cart state.
+ * This module receives data from the cartMixin (which has an add-to-cart function)
+ * and stores it in localstorage (to be loaded when page is refreshed)
+ */
+
 const cart = {
   state: {
     cartData: []
   },
+  // ///////////////////////////
+  // ////////MUTATIONS///////////
   mutations: {
     // updates cart with newly added item
     setCart(state, cartData) {
@@ -16,7 +24,7 @@ const cart = {
       state.cartData.push(cartData);
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
     },
-    // loads cart from localstorage on refresh
+    // sets cart from localstorage on refresh
     loadCart(state, cartData) {
       state.cartData = cartData;
     },
@@ -29,6 +37,8 @@ const cart = {
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
     }
   },
+  // ///////////////////////////
+  // ////////ACTIONS///////////
   actions: {
     clearCart({ commit }) {
       commit("clearCart");
@@ -48,6 +58,8 @@ const cart = {
       } else return;
     }
   },
+  // ///////////////////////////
+  // ////////GETTERS///////////
   getters: {
     getCartData(state) {
       return state.cartData;

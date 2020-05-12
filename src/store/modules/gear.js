@@ -46,9 +46,6 @@ const gear = {
     setGearShopItems({ commit }) {
       commit("setGearShop");
     },
-    sendToGearshop({ commit }, products) {
-      commit("setGearshop", products);
-    },
     increaseCount({ commit }, { id, product }) {
       commit("increaseCountMutation", { id, product });
     },

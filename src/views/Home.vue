@@ -104,6 +104,12 @@
 </template>
 
 <script>
+/**
+ * The Home page of the website.abnf
+ * An exercise mainly in styling,
+ * and dispaly modals/dialogs/menus conditionally.
+ * This page has the dropdown menu that lets a user sign in or sign up, and sign out.
+ */
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import NavBar from "../components/NavBar.vue";
@@ -117,7 +123,6 @@ export default {
   name: "Home",
   data() {
     return {
-      userLoggedIn: false,
       showMenu: false,
       reloadPage: 0,
       initMenu: false,
@@ -143,20 +148,16 @@ export default {
       this.SignupShowDialog = true;
     },
     signOut() {
-      this.$store.dispatch("firestoreSignOut");
-      // removes store localstorage and removes state.userData
+      this.$store.dispatch("firestoreSignOut"); //Action in firestore.js module
     }
   },
   computed: {
-    getOrderData() {
-      return this.$store.getters.getOrderData;
-    },
     auth() {
       return this.$store.getters.isLoggedIn;
       // checks if state.userData.email exists then shows UI components based result
     },
     userSignedUp() {
-      return this.$store.getters.isSignedUp;
+      return this.$store.getters.isSignedUp; //This value is set to 'true' when a user signs up (in index.js - vuex)
     }
   }
 };

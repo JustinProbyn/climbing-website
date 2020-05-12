@@ -45,7 +45,8 @@ new Vue({
   created() {
     firebase.auth().onAuthStateChanged(async firebaseUser => {
       if (firebaseUser) {
-        this.$store.dispatch("whenUserIsLoggedIn", firebaseUser);
+        this.$store.dispatch("whenUserIsLoggedIn", firebaseUser); //action in firestore.js module
+        this.$store.dispatch("setGearShopItems"); //action in gear.js module
       }
     });
   },

@@ -25,13 +25,17 @@
 
 <script>
 export default {
+  /**
+   * This is the component used in Pictures.vue (in views)
+   * It displays the pictures each with their own modal to expand
+   */
   data() {
     return {
       reload: 1
     };
   },
   props: {
-    // Receives data from Pictures.vue (View)
+    // Receives all the data about an image as a prop from Pictures.vue
     data: Object
   },
   methods: {

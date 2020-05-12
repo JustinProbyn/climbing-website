@@ -17,11 +17,15 @@
 
 <script>
 export default {
+  /**
+   * This is the component used in Gear.vue (in views)
+   * It loops through all the products available, displays it in Gear.vue, and links to their respective pages
+   */
   data: () => ({
     show: false
   }),
   props: {
-    //receives products list with - Router Data - from "Gear"
+    // Receives the list of available products (with router data) as a prop from Gear.vue
     product: Object
   }
 };

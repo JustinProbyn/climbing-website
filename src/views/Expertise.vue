@@ -57,6 +57,12 @@
 </template>
 
 <script>
+/**
+ * This is the Expertise page.
+ * This is one of the first pages I created and was done
+ * so mainly as a means to practice implementing nested routes.
+ * The different Expertise pages are stored in 'selectedExpertise' under 'components'
+ */
 import Footer from "../components/Footer.vue";
 import NavBar from "../components/NavBar.vue";
 import StickyNavBar from "../components/StickyNavBar.vue";
@@ -77,11 +83,6 @@ export default {
     navbar: NavBar,
     footerComp: Footer,
     stickynav: StickyNavBar
-  },
-  computed: {
-    getNewsData() {
-      return this.$store.getters.getArticleData;
-    }
   },
   methods: {
     onWaypoint({ going, direction }) {

@@ -85,16 +85,15 @@ export default {
       return this.$store.getters.getGearshopData.belayDevices;
     }
   },
-  //send all product data to state
-  created() {
-    const belayDevices = this.items;
-    this.$store.dispatch("sendToGearshop", belayDevices);
-  },
   components: {
     navbar: NavBar,
     footerComp: Footer,
     cart: Cart
   },
+  /**
+   * cartMixin is a function that adds items to the cart
+   * IncreaseDecreaseMixin is a function that increases/decreases the amount of one product added to the cart
+   */
   mixins: [cartMixin, IncreaseDecreaseMixin]
 };
 </script>

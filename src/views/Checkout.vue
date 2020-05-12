@@ -182,6 +182,15 @@
 </template>
 
 <script>
+/**
+ * The checkout page of the website.
+ * This page itself does minimal computing.
+ * It serves as a display to what items they user wishes to purchase,
+ * the total cost including delivery and VAT.
+ * The delivery cost is set statically, as this will be determined based on the delivery service selected at the time of implementation.
+ * It houses CheckoutComp - the checkout component - that interacts with Stripe and Firestore to make a purchase
+ */
+
 import CheckoutComp from "../components/CheckoutComp";
 import NavBar from "../components/NavBar.vue";
 import StickyNavBar from "../components/StickyNavBar.vue";
@@ -199,7 +208,7 @@ export default {
     return {
       // Delivery radios
       radio: "",
-      // delivery address
+      // Delivery address
       deliveryAddress: {
         streetNameNumber: "",
         suburb: "",
@@ -216,8 +225,6 @@ export default {
       },
       paymentSuccessful: true,
       finalAmount: 0
-
-      //  cost table
     };
   },
   created() {
@@ -259,10 +266,11 @@ export default {
       }
     },
     deleteCartItem(index) {
+      //action in cart.js module
       this.$store.dispatch("deleteCartItem", index);
       if (this.getCartData.length <= 0) {
         this.$router.push("gear");
-      } //action in cart module
+      }
     }
   }
 };

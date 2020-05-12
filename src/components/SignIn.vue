@@ -34,6 +34,12 @@
 </template>
 
 <script>
+/**
+ * A sign up component that is displayed on the website as a modal
+ * It is accesible from the Home.vue page dropdown menu
+ * A choice to sign in or sign up is displayed
+ * when a user tries to access the checkout page without signing in
+ */
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
 

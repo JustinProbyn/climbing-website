@@ -27,23 +27,19 @@
 </template>
 
 <script>
-// import GoBack from "../components/GoBack.vue";
+/**\
+ * The sticky navbar component.
+ * It is displayed when a user reaches a certain point (waypoint) on a page.
+ * Done with vue-waypoint.
+ */
 export default {
-  components: {
-    // goback: GoBack
-  },
   methods: {
+    //scrolls user to top of the page when they click on a link on the navbar
     scrollToTop() {
       window.scrollTo(0, 0);
     },
     goBack() {
       return this.$router.go(-1);
-    }
-  },
-  computed: {
-    auth() {
-      return this.$store.getters.isLoggedIn;
-      // checks if state.userData.email exists then shows UI components based result
     }
   }
 };

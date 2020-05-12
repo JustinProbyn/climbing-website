@@ -89,6 +89,12 @@
 </template>
 
 <script>
+/**
+ * The add article component of the website.
+ * Allows users that have signed in to add articles to News.vue.
+ * This functionality is for development purposes only
+ * and servces as experience and practice for this portfolio piece.
+ */
 import NavBar from "../components/NavBar.vue";
 import StickyNavBar from "../components/StickyNavBar.vue";
 import Footer from "../components/Footer.vue";
@@ -125,15 +131,8 @@ export default {
     onFileSelected(event) {
       this.articleData.image = event.target.files[0];
     },
-    // uploadImage() {
-    //   const storageRef = firebase.storage().ref();
-    //   const fileName = this.imageName;
-    //   const imageRef = storageRef.child("images/" + fileName + ".jpg");
-    //   const file = this.image;
-    //   imageRef.put(file);
-    // },
     submitArticle() {
-      this.$store.dispatch("submitArticle", this.articleData);
+      this.$store.dispatch("submitArticle", this.articleData); //Action in firestore.js
     },
     // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {

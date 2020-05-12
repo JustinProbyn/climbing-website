@@ -103,6 +103,12 @@
 </template>
 
 <script>
+/**
+ * This component is used in Gear.vue (in views).
+ * Its purpose is to suggest gear to the user based on what type of climbing they wish to do
+ * And given how much money they are willing to spend on each item to do so
+ * */
+
 export default {
   data() {
     return {
@@ -191,6 +197,7 @@ export default {
       return this.$store.getters.getGearshopData;
     }
   },
+  //disables search button if a type of climbing isn't selected
   watch: {
     selectedClimbing() {
       if (this.selectedClimbing.length >= 0) {
@@ -202,8 +209,7 @@ export default {
     }
   },
   methods: {
-    test() {},
-    // Contained Add to cart Method
+    //Add-to-cart method (separate from the mixin cartMixin.js, which is used for the main gear shop)
     addToCart(event) {
       const id = event.currentTarget.id;
       for (let i = 0; i < Object.entries(this.getItemsInStock).length; i++) {
@@ -223,7 +229,9 @@ export default {
       }
     },
 
-    /* GEAR SUGGESTOR LOGIC */
+    /* 
+    ///////////////////////////  GEAR SUGGESTOR LOGIC /////////////////////////// 
+    */
     productSearch() {
       /*****SETTING BUDGET*****/
 
@@ -275,7 +283,7 @@ export default {
           "We have highlighted items that are shared between your chosen disciplines.";
       } else this.searchText = "";
 
-      /**********DISPLAYING OPTIONS************/
+      /**********DISPLAYING SEARCH RESULTS************/
 
       /*LEAD IN GYM*/
 
@@ -300,7 +308,7 @@ export default {
           }
         });
       }
-      /********************* */
+      /**********************/
       /*LEAD OUTSIDE*/
       if (this.selectedClimbing.includes("Lead (outside)")) {
         if (
@@ -323,7 +331,7 @@ export default {
           }
         });
       }
-      /********************* */
+      /**********************/
       /*BOULDERING*/
       if (this.selectedClimbing.includes("Bouldering")) {
         if (
@@ -347,7 +355,7 @@ export default {
         });
       }
 
-      /********************* */
+      /**********************/
       /*TOP ROPE*/
       if (this.selectedClimbing.includes("Toprope")) {
         if (

@@ -59,6 +59,12 @@
 </template>
 
 <script>
+/**
+ * The add picture component of the website.
+ * Allows users that have signed in to add articles to Pictures.vue
+ * This functionality is for development purposes only
+ * and servces as experience and practice for this portfolio piece.
+ */
 import NavBar from "../components/NavBar.vue";
 import StickyNavBar from "../components/StickyNavBar.vue";
 import Footer from "../components/Footer.vue";
@@ -93,7 +99,7 @@ export default {
       this.imageData.image = event.target.files[0];
     },
     submitPicture() {
-      this.$store.dispatch("submitPicture", this.imageData);
+      this.$store.dispatch("submitPicture", this.imageData); //Action in firestore.js
     },
     // Waypoint that triggers Stickynav
     onWaypoint({ going, direction }) {

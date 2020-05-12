@@ -32,6 +32,10 @@
 </template>
 
 <script>
+/**
+ * This is the main Gear page which displays all the item categories it feeds to Products.vue (under components) as a prop.
+ * This page also houses the gearSuggestor component (under components).
+ */
 import NavBar from "../components/NavBar.vue";
 import StickyNavBar from "../components/StickyNavBar.vue";
 import Footer from "../components/Footer.vue";
@@ -48,7 +52,7 @@ export default {
         rootMargin: "0px 0px 0px 0px",
         threshold: [0.25, 0.75]
       },
-      // All products sent to Products.Vue (Component)
+      // All product categories sent to Products.vue
       products: [
         {
           type: "ropes",

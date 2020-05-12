@@ -80,6 +80,13 @@
 </template>
 
 <script>
+/**
+ * The component used in the Checkout.vue Page (in views).
+ * This is the only component/view in the website that has code relating to Firestore in its <script> code (everything else is stored in firestore.js).
+ * This was done to avoid unecessarily lengthy code to implement its functionality.
+ * This page loads pre-built elements from Stripe so that a user can make a secure payment
+ * To test a card payment, use card number 4242 4242 4242 4242, any CVC number, and any future date.
+ */
 import firebase from "firebase";
 export default {
   props: {
@@ -125,9 +132,6 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log(this.deliveryAddress);
-    },
     newPayment() {
       if (
         this.deliveryAddress.city == "" ||
@@ -146,7 +150,6 @@ export default {
             this.overlay = true;
             this.overlayLoading = true;
             const payment = {
-              // orderId:
               productsBought: this.getCartData,
               amount: this.amount,
               source: result.token,
@@ -159,7 +162,7 @@ export default {
               .collection("stripe_customers")
               .doc(this.currentUser.uid)
               .collection("paymentsToken");
-
+            // When payment is stored on Firestore, it triggers a Firestore Function to create a charge with Stripe
             paymentsRef.add({ payment }).then(docRef => {
               paymentsRef.onSnapshot(querySnapshot => {
                 querySnapshot.forEach(doc => {
@@ -169,6 +172,7 @@ export default {
                       paymentsRef.doc(doc.id).delete();
                       return;
                     } else if (
+                      //if payment was sucessful, a field ('status: succeeded') under the payment doc on Firestore is stored
                       (doc.id, " => ", doc.data().status == "succeeded")
                     ) {
                       this.overlay = true;
@@ -177,7 +181,6 @@ export default {
                       setTimeout(() => {
                         this.overlay = false;
                         this.$router.push("user-account");
-                        // action in cart module - shows orders (stored on firebase) for user on account page
                         this.$store.dispatch("clearCart");
                       }, 2000);
                     }
@@ -191,6 +194,7 @@ export default {
     }
   },
   mounted() {
+    // Loads the payment form elements from Stripe when the page is loaded
     this.amount = this.finalAmount;
     this.stripe = window.Stripe("pk_test_7CQkqRuEAKn6EjSN8wqGTBrs00lImK11Vj");
     var elements = this.stripe.elements();

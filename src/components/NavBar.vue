@@ -35,6 +35,11 @@
 </template>
 
 <script>
+/**
+ * The navbar that is used on every page of the website.
+ * Some links are disabled according to whether a user is logged in with Firebase
+ * This is done in Vue Router index.js with route guards
+ */
 export default {
   data() {
     return {
@@ -47,10 +52,6 @@ export default {
     }
   },
   computed: {
-    auth() {
-      return this.$store.getters.isLoggedIn;
-      // checks if state.userData.email exists then shows UI components based result
-    },
     getUsername() {
       return this.$store.getters.getUsername;
     }

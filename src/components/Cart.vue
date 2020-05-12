@@ -91,6 +91,12 @@
 </template>
 
 <script>
+/**
+ * The cart component.
+ * This component is a modal that is accessed by the cart icon on the navbar.
+ * If items are added to the cart, the user can proceed to the checkout page, otherwise there is no option to do so.
+ * If a user is not signed in, upon trying to enter checkout, this component will prompt the user to sign in/up.
+ */
 import firebase from "firebase";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
@@ -139,6 +145,7 @@ export default {
     initLoader() {
       this.showLoader = true;
     },
+    //Checks if a user is signed in order to view checkout
     checkOut() {
       this.dialog = false;
       if (firebase.auth().currentUser) {

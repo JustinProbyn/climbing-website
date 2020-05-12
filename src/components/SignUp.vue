@@ -54,7 +54,7 @@
         ></v-text-field>
         <div class="btns">
           <v-btn color="success" :disabled="$v.$invalid" class="mr-4" @click="submit">Submit</v-btn>
-          <!-- <v-btn @click="goToSignIn" color="info">Sign In</v-btn> -->
+
         </div>
       </div>
     </v-card>
@@ -62,6 +62,12 @@
 </template>
 
 <script>
+/**
+ * A sign up component that is displayed on the website as a modal
+ * It is accesible from the Home.vue page dropdown menu
+ * A choice to sign in or sign up is displayed
+ * when a user tries to access the checkout page without signing in
+ */
 import {
   required,
   maxLength,

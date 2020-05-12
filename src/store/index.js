@@ -1,3 +1,14 @@
+/**
+ * The main vuex store file.
+ * It houses the state, actions, mutations, and getters for
+ * processing orders placed, setting the user in the state (singing in and signing out),
+ * adding pictures, adding articles, and managing the sign in/sign up pop up on the home page.
+ * It does not house any state, actions, mutations, and getters that interacts with Firestore, the gear in the shop,
+ * or that interacts with the cart. These have their own separate modules.
+ * Do note though that some actions, mutations, and getters here
+ * are dispatched/commited from the previously mentioned separate modules.
+ */
+
 import Vue from "vue";
 import Vuex from "vuex";
 import gear from "./modules/gear";
@@ -19,7 +30,8 @@ const store = new Vuex.Store({
     orderData: []
   },
 
-  /*** MUTATIONS ***/
+  // ///////////////////////////
+  // ////////MUTATIONS///////////
   mutations: {
     // User sign in / up/ out Mutations
     setUser(state, userData) {
@@ -52,41 +64,42 @@ const store = new Vuex.Store({
       state.orderData.unshift(order);
     },
 
+    /* Article mutations */
     // pushes articles into state array which are displayed under "News"
     addArticleData(state, articleData) {
       state.articleData.unshift(articleData);
     },
+    /* Picture mutations */
     // pushes picture caption into state
     addPictureData(state, pictureData) {
       state.pictureData.unshift(pictureData);
     }
   },
 
-  /*** ACTIONS ***/
+  // ///////////////////////////
+  // ////////ACTIONS///////////
 
   actions: {
     // closing popup on home page for sign up
-
     userSignedUpPopupClose({ commit }) {
       commit("popupClose");
     },
 
     /* Article Actions */
-
     addArticle({ commit }, articleData) {
       commit("addArticleData", articleData);
     },
 
     /* Add Picture Actions */
-
     addPicture({ commit }, pictureData) {
       commit("addPictureData", pictureData);
     }
   },
 
-  /*** GETTERS ***/
+  // ///////////////////////////
+  // ////////GETTERS///////////
   getters: {
-    // User sign in / up/ out Getters
+    /* User sign in / up / out Getters */
     getUserData(state) {
       return state.userData;
     },
@@ -100,12 +113,12 @@ const store = new Vuex.Store({
       return state.userData.username;
     },
 
-    // Order getters
+    /* Order getters */
     getOrderData(state) {
       return state.orderData;
     },
 
-    // Articles etters
+    /* Articles getters */
     getArticleData(state) {
       return state.articleData;
     },
@@ -113,7 +126,7 @@ const store = new Vuex.Store({
       return state.articleID;
     },
 
-    //Picture getters
+    /* Picture getters */
     getPictureData(state) {
       return state.pictureData;
     }

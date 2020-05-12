@@ -1,3 +1,8 @@
+/**
+ * This module houses all actions and getters that interact with Firestore
+ * so as to make it easier to replace Firestore in the future if need be.
+ */
+
 import firebase from "firebase";
 import router from "../../router";
 
@@ -5,8 +10,10 @@ const firestore = {
   state: {},
   mutations: {},
   actions: {
-    /***SIGNIN/SIGNOUT ACTIONS***/
-    // signs in and dispatches action to set data from firestore
+    // ///////////////////////////
+    // ////////ACTIONS///////////
+
+    // signs in with firestore
     firestoreSignIn(state, userData) {
       firebase
         .auth()
@@ -15,6 +22,53 @@ const firestore = {
           alert(error.message);
         });
     },
+    // Signs user up with Firestore
+    firestoreSignUp({ commit }, userData) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(userData.email, userData.password)
+        .then(() => {
+          const fireStoreRef = firebase
+            .firestore()
+            .collection("userdata")
+            .doc(userData.email);
+          fireStoreRef.set({
+            username: userData.username,
+            email: userData.email,
+            password: userData.password
+          });
+          /**
+           *commit("userSignedUp") commits a mutation in index.js that sets a 'userSignedup' property value to true.
+           *This property is used to display sign in/up dialog modals on the Home page
+           */
+          commit("userSignedUp");
+        })
+        .catch(function(error) {
+          alert(error.message);
+        });
+    },
+    // Signs user out
+    firestoreSignOut({ commit }) {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log(" Sign-out successful.");
+        })
+        .catch(function(er) {
+          console.log(er);
+        });
+      localStorage.removeItem("cartData");
+      localStorage.removeItem("email");
+      localStorage.removeItem("username");
+      commit("signOutUser"); //in index.js - resets the user in the state
+      commit("clearCart"); //in cart.js - clears the cart and its localstorage
+    },
+    /**
+     * whenUserIsLoggedIn is dispatched from main.js when the firestore auth state changes (i.e, a user signs in/up).
+     * If a logged-in user is detected, this action dispatches other actions to load the news articles and pictures from firestore.
+     * It also sets the username and commits the mutation in index.js to set the user in the state.
+     */
     whenUserIsLoggedIn({ commit, dispatch }) {
       const user = firebase.auth().currentUser;
       if (user) {
@@ -34,48 +88,9 @@ const firestore = {
         return;
       }
     },
-    // signs user up
-    firestoreSignUp({ commit }, userData) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(userData.email, userData.password)
-        .then(() => {
-          const fireStoreRef = firebase
-            .firestore()
-            .collection("userdata")
-            .doc(userData.email);
-          fireStoreRef.set({
-            username: userData.username,
-            email: userData.email,
-            password: userData.password
-          });
-          commit("userSignedUp");
-        })
-        .catch(function(error) {
-          alert(error.message);
-        });
-    },
-    // signs out
-    firestoreSignOut({ commit }) {
-      firebase
-        .auth()
-        .signOut()
-        .then(function() {
-          console.log(" Sign-out successful.");
-        })
-        .catch(function(er) {
-          console.log(er);
-        });
-      //this action, in index.js, clears cart and local storage on signout
-      localStorage.removeItem("cartData");
-      localStorage.removeItem("email");
-      localStorage.removeItem("username");
-      commit("signOutUser");
-      commit("clearCart");
-    },
-    //set news articles and pictures
+    /**Loads news articles and pictures from Firetstore. This is dispatched by the whenUserIsLoggedIn action above.**/
     setNewsAndPictureData({ commit }) {
-      //set news
+      //Sets news articles
       async function newsData() {
         const snapshot = await firebase
           .firestore()
@@ -108,8 +123,7 @@ const firestore = {
       callPictureData();
     },
 
-    /****ORDER/PAYMENT ACTIONS ******/
-
+    /****ORDER/PAYMENT******/
     setOrderDataOnLogin({ commit }) {
       // load order from firestore
       firebase.auth().onAuthStateChanged(user => {
@@ -135,7 +149,6 @@ const firestore = {
     /***ADDING PICTURES***/
     // Uploading a picture to firestore
     submitPicture({ dispatch }, imageData) {
-      // Upload file
       const storageRef = firebase.storage().ref();
       const fileName = imageData.imageName;
       const imageNumber = Math.floor(Math.random() * 1000);
@@ -153,9 +166,9 @@ const firestore = {
               caption: imageData.caption,
               imageName: imageData.imageName
             };
-            dispatch("addPicture", pictureData); // action in index.js
+            dispatch("addPicture", pictureData); // Action in index.js - stores data for all pictures in state
 
-            dispatch("storePictureData", pictureData); // action in firestore.js
+            dispatch("storePictureData", pictureData);
             router.push("pictures");
           })
           .catch(function(error) {
@@ -163,7 +176,7 @@ const firestore = {
           });
       });
     },
-    // store pictures on firestore
+    // Stores pictures on firestore
     storePictureData(state, pictureData) {
       const fireStoreRef = firebase.firestore().collection("picturedata");
       const imageNumber = Math.floor(Math.random() * 1000);
@@ -193,7 +206,7 @@ const firestore = {
         imageRef
           .getDownloadURL()
           .then(url => {
-            // dispatches storeArticleData to store headline, text, url, etc.
+            // dispatches storeArticleData to store headline, text, url, etc. on firestore
             const image = url;
             var currentDate = new Date();
             var newDate = currentDate.getDate();
@@ -209,7 +222,7 @@ const firestore = {
               subTitle: articleData.subTitle,
               textBody: articleData.textBody
             };
-            dispatch("addArticle", articleTextData);
+            dispatch("addArticle", articleTextData); // Action in index.js - stores data for all articles in state
             dispatch("storeArticleData", articleTextData);
             router.push("news");
           })
@@ -239,7 +252,8 @@ const firestore = {
         });
     },
     /***REFRESHING PAGE***/
-    // When page is refreshed sets user. Action dispatched to do so in App.vue on created()
+    // Dispatched in App.vue on created()
+    // When page is refreshed, this action sets the user.
     onRefresh({ commit }) {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -257,8 +271,9 @@ const firestore = {
         }
       });
     }
-    /**********/
   },
+  // ///////////////////////////
+  // ////////GETTERS///////////
   getters: {}
 };
 

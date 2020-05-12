@@ -88,6 +88,10 @@ export default {
     footerComp: Footer,
     cart: Cart
   },
+  /**
+   * cartMixin is a function that adds items to the cart
+   * IncreaseDecreaseMixin is a function that increases/decreases the amount of one product added to the cart
+   */
   mixins: [cartMixin, IncreaseDecreaseMixin]
 };
 </script>

@@ -1,3 +1,8 @@
+/**
+ * The add-to-cart mixin.
+ * It is used on each item in the gear shop.
+ * It sends selected items to the vuex module cart.js
+ */
 export const cartMixin = {
   methods: {
     addToCart(event) {

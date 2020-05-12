@@ -34,6 +34,10 @@
 
 
 <script>
+/**
+ * component used in News.vue (in Views).
+ * It loops through the data it recieves as a prop from News.vue and displays the articles
+ */
 export default {
   props: {
     data: Object
