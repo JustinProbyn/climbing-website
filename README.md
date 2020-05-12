@@ -8,6 +8,8 @@ I also included Stripe as a means to make payment for the Gear Shop I added to w
 
 No branches were used as I worked on this alone.
 
+P.S. I realise my commit messages (or lack thereof) are not sufficient enough or in the correct format. Something I learnt after the fact.
+
 
 ## Project setup
 ```
