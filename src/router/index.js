@@ -1,4 +1,4 @@
-import Vue from "vue";
+gimport Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Expertise from "../views/Expertise.vue";
