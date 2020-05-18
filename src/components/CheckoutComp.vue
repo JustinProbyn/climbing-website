@@ -1,26 +1,49 @@
 <template>
   <v-card class="payment-form">
-    <h1 class="checkout__heading">Payment</h1>
+    <div class="checkoutcomp__header">
+      <h1 class="checkout__heading">Payment</h1>
+      <v-tooltip top>
+        <template class="card__tooltip" v-slot:activator="{ on }">
+          <v-icon v-on="on" color="grey lighten-1">mdi-information</v-icon>
+        </template>
+        <span>Use card number 4242 4242 4242 4242 for Stripe testing</span>
+      </v-tooltip>
+    </div>
     <h2 class="payment-type--text">Please select a payment method:</h2>
     <div class="payment-type">
       <div
-        @click="eftSelectedClass = !eftSelectedClass, cardSelectedClass = !cardSelectedClass, cardSelected = true, eftSelected = false"
+        @click="
+          (eftSelectedClass = !eftSelectedClass),
+            (cardSelectedClass = !cardSelectedClass),
+            (cardSelected = true),
+            (eftSelected = false)
+        "
         class="card-select"
       >
-        <div :class="{'selected': cardSelectedClass}">
+        <div :class="{ selected: cardSelectedClass }">
           <img src="../../public/img/debitcard.jpg" alt="Debit card example" />
         </div>
       </div>
       <div
-        @click="eftSelectedClass = !eftSelectedClass, cardSelectedClass = !cardSelectedClass, cardSelected = false, eftSelected = true"
+        @click="
+          (eftSelectedClass = !eftSelectedClass),
+            (cardSelectedClass = !cardSelectedClass),
+            (cardSelected = false),
+            (eftSelected = true)
+        "
         class="eft-select"
       >
-        <div :class="{'selected': eftSelectedClass}">EFT</div>
+        <div :class="{ selected: eftSelectedClass }">EFT</div>
       </div>
     </div>
     <div v-show="cardSelected" class="card-selected">
       <div class="card-element">
-        <input v-model="cardHolderName" placeholder="Card holder" type="text" id="card-holder-name" />
+        <input
+          v-model="cardHolderName"
+          placeholder="Card holder"
+          type="text"
+          id="card-holder-name"
+        />
       </div>
 
       <div class="card-element">
@@ -37,44 +60,51 @@
       </div>
 
       <div class="checkout__btn__container">
-        <button
-          class="checkout__btn"
-          @click="newPayment"
-        >Pay R{{this.totalCostVATDelivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</button>
+        <button class="checkout__btn" @click="newPayment">
+          Pay R{{
+            this.totalCostVATDelivery
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          }}
+        </button>
       </div>
     </div>
     <div v-show="eftSelected" class="eft-selected">
       <p style="font-size: 90%">
         Please transfer the the amount of
-        <span
-          style="color:#d35400;"
-        >R{{this.totalCostVATDelivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</span> to the follow bank details within two days.
+        <span style="color:#d35400;"
+          >R{{
+            this.totalCostVATDelivery
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          }}</span
+        >
+        to the follow bank details within two days.
       </p>
       <div style="font-size: 90%" class="account-details">
-        <p>
-          <strong>Account holder:</strong> Climbing Website
-        </p>
-        <p>
-          <strong>Account number:</strong> 12345678910
-        </p>
-        <p>
-          <strong>Branch code:</strong> 250655
-        </p>
-        <p>
-          <strong>Bank name:</strong> FNB
-        </p>
+        <p><strong>Account holder:</strong> Climbing Website</p>
+        <p><strong>Account number:</strong> 12345678910</p>
+        <p><strong>Branch code:</strong> 250655</p>
+        <p><strong>Bank name:</strong> FNB</p>
       </div>
       <p style="font-size: 90%">
-        Once the order is placed you will receive an order confirmation via email. Please use the order number as reference for the payment.
-        Please email proof of payment to email@email.com.
+        Once the order is placed you will receive an order confirmation via
+        email. Please use the order number as reference for the payment. Please
+        email proof of payment to email@email.com.
       </p>
       <div class="checkout__btn__container">
         <button class="placeorder__btn">Place order</button>
       </div>
     </div>
     <v-overlay :value="overlay">
-      <p v-if="overlayText" class="overlay__text">Payment successful! Thank you</p>
-      <v-progress-circular v-if="overlayLoading" indeterminate size="64"></v-progress-circular>
+      <p v-if="overlayText" class="overlay__text">
+        Payment successful! Thank you
+      </p>
+      <v-progress-circular
+        v-if="overlayLoading"
+        indeterminate
+        size="64"
+      ></v-progress-circular>
     </v-overlay>
   </v-card>
 </template>
@@ -262,11 +292,17 @@ export default {
   justify-content: space-between;
 }
 
+.checkoutcomp__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .checkout__heading {
   text-transform: uppercase;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-right: 10px;
 }
 .payment-form {
   display: flex;

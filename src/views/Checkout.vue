@@ -17,12 +17,23 @@
             <h1>Checkout</h1>
           </div>
           <div class="checkout__container">
-            <div class="checkout__container--items" v-if="getCartData.length >= 1">
-              <v-card class="cartitems" v-for="(item, i) in getCartData" :key="i">
+            <div
+              class="checkout__container--items"
+              v-if="getCartData.length >= 1"
+            >
+              <v-card
+                class="cartitems"
+                v-for="(item, i) in getCartData"
+                :key="i"
+              >
                 <div class="carttext">
                   <h4 style="margin-bottom: 20px" class="cartitem_quantity">
                     Qty
-                    <v-chip style="margin-left: 10px; padding: 10px" size="22">{{item.count}}</v-chip>
+                    <v-chip
+                      style="margin-left: 10px; padding: 10px"
+                      size="22"
+                      >{{ item.count }}</v-chip
+                    >
                   </h4>
                   <h4>{{ item.product }}</h4>
                   <br />
@@ -30,9 +41,9 @@
                     Total for this item:
                     <strong>
                       R{{
-                      (item.cost * item.count)
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        (item.cost * item.count)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                       }}
                     </strong>
                   </p>
@@ -40,7 +51,7 @@
                 <img
                   class="cartimg"
                   style="height: 200px"
-                  :src="`../../${item.img}`"
+                  :src="item.img"
                   :alt="`Image of ${item.product}`"
                 />
                 <v-btn
@@ -49,14 +60,16 @@
                   class="ma-2"
                   outlined
                   color="#E65100"
-                >Remove item</v-btn>
+                  >Remove item</v-btn
+                >
                 <v-btn
                   v-else
                   @click="deleteCartItem(i)"
                   class="ma-2"
                   outlined
                   color="#E65100"
-                >Remove items</v-btn>
+                  >Remove items</v-btn
+                >
               </v-card>
             </div>
             <div class="payment__container">
@@ -77,8 +90,11 @@
                           <td>{{ item.product }}</td>
                           <td>{{ item.count }}</td>
                           <td>
-                            R{{ item.cost.toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                            R{{
+                              item.cost
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                            }}
                           </td>
                         </tr>
                       </tbody>
@@ -92,7 +108,9 @@
                     <div class="total_cost">
                       <div class="items-total">
                         R{{
-                        totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                          totalCost
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                         }}
                       </div>
                     </div>
@@ -101,23 +119,33 @@
                   <div class="total">
                     <div class="total_text">VAT</div>
                     <div class="total_cost--VAT">
-                      <div
-                        class="items-total-VAT"
-                      >R{{(totalCost * 0.15).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</div>
+                      <div class="items-total-VAT">
+                        R{{
+                          (totalCost * 0.15)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        }}
+                      </div>
                     </div>
                   </div>
                   <div class="total">
                     <div class="total_text">Delivery cost</div>
                     <div class="total_cost--delivery">
-                      <div class="delivery-cost">R{{deliveryCost}}</div>
+                      <div class="delivery-cost">R{{ deliveryCost }}</div>
                     </div>
                   </div>
                   <div class="total">
-                    <div style="color: #d35400;" class="total_text">Grand total</div>
+                    <div style="color: #d35400;" class="total_text">
+                      Grand total
+                    </div>
                     <div class="total_cost--grand">
-                      <div
-                        class="grand-total"
-                      >R{{totalCostVATAndDelivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</div>
+                      <div class="grand-total">
+                        R{{
+                          totalCostVATAndDelivery
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -128,10 +156,18 @@
                 <p>Please select a delivery method:</p>
                 <v-radio-group v-model="radio" row mandatory>
                   <v-radio value="collection" label="Collection"></v-radio>
-                  <v-radio value="courier" label="Door-to-door courier"></v-radio>
+                  <v-radio
+                    value="courier"
+                    label="Door-to-door courier"
+                  ></v-radio>
                 </v-radio-group>
                 <div v-if="radio == 'collection'" class="collect-selected">
-                  <p>Please note: Due to the Coronavirus pandemic, in order to prioritise the health and safety of our customers and employees, until further notice we are no longer accepting collections.</p>
+                  <p>
+                    Please note: Due to the Coronavirus pandemic, in order to
+                    prioritise the health and safety of our customers and
+                    employees, until further notice we are no longer accepting
+                    collections.
+                  </p>
                 </div>
 
                 <div v-if="radio == 'courier'" class="courier-selected">
@@ -142,7 +178,11 @@
                       label="Street name and Street/Unit number"
                       outlined
                     ></v-text-field>
-                    <v-text-field v-model="deliveryAddress.suburb" label="Suburb" outlined></v-text-field>
+                    <v-text-field
+                      v-model="deliveryAddress.suburb"
+                      label="Suburb"
+                      outlined
+                    ></v-text-field>
                     <div class="address-small--input">
                       <v-text-field
                         v-model="deliveryAddress.city"
@@ -159,10 +199,9 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  v-if="radio == 'courier'"
-                  class="delivery-cost"
-                >Delivery cost: R{{deliveryCost}}</div>
+                <div v-if="radio == 'courier'" class="delivery-cost">
+                  Delivery cost: R{{ deliveryCost }}
+                </div>
               </div>
               <div class="checkout__container--payment">
                 <checkoutcomp
