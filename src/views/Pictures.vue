@@ -90,17 +90,29 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
 
 .pictures__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 header {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.911)), to(rgba(0, 0, 0, 0.7))),
+    url("../../public/img/climbing.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../public/img/climbing.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
   height: 100%;
@@ -111,8 +123,13 @@ header {
 }
 
 .whitepanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-left: 5%;
   background-color: rgb(255, 255, 255);
   width: 90%;
@@ -125,14 +142,20 @@ header {
 
 .pictures__header h1,
 .pictures__header h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-size: 400%;
   color: #fff;
   word-spacing: 2px;
   letter-spacing: 1px;
   justify-self: center;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 20px 20px;
   background-image: url("../../public/img/climbing-header-3.jpg");
   height: 200px;
@@ -147,12 +170,17 @@ h2 {
 }
 
 .pictures__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   margin-right: 20px;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   height: auto;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .footer {

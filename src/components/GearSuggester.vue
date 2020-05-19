@@ -387,7 +387,8 @@ export default {
 /* layout */
 .gear__suggester--container {
   position: absolute;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   width: 35%;
   margin-top: 275px;
   margin-left: 20px;
@@ -396,8 +397,12 @@ export default {
 /* h2 header */
 
 h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-weight: 400;
   font-size: 110%;
   padding: 5px;
@@ -428,7 +433,11 @@ h2 {
   padding: 5px;
   font-size: 90%;
   font-weight: 600;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
   transition: color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
 
@@ -444,6 +453,8 @@ h2 {
   text-transform: uppercase;
   text-decoration: none;
   color: rgb(219, 219, 219);
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
   transition: color 0.3s;
 
   word-spacing: 2px;
@@ -462,9 +473,16 @@ h2 {
 
 /* selector */
 .selecter__panel {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 10px;
 }
 
@@ -486,8 +504,12 @@ h2 {
 }
 
 .addToCartAlert {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100px;
   color: #d35400;
   border: 1px solid #d35400;

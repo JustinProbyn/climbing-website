@@ -167,8 +167,12 @@ export default {
   z-index: 10;
 }
 .cart__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   margin-right: 350px;
   height: 0px;
   position: absolute;
@@ -207,8 +211,12 @@ export default {
 
 .cart__popup {
   cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   color: rgb(211, 211, 211);
   border: 1px solid rgb(211, 211, 211);
   height: 35px;

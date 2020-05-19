@@ -105,7 +105,8 @@ export default {
 }
 
 * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   word-break: break-word;
   font-family: "Lato", "Arial", sans-serif;
 }
@@ -115,12 +116,23 @@ export default {
 }
 
 .expertise__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 header {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.911)), to(rgba(0, 0, 0, 0.7))),
+    url("../../public/img/climbing.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../public/img/climbing.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
   height: 100%;
@@ -132,8 +144,13 @@ header {
 }
 
 .whitepanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-left: 5%;
   background-color: rgb(255, 255, 255);
   width: 90%;
@@ -144,6 +161,8 @@ header {
 
 .expertise__header h1,
 .expertise__header h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   text-transform: uppercase;
   font-size: 400%;
@@ -151,8 +170,12 @@ header {
   color: #fff;
   word-spacing: 2px;
   letter-spacing: 1px;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 20px 20px;
   background-image: url("../../public/img/climbing-header-3.jpg");
   height: 200px;
@@ -167,12 +190,18 @@ header {
 /* ---SELECTED TITLE--- */
 
 .selected__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 50px;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-family: "Roboto Mono", monospace;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 250%;
   margin-top: 50px;
   margin-bottom: 30px;
@@ -183,17 +212,25 @@ header {
 /* ---SKILL SELECTOR--- */
 
 .skill__selector {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 
   width: 100%;
   height: 50px;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .skill__selector--btns-box {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .skill__selector--btns {
@@ -205,8 +242,13 @@ header {
 /* Belay List */
 
 .belay__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   text-decoration: none;
   width: 220px;
   padding: 15px;
@@ -220,6 +262,8 @@ header {
 
 /* Main panel */
 .main__panel {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 50%;
   background-color: rgba(250, 250, 250, 0.603);

@@ -63,10 +63,15 @@ footer {
 }
 
 .footer__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   text-align: center;
   padding: 30px;
 }
@@ -74,6 +79,8 @@ footer {
 /* ICONS */
 
 .icons {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   list-style: none;
   padding: 5px;
@@ -83,6 +90,7 @@ footer {
 .icons li a:visited {
   padding-bottom: 1px;
   -webkit-transition: color 0.2s;
+  -o-transition: color 0.2s;
   transition: color 0.2s;
   text-decoration: none;
   margin-left: 15px;
@@ -113,9 +121,5 @@ footer {
 
 .text {
   color: rgb(87, 86, 86);
-}
-
-.date {
-  color: #d35400;
 }
 </style>

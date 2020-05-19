@@ -10,13 +10,19 @@
           <router-link @click.native="scrollToTop" to="news">News</router-link>
         </li>
         <li>
-          <router-link @click.native="scrollToTop" to="pictures">Pictures</router-link>
+          <router-link @click.native="scrollToTop" to="pictures"
+            >Pictures</router-link
+          >
         </li>
         <li>
-          <router-link @click.native="scrollToTop" to="sport-climbing">Expertise</router-link>
+          <router-link @click.native="scrollToTop" to="sport-climbing"
+            >Expertise</router-link
+          >
         </li>
         <li>
-          <router-link @click.native="scrollToTop" to="climbing-spots">Climbing spots</router-link>
+          <router-link @click.native="scrollToTop" to="climbing-spots"
+            >Climbing spots</router-link
+          >
         </li>
         <li>
           <router-link @click.native="scrollToTop" to="gear">Gear</router-link>
@@ -49,6 +55,7 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
@@ -71,7 +78,11 @@ a.router-link-active {
 .stickynav__bar--ul {
   position: fixed;
   background-color: rgba(39, 41, 41, 0.781);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   list-style: none;
   color: rgb(218, 214, 214);
@@ -90,6 +101,8 @@ a.router-link-active {
   margin-right: 40px;
   text-decoration: none;
   color: rgb(219, 219, 219);
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
   transition: color 0.3s;
   word-spacing: 2px;
 }

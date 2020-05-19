@@ -168,7 +168,8 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .body {
@@ -183,6 +184,10 @@ export default {
 /*** HEADER ***/
 
 header {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0.7))),
+    url("../../public/img/climbing.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
+    url("../../public/img/climbing.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
   height: 100vh;
@@ -192,14 +197,24 @@ header {
 }
 
 .header__text {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-top: 35%;
 }
 
 .home__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   height: 30%;
   width: 100%;
   height: 100vh;
@@ -207,6 +222,8 @@ header {
 
 .home__header h1,
 .home__header h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   font-weight: 300;
@@ -215,7 +232,8 @@ header {
   color: rgb(218, 214, 214);
   word-spacing: 2px;
   letter-spacing: 1px;
-  align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
   margin-right: 150px;
 }
 
@@ -233,24 +251,36 @@ header {
 /*** MENU ***/
 
 .menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-top: 52px;
   margin-left: 20px;
-  justify-content: flex-start;
-  flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   position: absolute;
   z-index: 9999;
 }
 
 .menu__popout {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   color: #fff;
   font-size: 200%;
 }
 
 .menu__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-self: flex-start;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
 .v-application--wrap {
@@ -260,9 +290,14 @@ header {
 /*** BUTTONS ***/
 
 .btns-home {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-right: 12%;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-left: 8px;
   margin-top: 5px;
 }

@@ -63,7 +63,8 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
 
@@ -82,8 +83,12 @@ a.router-link-active {
   margin-top: 50px;
 }
 .nav__bar--ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   list-style: none;
   color: rgb(218, 214, 214);
   display: flex;
@@ -101,6 +106,8 @@ a.router-link-active {
   margin-right: 40px;
   text-decoration: none;
   color: rgb(219, 219, 219);
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
   transition: color 0.3s;
   word-spacing: 2px;
 }
@@ -112,6 +119,8 @@ a.router-link-active {
 
 .nav-bar__header h1,
 .nav-bar__header h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   font-weight: 300;

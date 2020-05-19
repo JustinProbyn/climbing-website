@@ -500,18 +500,30 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
 
 .climbing-spots__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   height: 100%;
 }
 
 header {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.911)), to(rgba(0, 0, 0, 0.7))),
+    url("../../public/img/climbing.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../public/img/climbing.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
   height: 100%;
@@ -522,8 +534,13 @@ header {
 }
 
 .whitepanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-left: 5%;
   background-color: rgb(255, 255, 255);
   width: 90%;
@@ -535,6 +552,8 @@ header {
 }
 .climbing-spots__header h1,
 .climbing-spots__header h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 
   text-transform: uppercase;
@@ -543,8 +562,12 @@ header {
   color: #fff;
   word-spacing: 2px;
   letter-spacing: 1px;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 20px;
   background-image: url("../../public/img/climbing-header-3.jpg");
   height: 200px;
@@ -557,11 +580,18 @@ header {
 }
 
 .spots__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .spacer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   border-bottom: 1px solid rgb(216, 214, 214);
   width: 100vw;
@@ -571,9 +601,15 @@ header {
 /* BUTTONS */
 
 .places-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   margin-left: 17px;
   margin-top: 10px;
 }
@@ -586,8 +622,12 @@ header {
 
 .YT {
   margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 /* Leaflet */
@@ -601,7 +641,8 @@ header {
 
 .places-text {
   width: 50%;
-  box-shadow: 2px 2px 2px rgb(224, 222, 222);
+  -webkit-box-shadow: 2px 2px 2px rgb(224, 222, 222);
+          box-shadow: 2px 2px 2px rgb(224, 222, 222);
 }
 
 .places-title {
@@ -623,6 +664,8 @@ header {
 .montagu,
 .rocklands,
 .waterval-boven {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 400px;
@@ -631,6 +674,8 @@ header {
 }
 
 .oorlogs-kloof {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 400px;
@@ -640,57 +685,83 @@ header {
 /* CAPE TOWN */
 
 .cape-town-img {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0.089))),
+    url("../../public/img/cape-town.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
+    url("../../public/img/cape-town.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
     url("../../public/img/cape-town.jpg");
   background-size: cover;
   background-position: center;
   width: 50%;
   border: 1px solid #000;
-  box-shadow: 5px 2px 5px rgb(187, 186, 186);
+  -webkit-box-shadow: 5px 2px 5px rgb(187, 186, 186);
+          box-shadow: 5px 2px 5px rgb(187, 186, 186);
 }
 
 /* MONTAGU*/
 
 .montagu-img {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0.089))),
+    url("../../public/img/montagu-fake.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
+    url("../../public/img/montagu-fake.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
     url("../../public/img/montagu-fake.jpg");
   background-size: cover;
   background-position: center;
   width: 50%;
-  box-shadow: 5px 2px 5px rgb(187, 186, 186);
+  -webkit-box-shadow: 5px 2px 5px rgb(187, 186, 186);
+          box-shadow: 5px 2px 5px rgb(187, 186, 186);
 }
 
 /* ROCKLANDS */
 
 .rocklands-img {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0.089))),
+    url("../../public/img/rocklands-fake.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
+    url("../../public/img/rocklands-fake.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
     url("../../public/img/rocklands-fake.jpg");
   background-size: cover;
   background-position: center;
   width: 50%;
-  box-shadow: 5px 2px 5px rgb(187, 186, 186);
+  -webkit-box-shadow: 5px 2px 5px rgb(187, 186, 186);
+          box-shadow: 5px 2px 5px rgb(187, 186, 186);
 }
 
 /* WATERVAL BOVEN */
 
 .waterval-boven-img {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0.089))),
+    url("../../public/img/waterval-boven-fake.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
+    url("../../public/img/waterval-boven-fake.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
     url("../../public/img/waterval-boven-fake.jpg");
   background-size: cover;
   background-position: center;
   width: 50%;
-  box-shadow: 5px 2px 5px rgb(187, 186, 186);
+  -webkit-box-shadow: 5px 2px 5px rgb(187, 186, 186);
+          box-shadow: 5px 2px 5px rgb(187, 186, 186);
 }
 
 /* OORLOGS KLOOF */
 
 .oorlogs-kloof-img {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0.089))),
+    url("../../public/img/oorlogs-kloof-fake.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
+    url("../../public/img/oorlogs-kloof-fake.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.089)),
     url("../../public/img/oorlogs-kloof-fake.jpg");
   background-size: cover;
   background-position: center;
   width: 50%;
 
-  box-shadow: 5px 2px 5px rgb(187, 186, 186);
+  -webkit-box-shadow: 5px 2px 5px rgb(187, 186, 186);
+
+          box-shadow: 5px 2px 5px rgb(187, 186, 186);
 }
 </style>

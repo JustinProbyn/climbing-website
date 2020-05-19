@@ -320,14 +320,21 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .checkout__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 header {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.911)), to(rgba(0, 0, 0, 0.7))),
+    url("../../public/img/climbing.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../public/img/climbing.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
   background-size: cover;
@@ -348,6 +355,8 @@ header {
 /* TITLE */
 .checkout__header h1,
 .checkout__header h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   text-transform: uppercase;
@@ -356,8 +365,12 @@ header {
   color: #fff;
   word-spacing: 2px;
   letter-spacing: 1px;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 20px 20px;
   background-image: url("../../public/img/climbing-header-3.jpg");
   height: 200px;
@@ -377,6 +390,8 @@ header {
 /* checkout form */
 
 .checkout__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 .checkout__header .pictures__nav {
@@ -384,8 +399,14 @@ header {
 }
 
 .checkout__container--items {
-  flex-direction: row;
-  flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 60%;
   margin-bottom: 30px;
@@ -397,6 +418,8 @@ header {
 }
 
 .checkout__comp {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   padding: 15px;
   width: 50%;
@@ -408,19 +431,34 @@ header {
 /* cart items */
 
 .cartitems {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 300px;
   height: 410px;
   padding: 10px;
   margin-left: 30px;
 }
 .cartitems h4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 /* Table */
@@ -432,7 +470,8 @@ header {
 }
 .totals {
   margin-top: 30px;
-  box-shadow: 2px 2px 2px rgb(187, 186, 186);
+  -webkit-box-shadow: 2px 2px 2px rgb(187, 186, 186);
+          box-shadow: 2px 2px 2px rgb(187, 186, 186);
 }
 
 .table_head {
@@ -445,10 +484,14 @@ header {
 }
 .total {
   border-top: 1px solid rgb(212, 212, 212);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-size: 90%;
   height: 50px;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .total_cost {
@@ -479,25 +522,41 @@ header {
   position: absolute;
   width: 24%;
   height: 550px;
-  box-shadow: 1px 1px 1px 1px rgb(214, 214, 214);
+  -webkit-box-shadow: 1px 1px 1px 1px rgb(214, 214, 214);
+          box-shadow: 1px 1px 1px 1px rgb(214, 214, 214);
 
   border-radius: 3px;
   padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 /* address */
 
 .delivery-address {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 10px;
 }
 
 .address-small--input {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 

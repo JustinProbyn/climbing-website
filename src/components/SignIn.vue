@@ -95,6 +95,8 @@ export default {
   font-weight: 300;
 }
 .btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-top: 20px;
 }

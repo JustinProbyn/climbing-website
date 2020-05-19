@@ -14,7 +14,7 @@
             class="mx-auto card"
             max-width="250"
           >
-            <v-img :src="climbingShoe.itemPicture" height="200px"></v-img>
+            <v-img :src="climbingShoe.itemPicture" height="200px" :alt="climbingShoe.itemName"></v-img>
             <div class="climbing-shoe__name">
               <h3>{{ climbingShoe.itemName }}</h3>
             </div>
@@ -103,7 +103,8 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
 .climbing-shoes__header {
@@ -111,6 +112,8 @@ export default {
 }
 .climbing-shoes__header h1,
 .climbing-shoes__header h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   text-transform: uppercase;
@@ -119,8 +122,12 @@ export default {
   color: #fff;
   word-spacing: 2px;
   letter-spacing: 1px;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 20px 20px;
   background-image: url("../../../public/img/climbing-header-3.jpg");
   height: 200px;
@@ -134,12 +141,23 @@ export default {
 }
 
 .climbing-shoes__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 header {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.911)), to(rgba(0, 0, 0, 0.7))),
+    url("../../../public/img/climbing.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../../public/img/climbing.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../../public/img/climbing.jpg");
   height: 100%;
@@ -150,8 +168,13 @@ header {
 }
 
 .whitepanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-left: 5%;
   background-color: rgb(255, 255, 255);
   width: 90%;
@@ -163,14 +186,22 @@ header {
 /* climbing-shoe ITEMS */
 
 .climbing-shoe__name {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 7px;
 }
 
 .climbing-shoe__price {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 7px;
 }
 
@@ -192,7 +223,11 @@ header {
   padding: 5px;
   font-size: 90%;
   font-weight: 600;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
   transition: color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
 
@@ -200,8 +235,11 @@ header {
   width: 100%;
 }
 .product__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 35px;
   width: 100%;
   height: auto;
@@ -209,20 +247,30 @@ header {
 
 .card {
   padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 .btn__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 8px;
 }
 /* product counter */
 
 .counter {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 5px;
   margin-bottom: 5px;
 }

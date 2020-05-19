@@ -250,13 +250,20 @@ export default {
 /* choose payment type */
 
 .payment-type--text {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-bottom: 10px;
 }
 .payment-type {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   height: 130px;
   width: 100%;
   border-radius: 3px;
@@ -265,9 +272,15 @@ export default {
 
 .eft-select,
 .card-select {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 30%;
   height: 95%;
 
@@ -276,9 +289,15 @@ export default {
 }
 
 .selected {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: 2px solid #d35400;
   height: 100%;
   width: 100%;
@@ -288,25 +307,44 @@ export default {
 /* form layout */
 
 .card-element--smaller {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .checkoutcomp__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .checkout__heading {
   text-transform: uppercase;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-right: 10px;
 }
 .payment-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   border: 1px solid #ececec;
 }
 .payment-form h5 {
@@ -323,7 +361,8 @@ export default {
 #card-cvc-element {
   background: white;
   padding: 5px;
-  box-shadow: 2px 2px 2px rgb(187, 186, 186);
+  -webkit-box-shadow: 2px 2px 2px rgb(187, 186, 186);
+          box-shadow: 2px 2px 2px rgb(187, 186, 186);
   border-radius: 5px;
   height: 40px;
   margin-top: 30px;
@@ -358,7 +397,11 @@ export default {
   padding: 5px;
   font-size: 90%;
   font-weight: 400;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
   transition: color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
   width: 100%;
   margin-top: 10px;
@@ -374,6 +417,8 @@ export default {
 }
 
 .checkout__btn__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 25%;
   margin-top: 8px;

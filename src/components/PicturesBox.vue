@@ -16,7 +16,7 @@
 
         <!-- Modal of enlarged image -->
         <modal style="z-index: 9999" width="1000px" height="auto" :name="data.imageName">
-          <img :src="data.url" />
+          <img :src="data.url" alt="Image"/>
         </modal>
       </v-card>
     </template>
@@ -51,18 +51,22 @@ export default {
 
 <style scoped>
 * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
 /* CARD BODY */
 .photo__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   max-width: 1140px;
   justify-self: center;
   margin-top: 35px;
   margin-bottom: 40px;
   margin-right: 140px;
-  box-shadow: 5px 2px 5px rgb(187, 186, 186);
+  -webkit-box-shadow: 5px 2px 5px rgb(187, 186, 186);
+          box-shadow: 5px 2px 5px rgb(187, 186, 186);
   border-radius: 4px;
 }
 
@@ -90,6 +94,8 @@ export default {
   height: 100%;
   width: 100%;
   opacity: 0;
+  -webkit-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
   transition: 0.5s ease;
   background-color: #d35400;
   border-radius: 4px;
@@ -106,15 +112,24 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate;
   cursor: pointer;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  -o-transition: transform 0.5s, opacity 0.5s;
   transition: transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s, -webkit-transform 0.5s;
 }
 
 #img {
   width: 100%;
   height: 280px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 1;
+  -webkit-transition: opacity 0.8s, -webkit-transform 0.8s;
+  transition: opacity 0.8s, -webkit-transform 0.8s;
+  -o-transition: transform 0.8s, opacity 0.8s;
   transition: transform 0.8s, opacity 0.8s;
+  transition: transform 0.8s, opacity 0.8s, -webkit-transform 0.8s;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }

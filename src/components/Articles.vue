@@ -9,7 +9,7 @@
               data.title
               }}
             </div>
-            <img id="img" class="news__img" :src="data.url" />
+            <img id="img" class="news__img" :src="data.url" alt="News article" />
           </div>
         </template>
         <v-card>
@@ -70,6 +70,8 @@ export default {
 }
 
 .article__box {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 420px;
   width: 300px;
@@ -82,12 +84,15 @@ export default {
 }
 
 #text {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   z-index: 1;
   position: absolute;
   padding: 10px;
   letter-spacing: 1px;
-  align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
   font-size: 120%;
   color: #ffffff;
   text-shadow: 2px 2px #313131;
@@ -97,20 +102,31 @@ export default {
 #img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0.7;
-  transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+      -ms-transform: scale(1.15);
+          transform: scale(1.15);
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  -o-transition: transform 0.5s, opacity 0.5s;
   transition: transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s, -webkit-transform 0.5s;
 }
 #text:hover + #img {
   opacity: 1;
-  transform: scale(1.03);
+  -webkit-transform: scale(1.03);
+      -ms-transform: scale(1.03);
+          transform: scale(1.03);
   cursor: pointer;
 }
 
 #img:hover {
   opacity: 1;
-  transform: scale(1.03);
+  -webkit-transform: scale(1.03);
+      -ms-transform: scale(1.03);
+          transform: scale(1.03);
   cursor: pointer;
 }
 
@@ -125,6 +141,8 @@ export default {
   font-size: 100%;
   text-decoration: none;
   color: rgb(54, 54, 54);
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
   transition: color 0.3s;
   word-spacing: 2px;
   list-style: none;

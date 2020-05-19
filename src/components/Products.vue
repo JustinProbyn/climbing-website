@@ -2,7 +2,7 @@
   <div class="product__container">
     <v-card class="mx-auto" max-width="250">
       <router-link :to="product.path">
-        <v-img style="cursor:pointer" :src="product.img" height="250px"></v-img>
+        <v-img style="cursor:pointer" :src="product.img" height="250px" :alt="product.type"></v-img>
       </router-link>
       <div>
         <v-card-actions class="btn__container">
@@ -35,7 +35,8 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .items,
@@ -56,15 +57,22 @@ export default {
 }
 
 .product__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 35px;
 }
 
 .item__title,
 .btn__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   text-decoration: none;
 }
 </style>

@@ -14,7 +14,11 @@
             class="mx-auto card"
             max-width="250"
           >
-            <v-img :src="slingsAndCord.itemPicture" height="200px"></v-img>
+            <v-img
+              :src="slingsAndCord.itemPicture"
+              height="200px"
+              :alt="slingsAndCord.itemName"
+            ></v-img>
             <div class="slingsAndCord__name">
               <h3>{{ slingsAndCord.itemName }}</h3>
             </div>
@@ -22,9 +26,9 @@
               <h4>
                 <strong>
                   R{{
-                  slingsAndCord.itemPrice
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    slingsAndCord.itemPrice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   }}
                 </strong>
               </h4>
@@ -41,7 +45,7 @@
                 <v-icon style="font-size: 120%">mdi-minus</v-icon>
               </v-btn>
 
-              <div>{{slingsAndCord.count}}</div>
+              <div>{{ slingsAndCord.count }}</div>
 
               <v-btn
                 :id="slingsAndCord.id"
@@ -60,7 +64,9 @@
                 outlined
                 color="#d35400"
                 @click="addToCart($event)"
-              >Add to cart</button>
+              >
+                Add to cart
+              </button>
             </div>
           </v-card>
         </div>
@@ -103,6 +109,7 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "Lato", "Arial", sans-serif;
 }
@@ -111,6 +118,8 @@ export default {
 }
 .slingsAndCords__header h1,
 .slingsAndCords__header h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Lato", "Arial", sans-serif;
   text-transform: uppercase;
@@ -119,7 +128,11 @@ export default {
   color: #fff;
   word-spacing: 2px;
   letter-spacing: 1px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin: 20px 20px;
   background-image: url("../../../public/img/climbing-header-3.jpg");
@@ -134,12 +147,29 @@ export default {
 }
 
 .slingsAndCords__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 
 header {
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.911)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url("../../../public/img/climbing.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
+    url("../../../public/img/climbing.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../../public/img/climbing.jpg");
   height: 100%;
@@ -150,7 +180,12 @@ header {
 }
 
 .whitepanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   margin-left: 5%;
   background-color: rgb(255, 255, 255);
@@ -163,13 +198,21 @@ header {
 /* slingsAndCord ITEMS */
 
 .slingsAndCord__name {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   margin-top: 7px;
 }
 
 .slingsAndCord__price {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   margin-top: 7px;
 }
@@ -192,7 +235,11 @@ header {
   padding: 5px;
   font-size: 90%;
   font-weight: 600;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
   transition: color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
 
@@ -200,7 +247,10 @@ header {
   width: 100%;
 }
 .product__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   padding: 35px;
   width: 100%;
@@ -209,19 +259,29 @@ header {
 
 .card {
   padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 .btn__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   margin-top: 8px;
 }
 /* product counter */
 
 .counter {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   margin-top: 5px;
   margin-bottom: 5px;
