@@ -8,21 +8,36 @@
             @click="openMenu"
             class="menu__icon"
             style="color: #d35400; font-size: 200%; cursor: pointer; margin-left: 5px"
-          >mdi-menu</v-icon>
+            >mdi-menu</v-icon
+          >
           <div class="menu__popout">
             <div
               :class="[
-                  showMenu
-                    ? 'animated slideInLeft faster'
-                    : 'animated slideOutLeft faster'
-                ]"
+                showMenu
+                  ? 'animated slideInLeft faster'
+                  : 'animated slideOutLeft faster'
+              ]"
             >
               <div v-if="initMenu" class="btns-home">
-                <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
+                <v-btn
+                  outlined
+                  color="#d35400"
+                  class="btn"
+                  v-if="auth"
+                  @click="signOut"
+                  >Sign Out</v-btn
+                >
 
                 <v-dialog v-if="!auth" max-width="500">
                   <template v-slot:activator="{ on }">
-                    <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth">Sign Up</v-btn>
+                    <v-btn
+                      outlined
+                      color="#d35400"
+                      v-on="on"
+                      class="btn"
+                      v-if="!auth"
+                      >Sign Up</v-btn
+                    >
                   </template>
                   <v-card height="538">
                     <signup @signedUp="initSignupDialog"></signup>
@@ -49,7 +64,14 @@
 
                 <v-dialog v-if="!auth" max-width="400">
                   <template v-slot:activator="{ on }">
-                    <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on">Sign In</v-btn>
+                    <v-btn
+                      outlined
+                      color="#d35400"
+                      class="btn"
+                      v-if="!auth"
+                      v-on="on"
+                      >Sign In</v-btn
+                    >
                   </template>
                   <v-card height="371">
                     <signin @signedIn="initSigninLoader"></signin>
@@ -66,21 +88,43 @@
                   <v-card color="primary" dark>
                     <v-card-text>
                       Logging in...
-                      <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                      <v-progress-linear
+                        indeterminate
+                        color="white"
+                        class="mb-0"
+                      ></v-progress-linear>
                     </v-card-text>
                   </v-card>
                 </v-dialog>
                 <!--  -->
 
-                <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-article">Add Article</v-btn>
-                <v-btn outlined color="#d35400" class="btn" v-if="auth" to="add-picture">Add Picture</v-btn>
+                <v-btn
+                  outlined
+                  color="#d35400"
+                  class="btn"
+                  v-if="auth"
+                  to="add-article"
+                  >Add Article</v-btn
+                >
+                <v-btn
+                  outlined
+                  color="#d35400"
+                  class="btn"
+                  v-if="auth"
+                  to="add-picture"
+                  >Add Picture</v-btn
+                >
                 <v-dialog max-width="290">
                   <template v-slot:activator="{ on }">
-                    <v-btn outlined color="#d35400" v-on="on" class="btn">Disclaimer</v-btn>
+                    <v-btn outlined color="#d35400" v-on="on" class="btn"
+                      >Disclaimer</v-btn
+                    >
                   </template>
                   <v-card>
                     <v-card-title class="headline">Disclaimer</v-card-title>
-                    <v-card-text styles="padding: 20px; border: 1px solid black; width: 280px">
+                    <v-card-text
+                      styles="padding: 20px; border: 1px solid black; width: 280px"
+                    >
                       The content on this mock website is not original. It has
                       been sourced from other websites that include
                       climbing.co.za, climbing.com, frictionlabs.com and
@@ -169,7 +213,7 @@ export default {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .body {
@@ -184,7 +228,13 @@ export default {
 /*** HEADER ***/
 
 header {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0.7))),
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.8)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
     url("../../public/img/climbing.jpg");
   background-image: -o-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
@@ -202,8 +252,8 @@ header {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin-top: 35%;
 }
 
@@ -213,8 +263,8 @@ header {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   height: 30%;
   width: 100%;
   height: 100vh;
@@ -233,7 +283,7 @@ header {
   word-spacing: 2px;
   letter-spacing: 1px;
   -ms-flex-item-align: end;
-      align-self: flex-end;
+  align-self: flex-end;
   margin-right: 150px;
 }
 
@@ -257,12 +307,12 @@ header {
   margin-top: 52px;
   margin-left: 20px;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   position: absolute;
   z-index: 9999;
 }
@@ -280,7 +330,7 @@ header {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-item-align: start;
-      align-self: flex-start;
+  align-self: flex-start;
 }
 
 .v-application--wrap {
@@ -296,13 +346,56 @@ header {
   margin-right: 12%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin-left: 8px;
   margin-top: 5px;
 }
 .btn {
   margin-right: 20px;
   margin-top: 15px;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 900px) {
+  .nav__bar--home {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .home__header h1 {
+    font-size: 230%;
+  }
+
+  .home__header h2 {
+    font-size: 180%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .home__header h1 {
+    font-size: 180%;
+  }
+  .home__header h2 {
+    font-size: 130%;
+  }
+  .home__header h2 {
+    margin-left: 0;
+  }
+
+  .header__text {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 361px) {
+  .home__header h1,
+  .home__header h2 {
+    font-size: 130%;
+    margin-right: 100px;
+    margin-left: 10px;
+  }
 }
 </style>
