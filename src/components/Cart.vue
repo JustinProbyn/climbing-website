@@ -7,32 +7,44 @@
           icon
           class="cart__icon"
           color="grey lighten-1"
-        >mdi-cart</v-icon>
+          >mdi-cart</v-icon
+        >
       </v-app>
-      <div @click="cartPopup = !cartPopup" class="cart__popup">{{ totalCount }} items in your cart</div>
+      <div @click="cartPopup = !cartPopup" class="cart__popup">
+        {{ totalCount }} items in your cart
+      </div>
     </div>
 
     <div class="text-center">
       <v-dialog v-model="cartPopup" width="500">
         <v-card>
-          <v-card-title class="headline grey lighten-2 cart__title" primary-title>Your cart</v-card-title>
+          <v-card-title
+            class="headline grey lighten-2 cart__title"
+            primary-title
+            >Your cart</v-card-title
+          >
 
-          <v-card-text class="itemsInCart" v-for="(data, index) in getCartData" :key="index">
-            {{data.count}} x {{ data.product }}: R{{
-            data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          <v-card-text
+            class="itemsInCart"
+            v-for="(data, index) in getCartData"
+            :key="index"
+          >
+            {{ data.count }} x {{ data.product }}: R{{
+              data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }}
-            <v-icon class="deleteIcon" @click="deleteCartItem(index)">mdi-delete-forever</v-icon>
+            <v-icon class="deleteIcon" @click="deleteCartItem(index)"
+              >mdi-delete-forever</v-icon
+            >
           </v-card-text>
-          <p
-            class="no-items-text"
-            v-if="getCartData.length < 1"
-          >You have no items in your shopping cart</p>
+          <p class="no-items-text" v-if="getCartData.length < 1">
+            You have no items in your shopping cart
+          </p>
           <v-divider></v-divider>
           <v-card-actions>
             <div class="total">
               <h2>
                 Total: R{{
-                totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 }}
               </h2>
             </div>
@@ -51,41 +63,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <!--  -->
-      <v-overlay v-if="!auth" :value="overlay" style="z-index: 9" :opacity="opacity">
-        <p>Please signin or signup to continue with your purchase.</p>
-
-        <v-dialog class="signInDialog" max-width="500">
-          <template v-slot:activator="{ on }">
-            <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth">Sign Up</v-btn>
-          </template>
-          <v-card height="538">
-            <signup></signup>
-          </v-card>
-        </v-dialog>
-
-        <v-dialog v-if="!auth" max-width="400">
-          <template v-slot:activator="{ on }">
-            <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on">Sign In</v-btn>
-          </template>
-          <v-card height="371">
-            <signin @signedIn="initLoader"></signin>
-          </v-card>
-        </v-dialog>
-        <!-- Sign in loader -->
-        <v-dialog v-if="!auth" v-model="showLoader" hide-overlay persistent width="300">
-          <v-card color="primary" dark>
-            <v-card-text>
-              Logging in
-              <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-        <v-btn absolute class="btn__close" icon @click="overlay = false">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </v-overlay>
-      <!--  -->
     </div>
   </div>
 </template>
@@ -97,14 +74,7 @@
  * If items are added to the cart, the user can proceed to the checkout page, otherwise there is no option to do so.
  * If a user is not signed in, upon trying to enter checkout, this component will prompt the user to sign in/up.
  */
-import firebase from "firebase";
-import SignIn from "../components/SignIn";
-import SignUp from "../components/SignUp";
 export default {
-  components: {
-    signin: SignIn,
-    signup: SignUp
-  },
   data() {
     return {
       // overlay
@@ -142,18 +112,6 @@ export default {
     }
   },
   methods: {
-    initLoader() {
-      this.showLoader = true;
-    },
-    //Checks if a user is signed in order to view checkout
-    checkOut() {
-      this.dialog = false;
-      if (firebase.auth().currentUser) {
-        this.overlay = false;
-        this.$router.push("checkout");
-      } else this.overlay = true;
-      this.cartPopup = false;
-    },
     deleteCartItem(index) {
       this.$store.dispatch("deleteCartItem", index);
     }
@@ -171,8 +129,8 @@ export default {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
   margin-right: 350px;
   height: 0px;
   position: absolute;
@@ -215,8 +173,8 @@ export default {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   color: rgb(211, 211, 211);
   border: 1px solid rgb(211, 211, 211);
   height: 35px;

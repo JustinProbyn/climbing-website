@@ -222,7 +222,6 @@ export default {
   height: 100%;
   top: 0px;
   left: 0px;
-  z-index: 1000;
 }
 
 /*** HEADER ***/
