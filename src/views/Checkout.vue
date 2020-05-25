@@ -321,7 +321,7 @@ export default {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .checkout__body {
@@ -331,7 +331,13 @@ export default {
 }
 
 header {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.911)), to(rgba(0, 0, 0, 0.7))),
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.911)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
     url("../../public/img/climbing.jpg");
   background-image: -o-linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
@@ -366,11 +372,11 @@ header {
   word-spacing: 2px;
   letter-spacing: 1px;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin: 20px 20px;
   background-image: url("../../public/img/climbing-header-3.jpg");
   height: 200px;
@@ -401,16 +407,16 @@ header {
 .checkout__container--items {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   width: 60%;
   margin-bottom: 30px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .checkout__container--payment {
@@ -436,29 +442,30 @@ header {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   width: 300px;
   height: 410px;
   padding: 10px;
   margin-left: 30px;
+  margin-top: 10px;
 }
 .cartitems h4 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 /* Table */
@@ -471,7 +478,7 @@ header {
 .totals {
   margin-top: 30px;
   -webkit-box-shadow: 2px 2px 2px rgb(187, 186, 186);
-          box-shadow: 2px 2px 2px rgb(187, 186, 186);
+  box-shadow: 2px 2px 2px rgb(187, 186, 186);
 }
 
 .table_head {
@@ -490,8 +497,8 @@ header {
   font-size: 90%;
   height: 50px;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .total_cost {
@@ -523,7 +530,7 @@ header {
   width: 24%;
   height: 550px;
   -webkit-box-shadow: 1px 1px 1px 1px rgb(214, 214, 214);
-          box-shadow: 1px 1px 1px 1px rgb(214, 214, 214);
+  box-shadow: 1px 1px 1px 1px rgb(214, 214, 214);
 
   border-radius: 3px;
   padding: 10px;
@@ -531,12 +538,12 @@ header {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 /* address */
@@ -546,11 +553,11 @@ header {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   padding: 10px;
 }
 

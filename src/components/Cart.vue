@@ -114,6 +114,9 @@ export default {
   methods: {
     deleteCartItem(index) {
       this.$store.dispatch("deleteCartItem", index);
+    },
+    checkOut() {
+      this.$router.push("checkout");
     }
   }
 };
