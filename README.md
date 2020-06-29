@@ -8,4 +8,6 @@ I also included Stripe as a means to make payment for the Gear Shop I added to w
 
 No branches were used as I worked on this alone.
 
+Login details to test are justin@probyn.com (PW: justin). You can, however, create a new account on the website as well.
+
 P.S. I realise my commit messages (or lack thereof) are not sufficient enough or in the correct format. Something I learnt after the fact.
