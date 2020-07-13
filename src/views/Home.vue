@@ -8,8 +8,7 @@
             @click="openMenu"
             class="menu__icon"
             style="color: #d35400; font-size: 200%; cursor: pointer; margin-left: 5px"
-            >mdi-menu</v-icon
-          >
+          >mdi-menu</v-icon>
           <div class="menu__popout">
             <div
               :class="[
@@ -19,119 +18,103 @@
               ]"
             >
               <div v-if="initMenu" class="btns-home">
-                <v-btn
-                  outlined
-                  color="#d35400"
-                  class="btn"
-                  v-if="auth"
-                  @click="signOut"
-                  >Sign Out</v-btn
-                >
+                <div class="permanent-btns">
+                  <v-btn outlined color="#d35400" class="btn" v-if="auth" @click="signOut">Sign Out</v-btn>
 
-                <v-dialog v-if="!auth" max-width="500">
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      outlined
-                      color="#d35400"
-                      v-on="on"
-                      class="btn"
-                      v-if="!auth"
-                      >Sign Up</v-btn
-                    >
-                  </template>
-                  <v-card height="538">
-                    <signup @signedUp="initSignupDialog"></signup>
-                  </v-card>
-                </v-dialog>
-                <!--  -->
-                <v-dialog
-                  v-if="!auth && userSignedUp"
-                  v-model="SignupShowDialog"
-                  width="300"
-                  persistent
-                >
-                  <v-card v-if="userSignedUp" class="signin__text" dark>
-                    <v-card-text class="signin__text">
-                      <p style="margin-bottom: 60px; text-align: center">
-                        Thank you for registering.
-                        <br />Please sign in
-                      </p>
+                  <v-dialog v-if="!auth" max-width="500">
+                    <template v-slot:activator="{ on }">
+                      <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth">Sign Up</v-btn>
+                    </template>
+                    <v-card height="538">
+                      <signup @signedUp="initSignupDialog"></signup>
+                    </v-card>
+                  </v-dialog>
+                  <!--  -->
+                  <v-dialog
+                    v-if="!auth && userSignedUp"
+                    v-model="SignupShowDialog"
+                    width="300"
+                    persistent
+                  >
+                    <v-card v-if="userSignedUp" class="signin__text" dark>
+                      <v-card-text class="signin__text">
+                        <p style="margin-bottom: 60px; text-align: center">
+                          Thank you for registering.
+                          <br />Please sign in
+                        </p>
+                        <signin @signedIn="initSigninLoader"></signin>
+                      </v-card-text>
+                    </v-card>
+                  </v-dialog>
+                  <!--  -->
+
+                  <v-dialog v-if="!auth" max-width="400">
+                    <template v-slot:activator="{ on }">
+                      <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on">Sign In</v-btn>
+                    </template>
+                    <v-card height="371">
                       <signin @signedIn="initSigninLoader"></signin>
-                    </v-card-text>
-                  </v-card>
-                </v-dialog>
-                <!--  -->
+                    </v-card>
+                  </v-dialog>
+                  <!-- Sign in loader -->
+                  <v-dialog
+                    v-if="!auth"
+                    v-model="SigninShowLoader"
+                    hide-overlay
+                    persistent
+                    width="300"
+                  >
+                    <v-card color="primary" dark>
+                      <v-card-text>
+                        Logging in...
+                        <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                      </v-card-text>
+                    </v-card>
+                  </v-dialog>
+                  <!--  -->
 
-                <v-dialog v-if="!auth" max-width="400">
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      outlined
-                      color="#d35400"
-                      class="btn"
-                      v-if="!auth"
-                      v-on="on"
-                      >Sign In</v-btn
-                    >
-                  </template>
-                  <v-card height="371">
-                    <signin @signedIn="initSigninLoader"></signin>
-                  </v-card>
-                </v-dialog>
-                <!-- Sign in loader -->
-                <v-dialog
-                  v-if="!auth"
-                  v-model="SigninShowLoader"
-                  hide-overlay
-                  persistent
-                  width="300"
-                >
-                  <v-card color="primary" dark>
-                    <v-card-text>
-                      Logging in...
-                      <v-progress-linear
-                        indeterminate
-                        color="white"
-                        class="mb-0"
-                      ></v-progress-linear>
-                    </v-card-text>
-                  </v-card>
-                </v-dialog>
-                <!--  -->
-
-                <v-btn
-                  outlined
-                  color="#d35400"
-                  class="btn"
-                  v-if="auth"
-                  to="add-article"
-                  >Add Article</v-btn
-                >
-                <v-btn
-                  outlined
-                  color="#d35400"
-                  class="btn"
-                  v-if="auth"
-                  to="add-picture"
-                  >Add Picture</v-btn
-                >
-                <v-dialog max-width="290">
-                  <template v-slot:activator="{ on }">
-                    <v-btn outlined color="#d35400" v-on="on" class="btn"
-                      >Disclaimer</v-btn
-                    >
-                  </template>
-                  <v-card>
-                    <v-card-title class="headline">Disclaimer</v-card-title>
-                    <v-card-text
-                      styles="padding: 20px; border: 1px solid black; width: 280px"
-                    >
-                      The content on this mock website is not original. It has
-                      been sourced from other websites that include
-                      climbing.co.za, climbing.com, frictionlabs.com and
-                      articlegenerator.org.
-                    </v-card-text>
-                  </v-card>
-                </v-dialog>
+                  <v-btn
+                    outlined
+                    color="#d35400"
+                    class="btn"
+                    v-if="auth"
+                    to="add-article"
+                  >Add Article</v-btn>
+                  <v-btn
+                    outlined
+                    color="#d35400"
+                    class="btn"
+                    v-if="auth"
+                    to="add-picture"
+                  >Add Picture</v-btn>
+                  <v-dialog max-width="290">
+                    <template v-slot:activator="{ on }">
+                      <v-btn outlined color="#d35400" v-on="on" class="btn">Disclaimer</v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title class="headline">Disclaimer</v-card-title>
+                      <v-card-text styles="padding: 20px; border: 1px solid black; width: 280px">
+                        The content on this mock website is not original. It has
+                        been sourced from other websites that include
+                        climbing.co.za, climbing.com, frictionlabs.com and
+                        articlegenerator.org.
+                      </v-card-text>
+                    </v-card>
+                  </v-dialog>
+                </div>
+                <div class="nav__bar--btns">
+                  <v-btn outlined color="#d35400" class="btn" v-if="auth" to="news">News</v-btn>
+                  <v-btn outlined color="#d35400" class="btn" v-if="auth" to="pictures">Pictures</v-btn>
+                  <v-btn outlined color="#d35400" class="btn" v-if="auth" to="expertise">Expertise</v-btn>
+                  <v-btn
+                    outlined
+                    color="#d35400"
+                    class="btn"
+                    v-if="auth"
+                    to="climbing-spots"
+                  >Climbing Spots</v-btn>
+                  <v-btn outlined color="#d35400" class="btn" v-if="auth" to="gear">Gear</v-btn>
+                </div>
               </div>
             </div>
           </div>
@@ -299,6 +282,10 @@ header {
 }
 /*** MENU ***/
 
+.nav__bar--btns {
+  display: none;
+}
+
 .menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -353,6 +340,17 @@ header {
 .btn {
   margin-right: 20px;
   margin-top: 15px;
+
+  width: 100%;
+}
+
+.v-btn__content {
+  font-size: 100%;
+}
+
+.permanent-btns {
+  display: flex;
+  flex-direction: column;
 }
 
 /* MEDIA QUERIES */
@@ -361,19 +359,53 @@ header {
   .nav__bar--home {
     display: none;
   }
+  .home__header h1 {
+    margin-top: 90px;
+  }
+
+  .home__header h2 {
+    margin-top: 10px;
+  }
+
+  .btns-home {
+    flex-direction: row;
+    width: 100vw;
+  }
+
+  .permanent-btns,
+  .nav__bar--btns {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: 12%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-left: 8px;
+    margin-top: 5px;
+  }
+  .btn {
+    margin-right: 20px;
+    margin-top: 15px;
+  }
 }
 
 @media screen and (max-width: 780px) {
   .home__header h1 {
     font-size: 230%;
   }
-
   .home__header h2 {
     font-size: 180%;
+    margin-top: 10px;
+  }
+
+  .header__text {
+    margin-top: 330px;
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 540px) {
   .home__header h1 {
     font-size: 180%;
   }
@@ -389,12 +421,47 @@ header {
   }
 }
 
+@media screen and (max-width: 460px) {
+  .home__header h1 {
+    font-size: 140%;
+  }
+  .home__header h2 {
+    font-size: 100%;
+    margin-top: 20px;
+    margin-left: 0px;
+  }
+  .header__text {
+    margin-left: 80px;
+  }
+  .btn {
+    width: 70%;
+  }
+  .v-btn__content {
+    font-size: 70%;
+  }
+}
+
 @media screen and (max-width: 361px) {
   .home__header h1,
   .home__header h2 {
-    font-size: 130%;
+    font-size: 120%;
     margin-right: 100px;
+  }
+
+  .home__header h2 {
     margin-left: 10px;
+    font-size: 100%;
+  }
+
+  .header__text {
+    display: flex;
+  }
+
+  .btn {
+    width: 65%;
+  }
+  .v-btn__content {
+    font-size: 60%;
   }
 }
 </style>

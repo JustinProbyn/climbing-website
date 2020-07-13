@@ -1,8 +1,6 @@
 <template>
   <div style=" z-index: 1;" class="nav-bar__container">
-    <v-icon v-if="!$route.meta.hideButton" class="go-back" @click="goBack"
-      >mdi-arrow-left-bold</v-icon
-    >
+    <v-icon v-if="!$route.meta.hideButton" class="go-back" @click="goBack">mdi-arrow-left-bold</v-icon>
     <nav class="nav__bar">
       <ul class="nav__bar--ul">
         <li>
@@ -34,19 +32,12 @@
       </ul>
     </nav>
     <v-app class="overlay__container">
-      <v-overlay
-        v-if="!auth"
-        :value="overlay"
-        style="z-index: 9"
-        :opacity="opacity"
-      >
+      <v-overlay v-if="!auth" :value="overlay" style="z-index: 9" :opacity="opacity">
         <p>Please signin or signup to continue.</p>
 
         <v-dialog class="signInDialog" max-width="500">
           <template v-slot:activator="{ on }">
-            <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth"
-              >Sign Up</v-btn
-            >
+            <v-btn outlined color="#d35400" v-on="on" class="btn" v-if="!auth">Sign Up</v-btn>
           </template>
           <v-card height="538">
             <signup></signup>
@@ -55,30 +46,18 @@
 
         <v-dialog v-if="!auth" max-width="400">
           <template v-slot:activator="{ on }">
-            <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on"
-              >Sign In</v-btn
-            >
+            <v-btn outlined color="#d35400" class="btn" v-if="!auth" v-on="on">Sign In</v-btn>
           </template>
           <v-card height="371">
             <signin @signedIn="initLoader"></signin>
           </v-card>
         </v-dialog>
         <!-- Sign in loader -->
-        <v-dialog
-          v-if="!auth"
-          v-model="showLoader"
-          hide-overlay
-          persistent
-          width="300"
-        >
+        <v-dialog v-if="!auth" v-model="showLoader" hide-overlay persistent width="300">
           <v-card color="primary" dark>
             <v-card-text>
               Logging in
-              <v-progress-linear
-                indeterminate
-                color="white"
-                class="mb-0"
-              ></v-progress-linear>
+              <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
             </v-card-text>
           </v-card>
         </v-dialog>
@@ -251,5 +230,31 @@ a.router-link-active {
 .btn__close {
   margin-left: 700px;
   margin-top: -400px;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 1740px) {
+  .nav-bar__username {
+    font-size: 80%;
+    margin-left: 50px;
+    margin-top: 2px;
+  }
+
+  .nav__bar--ul li a {
+    font-size: 130%;
+  }
+}
+
+@media screen and (max-width: 1210px) {
+  .nav-bar__username {
+    font-size: 70%;
+    margin-left: -10px;
+    margin-top: 2px;
+  }
+
+  .nav__bar--ul li a {
+    font-size: 110%;
+  }
 }
 </style>
