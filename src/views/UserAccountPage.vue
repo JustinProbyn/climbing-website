@@ -19,7 +19,7 @@
               v-if="getOrderData <= 0"
               class="pending-orders-heading"
             >You have no current orders.</div>
-            <div v-if="getOrderData.length > 1" class="orders">
+            <div v-if="getOrderData.length >= 1" class="orders">
               <div class="pending-orders-heading">Your pending orders are as follows:</div>
               <div v-for="(order, i) in getOrderData" :key="i" class="orders_separate">
                 <v-card class="order_items" v-for="(product, i) in order.productsBought" :key="i">
@@ -37,7 +37,7 @@
                   <img
                     class="cartimg"
                     style="height: 140px"
-                    :src="`../../${product.img}`"
+                    :src="product.img"
                     :alt="`Image of ${product.product}`"
                   />
                 </v-card>
@@ -122,7 +122,7 @@ export default {
 /* ---GENERAL--- */
 * {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   word-break: break-word;
   font-family: "Lato", "Arial", sans-serif;
 }
@@ -136,19 +136,25 @@ export default {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 h4 {
   text-align: center;
 }
 header {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.911)), to(rgba(0, 0, 0, 0.7))),
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.911)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
     url("../../public/img/climbing.jpg");
   background-image: -o-linear-gradient(rgba(0, 0, 0, 0.911), rgba(0, 0, 0, 0.7)),
     url("../../public/img/climbing.jpg");
@@ -168,8 +174,8 @@ header {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin-left: 5%;
   background-color: rgb(255, 255, 255);
   width: 90%;
@@ -190,11 +196,11 @@ header {
   word-spacing: 2px;
   letter-spacing: 1px;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin: 20px 20px;
   background-image: url("../../public/img/climbing-header-3.jpg");
   height: 200px;
@@ -213,15 +219,15 @@ header {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .pending-orders-heading {
@@ -230,11 +236,11 @@ header {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   color: #d35400;
 }
 
@@ -250,7 +256,7 @@ header {
   border: 1px solid rgb(172, 172, 172);
   border-radius: 3px;
   -ms-flex-item-align: start;
-      align-self: flex-start;
+  align-self: flex-start;
 }
 
 .orders-individual {
@@ -263,14 +269,14 @@ header {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   width: 200px;
   height: 300px;
   padding: 10px;
@@ -282,11 +288,11 @@ header {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .extra_order_info {
@@ -294,11 +300,11 @@ header {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin-top: 20px;
   height: 65%;
   border: 1px solid rgb(221, 221, 221);

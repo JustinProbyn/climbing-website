@@ -60,9 +60,9 @@ const store = new Vuex.Store({
     loadOrderOnLogin(state, order) {
       state.orderData.unshift(order);
     },
-    loadOrderOnRefresh(state, order) {
-      state.orderData.unshift(order);
-    },
+    // loadOrderOnRefresh(state, order) {
+    //   state.orderData.unshift(order);
+    // },
 
     /* Article mutations */
     // pushes articles into state array which are displayed under "News"

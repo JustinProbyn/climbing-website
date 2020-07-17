@@ -76,7 +76,7 @@ const firestore = {
           .firestore()
           .collection("userdata")
           .doc(user.email);
-        fbRef.get().then(doc => {
+        fbRef.get().then((doc) => {
           commit("setUsername", doc.data().username);
           localStorage.setItem("username", doc.data().username); //sets username in index.js store
         });
@@ -96,7 +96,7 @@ const firestore = {
           .firestore()
           .collection("articledata")
           .get();
-        return snapshot.docs.map(doc => doc.data());
+        return snapshot.docs.map((doc) => doc.data());
       }
       async function callNewsData() {
         const arrayData = await newsData();
@@ -112,7 +112,7 @@ const firestore = {
           .firestore()
           .collection("picturedata")
           .get();
-        return snapshot.docs.map(doc => doc.data());
+        return snapshot.docs.map((doc) => doc.data());
       }
       async function callPictureData() {
         const arrayData = await pictureData();
@@ -126,7 +126,7 @@ const firestore = {
     /****ORDER/PAYMENT******/
     setOrderDataOnLogin({ commit }) {
       // load order from firestore
-      firebase.auth().onAuthStateChanged(user => {
+      firebase.auth().onAuthStateChanged((user) => {
         async function odata() {
           const snapshot = await firebase
             .firestore()
@@ -134,11 +134,11 @@ const firestore = {
             .doc(user.uid)
             .collection("paymentsToken")
             .get();
-          return snapshot.docs.map(doc => doc.data());
+          return snapshot.docs.map((doc) => doc.data());
         }
         async function orderData() {
           const arrayData = await odata();
-          arrayData.forEach(order => {
+          arrayData.forEach((order) => {
             commit("loadOrderOnLogin", order.payment); //mutation in index.js
           });
         }
@@ -159,7 +159,7 @@ const firestore = {
       imageRef.put(file).then(() => {
         imageRef
           .getDownloadURL()
-          .then(url => {
+          .then((url) => {
             const image = url;
             const pictureData = {
               url: image,
@@ -205,7 +205,7 @@ const firestore = {
       imageRef.put(file).then(() => {
         imageRef
           .getDownloadURL()
-          .then(url => {
+          .then((url) => {
             // dispatches storeArticleData to store headline, text, url, etc. on firestore
             const image = url;
             var currentDate = new Date();
@@ -255,10 +255,11 @@ const firestore = {
     // Dispatched in App.vue on created()
     // When page is refreshed, this action sets the user.
     onRefresh({ commit }) {
-      firebase.auth().onAuthStateChanged(user => {
+      firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           const email = user.email;
           const username = localStorage.getItem("username");
+
           if (!username) {
             return;
           }
